@@ -220,6 +220,14 @@ h2 {
     animation: var(--slide-duration) exit-right ease-in-out, var(--slide-duration) fade-out ease-in-out;
 }
 
+@media (min-width: 400px) {
+
+    .title-break {
+        display: none;
+    }
+
+}
+
 .callout {
     background: #b2d7b8;
     border-radius: .5em;
