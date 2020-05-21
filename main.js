@@ -39,8 +39,8 @@ function tabSwitcher() {
             });
             nextVisible.forEach(function(section) {
                 setTimeout(function() {
-                    section.classList.add('section-slide-' + direction + '-fade-in');
                     section.classList.add('section-visible');
+                    section.classList.add('section-slide-' + direction + '-fade-in');
                 }, duration);
                 setTimeout(function() {
                     section.classList.remove('section-slide-' + direction + '-fade-in');
