@@ -1,36 +1,15 @@
-function init() {
-    function makeVisible(game, index) {
-        var visibleSections = document.querySelectorAll('.' + game);
-
-        document.querySelector('.tabs').setAttribute('style', '--index: ' + index);
-        document.querySelector('#tab-' + game).checked = true;
-        visibleSections.forEach(function(section) {
-            section.classList.add('section-visible');
-        });
-    }
-
-    if (!localStorage.getItem('yir-game')) {
-        makeVisible('rs', '0');
-    } else {
-        var game = localStorage.getItem('yir-game');
-        var index = localStorage.getItem('yir-index');
-
-        makeVisible(game, index);
-    }
-}
-
 function tabSwitcher() {
     var tabs = document.querySelectorAll('.tabs label');
 
     function clickBitch() {
         var game = this.dataset.game;
         var nextIndex = this.dataset.index;
-        var currentIndex = localStorage.getItem('yir-index');
+        var currIndex = document.querySelector('.tabs').style.getPropertyValue('--index').trim();
         var nextVisible = document.querySelectorAll('.' + game);
-        var currentlyVisible = document.querySelectorAll('.section-visible');
+        var currVisible = document.querySelectorAll('.section-visible');
 
         function hideAndSlide(direction, duration) {
-            currentlyVisible.forEach(function(section) {
+            currVisible.forEach(function(section) {
                 section.classList.add('slide-' + direction + '-fade-out');
                 setTimeout(function() {
                     section.classList.remove('section-visible');
@@ -47,13 +26,11 @@ function tabSwitcher() {
                 }, duration * 2);
             });
             document.querySelector('.tabs').setAttribute('style', '--index: ' + nextIndex);
-            localStorage.setItem('yir-game', game);
-            localStorage.setItem('yir-index', nextIndex);
         }
 
-        if (currentIndex === nextIndex) {
+        if (currIndex === nextIndex) {
             return;
-        } else if (currentIndex > nextIndex) {
+        } else if (currIndex > nextIndex) {
             hideAndSlide('left', 200);
         } else {
             hideAndSlide('right', 200);
@@ -65,5 +42,4 @@ function tabSwitcher() {
     });
 }
 
-init();
 tabSwitcher();
