@@ -32,10 +32,10 @@ function tabSwitcher() {
             return;
         } else if (currIndex > nextIndex) {
             // purposely shorter than --slide-duration; tabs otherwise flicker in chrome
-            hideAndSlide('left', 190);
+            hideAndSlide('left', 200);
         } else {
             // purposely shorter than --slide-duration; tabs otherwise flicker in chrome
-            hideAndSlide('right', 190);
+            hideAndSlide('right', 200);
         }
     }
 
