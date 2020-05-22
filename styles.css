@@ -70,7 +70,7 @@ h2 {
 @supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)) {
 
     .tabs {
-        background-color: rgba(242, 242, 242, .7);
+        background-color: rgba(240, 240, 240, .7);
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
     }
@@ -103,12 +103,12 @@ h2 {
     float: left;
 
     color: #777;
-    padding: 10px 0 11px;
     text-align: center;
+    padding: 12px 0;
     transition: calc(var(--slide-duration) * 2) color ease-in-out;
 }
 
-.tabs input[type="radio"]:checked + label {
+.tabs input:checked + label {
     color: #333;
 }
 
