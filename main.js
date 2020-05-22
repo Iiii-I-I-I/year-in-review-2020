@@ -1,14 +1,18 @@
 function tabSwitcher() {
     var tabs = document.querySelectorAll('.tabs label');
 
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', clickBitch);
+    });
+
     function clickBitch() {
-        var game = this.dataset.game;
         var nextIndex = this.dataset.index;
         var currIndex = document.querySelector('.tabs').style.getPropertyValue('--index');
-        var nextVisible = document.querySelectorAll('.' + game);
+        var nextVisible = document.querySelectorAll('.' + this.dataset.game);
         var currVisible = document.querySelectorAll('.section-visible');
 
         function hideAndSlide(direction, duration) {
+            // fade out and hide old sections
             currVisible.forEach(function(section) {
                 section.classList.add('slide-' + direction + '-fade-out');
                 setTimeout(function() {
@@ -16,6 +20,7 @@ function tabSwitcher() {
                     section.classList.remove('slide-' + direction + '-fade-out');
                 }, duration);
             });
+            // fade in and show new sections
             nextVisible.forEach(function(section) {
                 setTimeout(function() {
                     section.classList.add('section-visible');
@@ -31,17 +36,13 @@ function tabSwitcher() {
         if (currIndex === nextIndex) {
             return;
         } else if (currIndex > nextIndex) {
-            // purposely shorter than --slide-duration; tabs otherwise flicker in chrome
+            // must match --slide-duration in styles.css
             hideAndSlide('left', 200);
         } else {
-            // purposely shorter than --slide-duration; tabs otherwise flicker in chrome
+            // must match --slide-duration in styles.css
             hideAndSlide('right', 200);
         }
     }
-
-    tabs.forEach(function(tab) {
-        tab.addEventListener('click', clickBitch);
-    });
 }
 
 tabSwitcher();

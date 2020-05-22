@@ -13,7 +13,7 @@ html {
     --tab-gap: .25em;
     --border-radius: .5em;
     --slide-length: .4em;
-    --slide-duration: .21s;
+    --slide-duration: .2s;
 }
 
 @media (prefers-reduced-motion) {
@@ -138,7 +138,7 @@ h2 {
        opacity: 0;
    }
 
-   95% {
+   100% {
        opacity: 1;
    }
 
@@ -150,7 +150,7 @@ h2 {
        opacity: 1;
    }
 
-   95% {
+   100% {
        opacity: 0;
    }
 
@@ -162,7 +162,7 @@ h2 {
        transform: translateX(calc(var(--slide-length) / (3/4)));
    }
 
-   95% {
+   100% {
        transform: translateX(0);
    }
 
@@ -174,7 +174,7 @@ h2 {
        transform: translateX(0);
    }
 
-   95% {
+   100% {
        transform: translateX(calc(var(--slide-length) * -1));
    }
 
@@ -186,7 +186,7 @@ h2 {
        transform: translateX(calc(var(--slide-length) * -1 / (3/4)));
    }
 
-   95% {
+   100% {
        transform: translateX(0);
    }
 
@@ -198,7 +198,7 @@ h2 {
        transform: translateX(0);
    }
 
-   95% {
+   100% {
        transform: translateX(var(--slide-length));
    }
 
@@ -214,19 +214,23 @@ h2 {
 }
 
 .slide-left-fade-in {
-    animation: var(--slide-duration) enter-left ease-in-out forwards, var(--slide-duration) fade-in ease-in-out forwards;
+    animation: var(--slide-duration) enter-left ease-in-out forwards,
+               var(--slide-duration) fade-in ease-in-out forwards;
 }
 
 .slide-left-fade-out {
-    animation: var(--slide-duration) exit-left ease-in-out forwards, var(--slide-duration) fade-out ease-in-out forwards;
+    animation: var(--slide-duration) exit-left ease-in-out forwards,
+               var(--slide-duration) fade-out ease-in-out forwards;
 }
 
 .slide-right-fade-in {
-    animation: var(--slide-duration) enter-right ease-in-out forwards, var(--slide-duration) fade-in ease-in-out forwards;
+    animation: var(--slide-duration) enter-right ease-in-out forwards,
+               var(--slide-duration) fade-in ease-in-out forwards;
 }
 
 .slide-right-fade-out {
-    animation: var(--slide-duration) exit-right ease-in-out forwards, var(--slide-duration) fade-out ease-in-out forwards;
+    animation: var(--slide-duration) exit-right ease-in-out forwards,
+               var(--slide-duration) fade-out ease-in-out forwards;
 }
 
 @media (min-width: 400px) {
