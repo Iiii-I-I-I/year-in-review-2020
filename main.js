@@ -31,19 +31,19 @@ function tabSwitcher() {
 
         function hideAndSlide(direction, duration) {
             currentlyVisible.forEach(function(section) {
-                section.classList.add('section-slide-' + direction + '-fade-out');
+                section.classList.add('slide-' + direction + '-fade-out');
                 setTimeout(function() {
                     section.classList.remove('section-visible');
-                    section.classList.remove('section-slide-' + direction + '-fade-out');
+                    section.classList.remove('slide-' + direction + '-fade-out');
                 }, duration);
             });
             nextVisible.forEach(function(section) {
                 setTimeout(function() {
                     section.classList.add('section-visible');
-                    section.classList.add('section-slide-' + direction + '-fade-in');
+                    section.classList.add('slide-' + direction + '-fade-in');
                 }, duration);
                 setTimeout(function() {
-                    section.classList.remove('section-slide-' + direction + '-fade-in');
+                    section.classList.remove('slide-' + direction + '-fade-in');
                 }, duration * 2);
             });
             document.querySelector('.tabs').setAttribute('style', '--index: ' + nextIndex);
