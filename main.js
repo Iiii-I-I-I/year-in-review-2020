@@ -8,7 +8,7 @@ function tabSwitcher() {
     function clickBitch() {
         var nextIndex = this.dataset.index;
         var currIndex = document.querySelector('.tabs').style.getPropertyValue('--index');
-        var nextVisible = document.querySelectorAll('.' + this.dataset.game);
+        var nextVisible = document.querySelectorAll('.section-' + this.dataset.game);
         var currVisible = document.querySelectorAll('.section-visible');
 
         function hideAndSlide(direction, duration) {

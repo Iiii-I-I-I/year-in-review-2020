@@ -204,9 +204,11 @@ h2 {
 
 }
 
-.section {
+.section-rs,
+.section-osrs,
+.section-ptbr,
+.section-rsc {
     display: none;
-    /* transform: translateZ(0); */
 }
 
 .section-visible {
