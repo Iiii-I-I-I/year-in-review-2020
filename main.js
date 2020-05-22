@@ -4,7 +4,7 @@ function tabSwitcher() {
     function clickBitch() {
         var game = this.dataset.game;
         var nextIndex = this.dataset.index;
-        var currIndex = document.querySelector('.tabs').style.getPropertyValue('--index').trim();
+        var currIndex = document.querySelector('.tabs').style.getPropertyValue('--index');
         var nextVisible = document.querySelectorAll('.' + game);
         var currVisible = document.querySelectorAll('.section-visible');
 
@@ -25,15 +25,17 @@ function tabSwitcher() {
                     section.classList.remove('slide-' + direction + '-fade-in');
                 }, duration * 2);
             });
-            document.querySelector('.tabs').setAttribute('style', '--index: ' + nextIndex);
+            document.querySelector('.tabs').style.setProperty('--index', nextIndex);
         }
 
         if (currIndex === nextIndex) {
             return;
         } else if (currIndex > nextIndex) {
-            hideAndSlide('left', 200);
+            // purposely shorter than --slide-duration; tabs otherwise flicker in chrome
+            hideAndSlide('left', 190);
         } else {
-            hideAndSlide('right', 200);
+            // purposely shorter than --slide-duration; tabs otherwise flicker in chrome
+            hideAndSlide('right', 190);
         }
     }
 
