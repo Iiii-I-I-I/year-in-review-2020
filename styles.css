@@ -16,6 +16,14 @@ html {
     --slide-duration: .2s;
 }
 
+@media (prefers-reduced-motion) {
+
+    html {
+        --slide-length: 0;
+    }
+
+}
+
 body {
     color: #444;
     background: #fcfcfc;
