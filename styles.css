@@ -27,9 +27,7 @@ html {
 body {
     color: #444;
     background: #fcfcfc;
-    font-size: 15px;
-    font-family: system-ui, -apple-system, sans-serif;
-    line-height: 1.4;
+    font: 15px/1.4 system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
     margin: 5em 0;
 }
 
