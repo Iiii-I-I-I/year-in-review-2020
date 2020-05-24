@@ -13,7 +13,7 @@ html {
     --tab-gap: .25em;
     --border-radius: .5em;
     --slide-length: .5em;
-    --slide-duration: 250ms;
+    --slide-duration: 225ms;
     --easing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 

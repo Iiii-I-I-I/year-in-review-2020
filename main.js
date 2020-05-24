@@ -1,16 +1,19 @@
+var get = function(className) { return document.querySelector(className) },
+    getAll = function(className) { return document.querySelectorAll(className) };
+
 function tabSwitcher() {
-    var tabs = document.querySelectorAll('.tabs label');
+    var tabs = getAll('.tabs label');
 
     tabs.forEach(function(tab) {
         tab.addEventListener('click', clickBitch);
     });
 
     function clickBitch() {
-        var duration = window.getComputedStyle(document.querySelector('html')).getPropertyValue('--slide-duration').match(/\d+/)[0];
-        var nextIndex = this.dataset.index;
-        var currIndex = document.querySelector('.tabs').style.getPropertyValue('--index');
-        var nextVisible = document.querySelectorAll('.section-' + this.dataset.game);
-        var currVisible = document.querySelectorAll('.section-visible');
+        var nextIndex = this.dataset.index,
+            currIndex = get('.tabs').style.getPropertyValue('--index'),
+            nextVisible = getAll('.section-' + this.dataset.game),
+            currVisible = getAll('.section-visible'),
+            duration = window.getComputedStyle(get('html')).getPropertyValue('--slide-duration').match(/\d+/)[0];
 
         function hideAndSlide(direction) {
             // fade out and hide old sections
@@ -31,7 +34,7 @@ function tabSwitcher() {
                     section.classList.remove('slide-' + direction + '-fade-in');
                 }, duration * 2);
             });
-            document.querySelector('.tabs').style.setProperty('--index', nextIndex);
+            get('.tabs').style.setProperty('--index', nextIndex);
         }
 
         if (currIndex === nextIndex) {
