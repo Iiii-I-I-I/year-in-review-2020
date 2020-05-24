@@ -6,12 +6,13 @@ function tabSwitcher() {
     });
 
     function clickBitch() {
+        var duration = window.getComputedStyle(document.querySelector('html')).getPropertyValue('--slide-duration').match(/\d+/)[0];
         var nextIndex = this.dataset.index;
         var currIndex = document.querySelector('.tabs').style.getPropertyValue('--index');
         var nextVisible = document.querySelectorAll('.section-' + this.dataset.game);
         var currVisible = document.querySelectorAll('.section-visible');
 
-        function hideAndSlide(direction, duration) {
+        function hideAndSlide(direction) {
             // fade out and hide old sections
             currVisible.forEach(function(section) {
                 section.classList.add('slide-' + direction + '-fade-out');
@@ -36,11 +37,9 @@ function tabSwitcher() {
         if (currIndex === nextIndex) {
             return;
         } else if (currIndex > nextIndex) {
-            // must match --slide-duration in styles.css
-            hideAndSlide('left', 200);
+            hideAndSlide('left');
         } else {
-            // must match --slide-duration in styles.css
-            hideAndSlide('right', 200);
+            hideAndSlide('right');
         }
     }
 }
