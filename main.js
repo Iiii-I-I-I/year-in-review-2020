@@ -1,8 +1,17 @@
-var get = function(className) { return document.querySelector(className) },
-    getAll = function(className) { return document.querySelectorAll(className) };
+var get = function(selector) {
+        return document.querySelector(selector);
+    },
+    getAll = function(selector) {
+        return document.querySelectorAll(selector);
+    },
+    getStyle = function(selector, property) {
+        return window.getComputedStyle(get(selector)).getPropertyValue(property);
+    };
 
 function tabSwitcher() {
-    var tabs = getAll('.tabs label');
+    var tabs = getAll('.tabs label'),
+        enterDuration = parseInt(getStyle('html', '--slide-in-duration').match(/\d+/)[0]),
+        exitDuration = parseInt(getStyle('html', '--slide-out-duration').match(/\d+/)[0]);
 
     tabs.forEach(function(tab) {
         tab.addEventListener('click', clickBitch);
@@ -12,8 +21,7 @@ function tabSwitcher() {
         var nextIndex = this.dataset.index,
             currIndex = get('.tabs').style.getPropertyValue('--index'),
             nextVisible = getAll('.section-' + this.dataset.game),
-            currVisible = getAll('.section-visible'),
-            duration = window.getComputedStyle(get('html')).getPropertyValue('--slide-duration').match(/\d+/)[0];
+            currVisible = getAll('.section-visible');
 
         function hideAndSlide(direction) {
             // fade out and hide old sections
@@ -22,17 +30,17 @@ function tabSwitcher() {
                 setTimeout(function() {
                     section.classList.remove('section-visible');
                     section.classList.remove('slide-' + direction + '-fade-out');
-                }, duration);
+                }, exitDuration);
             });
             // fade in and show new sections
             nextVisible.forEach(function(section) {
                 setTimeout(function() {
                     section.classList.add('section-visible');
                     section.classList.add('slide-' + direction + '-fade-in');
-                }, duration);
+                }, exitDuration);
                 setTimeout(function() {
                     section.classList.remove('slide-' + direction + '-fade-in');
-                }, duration * 2);
+                }, enterDuration + exitDuration);
             });
             get('.tabs').style.setProperty('--index', nextIndex);
         }

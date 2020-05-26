@@ -13,7 +13,8 @@ html {
     --tab-gap: .25em;
     --border-radius: .5em;
     --slide-length: .5em;
-    --slide-duration: 225ms;
+    --slide-in-duration: 275ms;
+    --slide-out-duration: 150ms;
     --easing-tab: cubic-bezier(0.4, 0, 0.2, 1);
     --easing-section: cubic-bezier(0.46, 0.03, 0.52, 0.96);
 }
@@ -89,7 +90,7 @@ h2 {
     background: white;
     border-radius: var(--border-radius);
     box-shadow: 0 2px 6px -2px rgba(0, 0, 0, .15);
-    transition: calc(var(--slide-duration) * 2) transform var(--easing-tab);
+    transition: calc(var(--slide-in-duration) + var(--slide-out-duration)) transform var(--easing-tab);
 }
 
 .tabs input {
@@ -105,7 +106,7 @@ h2 {
     color: #777;
     text-align: center;
     padding: 12px 0;
-    transition: calc(var(--slide-duration) * 2) color var(--easing-tab);
+    transition: calc(var(--slide-in-duration) + var(--slide-out-duration)) color var(--easing-tab);
 }
 
 .tabs input:checked + label {
@@ -209,6 +210,8 @@ h2 {
 .section-ptbr,
 .section-rsc {
     display: none;
+    animation-fill-mode: forwards;
+    animation-timing-function: var(--easing-section);
 }
 
 .section-visible {
@@ -216,23 +219,23 @@ h2 {
 }
 
 .slide-left-fade-in {
-    animation: var(--slide-duration) enter-left var(--easing-section) forwards,
-               var(--slide-duration) fade-in var(--easing-section) forwards;
+    animation-name: enter-left, fade-in;
+    animation-duration: var(--slide-in-duration);
 }
 
 .slide-left-fade-out {
-    animation: var(--slide-duration) exit-left var(--easing-section) forwards,
-               var(--slide-duration) fade-out var(--easing-section) forwards;
+    animation-name: exit-left, fade-out;
+    animation-duration: var(--slide-out-duration);
 }
 
 .slide-right-fade-in {
-    animation: var(--slide-duration) enter-right var(--easing-section) forwards,
-               var(--slide-duration) fade-in var(--easing-section) forwards;
+    animation-name: enter-right, fade-in;
+    animation-duration: var(--slide-in-duration);
 }
 
 .slide-right-fade-out {
-    animation: var(--slide-duration) exit-right var(--easing-section) forwards,
-               var(--slide-duration) fade-out var(--easing-section) forwards;
+    animation-name: exit-right, fade-out;
+    animation-duration: var(--slide-out-duration);
 }
 
 @media (min-width: 400px) {
