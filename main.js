@@ -23,6 +23,14 @@ function tabSwitcher() {
             nextVisible = getAll('.section-' + this.dataset.game),
             currVisible = getAll('.section-visible');
 
+        if (currIndex === nextIndex) {
+            return;
+        } else if (currIndex > nextIndex) {
+            hideAndSlide('left');
+        } else {
+            hideAndSlide('right');
+        }
+
         function hideAndSlide(direction) {
             // fade out and hide old sections
             currVisible.forEach(function(section) {
@@ -43,14 +51,6 @@ function tabSwitcher() {
                 }, enterDuration + exitDuration);
             });
             get('.tabs').style.setProperty('--index', nextIndex);
-        }
-
-        if (currIndex === nextIndex) {
-            return;
-        } else if (currIndex > nextIndex) {
-            hideAndSlide('left');
-        } else {
-            hideAndSlide('right');
         }
     }
 }
