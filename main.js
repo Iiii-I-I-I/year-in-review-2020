@@ -10,8 +10,8 @@ var get = function(selector) {
 
 function tabSwitcher() {
     var tabs = getAll('.tabs label'),
-        enterDuration = parseInt(getStyle('html', '--slide-in-duration').match(/\d+/)[0]),
-        exitDuration = parseInt(getStyle('html', '--slide-out-duration').match(/\d+/)[0]);
+        enterDuration = parseInt(getStyle('html', '--slide-slow').match(/\d+/)[0]),
+        exitDuration = parseInt(getStyle('html', '--slide-fast').match(/\d+/)[0]);
 
     tabs.forEach(function(tab) {
         tab.addEventListener('click', clickBitch);

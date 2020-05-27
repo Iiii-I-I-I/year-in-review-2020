@@ -9,23 +9,31 @@
 }
 
 :root {
-    --border-radius: .5em;
+    --border-radius: .6em;
     --slide-length: .5em;
-    --slide-in-duration: 275ms;
-    --slide-out-duration: 150ms;
-    --easing-tab: cubic-bezier(0.4, 0, 0.2, 1);
-    --easing-section: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+    --slide-slow: 275ms;
+    --slide-fast: 150ms;
+    --ease-in-out-expo: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-in-out-quad: cubic-bezier(0.46, 0.03, 0.52, 0.96);
     --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (prefers-reduced-motion) {
+
+    :root {
+        --slide-length: 0;
+    }
+
 }
 
 html {
     font-size: 16px;
 }
 
-@media (prefers-reduced-motion) {
+@media (max-width: 800px) {
 
     html {
-        --slide-length: 0;
+        font-size: 14px;
     }
 
 }
@@ -72,7 +80,8 @@ header {
 
     background: #1b1b1d;
     color: white;
-    height: 600px;
+    height: 700px;
+    max-height: 100vh;
     display: flex;
 }
 
@@ -88,7 +97,7 @@ header h1 {
 
 .header-small {
     display: block;
-    color: #bfbfbf;
+    color: rgba(255, 255, 255, .7);
     font-size: var(--header-size);
     font-weight: 200;
     letter-spacing: .2ch;
@@ -117,18 +126,18 @@ header span:nth-child(3) {
 
 .tabs {
     --tab-count: 4;
-    --tab-gap: .25em;
+    --tab-gap: .2em;
 
     position: sticky;
     overflow: hidden;
     top: 1em;
     z-index: 1; /* stop bg flicker when switching tabs */
 
-    font-size: 14px;
+    font-size: .9em;
     background-color: #f5f5f5;
     margin: 0 auto 3rem;
     border-radius: calc(var(--border-radius) + var(--tab-gap));
-    max-width: 460px;
+    max-width: 35em;
 
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -158,11 +167,11 @@ header span:nth-child(3) {
     top: var(--tab-gap);
     left: var(--tab-gap);
     transform: translateX(calc(var(--index) * 100% + var(--index) * var(--tab-gap) * 2));
+    transition: calc(var(--slide-slow) + var(--slide-fast)) transform var(--ease-in-out-expo);
 
     background: white;
     border-radius: var(--border-radius);
     box-shadow: 0 2px 6px -2px rgba(0, 0, 0, .15);
-    transition: calc(var(--slide-in-duration) + var(--slide-out-duration)) transform var(--easing-tab);
 }
 
 .tabs input {
@@ -178,7 +187,7 @@ header span:nth-child(3) {
     color: #777;
     text-align: center;
     padding: 12px 0;
-    transition: calc(var(--slide-in-duration) + var(--slide-out-duration)) color var(--easing-tab);
+    transition: calc(var(--slide-slow) + var(--slide-fast)) color var(--ease-in-out-expo);
 }
 
 .tabs input:checked + label {
@@ -283,7 +292,7 @@ header span:nth-child(3) {
 .section-rsc {
     display: none;
     animation-fill-mode: both;
-    animation-timing-function: var(--easing-section);
+    animation-timing-function: var(--ease-in-out-quad);
 }
 
 .section-visible {
@@ -292,22 +301,22 @@ header span:nth-child(3) {
 
 .slide-left-fade-in {
     animation-name: enter-left, fade-in;
-    animation-duration: var(--slide-in-duration);
+    animation-duration: var(--slide-slow);
 }
 
 .slide-left-fade-out {
     animation-name: exit-left, fade-out;
-    animation-duration: var(--slide-out-duration);
+    animation-duration: var(--slide-fast);
 }
 
 .slide-right-fade-in {
     animation-name: enter-right, fade-in;
-    animation-duration: var(--slide-in-duration);
+    animation-duration: var(--slide-slow);
 }
 
 .slide-right-fade-out {
     animation-name: exit-right, fade-out;
-    animation-duration: var(--slide-out-duration);
+    animation-duration: var(--slide-fast);
 }
 
 @media (min-width: 400px) {
