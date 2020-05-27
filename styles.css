@@ -79,7 +79,6 @@ header {
 header h1 {
     margin: auto;
     line-height: 1;
-    font-weight: 200;
 }
 
 .header-big {
@@ -91,6 +90,7 @@ header h1 {
     display: block;
     color: #bfbfbf;
     font-size: var(--header-size);
+    font-weight: 200;
     letter-spacing: .2ch;
     text-transform: uppercase;
 }
