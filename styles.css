@@ -8,15 +8,18 @@
     box-sizing: border-box;
 }
 
-html {
-    --tab-count: 4;
-    --tab-gap: .25em;
+:root {
     --border-radius: .5em;
     --slide-length: .5em;
     --slide-in-duration: 275ms;
     --slide-out-duration: 150ms;
     --easing-tab: cubic-bezier(0.4, 0, 0.2, 1);
     --easing-section: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+    --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+html {
+    font-size: 16px;
 }
 
 @media (prefers-reduced-motion) {
@@ -30,8 +33,8 @@ html {
 body {
     color: #444;
     background: #fcfcfc;
-    font: 15px/1.4 system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    margin: 5em 0;
+    font: 1em/1.45 system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    margin: 0;
 }
 
 h2 {
@@ -43,7 +46,69 @@ h2 {
 .container {
     max-width: 45em;
     padding: 0 2em;
+    margin: 5em auto;
+}
+
+/* --------------
+       HEADER
+   -------------- */
+
+@keyframes fade-and-slide {
+
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+header {
+    --header-size: 3.75rem;
+
+    background: #1b1b1d;
+    color: white;
+    height: 600px;
+    display: flex;
+}
+
+header h1 {
     margin: auto;
+    line-height: 1;
+    font-weight: 200;
+}
+
+.header-big {
+    display: block;
+    font-size: calc(var(--header-size) * 2);
+}
+
+.header-small {
+    display: block;
+    color: #bfbfbf;
+    font-size: var(--header-size);
+    letter-spacing: .2ch;
+    text-transform: uppercase;
+}
+
+header span {
+    animation: 1.4s fade-and-slide both var(--ease-out-quad);
+}
+
+header span:nth-child(1) {
+    animation-delay: .2s;
+}
+
+header span:nth-child(2) {
+    animation-delay: .45s;
+}
+
+header span:nth-child(3) {
+    animation-delay: .7s;
 }
 
 /* ------------
@@ -51,6 +116,9 @@ h2 {
    ------------ */
 
 .tabs {
+    --tab-count: 4;
+    --tab-gap: .25em;
+
     position: sticky;
     overflow: hidden;
     top: 1em;
@@ -58,7 +126,7 @@ h2 {
 
     font-size: 14px;
     background-color: #f5f5f5;
-    margin: 0 auto 3em;
+    margin: 0 auto 3rem;
     border-radius: calc(var(--border-radius) + var(--tab-gap));
     max-width: 460px;
 
@@ -76,6 +144,10 @@ h2 {
         backdrop-filter: blur(10px);
     }
 
+}
+
+.tab-heading {
+    margin-top: 3rem;
 }
 
 .tabs::before {
@@ -210,7 +282,7 @@ h2 {
 .section-ptbr,
 .section-rsc {
     display: none;
-    animation-fill-mode: forwards;
+    animation-fill-mode: both;
     animation-timing-function: var(--easing-section);
 }
 
