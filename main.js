@@ -8,12 +8,26 @@ var get = function(selector) {
         return window.getComputedStyle(get(selector)).getPropertyValue(property);
     };
 
+function fadeInMain() {
+    // don't animate <main> when < 50% of the header is visible; if user is scrolled
+    // down and the page is reloaded, don't make them wait for the animation to finish
+
+    var observer = new IntersectionObserver(entry => {
+        if (entry[0].intersectionRatio > 0.5) {
+            get('.container').classList.add('container-slide');
+            observer.disconnect();
+        }
+    });
+
+    observer.observe(get('header'));
+}
+
 function tabSwitcher() {
     var tabs = getAll('.tabs label'),
-        enterDuration = parseInt(getStyle('html', '--slide-slow').match(/\d+/)[0]),
-        exitDuration = parseInt(getStyle('html', '--slide-fast').match(/\d+/)[0]);
+        enterDuration = parseInt(getStyle(':root', '--slide-slow').match(/\d+/)[0]),
+        exitDuration = parseInt(getStyle(':root', '--slide-fast').match(/\d+/)[0]);
 
-    tabs.forEach(function(tab) {
+    tabs.forEach(tab => {
         tab.addEventListener('click', clickBitch);
     });
 
@@ -33,20 +47,20 @@ function tabSwitcher() {
 
         function hideAndSlide(direction) {
             // fade out and hide old sections
-            currVisible.forEach(function(section) {
+            currVisible.forEach(section => {
                 section.classList.add('slide-' + direction + '-fade-out');
-                setTimeout(function() {
+                setTimeout(() => {
                     section.classList.remove('section-visible');
                     section.classList.remove('slide-' + direction + '-fade-out');
                 }, exitDuration);
             });
             // fade in and show new sections
-            nextVisible.forEach(function(section) {
-                setTimeout(function() {
+            nextVisible.forEach(section => {
+                setTimeout(() => {
                     section.classList.add('section-visible');
                     section.classList.add('slide-' + direction + '-fade-in');
                 }, exitDuration);
-                setTimeout(function() {
+                setTimeout(() => {
                     section.classList.remove('slide-' + direction + '-fade-in');
                 }, enterDuration + exitDuration);
             });
@@ -55,4 +69,5 @@ function tabSwitcher() {
     }
 }
 
+fadeInMain();
 tabSwitcher();

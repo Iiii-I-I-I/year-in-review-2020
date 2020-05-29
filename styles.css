@@ -10,7 +10,7 @@
 
 :root {
     --border-radius: .6em;
-    --slide-length: 8px;
+    --slide-length: 10px;
     --slide-slow: 275ms;
     --slide-fast: 150ms;
     --ease-in-out-expo: cubic-bezier(0.4, 0, 0.2, 1);
@@ -30,10 +30,10 @@ html {
     font-size: 16px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
 
     html {
-        font-size: 14px;
+        font-size: 15px;
     }
 
 }
@@ -43,6 +43,14 @@ body {
     background: #fcfcfc;
     font: 1em/1.45 system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
     margin: 0;
+}
+
+h1 {
+    line-height: 1;
+}
+
+h2 {
+    line-height: 1.2;
 }
 
 /* -----------------
@@ -147,9 +155,17 @@ header {
     display: flex;
 }
 
+@media (max-width: 600px) {
+
+    header {
+        --header-size: 10vw;
+        height: 60vh;
+    }
+
+}
+
 header h1 {
     margin: auto;
-    line-height: 1;
 }
 
 .header-big {
@@ -191,9 +207,19 @@ header span:nth-child(3) {
     max-width: 45em;
     padding: 0 2em;
     margin: 5em auto;
-    /* @TODO: - only add animation if at the top of the page
-              - delay should succeed header span:nth-child(3) */
-    animation: 1.4s 1s both var(--ease-out-quad);
+}
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 0 1em;
+    }
+
+}
+
+/* only added to .container if > 50% of the header is visible */
+.container-slide {
+    animation: 1.2s 1s both var(--ease-out-quad);
     animation-name: fade-in, enter-top;
 }
 
@@ -203,7 +229,6 @@ header span:nth-child(3) {
 
 .tab-heading {
     text-align: center;
-    line-height: 1.2;
     margin: 3rem 0 .5em;
 }
 
