@@ -9,10 +9,21 @@
 }
 
 :root {
+    --primary-bg: #1b1b1d;
+    --secondary-bg: #282828;
+    --tertiary-bg: #aaa;
+
+    --primary-text: rgba(255, 255, 255, .75);
+    --secondary-text: #fff;
+    --tertiary-text: #999;
+
     --border-radius: .6em;
+    --box-shadow: 0 2px 8px -1px rgba(0, 0, 0, .2);
+
     --slide-length: 10px;
     --slide-slow: 275ms;
     --slide-fast: 150ms;
+
     --ease-in-out-expo: cubic-bezier(0.4, 0, 0.2, 1);
     --ease-in-out-quad: cubic-bezier(0.46, 0.03, 0.52, 0.96);
     --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -30,27 +41,46 @@ html {
     font-size: 16px;
 }
 
-@media (max-width: 600px) {
+@media (min-width: 800px) {
 
     html {
-        font-size: 15px;
+        font-size: 17px;
+    }
+
+}
+
+@media (min-width: 1400px) {
+
+    html {
+        font-size: 18px;
     }
 
 }
 
 body {
-    color: #444;
-    background: #fcfcfc;
+    color: var(--primary-text);
+    background: var(--primary-bg);
     font: 1em/1.45 system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
     margin: 0;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--secondary-text);
 }
 
 h1 {
     line-height: 1;
 }
 
-h2 {
+h2,
+h3 {
     line-height: 1.2;
+}
+
+a {
+    color: var(--tertiary-text);
 }
 
 /* -----------------
@@ -148,11 +178,11 @@ h2 {
 header {
     --header-size: 3.75rem;
 
-    background: #1b1b1d;
-    color: white;
-    height: 650px;
-    max-height: 100vh;
+    height: 100vh;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row wrap;
 }
 
 @media (max-width: 600px) {
@@ -164,17 +194,19 @@ header {
 
 }
 
-header h1 {
-    margin: auto;
+.h1-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-self: flex-end;
+    margin-bottom: 5vh;
 }
 
 .header-big {
-    display: block;
     font-size: calc(var(--header-size) * 2);
 }
 
 .header-small {
-    display: block;
     font-size: var(--header-size);
     font-weight: 200;
     letter-spacing: .2ch;
@@ -182,31 +214,78 @@ header h1 {
 }
 
 header span {
-    animation: 1.4s both var(--ease-out-quad);
-    animation-name: fade-in, enter-top;
+    display: block;
+    /* animation: 1.4s both var(--ease-out-quad);
+    animation-name: fade-in, enter-top; */
 }
 
 header span:nth-child(1) {
-    animation-delay: .2s;
+    /* animation-delay: .2s; */
 }
 
 header span:nth-child(2) {
-    animation-delay: .4s;
-    color: rgba(255, 255, 255, .7);
+    color: var(--primary-text);
+    /* animation-delay: .4s; */
 }
 
 header span:nth-child(3) {
-    animation-delay: .6s;
+    /* animation-delay: .6s; */
 }
 
 /* ------------
        MAIN
    ------------ */
 
+/* @TODO: at <900px make it overflow and scroll */
+.wiki-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1em;
+    align-self: flex-start;
+
+    max-width: 65em;
+    padding: 0 1em;
+}
+
+.wiki-card {
+    display: block;
+    height: 10em;
+    padding: 1em 1.5em;
+    background-color: var(--secondary-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px -4px rgba(0, 0, 0, .1);
+
+    color: white;
+    text-decoration: none;
+
+    /* needed for perspectiveCards() in main.js */
+    transition: transform .45s ease;
+    transform: perspective(500px) rotateX(0) rotateY(0);
+
+    /* animation: 1.4s .8s both var(--ease-out-quad);
+    animation-name: fade-in, enter-top; */
+}
+
+.card-rs {
+    background-color: #035384;
+}
+
+.card-osrs {
+    background-color: #674a23;
+}
+
+.card-ptbr {
+    background-color: #194388;
+}
+
+.card-rsc {
+    background-color: #145211;
+}
+
 .container {
     max-width: 45em;
     padding: 0 2em;
-    margin: 5em auto;
+    margin: 1em auto 5em;
 }
 
 @media (max-width: 600px) {
@@ -217,9 +296,9 @@ header span:nth-child(3) {
 
 }
 
-/* only added to .container if > 50% of the header is visible */
-.container-slide {
-    animation: 1.2s 1s both var(--ease-out-quad);
+/* OUTDATED: only added to .container if > 50% of the header is visible */
+.fade-and-slide {
+    animation: 1.4s both var(--ease-out-quad);
     animation-name: fade-in, enter-top;
 }
 
@@ -242,7 +321,7 @@ header span:nth-child(3) {
     z-index: 1; /* stop bg flicker when switching tabs */
 
     font-size: .9em;
-    background-color: #f5f5f5;
+    background-color: var(--secondary-bg);
     margin: 0 auto 3rem;
     border-radius: calc(var(--border-radius) + var(--tab-gap));
     max-width: 35em;
@@ -253,7 +332,7 @@ header span:nth-child(3) {
     user-select: none;
 }
 
-@supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)) {
+/* @supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)) {
 
     .tabs {
         background-color: rgba(240, 240, 240, .7);
@@ -261,7 +340,7 @@ header span:nth-child(3) {
         backdrop-filter: blur(10px);
     }
 
-}
+} */
 
 .tabs::before {
     content: '';
@@ -273,9 +352,9 @@ header span:nth-child(3) {
     transform: translateX(calc(var(--index) * 100% + var(--index) * var(--tab-gap) * 2));
     transition: calc(var(--slide-slow) + var(--slide-fast)) transform var(--ease-in-out-expo);
 
-    background: white;
+    background-color: #444;
     border-radius: var(--border-radius);
-    box-shadow: 0 2px 6px -2px rgba(0, 0, 0, .15);
+    box-shadow: var(--box-shadow);
 }
 
 .tabs input {
@@ -284,18 +363,18 @@ header span:nth-child(3) {
 }
 
 .tabs label {
-    width: calc(100% / var(--tab-count));
     position: relative;
     float: left;
+    width: calc(100% / var(--tab-count));
+    transition: calc(var(--slide-slow) + var(--slide-fast)) color var(--ease-in-out-expo);
 
-    color: #777;
+    color: var(--tertiary-text);
     text-align: center;
     padding: 12px 0;
-    transition: calc(var(--slide-slow) + var(--slide-fast)) color var(--ease-in-out-expo);
 }
 
 .tabs input:checked + label {
-    color: #333;
+    color: #ccc;
 }
 
 .label-small {
@@ -360,7 +439,7 @@ header span:nth-child(3) {
 }
 
 .callout {
-    background: #b2d7b8;
+    background: #165821;
     border-radius: var(--border-radius);
     padding: 1em 2em;
     margin: 2em -2em;

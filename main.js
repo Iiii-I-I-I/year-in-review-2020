@@ -10,7 +10,8 @@ var get = function(selector) {
 
 function fadeInMain() {
     // don't animate <main> when < 50% of the header is visible; if user is scrolled
-    // down and the page is reloaded, don't make them wait for the animation to finish
+    // down and the page is reloaded, no point in making them wait for the animation
+    // when they can't see the first three parts of it (the header) run
 
     var observer = new IntersectionObserver(entry => {
         if (entry[0].intersectionRatio > 0.5) {
@@ -20,6 +21,54 @@ function fadeInMain() {
     });
 
     observer.observe(get('header'));
+}
+
+// modified from <https://technokami.in/3d-hover-effect-using-javascript-animations-css-html>
+function gainPerspective() {
+    let cards = getAll('.wiki-card');
+
+    cards.forEach(card => {
+        const height = card.clientHeight;
+        const width = card.clientWidth;
+
+        function throttle(delay, fn) {
+            let lastCall = 0;
+
+            return function (...args) {
+                const now = (new Date).getTime();
+
+                if (now - lastCall < delay) {
+                    return;
+                }
+
+                lastCall = now;
+                return fn(...args);
+            }
+        }
+
+        function moveHandler(e) {
+            // get position of mouse cursor within element
+            var rect = e.currentTarget.getBoundingClientRect();
+            var xVal = e.clientX - rect.left;
+            var yVal = e.clientY - rect.top;
+
+            // calculate rotation value along the axes
+            const multiplier = 15;
+            const yRotation = multiplier * ((xVal - width / 2) / width);
+            const xRotation = -multiplier * ((yVal - height / 2) / height);
+
+            // generate string for CSS transform
+            const transform = 'perspective(500px) rotateX(' + xRotation + 'deg) rotateY(' + yRotation + 'deg)';
+
+            card.style.transform = transform;
+            card.style.transition = 'transform .2s ease';
+        }
+
+        card.addEventListener('mousemove', throttle(50, moveHandler));
+        card.addEventListener('mouseout', function() {
+            card.removeAttribute('style');
+        });
+    });
 }
 
 function tabSwitcher() {
@@ -69,5 +118,6 @@ function tabSwitcher() {
     }
 }
 
-fadeInMain();
+// fadeInMain();
+gainPerspective();
 tabSwitcher();
