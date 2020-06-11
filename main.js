@@ -8,22 +8,8 @@ var get = function(selector) {
         return window.getComputedStyle(get(selector)).getPropertyValue(property);
     };
 
-function fadeInMain() {
-    // don't animate <main> when < 50% of the header is visible; if user is scrolled
-    // down and the page is reloaded, no point in making them wait for the animation
-    // when they can't see the first three parts of it (the header) run
-
-    var observer = new IntersectionObserver(entry => {
-        if (entry[0].intersectionRatio > 0.5) {
-            get('.container').classList.add('container-slide');
-            observer.disconnect();
-        }
-    });
-
-    observer.observe(get('header'));
-}
-
 // modified from <https://technokami.in/3d-hover-effect-using-javascript-animations-css-html>
+// and <https://codeburst.io/throttling-and-debouncing-in-javascript-646d076d0a44>
 function gainPerspective() {
     let cards = getAll('.wiki-card');
 
@@ -31,11 +17,12 @@ function gainPerspective() {
         const height = card.clientHeight;
         const width = card.clientWidth;
 
+        // delay is in milliseconds
         function throttle(delay, fn) {
             let lastCall = 0;
 
             return function (...args) {
-                const now = (new Date).getTime();
+                const now = new Date().getTime();
 
                 if (now - lastCall < delay) {
                     return;
@@ -61,7 +48,7 @@ function gainPerspective() {
             const transform = 'perspective(500px) rotateX(' + xRotation + 'deg) rotateY(' + yRotation + 'deg)';
 
             card.style.transform = transform;
-            card.style.transition = 'transform .2s ease';
+            card.style.transition = 'transform .25s ease';
         }
 
         card.addEventListener('mousemove', throttle(50, moveHandler));
@@ -118,6 +105,5 @@ function tabSwitcher() {
     }
 }
 
-// fadeInMain();
 gainPerspective();
 tabSwitcher();

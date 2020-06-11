@@ -9,16 +9,16 @@
 }
 
 :root {
-    --primary-bg: #1b1b1d;
-    --secondary-bg: #282828;
-    --tertiary-bg: #aaa;
+    --primary-bg: #fcfcfc;
+    --secondary-bg: #f5f5f5;
+    --tertiary-bg: #ccc;
 
-    --primary-text: rgba(255, 255, 255, .75);
-    --secondary-text: #fff;
-    --tertiary-text: #999;
+    --primary-text: rgba(0, 0, 0, .65);
+    --secondary-text: #333;
+    --tertiary-text: #777;
 
     --border-radius: .6em;
-    --box-shadow: 0 2px 8px -1px rgba(0, 0, 0, .2);
+    --box-shadow: 0 2px 6px -2px rgba(0, 0, 0, .2);
 
     --slide-length: 10px;
     --slide-slow: 275ms;
@@ -189,7 +189,7 @@ header {
 
     header {
         --header-size: 10vw;
-        height: 60vh;
+        /* height: 60vh; */
     }
 
 }
@@ -199,37 +199,42 @@ header {
     display: flex;
     justify-content: center;
     align-self: flex-end;
-    margin-bottom: 5vh;
+    margin-bottom: 2em;
+}
+
+header h1 {
+    margin-top: 0;
 }
 
 .header-big {
-    font-size: calc(var(--header-size) * 2);
+    font-size: calc(var(--header-size) * 2.25);
 }
 
 .header-small {
     font-size: var(--header-size);
     font-weight: 200;
-    letter-spacing: .2ch;
+    letter-spacing: .15ch;
     text-transform: uppercase;
 }
 
 header span {
     display: block;
-    /* animation: 1.4s both var(--ease-out-quad);
-    animation-name: fade-in, enter-top; */
+    animation: 1.4s both var(--ease-out-quad);
+    animation-name: fade-in, enter-top;
 }
 
 header span:nth-child(1) {
-    /* animation-delay: .2s; */
+    animation-delay: .2s;
 }
 
 header span:nth-child(2) {
-    color: var(--primary-text);
-    /* animation-delay: .4s; */
+    color: rgba(0, 0, 0, .5);
+    animation-delay: .5s;
 }
 
 header span:nth-child(3) {
-    /* animation-delay: .6s; */
+    animation-delay: .8s;
+    font-size: calc(var(--header-size) * 1.1);
 }
 
 /* ------------
@@ -243,43 +248,94 @@ header span:nth-child(3) {
     grid-gap: 1em;
     align-self: flex-start;
 
-    max-width: 65em;
+    width: 100vw;
+    max-width: 75em;
     padding: 0 1em;
+    animation: 1.2s 1.2s both var(--ease-out-quad);
+    animation-name: fade-in, enter-top;
 }
 
 .wiki-card {
-    display: block;
-    height: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    max-height: 10em;
     padding: 1em 1.5em;
+    position: relative;
+    overflow: hidden;
+
+    text-decoration: none;
     background-color: var(--secondary-bg);
     border-radius: var(--border-radius);
-    box-shadow: 0 4px 12px -4px rgba(0, 0, 0, .1);
+    box-shadow: /* https://brumm.af/shadows */
+        0 2.4px 3.2px rgba(0, 0, 0, 0.053),
+        0 8px 10.7px rgba(0, 0, 0, 0.077),
+        0 36px 48px rgba(0, 0, 0, 0.13);
 
-    color: white;
-    text-decoration: none;
 
-    /* needed for perspectiveCards() in main.js */
-    transition: transform .45s ease;
+    /* needed for gainPerspective() in main.js */
+    transition: transform .5s ease;
     transform: perspective(500px) rotateX(0) rotateY(0);
+}
 
-    /* animation: 1.4s .8s both var(--ease-out-quad);
-    animation-name: fade-in, enter-top; */
+/* background image on a separate element so opacity can be changed */
+.wiki-card::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    opacity: 0.6;
+    filter: saturate(0.75);
+    background-position: center;
+    background-size: cover;
+    box-shadow: inset 0 1px 4px rgba(255, 255, 255, .5);
+}
+
+.wiki-card div {
+    color: white;
+    font-size: 1.25em;
+    font-weight: bold;
+    line-height: 1.3;
+    text-align: center;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, .5);
 }
 
 .card-rs {
     background-color: #035384;
 }
 
+.card-rs::before {
+    background-image: url(images/card-rs.jpg);
+}
+
 .card-osrs {
-    background-color: #674a23;
+    background-color: #8a9450;
+}
+
+.card-osrs::before {
+    background-image: url(images/card-osrs.jpg);
 }
 
 .card-ptbr {
-    background-color: #194388;
+    background-color: #9f7dcc;
+}
+
+.card-ptbr::before {
+    background-image: url(images/card-ptbr.jpg);
 }
 
 .card-rsc {
-    background-color: #145211;
+    background-color: #a58141;
+}
+
+.card-rsc::before {
+    background-image: url(images/card-rsc.jpg);
 }
 
 .container {
@@ -296,12 +352,6 @@ header span:nth-child(3) {
 
 }
 
-/* OUTDATED: only added to .container if > 50% of the header is visible */
-.fade-and-slide {
-    animation: 1.4s both var(--ease-out-quad);
-    animation-name: fade-in, enter-top;
-}
-
 /* ------------
        TABS
    ------------ */
@@ -315,7 +365,7 @@ header span:nth-child(3) {
     --tab-count: 4;
     --tab-gap: .2em;
 
-    position: sticky;
+    position: relative;
     overflow: hidden;
     top: 1em;
     z-index: 1; /* stop bg flicker when switching tabs */
@@ -352,7 +402,7 @@ header span:nth-child(3) {
     transform: translateX(calc(var(--index) * 100% + var(--index) * var(--tab-gap) * 2));
     transition: calc(var(--slide-slow) + var(--slide-fast)) transform var(--ease-in-out-expo);
 
-    background-color: #444;
+    background-color: white;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
 }
@@ -374,7 +424,7 @@ header span:nth-child(3) {
 }
 
 .tabs input:checked + label {
-    color: #ccc;
+    color: var(--secondary-text);
 }
 
 .label-small {
@@ -439,7 +489,7 @@ header span:nth-child(3) {
 }
 
 .callout {
-    background: #165821;
+    background: var(--secondary-bg);
     border-radius: var(--border-radius);
     padding: 1em 2em;
     margin: 2em -2em;
