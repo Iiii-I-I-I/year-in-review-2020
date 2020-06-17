@@ -14,10 +14,10 @@ function gainPerspective() {
     let cards = getAll('.wiki-card');
 
     cards.forEach(card => {
-        const height = card.clientHeight;
-        const width = card.clientWidth;
+        const height = card.clientHeight,
+              width = card.clientWidth;
 
-        // delay is in milliseconds
+        // throttle the rate at which moveHandler updates (delay is in milliseconds)
         function throttle(delay, fn) {
             let lastCall = 0;
 
@@ -35,14 +35,14 @@ function gainPerspective() {
 
         function moveHandler(e) {
             // get position of mouse cursor within element
-            var rect = e.currentTarget.getBoundingClientRect();
-            var xVal = e.clientX - rect.left;
-            var yVal = e.clientY - rect.top;
+            let rect = e.currentTarget.getBoundingClientRect(),
+                xVal = e.clientX - rect.left,
+                yVal = e.clientY - rect.top;
 
             // calculate rotation value along the axes
-            const multiplier = 15;
-            const yRotation = multiplier * ((xVal - width / 2) / width);
-            const xRotation = -multiplier * ((yVal - height / 2) / height);
+            const multiplier = 15,
+                  yRotation = multiplier * ((xVal - width / 2) / width),
+                  xRotation = -multiplier * ((yVal - height / 2) / height);
 
             // generate string for CSS transform
             const transform = 'perspective(500px) rotateX(' + xRotation + 'deg) rotateY(' + yRotation + 'deg)';
@@ -59,7 +59,8 @@ function gainPerspective() {
 }
 
 function tabSwitcher() {
-    var tabs = getAll('.tabs label'),
+    let tabGroups = getAll('.tabs'),
+        tabs = getAll('.tabs label'),
         enterDuration = parseInt(getStyle(':root', '--slide-slow').match(/\d+/)[0]),
         exitDuration = parseInt(getStyle(':root', '--slide-fast').match(/\d+/)[0]);
 
@@ -68,18 +69,11 @@ function tabSwitcher() {
     });
 
     function clickBitch() {
-        var nextIndex = this.dataset.index,
+        let nextIndex = this.dataset.index,
             currIndex = get('.tabs').style.getPropertyValue('--index'),
+            nextRadio = getAll('.tab-' + this.dataset.game),
             nextVisible = getAll('.section-' + this.dataset.game),
             currVisible = getAll('.section-visible');
-
-        if (currIndex === nextIndex) {
-            return;
-        } else if (currIndex > nextIndex) {
-            hideAndSlide('left');
-        } else {
-            hideAndSlide('right');
-        }
 
         function hideAndSlide(direction) {
             // fade out and hide old sections
@@ -90,6 +84,7 @@ function tabSwitcher() {
                     section.classList.remove('slide-' + direction + '-fade-out');
                 }, exitDuration);
             });
+
             // fade in and show new sections
             nextVisible.forEach(section => {
                 setTimeout(() => {
@@ -100,7 +95,25 @@ function tabSwitcher() {
                     section.classList.remove('slide-' + direction + '-fade-in');
                 }, enterDuration + exitDuration);
             });
-            get('.tabs').style.setProperty('--index', nextIndex);
+
+            // update --index number for .tabs::before
+            tabGroups.forEach(tabGroup => {
+                tabGroup.style.setProperty('--index', nextIndex);
+            });
+
+            // update all radio inputs to match the one being clicked
+            nextRadio.forEach(radio => {
+                radio.checked = true;
+            });
+
+        }
+
+        if (currIndex === nextIndex) {
+            return;
+        } else if (currIndex > nextIndex) {
+            hideAndSlide('left');
+        } else {
+            hideAndSlide('right');
         }
     }
 }

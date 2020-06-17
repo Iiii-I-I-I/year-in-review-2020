@@ -268,7 +268,7 @@ header span:nth-child(3) {
     align-self: flex-start;
 
     width: 100vw;
-    max-width: 80em;
+    max-width: 75em;
     padding: 0 1em;
     animation: 1.2s 1.2s both var(--ease-out-quad);
     animation-name: fade-in, enter-top;
@@ -278,8 +278,7 @@ header span:nth-child(3) {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20vh;
-    max-height: 5em;
+    height: 9em;
     padding: 1em 1.5em;
     position: relative;
     overflow: hidden;
@@ -298,7 +297,7 @@ header span:nth-child(3) {
     transform: perspective(500px) rotateX(0) rotateY(0);
 }
 
-/* background image on a separate element so opacity can be changed */
+/* background image on a separate pseudo-element so opacity can be changed */
 .wiki-card::before {
     content: '';
     display: block;
@@ -383,14 +382,6 @@ header span:nth-child(3) {
 
     .wiki-cards {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-@media (min-width: 550px) {
-
-    .wiki-card {
-        max-height: 15vh;
     }
 
 }
