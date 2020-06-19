@@ -74,6 +74,11 @@ h1 {
     line-height: 1;
 }
 
+h2 {
+    margin: 4em 0 .5em;
+    text-align: center;
+}
+
 h2,
 h3 {
     line-height: 1.2;
@@ -405,11 +410,6 @@ header span:nth-child(3) {
 /* ------------
        TABS
    ------------ */
-
-.tab-heading {
-    text-align: center;
-    margin: 3rem 0 .5em;
-}
 
 .tabs {
     --tab-count: 4;
