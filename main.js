@@ -14,48 +14,48 @@
     function gainPerspective() {
         let cards = getAll('.wiki-card');
 
-        cards.forEach(card => {
-            const height = card.clientHeight,
-                  width = card.clientWidth;
+        // throttle the rate at which moveHandler updates (delay is in milliseconds)
+        function throttleMoveHandler(delay) {
+            let lastCall = 0;
 
-            // throttle the rate at which moveHandler updates (delay is in milliseconds)
-            function throttleMoveHandler(delay) {
-                let lastCall = 0;
+            return function (e) {
+                const now = new Date().getTime();
 
-                return function (e) {
-                    const now = new Date().getTime();
-
-                    if (now - lastCall < delay) {
-                        return;
-                    }
-
-                    lastCall = now;
-                    return moveHandler(e);
+                if (now - lastCall < delay) {
+                    return;
                 }
+
+                lastCall = now;
+                return moveHandler(e);
             }
+        }
 
-            function moveHandler(e) {
-                // get position of mouse cursor within element
-                let rect = e.currentTarget.getBoundingClientRect(),
-                    xVal = e.clientX - rect.left,
-                    yVal = e.clientY - rect.top;
+        function moveHandler(e) {
+            // get position of mouse cursor within element
+            let rect = e.currentTarget.getBoundingClientRect(),
+                xVal = e.clientX - rect.left,
+                yVal = e.clientY - rect.top,
+                cardWidth = e.currentTarget.clientWidth,
+                cardHeight = e.currentTarget.clientHeight;
 
-                // calculate rotation value along the axes
-                const multiplier = 15,
-                      yRotation = multiplier * ((xVal - width / 2) / width),
-                      xRotation = -multiplier * ((yVal - height / 2) / height);
+            // calculate rotation value along the axes
+            const multiplier = 15,
+                  yRotate = multiplier * ((xVal - cardWidth / 2) / cardWidth),
+                  xRotate = -multiplier * ((yVal - cardHeight / 2) / cardHeight);
 
-                // generate string for CSS transform
-                const transform = 'perspective(500px) rotateX(' + xRotation + 'deg) rotateY(' + yRotation + 'deg)';
+            // generate string for CSS transform
+            const transform = `perspective(500px) rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
 
-                card.style.transform = transform;
-                card.style.transition = 'transform .25s ease';
+            e.currentTarget.style.transform = transform;
+            e.currentTarget.style.transitionDuration = '.25s';
+        }
+
+        cards.forEach(card => {
+            // when viewport is < 500px the cards are full width and should not rotate
+            if (document.body.clientWidth > 500) {
+                card.addEventListener('mousemove', throttleMoveHandler(40));
+                card.addEventListener('mouseout', () => { card.removeAttribute('style'); });
             }
-
-            card.addEventListener('mousemove', throttleMoveHandler(40));
-            card.addEventListener('mouseout', function () {
-                card.removeAttribute('style');
-            });
         });
     }
 
@@ -64,10 +64,6 @@
             tabs = getAll('.tabs label'),
             enterDuration = parseInt(getStyle(':root', '--slide-slow').match(/\d+/)[0]),
             exitDuration = parseInt(getStyle(':root', '--slide-fast').match(/\d+/)[0]);
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', clickBitch);
-        });
 
         function clickBitch() {
             let nextIndex = this.dataset.index,
@@ -106,7 +102,6 @@
                 nextRadio.forEach(radio => {
                     radio.checked = true;
                 });
-
             }
 
             if (currIndex === nextIndex) {
@@ -117,6 +112,10 @@
                 hideAndSlide('right');
             }
         }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', clickBitch);
+        });
     }
 
     gainPerspective();
