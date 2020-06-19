@@ -34,29 +34,30 @@
             // get position of mouse cursor within element
             let rect = e.currentTarget.getBoundingClientRect(),
                 xVal = e.clientX - rect.left,
-                yVal = e.clientY - rect.top,
-                cardWidth = e.currentTarget.clientWidth,
-                cardHeight = e.currentTarget.clientHeight;
+                yVal = e.clientY - rect.top;
 
             // calculate rotation value along the axes
             const multiplier = 15,
+                  cardWidth = e.currentTarget.clientWidth,
+                  cardHeight = e.currentTarget.clientHeight,
                   yRotate = multiplier * ((xVal - cardWidth / 2) / cardWidth),
                   xRotate = -multiplier * ((yVal - cardHeight / 2) / cardHeight);
 
-            // generate string for CSS transform
+            // generate string for transform and apply styles
             const transform = `perspective(500px) rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
 
             e.currentTarget.style.transform = transform;
             e.currentTarget.style.transitionDuration = '.25s';
         }
 
-        cards.forEach(card => {
-            // when viewport is < 500px the cards are full width and should not rotate
-            if (document.body.clientWidth > 500) {
+        // when viewport is < 500px the cards are full width and should not rotate
+        // too lazy to use ResizeObserver
+        if (document.body.clientWidth > 500) {
+            cards.forEach(card => {
                 card.addEventListener('mousemove', throttleMoveHandler(40));
                 card.addEventListener('mouseout', () => { card.removeAttribute('style'); });
-            }
-        });
+            });
+        }
     }
 
     function tabSwitcher() {
