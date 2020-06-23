@@ -17,7 +17,7 @@
     --secondary-text: #333;
     --tertiary-text: #777;
 
-    --border-radius: .6em;
+    --border-radius: .7em;
     --box-shadow: 0 2px 6px -2px rgba(0, 0, 0, .2);
 
     --slide-length: 10px;
@@ -75,7 +75,7 @@ h1 {
 }
 
 h2 {
-    margin: 4em 0 .5em;
+    margin: 5rem 0 .5rem;
     text-align: center;
 }
 
@@ -181,8 +181,7 @@ a {
    -------------- */
 
 header {
-    --header-size: 3.75rem;
-    --header-size: 5vw;
+    --header-size: 4rem;
 
     height: 100vh;
     display: flex;
@@ -196,22 +195,21 @@ header {
     display: flex;
     justify-content: center;
     align-self: flex-end;
-    margin: -2em 0 3em;
+    margin: -3em 0 3.5em;
 }
 
 header h1 {
     margin: 0;
-    font-weight: 200;
+    /* font-weight: 200; */
 }
 
 .header-big {
-    font-size: calc(var(--header-size) * 2.25);
+    font-size: calc(var(--header-size) * 2.5);
+    font-weight: 600;
 }
 
 .header-small {
     font-size: var(--header-size);
-    letter-spacing: .15ch;
-    text-transform: uppercase;
 }
 
 header span {
@@ -222,49 +220,23 @@ header span {
 
 header span:nth-child(1) {
     animation-delay: .2s;
+
+    display: inline-block;
+    background: linear-gradient(to right, #70c9ff 10%, #d8da3f, #e19aff, #ff9e9e 90%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
 }
 
 header span:nth-child(2) {
-    color: rgba(0, 0, 0, .5);
+    color: rgba(35, 42, 47, .5);
     animation-delay: .5s;
+    margin: .1em 0 -0.1em;
 }
 
 header span:nth-child(3) {
     animation-delay: .8s;
-    font-size: calc(var(--header-size) * 1.2);
+    font-size: calc(var(--header-size) * 1.25);
 }
-
-@media (max-width: 550px) {
-
-    header {
-        height: initial;
-    }
-
-    .h1-container {
-        margin-top: 5em;
-    }
-
-}
-
-@media (max-width: 900px) {
-
-    header {
-        --header-size: 3rem;
-    }
-
-}
-
-@media (min-width: 1500px) {
-
-    header {
-        --header-size: 4rem;
-    }
-
-}
-
-/* ------------
-       MAIN
-   ------------ */
 
 /* @TODO: at <900px make it overflow and scroll */
 .wiki-cards {
@@ -274,7 +246,7 @@ header span:nth-child(3) {
 
     width: 100vw;
     max-width: 75em;
-    padding: 0 1em;
+    padding: 0 2em;
     animation: 1.2s 1.2s both var(--ease-out-quad);
     animation-name: fade-in, enter-top;
 }
@@ -290,7 +262,7 @@ header span:nth-child(3) {
 
     text-decoration: none;
     background-color: var(--secondary-bg);
-    border-radius: var(--border-radius);
+    border-radius: calc(var(--border-radius) * 1.1);
     box-shadow: /* https://brumm.af/shadows */
         0 2.4px 3.2px rgba(0, 0, 0, 0.053),
         0 8px 10.7px rgba(0, 0, 0, 0.077),
@@ -317,7 +289,6 @@ header span:nth-child(3) {
     filter: saturate(0.75);
     background-position: center;
     background-size: cover;
-    box-shadow: inset 0 1px 4px rgba(255, 255, 255, .3);
 }
 
 .wiki-card div {
@@ -329,7 +300,7 @@ header span:nth-child(3) {
 }
 
 .card-rs {
-    background-color: #035384;
+    background-color: #2e84b9;
 }
 
 .card-rs::before {
@@ -337,7 +308,7 @@ header span:nth-child(3) {
 }
 
 .card-osrs {
-    background-color: #8a9450;
+    background-color: #b2b548;
 }
 
 .card-osrs::before {
@@ -345,7 +316,7 @@ header span:nth-child(3) {
 }
 
 .card-ptbr {
-    background-color: #9f7dcc;
+    background-color: #d292f3;
 }
 
 .card-ptbr::before {
@@ -353,12 +324,44 @@ header span:nth-child(3) {
 }
 
 .card-rsc {
-    background-color: #a58141;
+    background-color: #e7a085;
 }
 
 .card-rsc::before {
     background-image: url(images/card-rsc.jpg);
 }
+
+@media (max-width: 550px) {
+
+    header {
+        height: initial;
+    }
+
+    .h1-container {
+        margin-top: 5em;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    header {
+        --header-size: 3.25rem;
+    }
+
+}
+
+/* @media (min-width: 1500px) {
+
+    header {
+        --header-size: 4rem;
+    }
+
+} */
+
+/* ------------
+       MAIN
+   ------------ */
 
 .container {
     max-width: 45em;
@@ -366,15 +369,10 @@ header span:nth-child(3) {
     margin: 1em auto 5em;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 501px) {
 
     .wiki-cards {
-        grid-gap: 0;
-        padding: 0;
-    }
-
-    .wiki-card {
-        border-radius: 0;
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .container {
@@ -383,7 +381,7 @@ header span:nth-child(3) {
 
 }
 
-@media (min-width: 550px) and (max-width: 900px) {
+@media (min-width: 501px) and (max-width: 900px) {
 
     .wiki-cards {
         grid-template-columns: repeat(2, 1fr);
@@ -393,7 +391,8 @@ header span:nth-child(3) {
 
 @media (max-width: 600px) {
 
-    .container {
+    .container,
+    .wiki-cards {
         padding: 0 1em;
     }
 
@@ -413,7 +412,7 @@ header span:nth-child(3) {
 
 .tabs {
     --tab-count: 4;
-    --tab-gap: .2em;
+    --tab-gap: .25em;
 
     position: relative;
     overflow: hidden;
@@ -470,7 +469,7 @@ header span:nth-child(3) {
 
     color: var(--tertiary-text);
     text-align: center;
-    padding: 12px 0;
+    padding: 13px 0;
 }
 
 .tabs input:checked + label {
@@ -510,6 +509,7 @@ header span:nth-child(3) {
     display: block;
 }
 
+/* added via tabSwitcher() in main.js */
 .slide-left-fade-in {
     animation-name: enter-left, fade-in;
     animation-duration: var(--slide-slow);
@@ -545,10 +545,12 @@ header span:nth-child(3) {
     margin: 2em -2em;
 }
 
-@media (max-width: 40em) {
+@media (max-width: 600px) {
 
     .callout {
         border-radius: 0;
+        padding: 1em;
+        margin: 2em -1em;
     }
 
 }
