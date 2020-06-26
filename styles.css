@@ -188,6 +188,7 @@ header {
     justify-content: center;
     align-items: center;
     flex-flow: row wrap;
+    transform: skewY(-4deg);
 }
 
 .h1-container {
@@ -222,14 +223,14 @@ header span:nth-child(1) {
     animation-delay: .2s;
 
     display: inline-block;
-    background: linear-gradient(to right, #70c9ff 10%, #d8da3f, #e19aff, #ff9e9e 90%);
+    background: linear-gradient(to right, #70c9ff 10%, #eae41e, #e19aff, #ff9e9e 90%);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
 }
 
 header span:nth-child(2) {
-    color: rgba(35, 42, 47, .5);
     animation-delay: .5s;
+    color: rgba(35, 42, 47, .5);
     margin: .1em 0 -0.1em;
 }
 
@@ -267,6 +268,7 @@ header span:nth-child(3) {
         0 2.4px 3.2px rgba(0, 0, 0, 0.053),
         0 8px 10.7px rgba(0, 0, 0, 0.077),
         0 36px 48px rgba(0, 0, 0, 0.13);
+    box-shadow: 0 30px 60px -12px rgba(50,50,93,.25),0 18px 36px -18px rgba(0,0,0,.3),0 -12px 36px -8px rgba(0,0,0,.025);
 
 
     /* needed for gainPerspective() in main.js */
@@ -351,14 +353,6 @@ header span:nth-child(3) {
 
 }
 
-/* @media (min-width: 1500px) {
-
-    header {
-        --header-size: 4rem;
-    }
-
-} */
-
 /* ------------
        MAIN
    ------------ */
@@ -370,6 +364,11 @@ header span:nth-child(3) {
 }
 
 @media (max-width: 501px) {
+
+    .container,
+    .wiki-cards {
+        padding: 0 1em;
+    }
 
     .wiki-cards {
         grid-template-columns: repeat(4, 1fr);
@@ -385,15 +384,6 @@ header span:nth-child(3) {
 
     .wiki-cards {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-@media (max-width: 600px) {
-
-    .container,
-    .wiki-cards {
-        padding: 0 1em;
     }
 
 }
