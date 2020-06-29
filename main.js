@@ -1,4 +1,4 @@
-(function() {
+document.addEventListener('DOMContentLoaded', (function() {
     var get = function (selector) {
             return document.querySelector(selector);
         },
@@ -121,4 +121,4 @@
 
     gainPerspective();
     tabSwitcher();
-})();
+})(), false);
