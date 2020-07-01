@@ -18,7 +18,7 @@
     --tertiary-text: #777;
 
     --border-radius: .7em;
-    --box-shadow: 0 2px 6px -2px rgba(0, 0, 0, .2);
+    --box-shadow: 0 3px 10px -3px rgba(0, 0, 0, .1);
 
     --anim-length: 10px;
     --anim-slow: 275ms;
@@ -72,16 +72,20 @@ h3 {
 
 h1 {
     line-height: 1;
+    margin: 0;
 }
 
 h2 {
     margin: 5rem 0 .5rem;
-    text-align: center;
 }
 
 h2,
 h3 {
     line-height: 1.2;
+}
+
+p {
+    margin: 0 0 2em;
 }
 
 a {
@@ -199,19 +203,6 @@ header {
     margin: -3em 0 3.5em;
 }
 
-header h1 {
-    margin: 0;
-}
-
-.header-big {
-    font-size: calc(var(--header-size) * 2.5);
-    font-weight: 600;
-}
-
-.header-small {
-    font-size: var(--header-size);
-}
-
 header span {
     display: block;
     animation: 1.4s both var(--ease-out-quad);
@@ -220,8 +211,9 @@ header span {
 
 header span:nth-child(1) {
     animation-delay: .2s;
-
     display: inline-block;
+    font-size: calc(var(--header-size) * 2.5);
+    font-weight: 600;
     background: linear-gradient(to right, #70c9ff 10%, #eae41e, #e19aff, #ff9e9e 90%);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
@@ -230,6 +222,7 @@ header span:nth-child(1) {
 header span:nth-child(2) {
     animation-delay: .5s;
     color: rgba(35, 42, 47, .5);
+    font-size: var(--header-size);
     margin: .1em 0 -0.1em;
 }
 
@@ -387,9 +380,60 @@ header span:nth-child(3) {
    ------------ */
 
 .container {
-    max-width: 45em;
+    max-width: 800px;
     padding: 0 2em;
     margin: 1em auto 5em;
+}
+
+.stats-grid {
+    --breakout-margin: -4em;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1.25em;
+    margin: 0 var(--breakout-margin) 3em;
+}
+
+.stat-header {
+    margin: 0;
+}
+
+.stat {
+    background-color: white;
+    padding: 1.5em;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.stat dt {
+    color: var(--stat-color);
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.stat dd {
+    margin-left: 0;
+}
+
+.stat ol {
+    margin-bottom: 0;
+    padding-left: 2em;
+}
+
+.section-rs .stat {
+    --stat-color: #3ea6e6;
+}
+
+.section-osrs .stat {
+    --stat-color: #deae7b;
+}
+
+.section-ptbr .stat {
+    --stat-color: #9592fd;
+}
+
+.section-rsc .stat {
+    --stat-color: #6bc71f;
 }
 
 @media (max-width: 501px) {
@@ -401,6 +445,27 @@ header span:nth-child(3) {
 
     .container {
         margin-top: 5em;
+    }
+
+    .stats-grid {
+        grid-template-columns: none;
+    }
+
+}
+
+@media screen and (min-width: 501px) and (max-width: 700px) {
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media screen and (max-width: 800px) {
+
+    .stats-grid {
+        margin-left: 0;
+        margin-right: 0;
     }
 
 }
@@ -415,12 +480,11 @@ header span:nth-child(3) {
 
     position: relative;
     overflow: hidden;
-    top: 1em;
     z-index: 1; /* stop bg flicker when switching tabs */
 
     font-size: .9em;
     background-color: var(--secondary-bg);
-    margin: 0 auto 3rem;
+    margin: 2em auto;
     border-radius: calc(var(--border-radius) + var(--tab-gap));
     max-width: 35em;
 
@@ -453,6 +517,7 @@ header span:nth-child(3) {
     background-color: white;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
+    box-shadow: 0 2px 5px -2px rgba(0, 0, 0, .2);
 }
 
 .tabs input {
@@ -504,8 +569,8 @@ header span:nth-child(3) {
     animation-timing-function: var(--ease-in-out-quad);
 }
 
-.section-visible {
-    display: block;
+.stats-grid.section-visible {
+    display: grid;
 }
 
 /* added via tabSwitcher() in main.js */
@@ -526,30 +591,5 @@ header span:nth-child(3) {
 
 .slide-right-fade-out {
     animation-name: exit-right, fade-out;
-}
-
-@media (min-width: 400px) {
-
-    .title-break {
-        display: none;
-    }
-
-}
-
-.callout {
-    background: var(--secondary-bg);
-    border-radius: var(--border-radius);
-    padding: 1em 2em;
-    margin: 2em -2em;
-}
-
-@media (max-width: 600px) {
-
-    .callout {
-        border-radius: 0;
-        padding: 1em;
-        margin: 2em -1em;
-    }
-
     animation-duration: var(--anim-fast);
 }
