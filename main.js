@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', (function() {
     function tabSwitcher() {
         let tabGroups = getAll('.tabs'),
             tabs = getAll('.tabs label'),
-            enterDuration = parseInt(getStyle(':root', '--slide-slow').match(/\d+/)[0]),
-            exitDuration = parseInt(getStyle(':root', '--slide-fast').match(/\d+/)[0]);
+            enterDuration = parseInt(getStyle(':root', '--anim-slow').match(/\d+/)[0]),
+            exitDuration = parseInt(getStyle(':root', '--anim-fast').match(/\d+/)[0]);
 
         function clickBitch() {
             let nextIndex = this.dataset.index,
