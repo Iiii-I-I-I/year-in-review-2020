@@ -1,13 +1,15 @@
 document.addEventListener('DOMContentLoaded', (function() {
-    var get = function (selector) {
-            return document.querySelector(selector);
-        },
-        getAll = function (selector) {
-            return document.querySelectorAll(selector);
-        },
-        getStyle = function (selector, property) {
-            return window.getComputedStyle(get(selector)).getPropertyValue(property);
-        };
+    function get(selector) {
+        return document.querySelector(selector);
+    }
+
+    function getAll(selector) {
+        return document.querySelectorAll(selector);
+    }
+
+    function getStyle(selector, property) {
+        return window.getComputedStyle(get(selector)).getPropertyValue(property);
+    }
 
     // modified from <https://technokami.in/3d-hover-effect-using-javascript-animations-css-html>
     // and <https://codeburst.io/throttling-and-debouncing-in-javascript-646d076d0a44>
@@ -16,17 +18,13 @@ document.addEventListener('DOMContentLoaded', (function() {
 
         // throttle the rate at which moveHandler updates (delay is in milliseconds)
         function throttleMoveHandler(delay) {
-            let lastCall = 0;
+            var time = Date.now();
 
             return function (e) {
-                const now = new Date().getTime();
-
-                if (now - lastCall < delay) {
-                    return;
+                if ((time + delay - Date.now()) < 0) {
+                    moveHandler(e);
+                    time = Date.now();
                 }
-
-                lastCall = now;
-                return moveHandler(e);
             }
         }
 
