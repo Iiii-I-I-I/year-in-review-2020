@@ -88,6 +88,10 @@ p {
     margin: 0 0 2em;
 }
 
+code {
+    font-family: ui-monospace, monospace;
+}
+
 a {
     color: var(--tertiary-text);
 }
@@ -400,7 +404,7 @@ header span:nth-child(3) {
 
 .stat {
     background-color: white;
-    padding: 1.5em;
+    padding: 1.5em 1.75em;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
 }
@@ -413,6 +417,7 @@ header span:nth-child(3) {
 
 .stat dd {
     margin-left: 0;
+    font-size: .9em;
 }
 
 .stat ol {
@@ -420,12 +425,17 @@ header span:nth-child(3) {
     padding-left: 2em;
 }
 
+.stat ::marker {
+    color: var(--stat-color);
+    font-weight: bold;
+}
+
 .section-rs .stat {
-    --stat-color: #3ea6e6;
+    --stat-color: #42acec;
 }
 
 .section-osrs .stat {
-    --stat-color: #deae7b;
+    --stat-color: #90cc1d;
 }
 
 .section-ptbr .stat {
@@ -433,7 +443,7 @@ header span:nth-child(3) {
 }
 
 .section-rsc .stat {
-    --stat-color: #6bc71f;
+    --stat-color: #de897b;
 }
 
 @media (max-width: 501px) {
