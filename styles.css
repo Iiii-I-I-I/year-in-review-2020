@@ -436,12 +436,30 @@ header {
 
 .stat li {
     font-size: .95em;
-    background: linear-gradient(to right, var(--stat-color) var(--bar-size), transparent 0);
-    filter: brightness(1.15) saturate(.8);
+    background-color: var(--bg-01);
+    /* isolation: isolate; */
+    filter: brightness(1.015);
     border-radius: calc(var(--border-radius) * .4);
+
+    position: relative;
     padding: 0 .5em;
     margin-bottom: .4em;
     list-style: none;
+}
+
+.stat li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+
+    background: linear-gradient(to right, var(--stat-color) var(--bar-size), transparent 0);
+    border-radius: calc(var(--border-radius) * .4);
+    filter: brightness(1.12) saturate(.8);
+    overflow: hidden;
 }
 
 .section-rs .stat {
