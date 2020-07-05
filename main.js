@@ -12,7 +12,6 @@ document.addEventListener('load', (function() {
     }
 
     // modified from <https://technokami.in/3d-hover-effect-using-javascript-animations-css-html>
-    // and <https://codeburst.io/throttling-and-debouncing-in-javascript-646d076d0a44>
     function gainPerspective() {
         let cards = getAll('.wiki-card');
 
@@ -61,8 +60,8 @@ document.addEventListener('load', (function() {
     function tabSwitcher() {
         let tabGroups = getAll('.tabs'),
             tabs = getAll('.tabs label'),
-            enterDuration = parseInt(getStyle(':root', '--anim-slow').match(/\d+/)[0]),
-            exitDuration = parseInt(getStyle(':root', '--anim-fast').match(/\d+/)[0]);
+            enterDuration = 275, // --anim-slow
+            exitDuration = 150; // --anim-fast
 
         function clickBitch() {
             let nextIndex = this.dataset.index,
@@ -71,6 +70,7 @@ document.addEventListener('load', (function() {
                 nextVisible = getAll('.section-' + this.dataset.game),
                 currVisible = getAll('.section-visible');
 
+            // @TODO: animate via absolute positioning
             function hideAndSlide(direction) {
                 // fade out and hide old sections
                 currVisible.forEach(section => {
