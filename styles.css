@@ -41,6 +41,20 @@
     --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+@media screen and (prefers-color-scheme: dark) {
+
+    :root {
+        --bg-01: #1a1a1a;
+        --bg-02: #222;
+        --bg-03: #333;
+
+        --text-01: #ccc;
+        --text-02: #bbb;
+        --text-03: #aaa;
+    }
+
+}
+
 @media screen and (prefers-reduced-motion) {
 
     :root {
@@ -238,7 +252,7 @@ header {
 
 .h1-container span:nth-child(2) {
     animation-delay: .5s;
-    color: rgba(35, 42, 47, .5);
+    color: var(--text-03);
     font-size: var(--header-size);
     margin: .1em 0 -0.1em;
 }
@@ -476,6 +490,34 @@ header {
 
 .section-rsc .stat {
     --stat-color: #ec9385;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+
+    .stat li {
+        background-color: var(--bg-02);
+    }
+
+    .stat li::before {
+        filter: brightness(.9);
+    }
+
+    .section-rs .stat {
+        --stat-color: #2985bd;
+    }
+
+    .section-osrs .stat {
+        --stat-color: #628e0c;
+    }
+
+    .section-ptbr .stat {
+        --stat-color: #7774dc;
+    }
+
+    .section-rsc .stat {
+        --stat-color: #b96a5e;
+    }
+
 }
 
 @media (max-width: 501px) {
