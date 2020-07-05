@@ -1,4 +1,4 @@
-document.addEventListener('load', (function() {
+document.addEventListener('DOMContentLoaded', (function() {
     function get(selector) {
         return document.querySelector(selector);
     }
