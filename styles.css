@@ -44,13 +44,24 @@
 @media screen and (prefers-color-scheme: dark) {
 
     :root {
-        --bg-01: #1a1a1a;
-        --bg-02: #222;
-        --bg-03: #333;
+        --bg-01: #1d1d1d;
+        --bg-02: #212121;
+        --bg-03: #313131;
 
-        --text-01: #ccc;
-        --text-02: #bbb;
+        --text-01: #d1d1d1;
+        --text-02: #bfbfbf;
         --text-03: #aaa;
+
+        --shadow-01:
+            inset 0 0 0px 2px rgba(255, 255, 255, .35),
+            inset 0 0 0px 1px rgba(0, 0, 0, .35),
+            0 30px 60px -12px rgba(50, 50, 93, .45),
+            0 18px 36px -18px rgba(0, 0, 0, .5),
+            0 -12px 36px -8px rgba(0, 0, 0, .225);
+        --shadow-02:
+            0 3px 8px 0 rgba(10, 10, 10, .25),
+            0 15px 30px 0 rgba(10, 10, 10, .24);
+        --shadow-03: 0 3px 8px -2px rgba(10, 10, 10, .3);
     }
 
 }
