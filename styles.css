@@ -15,7 +15,7 @@
     --bg-03: #fff;
 
     --text-01: #333;
-    --text-02: #4b4b4b;
+    --text-02: #515151;
     --text-03: #777;
 
     /* big to small */
@@ -48,9 +48,9 @@
         --bg-02: #111;
         --bg-03: #222;
 
-        --text-01: #bbb;
-        --text-02: #a7a7a7;
-        --text-03: #888;
+        --text-01: #ddd;
+        --text-02: #bbb;
+        --text-03: #999;
 
         --shadow-01:
             inset 0 0 0px 2px rgba(255, 255, 255, .35),
@@ -126,9 +126,13 @@ p {
     margin: 0 0 2em;
 }
 
-a {
+a.link {
     color: #2985bd;
     text-decoration: none;
+}
+
+a.link:hover {
+    text-decoration: underline;
 }
 
 code {
@@ -477,8 +481,11 @@ header {
 
     position: relative;
     padding: 0 .5em;
-    margin-bottom: .4em;
     list-style: none;
+}
+
+.stat li + li {
+    margin-top: .4em;
 }
 
 .stat li::before {
@@ -493,7 +500,10 @@ header {
     background: linear-gradient(to right, var(--stat-color) var(--bar-size), transparent 0);
     border-radius: calc(var(--border-radius) * .4);
     filter: brightness(1.12) saturate(.8);
-    overflow: hidden;
+}
+
+.stat li span {
+    color: var(--text-01);
 }
 
 .section-rs .stat {
@@ -515,7 +525,6 @@ header {
 @media screen and (prefers-color-scheme: dark) {
 
     .stat li {
-        color: var(--text-01);
         background-color: var(--bg-02);
     }
 
@@ -758,7 +767,13 @@ footer h3 {
     font-weight: bold;
     text-decoration: none;
     padding: 1.25em 1.5em;
+    box-shadow: var(--shadow-02);
     border-radius: var(--border-radius);
+    transition: transform .3s var(--ease-in-out-expo);
+}
+
+.social:hover {
+    transform: translateY(-3px);
 }
 
 .social + .social {
@@ -776,7 +791,15 @@ footer h3 {
 @media screen and (prefers-color-scheme: dark) {
 
     .social {
-        filter: brightness(.85);
+        color: var(--text-01);
+    }
+
+    .discord {
+        background-color: #4760bf;
+    }
+
+    .twitter {
+        background-color: #037dc7;
     }
 
 }
