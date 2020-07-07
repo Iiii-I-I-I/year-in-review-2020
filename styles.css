@@ -44,13 +44,13 @@
 @media screen and (prefers-color-scheme: dark) {
 
     :root {
-        --bg-01: #1d1d1d;
-        --bg-02: #212121;
-        --bg-03: #313131;
+        --bg-01: #0a0a0a;
+        --bg-02: #111;
+        --bg-03: #222;
 
-        --text-01: #d1d1d1;
-        --text-02: #bfbfbf;
-        --text-03: #aaa;
+        --text-01: #bbb;
+        --text-02: #a7a7a7;
+        --text-03: #888;
 
         --shadow-01:
             inset 0 0 0px 2px rgba(255, 255, 255, .35),
@@ -126,12 +126,13 @@ p {
     margin: 0 0 2em;
 }
 
-code {
-    font-family: ui-monospace, monospace;
+a {
+    color: #2985bd;
+    text-decoration: none;
 }
 
-a {
-    color: var(--text-03);
+code {
+    font-family: ui-monospace, 'Menlo', 'Courier', monospace;
 }
 
 /* -----------------
@@ -362,6 +363,14 @@ header {
     background-image: url(images/card-rsc.jpg);
 }
 
+@media screen and (prefers-color-scheme: dark) {
+
+    .wiki-card::before {
+        filter: brightness(.75);
+    }
+
+}
+
 @media (max-width: 501px) {
 
     header {
@@ -418,7 +427,7 @@ header {
 .container {
     max-width: 800px;
     padding: 0 2em;
-    margin: 1em auto 5em;
+    margin: 2em auto;
 }
 
 .stats-grid {
@@ -426,7 +435,7 @@ header {
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1.25em;
+    grid-gap: 1em;
     margin: 0 var(--breakout-margin) 3em;
 }
 
@@ -460,7 +469,7 @@ header {
 }
 
 .stat li {
-    font-size: .95em;
+    font-size: .9em;
     background-color: var(--bg-01);
     /* isolation: isolate; */
     filter: brightness(1.015);
@@ -506,6 +515,7 @@ header {
 @media screen and (prefers-color-scheme: dark) {
 
     .stat li {
+        color: var(--text-01);
         background-color: var(--bg-02);
     }
 
@@ -546,9 +556,14 @@ header {
         grid-template-columns: none;
     }
 
+    .stat {
+        padding: 1.25em 1.5em;
+    }
+
     .stat dt {
         float: left;
         margin-right: 1.5rem;
+        margin-bottom: 0;
     }
 
     .stat dd {
@@ -588,7 +603,7 @@ header {
 
     font-size: .9em;
     background-color: var(--bg-01);
-    margin: 3em auto 2em;
+    margin: 3em auto 1.5em;
     border-radius: calc(var(--border-radius) + var(--tab-gap));
     width: 85%;
     max-width: 35em;
@@ -696,4 +711,81 @@ header {
 .slide-right-fade-out {
     animation-name: exit-right, fade-out;
     animation-duration: var(--anim-fast);
+}
+
+/* --------------
+       FOOTER
+   -------------- */
+
+footer.container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    font-size: .85em;
+    margin-top: 10em;
+    margin-bottom: 10em;
+}
+
+footer h3 {
+    margin-bottom: .5em;
+}
+
+.about {
+    flex: 1;
+}
+
+.links {
+    margin-left: 3em;
+}
+
+.links ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.links li {
+    margin-bottom: .25em;
+}
+
+.socials {
+    margin-top: 1.5em;
+}
+
+.social {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 1.25em 1.5em;
+    border-radius: var(--border-radius);
+}
+
+.social + .social {
+    margin-left: .75em;
+}
+
+.discord {
+    background-color: #7389da;
+}
+
+.twitter {
+    background-color: #1ea1f1;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+
+    .social {
+        filter: brightness(.85);
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+
+    .links {
+        flex: 1 100%;
+        margin: 1.5em 0 0;
+    }
+
 }
