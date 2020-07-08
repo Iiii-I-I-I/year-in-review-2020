@@ -514,7 +514,7 @@ header {
 .icon {
     display: inline-block;
     float: left;
-    margin-top: .075em;
+    margin-top: .05em;
     margin-right: .4em;
     opacity: .6;
 }
