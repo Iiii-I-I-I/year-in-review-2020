@@ -14,9 +14,9 @@
     --bg-02: #fcfcfc;
     --bg-03: #fff;
 
-    --text-01: #333;
-    --text-02: #515151;
-    --text-03: #777;
+    --text-01: rgba(0, 0, 0, .8);
+    --text-02: rgba(0, 0, 0, .7);
+    --text-03: rgba(0, 0, 0, .55);
 
     /* big to small */
     --shadow-01:
@@ -48,9 +48,9 @@
         --bg-02: #111;
         --bg-03: #222;
 
-        --text-01: #ddd;
-        --text-02: #bbb;
-        --text-03: #999;
+        --text-01: rgba(255, 255, 255, .85);
+        --text-02: rgba(255, 255, 255, .65);
+        --text-03: rgba(255, 255, 255, .5);
 
         --shadow-01:
             inset 0 0 0px 2px rgba(255, 255, 255, .35),
@@ -449,9 +449,13 @@ header {
 
 .stat {
     background-color: var(--bg-03);
-    padding: 1.5em 1.75em;
+    padding: 1.25em 1.5em;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-02);
+}
+
+.stat h3 {
+    font-size: 1.1em;
 }
 
 .stat dt {
@@ -473,6 +477,7 @@ header {
 }
 
 .stat li {
+    color: var(--text-03);
     font-size: .9em;
     background-color: var(--bg-01);
     /* isolation: isolate; */
@@ -503,7 +508,15 @@ header {
 }
 
 .stat li span {
-    color: var(--text-01);
+    color: var(--text-02);
+}
+
+.icon {
+    display: inline-block;
+    float: left;
+    margin-top: .075em;
+    margin-right: .4em;
+    opacity: .6;
 }
 
 .section-rs .stat {
@@ -511,7 +524,7 @@ header {
 }
 
 .section-osrs .stat {
-    --stat-color: #8dc71d;
+    --stat-color: #7bc722;
 }
 
 .section-ptbr .stat {
@@ -532,12 +545,16 @@ header {
         filter: brightness(.9);
     }
 
+    .icon {
+        filter: invert(1);
+    }
+
     .section-rs .stat {
         --stat-color: #2985bd;
     }
 
     .section-osrs .stat {
-        --stat-color: #628e0c;
+        --stat-color: #58980d;
     }
 
     .section-ptbr .stat {
@@ -604,7 +621,7 @@ header {
 
 .tabs {
     --tab-count: 4;
-    --tab-gap: .35em;
+    --tab-gap: .3em;
 
     position: relative;
     overflow: hidden;
@@ -661,7 +678,7 @@ header {
 
     color: var(--text-03);
     text-align: center;
-    padding: 15px 0;
+    padding: 14px 0;
 }
 
 .tabs input:checked + label {
@@ -754,7 +771,7 @@ footer h3 {
 }
 
 .links li {
-    margin-bottom: .25em;
+    margin-bottom: .35em;
 }
 
 .socials {

@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', (function() {
         // too lazy to use ResizeObserver
         if (document.body.clientWidth > 500) {
             cards.forEach(card => {
-                card.addEventListener('mousemove', throttleMoveHandler(40));
+                card.addEventListener('mousemove', throttleMoveHandler(30));
                 card.addEventListener('mouseout', () => { card.removeAttribute('style'); });
             });
         }
