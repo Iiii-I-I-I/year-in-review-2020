@@ -41,10 +41,10 @@ document.addEventListener('DOMContentLoaded', (function() {
                   xRotate = -multiplier * ((yVal - cardHeight / 2) / cardHeight);
 
             // generate string for transform and apply styles
-            const transform = `perspective(500px) rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
+            const transform = `perspective(750px) scale(1.05) rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
 
             e.currentTarget.style.transform = transform;
-            e.currentTarget.style.transitionDuration = '.25s';
+            e.currentTarget.classList.add('card-hover');
         }
 
         // when viewport is < 500px the cards are full width and should not rotate
@@ -52,7 +52,10 @@ document.addEventListener('DOMContentLoaded', (function() {
         if (document.body.clientWidth > 500) {
             cards.forEach(card => {
                 card.addEventListener('mousemove', throttleMoveHandler(30));
-                card.addEventListener('mouseout', () => { card.removeAttribute('style'); });
+                card.addEventListener('mouseout', () => {
+                    card.removeAttribute('style');
+                    card.classList.remove('card-hover');
+                });
             });
         }
     }
