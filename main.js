@@ -118,49 +118,18 @@ document.addEventListener('DOMContentLoaded', (function() {
 
     // based on <https://www.sitepoint.com/simple-javascript-quiz/>
     function startQuiz() {
-        // @TODO: <https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON>
-        const myQuestions = [
-            {
-                question: "Who invented JavaScript?",
-                answers: {
-                    a: "Douglas Crockford",
-                    b: "Sheryl Sandberg",
-                    c: "Brendan Eich",
-                    d: "Janet Reno"
-                },
-                correctAnswer: "c"
-            },
-            {
-                question: "Which one of these is a JavaScript package manager?",
-                answers: {
-                    a: "Node.js",
-                    b: "TypeScript",
-                    c: "npm",
-                    d: "Janet Reno"
-                },
-                correctAnswer: "c"
-            },
-            {
-                question: "Which tool can you use to ensure code quality?",
-                answers: {
-                    a: "Angular",
-                    b: "RequireJS",
-                    c: "ESLint",
-                    d: "Janet Reno"
-                },
-                correctAnswer: "d"
-            },
-            {
-                question: "Who invented JavaScript?",
-                answers: {
-                    a: "Douglas Crockford",
-                    b: "Sheryl Sandberg",
-                    c: "Brendan Eich",
-                    d: "Janet Reno"
-                },
-                correctAnswer: "c"
-            },
-        ];
+        let request = new XMLHttpRequest(),
+            requestURL = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/questions.json', // CHEATERS BEGONE
+            myQuestions;
+
+        request.open('GET', requestURL);
+        request.responseType = 'json';
+        request.send();
+
+        request.onload = function() {
+            myQuestions = request.response;
+            buildQuiz();
+        }
 
         function buildQuiz() {
             let quiz = get('.quiz'),
@@ -176,7 +145,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                     choices = group.querySelectorAll('.quiz-choice');
 
                 // fill in <template> with content
-                number.textContent += ` ${i + 1}`;
+                number.textContent = `Question ${i + 1}`;
                 question.textContent = currentQ.question;
                 choices[0].textContent = currentQ.answers.a;
                 choices[1].textContent = currentQ.answers.b;
@@ -200,10 +169,10 @@ document.addEventListener('DOMContentLoaded', (function() {
 
                     // console.log(currentQ.answers, correctA);
 
-                    answered += 1;
                     this.parentElement.classList.remove('unanswered');
                     groupChoices.forEach(choice => { choice.removeEventListener('click', validateChoice); });
 
+                    answered += 1;
                     if (answered === total) {
                         showResults();
                     }
@@ -213,21 +182,19 @@ document.addEventListener('DOMContentLoaded', (function() {
             function showResults() {
                 let results = get('.quiz-results');
 
-                results.textContent = `You got ${correct} out of ${total} questions correct.`
+                results.textContent = `You got ${correct} out of ${total} questions correct. `
 
                 if (correct === total) {
-                    results.textContent += ' congrats';
+                    results.textContent += 'congrats';
                 } else if ((correct / total) >= 0.67) {
-                    results.textContent += ' pretty good';
+                    results.textContent += 'pretty good';
                 } else if ((correct / total) >= 0.34) {
-                    results.textContent += ' sit kid';
+                    results.textContent += 'sit kid';
                 } else {
-                    results.textContent += ' pathetic';
+                    results.textContent += 'pathetic';
                 }
             }
         }
-
-        buildQuiz();
     }
 
     gainPerspective();
