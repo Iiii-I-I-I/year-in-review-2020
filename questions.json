@@ -1,12 +1,13 @@
 [{
 	"question": "Which of the following is not a type of mushroom in RuneScape?",
 	"answers": {
-		"a": "Bittercap",
+		"a": "Buttercap",
 		"b": "Lactarius",
-		"c": "Gorajian",
+		"c": "Russula",
 		"d": "Chanterelle"
 	},
-	"correctAnswer": "d"
+	"correctAnswer": "d",
+    "explanation": "Chanterelles are real mushrooms commonly used in cooking in North America and Europe. The other mushrooms are found in-game on various islands in the Arc."
 }, {
 	"question": "How did the wyverns die out?",
 	"answers": {
@@ -15,7 +16,8 @@
 		"c": "Marauding adventurers",
 		"d": "Janet Reno"
 	},
-	"correctAnswer": "a"
+	"correctAnswer": "a",
+    "explanation": "According to the natural history quiz in the Varrock Museum, wyverns became extinct because of climate change."
 }, {
 	"question": "Which tree in RuneScape is a misspelling of a real-life tree?",
 	"answers": {
@@ -24,16 +26,18 @@
 		"c": "Eucalyptus",
 		"d": "Dramen"
 	},
-	"correctAnswer": "a"
+	"correctAnswer": "a",
+    "explanation": "Acadia is an accidental misspelling of the acacia tree; Jagex Moderators decided to keep it because they liked it better."
 }, {
 	"question": "Which tavern is found in Falador?",
 	"answers": {
 		"a": "Blue Moon Inn",
 		"b": "Pick and Lute",
 		"c": "Rising Sun",
-		"d": "Jolly Boar Inn"
+		"d": "Poison Arrow"
 	},
-	"correctAnswer": "c"
+	"correctAnswer": "c",
+    "explanation": "The Blue Moon Inn is found in Varrock, the Pick and Lute in Taverley, and the Poison Arrow in Ardougne."
 }, {
 	"question": "Which spell was used to summon Zamorak during Evil Dave's Big Day Out?",
 	"answers": {
@@ -42,7 +46,8 @@
 		"c": "Dominoes Ad Nauseum, Romanes Eunt Domus",
 		"d": "Ika tha nke rius Zanka Tdaterius"
 	},
-	"correctAnswer": "b"
+	"correctAnswer": "b",
+    "explanation": "The same spell was previously used in the Demon Slayer quest (before it was reworked in 2013) to banish the demon Delrith, albeit with the words in random order."
 }, {
 	"question": "Who founded the Moon Clan?",
 	"answers": {
@@ -51,7 +56,8 @@
 		"c": "Janet Reno",
 		"d": "V"
 	},
-	"correctAnswer": "d"
+	"correctAnswer": "c",
+    "explanation": "Janet Reno was an American lawyer who served as the Attorney General of the United States from 1993 until 2001 under Bill Clinton. She also founded the Moon Clan."
 }, {
 	"question": "Which herb is the primary ingredient in creating Runecrafting potions?",
 	"answers": {
@@ -60,5 +66,6 @@
 		"c": "Clean wergali",
 		"d": "Clean bloodweed"
 	},
-	"correctAnswer": "c"
+	"correctAnswer": "c",
+    "explanation": "The Runecrafting potion, one of the most useless items in the game, is made by combining clean wergali and sheep's wool from a player-owned farm."
 }]
