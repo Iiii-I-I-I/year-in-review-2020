@@ -116,7 +116,8 @@ document.addEventListener('DOMContentLoaded', (function() {
         });
     }
 
-    // based on <https://www.sitepoint.com/simple-javascript-quiz/>
+    // code based on <https://www.sitepoint.com/simple-javascript-quiz/>
+    // design and ux stolen from NYT quizzes <https://www.nytimes.com/spotlight/news-quiz>
     function startQuiz() {
         let request = new XMLHttpRequest(),
             requestURL = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/questions.json', // CHEATERS BEGONE
@@ -137,6 +138,8 @@ document.addEventListener('DOMContentLoaded', (function() {
                 total = myQuestions.length,
                 correct = 0,
                 answered = 0;
+
+            createStartButton();
 
             myQuestions.forEach((currentQ, i) => {
                 let group = template.content.cloneNode(true),
@@ -164,10 +167,11 @@ document.addEventListener('DOMContentLoaded', (function() {
                         this.classList.add('selected', 'correct');
                         correct += 1;
                     } else {
-                        this.classList.add('selected', 'incorrect');
-                    }
+                        let correctIndex = Object.keys(currentQ.answers).indexOf(currentQ.correctAnswer);
 
-                    // console.log(currentQ.answers, correctA);
+                        this.classList.add('selected', 'incorrect');
+                        groupChoices[correctIndex].classList.add('not-selected', 'correct');
+                    }
 
                     this.parentElement.classList.remove('unanswered');
                     groupChoices.forEach(choice => { choice.removeEventListener('click', validateChoice); });
@@ -182,17 +186,34 @@ document.addEventListener('DOMContentLoaded', (function() {
             function showResults() {
                 let results = get('.quiz-results');
 
+                results.style.display = 'block';
                 results.textContent = `You got ${correct} out of ${total} questions correct. `
 
                 if (correct === total) {
-                    results.textContent += 'congrats';
-                } else if ((correct / total) >= 0.67) {
+                    results.textContent += 'congrats ___ have you considered editing the wiki or OSWF';
+                } else if ((correct / total) >= 0.75) {
                     results.textContent += 'pretty good';
-                } else if ((correct / total) >= 0.34) {
+                } else if ((correct / total) >= 0.50) {
+                    results.textContent += 'okay';
+                } else if ((correct / total) >= 0.25) {
                     results.textContent += 'sit kid';
                 } else {
-                    results.textContent += 'pathetic';
+                    results.textContent += 'pathetic. consider reading the runescape wiki every once in a while';
                 }
+
+                results.textContent += ' For more trivia questions like these, follow us on Twitter at @blahblahblah.'
+            }
+
+            function createStartButton() {
+                let button = document.createElement('button');
+
+                button.classList.add('quiz-start');
+                button.appendChild(document.createTextNode('Start quiz'));
+                button.addEventListener('click', function () {
+                    quiz.classList.remove('quiz-hidden');
+                    button.remove();
+                });
+                get('.quiz').appendChild(button);
             }
         }
     }

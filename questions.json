@@ -35,7 +35,7 @@
 	},
 	"correctAnswer": "c"
 }, {
-	"question": "Which spell was used by Evil Dave to summon Zamorak during Evil Dave's Big Day Out?",
+	"question": "Which spell was used to summon Zamorak during Evil Dave's Big Day Out?",
 	"answers": {
 		"a": "Um nahi listic durooo-rah",
 		"b": "Carlem Aber Camerinthum Purchai Gabindo",
@@ -53,12 +53,12 @@
 	},
 	"correctAnswer": "d"
 }, {
-	"question": "Which herb is the primary ingredient in creating runecrafting potions?",
+	"question": "Which herb is the primary ingredient in creating Runecrafting potions?",
 	"answers": {
 		"a": "Clean spirit weed",
 		"b": "Clean kwuarm",
 		"c": "Clean wergali",
 		"d": "Clean bloodweed"
 	},
-	"correctAnswer": "b"
+	"correctAnswer": "c"
 }]
