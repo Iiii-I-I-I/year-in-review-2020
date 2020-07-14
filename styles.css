@@ -395,7 +395,7 @@ header {
 
 @media screen and (prefers-color-scheme: dark) {
 
-    .h1-container span:nth-child(1),
+    /* .h1-container span:nth-child(1), */
     .wiki-card::before {
         filter: brightness(.65);
     }
@@ -779,6 +779,7 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: transform .3s var(--ease-in-out-expo);
 
     color: white;
     background-color: #7db381;
@@ -789,6 +790,10 @@ header {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-02);
     z-index: 1;
+}
+
+.quiz-start:hover {
+    transform: translate(-50%, -58%);
 }
 
 /* fade questions and limit height before starting */
@@ -810,7 +815,7 @@ header {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(transparent, var(--bg-02));
+    background-image: linear-gradient(rgba(252, 252, 252, 0), var(--bg-02));
 }
 
 .quiz-group {
@@ -843,8 +848,7 @@ header {
 }
 
 .unanswered .quiz-choice:hover {
-    color: white;
-    background: #999;
+    background: #ddd;
 }
 
 .selected,
@@ -861,7 +865,7 @@ header {
 }
 
 .not-selected.correct {
-    color: #7db381;
+    color: #57a75c;
     background-image: url('images/icons/check-green.svg');
 }
 
@@ -880,8 +884,24 @@ header {
 
 @media screen and (prefers-color-scheme: dark) {
 
+    .quiz-hidden::after {
+        background-image: linear-gradient(rgba(17, 17, 17, 0), var(--bg-02));
+    }
+
     .quiz-choice {
         background: var(--bg-03);
+    }
+
+    .unanswered .quiz-choice:hover {
+        color: white;
+        background: #333;
+    }
+
+    .selected,
+    .not-selected {
+        background-size: 19px;
+        background-repeat: no-repeat;
+        background-position: calc(100% - 1.2em) center;
     }
 
     .quiz-choice.selected.correct {
@@ -939,7 +959,7 @@ footer h3 {
     font-weight: bold;
     text-decoration: none;
     padding: 1.25em 1.5em;
-    box-shadow: var(--shadow-03);
+    box-shadow: var(--shadow-02);
     border-radius: var(--border-radius);
     transition: transform .3s var(--ease-in-out-expo);
 }
