@@ -1,37 +1,64 @@
 [{
-	"question": "Who invented JavaScript?",
+	"question": "Which of the following is not a type of mushroom in RuneScape?",
 	"answers": {
-		"a": "Douglas Crockford",
-		"b": "Sheryl Sandberg",
-		"c": "Brendan Eich",
-		"d": "Janet Reno"
-	},
-	"correctAnswer": "c"
-}, {
-	"question": "Which one of these is a JavaScript package manager?",
-	"answers": {
-		"a": "Node.js",
-		"b": "TypeScript",
-		"c": "npm",
-		"d": "Janet Reno"
-	},
-	"correctAnswer": "c"
-}, {
-	"question": "Which tool can you use to ensure code quality?",
-	"answers": {
-		"a": "Angular",
-		"b": "RequireJS",
-		"c": "ESLint",
-		"d": "Janet Reno"
+		"a": "Bittercap",
+		"b": "Lactarius",
+		"c": "Gorajian",
+		"d": "Chanterelle"
 	},
 	"correctAnswer": "d"
 }, {
-	"question": "What is Steve Jobs's first name?",
+	"question": "How did the wyverns die out?",
 	"answers": {
-		"a": "Steve",
-		"b": "Steven",
-		"c": "Stephen",
-		"d": "Stefan"
+		"a": "Climate change",
+		"b": "Disease",
+		"c": "Marauding adventurers",
+		"d": "Janet Reno"
+	},
+	"correctAnswer": "a"
+}, {
+	"question": "Which RuneScape tree name is a misspelling of a real-life tree?",
+	"answers": {
+		"a": "Acadia",
+		"b": "Blisterwood",
+		"c": "Eucalyptus",
+		"d": "Dramen"
+	},
+	"correctAnswer": "a"
+}, {
+	"question": "Which tavern is found in Falador?",
+	"answers": {
+		"a": "Blue Moon Inn",
+		"b": "Pick and Lute",
+		"c": "Rising Sun",
+		"d": "Jolly Boar Inn"
+	},
+	"correctAnswer": "c"
+}, {
+	"question": "Which spell was used by Evil Dave to summon Zamorak during Evil Dave's Big Day Out?",
+	"answers": {
+		"a": "Um nahi listic durooo-rah",
+		"b": "Carlem Aber Camerinthum Purchai Gabindo",
+		"c": "Dominoes Ad Nauseum, Romanes Eunt Domus",
+		"d": "Ika tha nke rius Zanka Tdaterius"
+	},
+	"correctAnswer": "b"
+}, {
+	"question": "Who founded the Moon Clan?",
+	"answers": {
+		"a": "Pauline Polaris",
+		"b": "The Oneiromancer",
+		"c": "Baba Yaga",
+		"d": "V"
+	},
+	"correctAnswer": "d"
+}, {
+	"question": "Which herb is the primary ingredient in creating runecrafting potions?",
+	"answers": {
+		"a": "Clean spirit weed",
+		"b": "Clean kwuarm",
+		"c": "Clean wergali",
+		"d": "Clean bloodweed"
 	},
 	"correctAnswer": "b"
 }]
