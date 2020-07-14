@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', (function() {
         });
     }
 
-    // code based on <https://www.sitepoint.com/simple-javascript-quiz/>
     // design and ux stolen from NYT quizzes <https://www.nytimes.com/spotlight/news-quiz>
     function startQuiz() {
         let request = new XMLHttpRequest(),
@@ -145,7 +144,8 @@ document.addEventListener('DOMContentLoaded', (function() {
                 let group = template.content.cloneNode(true),
                     number = group.querySelector('.quiz-number'),
                     question = group.querySelector('.quiz-question'),
-                    choices = group.querySelectorAll('.quiz-choice');
+                    choices = group.querySelectorAll('.quiz-choice'),
+                    explanation = group.querySelector('.quiz-explanation');
 
                 // fill in <template> with content
                 number.textContent = `Question ${i + 1}`;
@@ -169,14 +169,16 @@ document.addEventListener('DOMContentLoaded', (function() {
                     } else {
                         let correctIndex = Object.keys(currentQ.answers).indexOf(currentQ.correctAnswer);
 
-                        this.classList.add('selected', 'incorrect');
+                        // reveal correct answer if wrong one is chosen
                         groupChoices[correctIndex].classList.add('not-selected', 'correct');
+                        this.classList.add('selected', 'incorrect');
                     }
 
-                    this.parentElement.classList.remove('unanswered');
+                    explanation.textContent = currentQ.explanation;
                     groupChoices.forEach(choice => { choice.removeEventListener('click', validateChoice); });
 
                     answered += 1;
+                    this.parentElement.classList.remove('unanswered');
                     if (answered === total) {
                         showResults();
                     }
@@ -194,7 +196,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 } else if ((correct / total) >= 0.75) {
                     results.textContent += 'pretty good';
                 } else if ((correct / total) >= 0.50) {
-                    results.textContent += 'okay';
+                    results.textContent += 'it\'s okay i guess';
                 } else if ((correct / total) >= 0.25) {
                     results.textContent += 'sit kid';
                 } else {
@@ -213,7 +215,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                     quiz.classList.remove('quiz-hidden');
                     button.remove();
                 });
-                get('.quiz').appendChild(button);
+                quiz.appendChild(button);
             }
         }
     }
