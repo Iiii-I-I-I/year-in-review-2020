@@ -7,7 +7,7 @@
 		"d": "Chanterelle"
 	},
 	"correctAnswer": "d",
-    "explanation": "Chanterelles are commonly used in cooking in North America and Europe. The other mushrooms are found in-game on various islands in the Arc."
+	"explanation": "Chanterelles are commonly used in cooking in North America and Europe. The other mushrooms are found in-game on various islands in the Arc."
 }, {
 	"question": "How did the wyverns die out?",
 	"answers": {
@@ -17,7 +17,7 @@
 		"d": "Janet Reno"
 	},
 	"correctAnswer": "a",
-    "explanation": "According to the natural history quiz in the Varrock Museum, wyverns became extinct because of climate change."
+	"explanation": "According to the natural history quiz in the Varrock Museum, wyverns became extinct because of climate change."
 }, {
 	"question": "Which tree in RuneScape is a misspelling of a real-life tree?",
 	"answers": {
@@ -27,7 +27,7 @@
 		"d": "Dramen"
 	},
 	"correctAnswer": "a",
-    "explanation": "Acadia is an accidental misspelling of the acacia tree that the developers decided to keep because they liked it better."
+	"explanation": "Acadia is an accidental misspelling of the acacia tree that the developers decided to keep because they liked it better."
 }, {
 	"question": "Which tavern is found in Falador?",
 	"answers": {
@@ -37,7 +37,7 @@
 		"d": "Poison Arrow"
 	},
 	"correctAnswer": "c",
-    "explanation": "The Blue Moon Inn is found in Varrock, the Pick and Lute in Taverley, and the Poison Arrow in Ardougne."
+	"explanation": "The Blue Moon Inn is found in Varrock, the Pick and Lute in Taverley, and the Poison Arrow in Ardougne."
 }, {
 	"question": "Which spell was used to summon Zamorak during Evil Dave's Big Day Out?",
 	"answers": {
@@ -47,7 +47,7 @@
 		"d": "Ika tha nke rius Zanka Tdaterius"
 	},
 	"correctAnswer": "b",
-    "explanation": "The same spell was previously used in the Demon Slayer quest, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
+	"explanation": "The same spell was previously used in the Demon Slayer quest, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
 }, {
 	"question": "Who founded the Moon Clan?",
 	"answers": {
@@ -57,7 +57,7 @@
 		"d": "V"
 	},
 	"correctAnswer": "c",
-    "explanation": "Janet Reno was an American lawyer who served as the Attorney General of the United States from 1993 until 2001 under Bill Clinton."
+	"explanation": "Janet Reno was an American lawyer who served as the Attorney General of the United States from 1993 until 2001 under Bill Clinton."
 }, {
 	"question": "Which herb is the primary ingredient in creating Runecrafting potions?",
 	"answers": {
@@ -67,5 +67,5 @@
 		"d": "Clean bloodweed"
 	},
 	"correctAnswer": "c",
-    "explanation": "The Runecrafting potion, one of the most useless items in the game, is made by combining clean wergali and sheep's wool from a player-owned farm."
+	"explanation": "The Runecrafting potion, one of the most useless items in the game, is made by combining clean wergali and sheep's wool from a player-owned farm."
 }]
