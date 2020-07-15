@@ -186,24 +186,29 @@ document.addEventListener('DOMContentLoaded', (function() {
             });
 
             function showResults() {
-                let results = get('.quiz-results');
+                let results = get('.quiz-results'),
+                    numbers = document.createElement('div');
+                    desc = document.createElement('div');
 
                 results.style.display = 'block';
-                results.textContent = `You got ${correct} out of ${total} questions correct. `
+                results.appendChild(numbers);
+                results.appendChild(desc);
+
+                numbers.classList.add('results-correct');
+                numbers.textContent = `You answered ${correct} out of ${total} questions correctly.`;
+                desc.classList.add('results-description');
 
                 if (correct === total) {
-                    results.textContent += 'congrats ___ have you considered editing the wiki or OSWF';
+                    desc.textContent = 'congrats! have you considered signing up for our OSWF tasks?';
                 } else if ((correct / total) >= 0.75) {
-                    results.textContent += 'pretty good';
+                    desc.textContent = 'pretty good. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
                 } else if ((correct / total) >= 0.50) {
-                    results.textContent += 'it\'s okay i guess';
+                    desc.textContent = 'it\'s okay i guess. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
                 } else if ((correct / total) >= 0.25) {
-                    results.textContent += 'sit kid';
+                    desc.textContent = 'sit kid';
                 } else {
-                    results.textContent += 'pathetic. consider reading the runescape wiki every once in a while';
+                    desc.textContent = 'pathetic. consider reading the runescape wiki for once in your life';
                 }
-
-                results.textContent += ' For more trivia questions like these, follow us on Twitter at @blahblahblah.'
             }
 
             function createStartButton() {

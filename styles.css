@@ -778,7 +778,7 @@ header {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -55%);
     transition: transform .3s var(--ease-in-out-expo);
 
     color: white;
@@ -793,7 +793,7 @@ header {
 }
 
 .quiz-start:hover {
-    transform: translate(-50%, -58%);
+    transform: translate(-50%, -63%);
 }
 
 /* fade questions and limit height before starting */
@@ -825,7 +825,9 @@ header {
 }
 
 .quiz-group + .quiz-group {
+    border-top: 1px solid #bbb;
     margin-top: 3em;
+    padding-top: 3em;
 }
 
 .quiz-number {
@@ -888,6 +890,12 @@ header {
     margin-top: 3em;
 }
 
+.results-correct {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: .5rem;
+}
+
 @media screen and (prefers-color-scheme: dark) {
 
     .quiz-hidden::after {
@@ -926,6 +934,7 @@ header {
         background-color: #9e2929;
     }
 
+    .quiz-group + .quiz-group,
     .quiz-results {
         border-color: #555;
     }
