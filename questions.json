@@ -37,7 +37,7 @@
 		"d": "Dramen"
 	},
 	"correctAnswer": "a",
-	"explanation": "Acadia is an accidental misspelling of the acacia tree that the developers decided to keep because they liked it better."
+	"explanation": "Acadia is an accidental misspelling of the acacia tree; the developers decided to keep it because they liked it better."
 }, {
 	"question": "During which quest does Sigmund tie Zanik to the tracks of the Dorgesh-Kaan–Keldagrim train system?",
 	"answers": {
@@ -46,8 +46,7 @@
 		"c": "Land of the Goblins",
 		"d": "The Chosen Commander"
 	},
-	"correctAnswer": "a",
-	"explanation": "Sigmund also asks her, \"What the fuck is Kingsman, and who's Harry Hart?\""
+	"correctAnswer": "a"
 }, {
 	"question": "Who founded the Moon Clan?",
 	"answers": {
@@ -79,7 +78,7 @@
 	"correctAnswer": "b",
 	"explanation": "The same spell was previously used in the Demon Slayer quest, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
 }, {
-	"question": "The God Wars Dungeon, frozen for thousands of years with the armies of four gods inside, was thawed in the Fifth Age. Who rediscovered the temple and its combatants?",
+	"question": "The God Wars Dungeon, frozen for thousands of years, was thawed in the Fifth Age. Who rediscovered the temple and its combatants?",
 	"answers": {
 		"a": "The Temple Knights",
 		"b": "The White Knights",
@@ -87,7 +86,7 @@
 		"d": "Drunken Dwarf"
 	},
 	"correctAnswer": "d",
-	"explanation": "A letter written by Sir Gerry, who lays dying outside the entrance to the God Wars Dungeon, describes his efforts to \"investigate the dwarf's drunken claims\"."
+	"explanation": "A letter written by Sir Gerry, who lies dying outside the entrance to the God Wars Dungeon, describes his efforts to \"investigate the dwarf's drunken claims\"."
 }, {
 	"question": "Of the four following cities, which one is furthest south?",
 	"answers": {
