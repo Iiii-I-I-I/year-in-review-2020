@@ -92,14 +92,10 @@ document.addEventListener('DOMContentLoaded', (function() {
                 });
 
                 // update --index number for .tabs::before
-                tabGroups.forEach(tabGroup => {
-                    tabGroup.style.setProperty('--index', nextIndex);
-                });
+                tabGroups.forEach(tabGroup => tabGroup.style.setProperty('--index', nextIndex));
 
                 // update all radio inputs to match the one being clicked
-                nextRadio.forEach(radio => {
-                    radio.checked = true;
-                });
+                nextRadio.forEach(radio => radio.checked = true);
             }
 
             if (currIndex === nextIndex) {
@@ -111,25 +107,23 @@ document.addEventListener('DOMContentLoaded', (function() {
             }
         }
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', clickBitch);
-        });
+        tabs.forEach(tab => tab.addEventListener('click', clickBitch));
     }
 
     // design and ux stolen from NYT quizzes <https://www.nytimes.com/spotlight/news-quiz>
     function startQuiz() {
         let request = new XMLHttpRequest(),
-            requestURL = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/questions.json', // CHEATERS BEGONE
+            requestURL = `https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review${ /* CHEATERS BEGONE */'' }-2020/master/questions.json`,
             myQuestions;
 
         request.open('GET', requestURL);
         request.responseType = 'json';
         request.send();
 
-        request.onload = function() {
+        request.addEventListener('load', function () {
             myQuestions = request.response;
             buildQuiz();
-        }
+        });
 
         function buildQuiz() {
             let quiz = get('.quiz'),
@@ -155,7 +149,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 choices[2].textContent = currentQ.answers.c;
                 choices[3].textContent = currentQ.answers.d;
 
-                choices.forEach(choice => { choice.addEventListener('click', validateChoice); });
+                choices.forEach(choice => choice.addEventListener('click', validateChoice));
                 quiz.appendChild(group);
 
                 function validateChoice() {
@@ -175,7 +169,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                     }
 
                     explanation.textContent = currentQ.explanation;
-                    groupChoices.forEach(choice => { choice.removeEventListener('click', validateChoice); });
+                    groupChoices.forEach(choice => choice.removeEventListener('click', validateChoice));
 
                     answered += 1;
                     this.parentElement.classList.remove('unanswered');
@@ -194,9 +188,9 @@ document.addEventListener('DOMContentLoaded', (function() {
                 results.appendChild(numbers);
                 results.appendChild(desc);
 
+                desc.classList.add('results-description');
                 numbers.classList.add('results-correct');
                 numbers.textContent = `You answered ${correct} out of ${total} questions correctly.`;
-                desc.classList.add('results-description');
 
                 if (correct === total) {
                     desc.textContent = 'congrats! have you considered signing up for our OSWF tasks?';
