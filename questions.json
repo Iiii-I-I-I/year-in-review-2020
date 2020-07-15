@@ -1,4 +1,14 @@
 [{
+	"question": "Which tavern is found in Falador?",
+	"answers": {
+		"a": "Blue Moon Inn",
+		"b": "Pick and Lute",
+		"c": "Rising Sun",
+		"d": "Poison Arrow"
+	},
+	"correctAnswer": "c",
+	"explanation": "The Blue Moon Inn is found in Varrock, the Pick and Lute in Taverley, and the Poison Arrow in Ardougne."
+}, {
 	"question": "Which of the following is not a type of mushroom in RuneScape?",
 	"answers": {
 		"a": "Buttercap",
@@ -9,7 +19,7 @@
 	"correctAnswer": "d",
 	"explanation": "Chanterelles are commonly used in cooking in North America and Europe. The other mushrooms are found in-game on various islands in the Arc."
 }, {
-	"question": "How did the wyverns die out?",
+	"question": "How did wyverns die out?",
 	"answers": {
 		"a": "Climate change",
 		"b": "Disease",
@@ -29,25 +39,15 @@
 	"correctAnswer": "a",
 	"explanation": "Acadia is an accidental misspelling of the acacia tree that the developers decided to keep because they liked it better."
 }, {
-	"question": "Which tavern is found in Falador?",
+	"question": "During which quest does Sigmund tie Zanik to the tracks of the Dorgesh-Kaan–Keldagrim train system?",
 	"answers": {
-		"a": "Blue Moon Inn",
-		"b": "Pick and Lute",
-		"c": "Rising Sun",
-		"d": "Poison Arrow"
+		"a": "Another Slice of H.A.M.",
+		"b": "Death to the Dorgeshuun",
+		"c": "Land of the Goblins",
+		"d": "The Chosen Commander"
 	},
-	"correctAnswer": "c",
-	"explanation": "The Blue Moon Inn is found in Varrock, the Pick and Lute in Taverley, and the Poison Arrow in Ardougne."
-}, {
-	"question": "Which spell was used to summon Zamorak during Evil Dave's Big Day Out?",
-	"answers": {
-		"a": "Um nahi listic durooo-rah",
-		"b": "Carlem Aber Camerinthum Purchai Gabindo",
-		"c": "Dominoes Ad Nauseum, Romanes Eunt Domus",
-		"d": "Ika tha nke rius Zanka Tdaterius"
-	},
-	"correctAnswer": "b",
-	"explanation": "The same spell was previously used in the Demon Slayer quest, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
+	"correctAnswer": "a",
+	"explanation": "Sigmund also asks her, \"What the fuck is Kingsman, and who's Harry Hart?\""
 }, {
 	"question": "Who founded the Moon Clan?",
 	"answers": {
@@ -68,4 +68,33 @@
 	},
 	"correctAnswer": "c",
 	"explanation": "The Runecrafting potion, one of the most useless items in the game, is made by combining clean wergali and sheep's wool from a player-owned farm."
+}, {
+	"question": "Which spell was used to summon Zamorak during Evil Dave's Big Day Out?",
+	"answers": {
+		"a": "Um nahi listic durooo-rah",
+		"b": "Carlem Aber Camerinthum Purchai Gabindo",
+		"c": "Dominoes Ad Nauseum, Romanes Eunt Domus",
+		"d": "Ika tha nke rius Zanka Tdaterius"
+	},
+	"correctAnswer": "b",
+	"explanation": "The same spell was previously used in the Demon Slayer quest, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
+}, {
+	"question": "The God Wars Dungeon, frozen for thousands of years with the armies of four gods inside, was thawed in the Fifth Age. Who rediscovered the temple and its combatants?",
+	"answers": {
+		"a": "The Temple Knights",
+		"b": "The White Knights",
+		"c": "Orlando Smith",
+		"d": "Drunken Dwarf"
+	},
+	"correctAnswer": "d",
+	"explanation": "A letter written by Sir Gerry, who lays dying outside the entrance to the God Wars Dungeon, describes his efforts to \"investigate the dwarf's drunken claims\"."
+}, {
+	"question": "Of the four following cities, which one is furthest south?",
+	"answers": {
+		"a": "Yanille",
+		"b": "Al Kharid",
+		"c": "Brimhaven",
+		"d": "Lletya"
+	},
+	"correctAnswer": "a"
 }]
