@@ -9,7 +9,7 @@
 	"correctAnswer": "c",
 	"explanation": "The Blue Moon Inn is found in Varrock, the Pick and Lute in Taverley, and the Poison Arrow in Ardougne."
 }, {
-	"question": "Count Draynor, weakened after being separated from Morytania for centuries, is killed by the player during Vampyre Slayer. Which of the following was he related to?",
+	"question": "Count Draynor, weakened after isolation from Morytania, is killed by the player during Vampyre Slayer. Which of the following was he related to?",
 	"answers": {
 		"a": "Alexei Jovkai",
 		"b": "Vanstrom Klause",
@@ -17,7 +17,7 @@
 		"d": "Vanescula Drakan"
 	},
 	"correctAnswer": "d",
-	"explanation": "Count Draynor also had two brothers, Lowerniel Drakan and Ranis Drakan."
+	"explanation": "Count Draynor Drakan also had two brothers, Lowerniel Drakan and Ranis Drakan."
 }, {
 	"question": "How did wyverns die out?",
 	"answers": {
@@ -78,6 +78,15 @@
 	"correctAnswer": "b",
 	"explanation": "The same spell was previously used in the Demon Slayer quest, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
 }, {
+	"question": "Of the four following cities, which one is furthest south?",
+	"answers": {
+		"a": "Yanille",
+		"b": "Al Kharid",
+		"c": "Brimhaven",
+		"d": "Lletya"
+	},
+	"correctAnswer": "a"
+}, {
 	"question": "The God Wars Dungeon, frozen for thousands of years, was thawed in the Fifth Age. Who rediscovered the temple and its combatants?",
 	"answers": {
 		"a": "The Temple Knights",
@@ -87,13 +96,4 @@
 	},
 	"correctAnswer": "d",
 	"explanation": "A letter written by Sir Gerry, who lies dying outside the entrance to the God Wars Dungeon, describes his efforts to \"investigate the dwarf's drunken claims\"."
-}, {
-	"question": "Of the four following cities, which one is furthest south?",
-	"answers": {
-		"a": "Yanille",
-		"b": "Al Kharid",
-		"c": "Brimhaven",
-		"d": "Lletya"
-	},
-	"correctAnswer": "a"
 }]
