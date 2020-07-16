@@ -898,7 +898,7 @@ header {
 @media screen and (prefers-color-scheme: dark) {
 
     .quiz-hidden::after {
-        background-image: linear-gradient(rgba(17, 17, 17, 0), var(--bg-02));
+        background-image: linear-gradient(rgba(17, 17, 17, 0.5), var(--bg-02));
     }
 
     .quiz-start {

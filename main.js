@@ -132,9 +132,11 @@ document.addEventListener('DOMContentLoaded', (function() {
                 correct = 0,
                 answered = 0;
 
+            quiz.classList.add('quiz-hidden'); // limit height of quiz section before starting
+            quiz.textContent = ''; // clear warning about quiz not working
             createStartButton();
 
-            myQuestions.forEach((currentQ, i) => {
+            myQuestions.forEach((currQuestion, i) => {
                 let group = template.content.cloneNode(true),
                     number = group.querySelector('.quiz-number'),
                     question = group.querySelector('.quiz-question'),
@@ -142,12 +144,12 @@ document.addEventListener('DOMContentLoaded', (function() {
 
                 // fill in <template> with content
                 number.textContent = `Question ${i + 1}`;
-                question.textContent = currentQ.question;
-                Object.keys(currentQ.answers).forEach(answer => {
+                question.textContent = currQuestion.question;
+                Object.keys(currQuestion.answers).forEach(answer => {
                     let choice = document.createElement('div');
 
                     choice.classList.add('quiz-choice');
-                    choice.textContent = currentQ.answers[answer];
+                    choice.textContent = currQuestion.answers[answer];
                     explanation.parentNode.insertBefore(choice, explanation);
                 });
 
@@ -156,26 +158,25 @@ document.addEventListener('DOMContentLoaded', (function() {
                 quiz.appendChild(group);
 
                 function checkAnswer() {
-                    let selectedA = this.textContent,
-                        correctA = currentQ.answers[currentQ.correctAnswer],
+                    let selectedAnswer = this.textContent,
+                        correctAnswer = currQuestion.answers[currQuestion.correctAnswer],
                         groupChoices = this.parentElement.querySelectorAll('.quiz-choice');
 
-                    if (selectedA === correctA) {
+                    if (selectedAnswer === correctAnswer) {
                         this.classList.add('selected', 'correct');
                         correct += 1;
                     } else {
-                        let correctIndex = Object.keys(currentQ.answers).indexOf(currentQ.correctAnswer);
+                        let correctIndex = Object.keys(currQuestion.answers).indexOf(currQuestion.correctAnswer);
 
                         // reveal correct answer if wrong one is chosen
                         groupChoices[correctIndex].classList.add('not-selected', 'correct');
                         this.classList.add('selected', 'incorrect');
                     }
 
-                    explanation.textContent = currentQ.explanation;
+                    explanation.textContent = currQuestion.explanation;
                     groupChoices.forEach(choice => choice.removeEventListener('click', checkAnswer));
-
-                    answered += 1;
                     this.parentElement.classList.remove('unanswered');
+                    answered += 1;
 
                     // show final results after all questions answered
                     if (answered === total) {
@@ -184,11 +185,11 @@ document.addEventListener('DOMContentLoaded', (function() {
                 }
             });
 
-
             function showResults() {
                 let results = get('.quiz-results'),
                     numbers = document.createElement('div'),
-                    desc = document.createElement('div');
+                    desc = document.createElement('div'),
+                    score = correct / total;
 
                 results.style.display = 'block';
                 results.appendChild(numbers);
@@ -198,14 +199,16 @@ document.addEventListener('DOMContentLoaded', (function() {
                 numbers.classList.add('results-correct');
                 numbers.textContent = `You answered ${correct} out of ${total} questions correctly.`;
 
-                if (correct === total) {
+                if (score === 1) {
                     desc.textContent = 'congrats! have you considered signing up for our OSWF tasks?';
-                } else if ((correct / total) >= 0.75) {
+                } else if (score >= 0.75) {
                     desc.textContent = 'pretty good. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
-                } else if ((correct / total) >= 0.50) {
+                } else if (score >= 0.50) {
                     desc.textContent = 'it\'s okay i guess. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
-                } else if ((correct / total) >= 0.25) {
+                } else if (score >= 0.25) {
                     desc.textContent = 'sit kid';
+                } else if (score < 0.25 && score !== 0) {
+                    desc.textContent = 'absolute disgrace';
                 } else {
                     desc.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life';
                 }
@@ -215,7 +218,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 let button = document.createElement('button');
 
                 button.classList.add('quiz-start');
-                button.appendChild(document.createTextNode('Start quiz'));
+                button.appendChild(document.createTextNode('Take quiz'));
                 button.addEventListener('click', function () {
                     quiz.classList.remove('quiz-hidden');
                     button.remove();
