@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', (function() {
 
         // throttle the rate at which moveHandler updates (delay is in milliseconds)
         function throttleMoveHandler(delay) {
-            var time = Date.now();
+            let time = Date.now();
 
             return function (e) {
                 if ((time + delay - Date.now()) < 0) {
@@ -153,7 +153,6 @@ document.addEventListener('DOMContentLoaded', (function() {
                     explanation.parentNode.insertBefore(choice, explanation);
                 });
 
-                // stop user from choosing again
                 group.querySelectorAll('.quiz-choice').forEach(choice => choice.addEventListener('click', checkAnswer));
                 quiz.appendChild(group);
 
@@ -173,15 +172,13 @@ document.addEventListener('DOMContentLoaded', (function() {
                         this.classList.add('selected', 'incorrect');
                     }
 
-                    explanation.textContent = currQuestion.explanation;
+                    // stop user from choosing again
                     groupChoices.forEach(choice => choice.removeEventListener('click', checkAnswer));
+                    if (currQuestion.explanation) explanation.textContent = currQuestion.explanation;
                     this.parentElement.classList.remove('unanswered');
-                    answered += 1;
 
-                    // show final results after all questions answered
-                    if (answered === total) {
-                        showResults();
-                    }
+                    answered += 1;
+                    if (answered === total) showResults();
                 }
             });
 
