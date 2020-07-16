@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', (function() {
     // design and ux stolen from NYT quizzes <https://www.nytimes.com/spotlight/news-quiz>
     function startQuiz() {
         let request = new XMLHttpRequest(),
-            requestURL = `https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review${ /* CHEATERS BEGONE */'' }-2020/master/questions.json`,
+            requestURL = `https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review${ /* CHEATERS BEGONE */'' }-2020/master/cryptic.json`,
             myQuestions;
 
         request.open('GET', requestURL);
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 } else if ((correct / total) >= 0.25) {
                     desc.textContent = 'sit kid';
                 } else {
-                    desc.textContent = 'pathetic. consider reading the runescape wiki for once in your life';
+                    desc.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life';
                 }
             }
 
