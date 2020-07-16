@@ -9,15 +9,15 @@
 	"correctAnswer": "c",
 	"explanation": "The Blue Moon Inn is found in Varrock, the Pick and Lute in Taverley, and the Poison Arrow in Ardougne."
 }, {
-	"question": "Which of the following is not a type of mushroom in RuneScape?",
+	"question": "Count Draynor, weakened after being separated from Morytania for centuries, is killed by the player during Vampyre Slayer. Which of the following was he related to?",
 	"answers": {
-		"a": "Buttercap",
-		"b": "Lactarius",
-		"c": "Russula",
-		"d": "Chanterelle"
+		"a": "Alexei Jovkai",
+		"b": "Vanstrom Klause",
+		"c": "Tenebra Remanis",
+		"d": "Vanescula Drakan"
 	},
 	"correctAnswer": "d",
-	"explanation": "Chanterelles are commonly used in cooking in North America and Europe. The other mushrooms are found in-game on various islands in the Arc."
+	"explanation": "Count Draynor also had two brothers, Lowerniel Drakan and Ranis Drakan."
 }, {
 	"question": "How did wyverns die out?",
 	"answers": {
@@ -31,13 +31,13 @@
 }, {
 	"question": "Which tree in RuneScape is a misspelling of a real-life tree?",
 	"answers": {
-		"a": "Acadia",
-		"b": "Blisterwood",
-		"c": "Eucalyptus",
-		"d": "Dramen"
+		"a": "Acadia tree",
+		"b": "Sassafras tree",
+		"c": "Eucalyptus tree",
+		"d": "Dramen tree"
 	},
 	"correctAnswer": "a",
-	"explanation": "Acadia is an accidental misspelling of the acacia tree; the developers decided to keep it because they liked it better."
+	"explanation": "Acadia is an accidental misspelling of acacia; the developers decided to keep it because they liked it better."
 }, {
 	"question": "During which quest does Sigmund tie Zanik to the tracks of the Dorgesh-Kaan–Keldagrim train system?",
 	"answers": {
@@ -58,15 +58,15 @@
 	"correctAnswer": "c",
 	"explanation": "Janet Reno was an American lawyer who served as the Attorney General of the United States from 1993 until 2001 under Bill Clinton."
 }, {
-	"question": "Which herb is the primary ingredient in creating Runecrafting potions?",
+	"question": "Kranon the Ambassador, corrupted after a ritual that unintentionally summoned Xau-Tak, was originally a member of which race?",
 	"answers": {
-		"a": "Clean spirit weed",
-		"b": "Clean kwuarm",
-		"c": "Clean wergali",
-		"d": "Clean bloodweed"
+		"a": "Naragi",
+		"b": "Dragonkin",
+		"c": "Chthonians",
+		"d": "Ilujanka"
 	},
-	"correctAnswer": "c",
-	"explanation": "The Runecrafting potion, one of the most useless items in the game, is made by combining clean wergali and sheep's wool from a player-owned farm."
+	"correctAnswer": "b",
+	"explanation": "\"Kerapac objects, of course. As do some of the remaining council. They tell me that it's dark magic. That there is something wrong about it. Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
 }, {
 	"question": "Which spell was used to summon Zamorak during Evil Dave's Big Day Out?",
 	"answers": {
