@@ -138,21 +138,24 @@ document.addEventListener('DOMContentLoaded', (function() {
                 let group = template.content.cloneNode(true),
                     number = group.querySelector('.quiz-number'),
                     question = group.querySelector('.quiz-question'),
-                    choices = group.querySelectorAll('.quiz-choice'),
                     explanation = group.querySelector('.quiz-explanation');
 
                 // fill in <template> with content
                 number.textContent = `Question ${i + 1}`;
                 question.textContent = currentQ.question;
-                choices[0].textContent = currentQ.answers.a;
-                choices[1].textContent = currentQ.answers.b;
-                choices[2].textContent = currentQ.answers.c;
-                choices[3].textContent = currentQ.answers.d;
+                Object.keys(currentQ.answers).forEach(answer => {
+                    let choice = document.createElement('div');
 
-                choices.forEach(choice => choice.addEventListener('click', validateChoice));
+                    choice.classList.add('quiz-choice');
+                    choice.textContent = currentQ.answers[answer];
+                    explanation.parentNode.insertBefore(choice, explanation);
+                });
+
+                // stop user from choosing again
+                group.querySelectorAll('.quiz-choice').forEach(choice => choice.addEventListener('click', checkAnswer));
                 quiz.appendChild(group);
 
-                function validateChoice() {
+                function checkAnswer() {
                     let selectedA = this.textContent,
                         correctA = currentQ.answers[currentQ.correctAnswer],
                         groupChoices = this.parentElement.querySelectorAll('.quiz-choice');
@@ -169,19 +172,22 @@ document.addEventListener('DOMContentLoaded', (function() {
                     }
 
                     explanation.textContent = currentQ.explanation;
-                    groupChoices.forEach(choice => choice.removeEventListener('click', validateChoice));
+                    groupChoices.forEach(choice => choice.removeEventListener('click', checkAnswer));
 
                     answered += 1;
                     this.parentElement.classList.remove('unanswered');
+
+                    // show final results after all questions answered
                     if (answered === total) {
                         showResults();
                     }
                 }
             });
 
+
             function showResults() {
                 let results = get('.quiz-results'),
-                    numbers = document.createElement('div');
+                    numbers = document.createElement('div'),
                     desc = document.createElement('div');
 
                 results.style.display = 'block';
