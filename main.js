@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                     moveHandler(e);
                     time = Date.now();
                 }
-            }
+            };
         }
 
         function moveHandler(e) {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', (function() {
         if (document.body.clientWidth > 500) {
             cards.forEach(card => {
                 card.addEventListener('mousemove', throttleMoveHandler(30));
-                card.addEventListener('mouseout', () => {
+                card.addEventListener('mouseout', function () {
                     card.removeAttribute('style');
                     card.classList.remove('card-hover');
                 });
@@ -150,16 +150,17 @@ document.addEventListener('DOMContentLoaded', (function() {
 
                     choice.classList.add('quiz-choice');
                     choice.textContent = currQuestion.answers[answer];
-                    explanation.parentNode.insertBefore(choice, explanation);
+                    group.querySelector('.quiz-choice-group').appendChild(choice);
                 });
 
-                group.querySelectorAll('.quiz-choice').forEach(choice => choice.addEventListener('click', checkAnswer));
+                let groupChoices = group.querySelectorAll('.quiz-choice');
+
+                groupChoices.forEach(choice => choice.addEventListener('click', checkAnswer));
                 quiz.appendChild(group);
 
                 function checkAnswer() {
                     let selectedAnswer = this.textContent,
-                        correctAnswer = currQuestion.answers[currQuestion.correctAnswer],
-                        groupChoices = this.parentElement.querySelectorAll('.quiz-choice');
+                        correctAnswer = currQuestion.answers[currQuestion.correctAnswer];
 
                     if (selectedAnswer === correctAnswer) {
                         this.classList.add('selected', 'correct');
@@ -175,7 +176,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                     // stop user from choosing again
                     groupChoices.forEach(choice => choice.removeEventListener('click', checkAnswer));
                     if (currQuestion.explanation) explanation.textContent = currQuestion.explanation;
-                    this.parentElement.classList.remove('unanswered');
+                    this.parentElement.parentElement.classList.remove('unanswered');
 
                     answered += 1;
                     if (answered === total) showResults();
@@ -193,7 +194,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 results.appendChild(desc);
 
                 desc.classList.add('results-description');
-                numbers.classList.add('results-correct');
+                numbers.classList.add('results-number');
                 numbers.textContent = `You answered ${correct} out of ${total} questions correctly.`;
 
                 if (score === 1) {
