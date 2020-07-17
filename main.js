@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 } else if (score >= 0.25) {
                     desc.textContent = 'sit kid';
                 } else if (score < 0.25 && score !== 0) {
-                    desc.textContent = 'absolute disgrace';
+                    desc.textContent = 'you fucking donkey. you absolute turnip. you idiot sandwich';
                 } else {
                     desc.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life';
                 }

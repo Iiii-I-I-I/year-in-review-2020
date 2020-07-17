@@ -57,7 +57,7 @@
 	"correctAnswer": "c",
 	"explanation": "Janet Reno was an American lawyer who served as the Attorney General of the United States from 1993 until 2001 under Bill Clinton."
 }, {
-	"question": "Kranon the Ambassador, corrupted after a ritual that unintentionally summoned Xau-Tak, was originally a member of which race?",
+	"question": "Kranon the Ambassador, corrupted after a ritual that summoned Xau-Tak, was originally a member of which race?",
 	"answers": {
 		"a": "Naragi",
 		"b": "Dragonkin",
@@ -66,6 +66,15 @@
 	},
 	"correctAnswer": "b",
 	"explanation": "\"Kerapac objects, of course. As do some of the remaining council. They tell me that it's dark magic. That there is something wrong about it. Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
+}, {
+	"question": "Of the four following cities, which one is furthest south?",
+	"answers": {
+		"a": "Yanille",
+		"b": "Al Kharid",
+		"c": "Brimhaven",
+		"d": "Lletya"
+	},
+	"correctAnswer": "a"
 }, {
 	"question": "Which spell was used to summon Zamorak during Evil Dave's Big Day Out?",
 	"answers": {
@@ -76,15 +85,6 @@
 	},
 	"correctAnswer": "b",
 	"explanation": "The same spell was previously used in the Demon Slayer quest, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
-}, {
-	"question": "Of the four following cities, which one is furthest south?",
-	"answers": {
-		"a": "Yanille",
-		"b": "Al Kharid",
-		"c": "Brimhaven",
-		"d": "Lletya"
-	},
-	"correctAnswer": "a"
 }, {
 	"question": "The God Wars Dungeon, frozen for thousands of years, was thawed in the Fifth Age. Who rediscovered the temple and its combatants?",
 	"answers": {
