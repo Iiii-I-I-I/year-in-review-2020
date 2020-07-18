@@ -366,7 +366,7 @@ header {
 }
 
 .card-rs::before {
-    background-image: url(images/card-rs.jpg);
+    background-image: url('../images/card-rs.jpg');
 }
 
 .card-osrs {
@@ -374,7 +374,7 @@ header {
 }
 
 .card-osrs::before {
-    background-image: url(images/card-osrs.jpg);
+    background-image: url('../images/card-osrs.jpg');
 }
 
 .card-ptbr {
@@ -382,7 +382,7 @@ header {
 }
 
 .card-ptbr::before {
-    background-image: url(images/card-ptbr.jpg);
+    background-image: url('../images/card-ptbr.jpg');
 }
 
 .card-rsc {
@@ -390,7 +390,7 @@ header {
 }
 
 .card-rsc::before {
-    background-image: url(images/card-rsc.jpg);
+    background-image: url('../images/card-rsc.jpg');
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -876,18 +876,18 @@ header {
 
 .selected.correct {
     color: white;
-    background-image: url('images/icons/check-light.svg');
+    background-image: url('../images/icons/check-light.svg');
     background-color: #7db381;
 }
 
 .not-selected.correct {
     color: #57a75c;
-    background-image: url('images/icons/check-green.svg');
+    background-image: url('../images/icons/check-green.svg');
 }
 
 .selected.incorrect {
     color: white;
-    background-image: url('images/icons/x-light.svg');
+    background-image: url('../images/icons/x-light.svg');
     background-color: #dc6f6f;
 }
 
@@ -935,7 +935,7 @@ header {
     }
 
     .not-selected.correct {
-        background-image: url('images/icons/check-green-dark.svg');
+        background-image: url('../images/icons/check-green-dark.svg');
     }
 
     .selected.incorrect {
