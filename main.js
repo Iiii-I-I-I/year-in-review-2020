@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', (function() {
-    function get(selector) {
-        return document.querySelector(selector);
+    function get(selector, scope = document) {
+        return scope.querySelector(selector);
     }
 
-    function getAll(selector) {
-        return document.querySelectorAll(selector);
+    function getAll(selector, scope = document) {
+        return scope.querySelectorAll(selector);
     }
 
     // based on <https://technokami.in/3d-hover-effect-using-javascript-animations-css-html>
@@ -127,7 +127,6 @@ document.addEventListener('DOMContentLoaded', (function() {
 
         function buildQuiz() {
             let quiz = get('.quiz'),
-                template = get('.template-group'),
                 total = myQuestions.length,
                 correct = 0,
                 answered = 0;
@@ -137,10 +136,10 @@ document.addEventListener('DOMContentLoaded', (function() {
             createStartButton();
 
             myQuestions.forEach((currQuestion, i) => {
-                let group = template.content.cloneNode(true),
-                    number = group.querySelector('.quiz-number'),
-                    question = group.querySelector('.quiz-question'),
-                    explanation = group.querySelector('.quiz-explanation');
+                let group = get('.template-group').content.cloneNode(true),
+                    number = get('.quiz-number', group),
+                    question = get('.quiz-question', group),
+                    explanation = get('.quiz-explanation', group);
 
                 // fill in <template> with content
                 number.textContent = `Question ${i + 1}`;
@@ -150,10 +149,10 @@ document.addEventListener('DOMContentLoaded', (function() {
 
                     choice.classList.add('quiz-choice');
                     choice.textContent = currQuestion.answers[answer];
-                    group.querySelector('.quiz-choice-group').appendChild(choice);
+                    get('.quiz-choice-group', group).appendChild(choice);
                 });
 
-                let groupChoices = group.querySelectorAll('.quiz-choice');
+                let groupChoices = getAll('.quiz-choice', group);
 
                 groupChoices.forEach(choice => choice.addEventListener('click', checkAnswer));
                 quiz.appendChild(group);

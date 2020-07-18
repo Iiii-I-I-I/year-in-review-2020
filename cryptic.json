@@ -18,7 +18,7 @@
 	},
 	"correctAnswer": "a"
 }, {
-	"question": "Count Draynor, weakened after isolation from Morytania, is killed by the player during Vampyre Slayer. Which vampyre was he related to?",
+	"question": "Count Draynor, weakened after isolation from Morytania, is killed by the player during Vampyre Slayer. Which vampyre is he related to?",
 	"answers": {
 		"a": "Alexei Jovkai",
 		"b": "Vanstrom Klause",
@@ -26,7 +26,7 @@
 		"d": "Vanescula Drakan"
 	},
 	"correctAnswer": "d",
-	"explanation": "Count Draynor Drakan also had two brothers, Lowerniel Drakan and Ranis Drakan."
+	"explanation": "Count Draynor Drakan also has two brothers, Lowerniel Drakan and Ranis Drakan."
 }, {
 	"question": "Which tree in RuneScape is a misspelling of a real-life tree?",
 	"answers": {
@@ -65,7 +65,7 @@
 		"d": "Ilujanka"
 	},
 	"correctAnswer": "b",
-	"explanation": "\"Kerapac objects, of course. As do some of the remaining council. They tell me that it's dark magic. That there is something wrong about it. Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
+	"explanation": "\"Kerapac objects, of course. As do some of the remaining council. . . . They tell me that it's dark magic. That there is something wrong about it. . . . Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
 }, {
 	"question": "Of the four following cities, which one is furthest south?",
 	"answers": {

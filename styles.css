@@ -848,7 +848,7 @@ header {
     align-items: center;
     background: var(--bg-01);
     border-radius: .3em;
-    padding: .6em calc(1.2em + 25px) .6em 1.2em;
+    padding: .6em 1.2em;
     transition: .2s ease;
     transition-property: background-color, color;
 }
@@ -860,6 +860,7 @@ header {
 
 .selected,
 .not-selected {
+    padding-right: calc(1.2em + 25px); /* original padding + width of icon */
     background-size: 19px;
     background-repeat: no-repeat;
     background-position: calc(100% - 1.2em) center;
