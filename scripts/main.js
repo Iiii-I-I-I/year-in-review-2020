@@ -113,13 +113,12 @@ document.addEventListener('DOMContentLoaded', (function() {
     // design and ux stolen from NYT quizzes <https://www.nytimes.com/spotlight/news-quiz>
     function startQuiz() {
         let request = new XMLHttpRequest(),
-            requestURL = `https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review${ /* CHEATERS BEGONE */'' }-2020/master/cryptic.json`,
+            requestURL = `https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review${ /* CHEATERS BEGONE */'' }-2020/master/data/cryptic.json`,
             myQuestions;
 
         request.open('GET', requestURL);
         request.responseType = 'json';
         request.send();
-
         request.addEventListener('load', function () {
             myQuestions = request.response;
             buildQuiz();
@@ -133,7 +132,13 @@ document.addEventListener('DOMContentLoaded', (function() {
 
             quiz.classList.add('quiz-hidden'); // limit height of quiz section before starting
             quiz.textContent = ''; // clear warning about quiz not working
-            createStartButton();
+
+            let buttonGroup = document.createElement('div');
+
+            buttonGroup.classList.add('quiz-button-group');
+            quiz.appendChild(buttonGroup);
+            createStartButton('Take RS quiz');
+            createStartButton('Take OSRS quiz');
 
             myQuestions.forEach((currQuestion, i) => {
                 let group = get('.template-group').content.cloneNode(true),
@@ -152,9 +157,9 @@ document.addEventListener('DOMContentLoaded', (function() {
                     get('.quiz-choice-group', group).appendChild(choice);
                 });
 
-                let groupChoices = getAll('.quiz-choice', group);
+                let choiceGroup = getAll('.quiz-choice', group);
 
-                groupChoices.forEach(choice => choice.addEventListener('click', checkAnswer));
+                choiceGroup.forEach(choice => choice.addEventListener('click', checkAnswer));
                 quiz.appendChild(group);
 
                 function checkAnswer() {
@@ -168,12 +173,12 @@ document.addEventListener('DOMContentLoaded', (function() {
                         let correctIndex = Object.keys(currQuestion.answers).indexOf(currQuestion.correctAnswer);
 
                         // reveal correct answer if wrong one is chosen
-                        groupChoices[correctIndex].classList.add('not-selected', 'correct');
+                        choiceGroup[correctIndex].classList.add('not-selected', 'correct');
                         this.classList.add('selected', 'incorrect');
                     }
 
                     // stop user from choosing again
-                    groupChoices.forEach(choice => choice.removeEventListener('click', checkAnswer));
+                    choiceGroup.forEach(choice => choice.removeEventListener('click', checkAnswer));
                     if (currQuestion.explanation) explanation.textContent = currQuestion.explanation;
                     this.parentElement.parentElement.classList.remove('unanswered');
 
@@ -211,16 +216,17 @@ document.addEventListener('DOMContentLoaded', (function() {
                 }
             }
 
-            function createStartButton() {
+            function createStartButton(text, game) {
                 let button = document.createElement('button');
 
-                button.classList.add('quiz-start');
-                button.appendChild(document.createTextNode('Take quiz'));
+                button.classList.add('quiz-start', 'button');
+                button.textContent = text;
                 button.addEventListener('click', function () {
                     quiz.classList.remove('quiz-hidden');
-                    button.remove();
+                    get('.quiz-button-group').remove();
+                    // load rs or osrs
                 });
-                quiz.appendChild(button);
+                buttonGroup.appendChild(button);
             }
         }
     }
