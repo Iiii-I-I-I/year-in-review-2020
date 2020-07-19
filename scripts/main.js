@@ -57,51 +57,64 @@ document.addEventListener('DOMContentLoaded', (function() {
     }
 
     function drawGraph() {
-        let dygraph = document.createElement('script'),
-            csv = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv',
-            annotations = [{
-            	x: "2019/07/24",
-            	text: "Release of God Wars Dungeon"
-            }, {
-            	x: "2019/11/13",
-            	text: "Release of Chef's Assistant"
-            }, {
-            	x: "2020/02/04",
-            	text: "Partyhat duplication bug"
-            }, {
-            	x: "2020/03/14",
-            	text: "Start of coronavirus pandemic"
-            }, {
-            	x: "2020/06/03",
-            	text: "Twisted bow glitch"
-            }];
+        let script = document.createElement('script'),
+            csv = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv';
 
-        annotations.forEach((anno, i) => {
-            anno.series = 'Pageviews';
-            anno.shortText = i + 1;
-            anno.width = 24;
-            anno.height = 24;
-            anno.tickHeight = 25;
-            anno.tickWidth = 2;
-            anno.tickColor = '#4ab1ef';
+        document.body.appendChild(script);
+        script.src = 'scripts/dygraph.min.js';
+        script.addEventListener('load', function () {
+            graphStuff();
         });
 
-        document.body.appendChild(dygraph);
-        dygraph.src = 'scripts/dygraph.min.js';
-        dygraph.addEventListener('load', function () {
-            let g = new Dygraph(get('.traffic-graph'), csv, {
-                        title: 'Daily combined pageviews for all wikis',
-                        width: '750',
-                        color: '#438ab5',
+        function graphStuff() {
+            let graphWidth = get('.traffic-graph').clientWidth,
+                lineColor,
+                gridColor,
+                noteColor;
+
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                gridColor = '#393939';
+                lineColor = '#4ab1ef';
+                noteColor = '#438ab5';
+            } else {
+                gridColor = '#ececec';
+                lineColor = '#438ab5';
+                noteColor = '#4ab1ef';
+            }
+
+            let graph = new Dygraph(get('.traffic-graph'), csv, {
+                        title: 'Daily pageviews for all wikis',
+                        titleHeight: 35,
+                        width: graphWidth,
+                        color: lineColor,
                         strokeWidth: 3,
-                        axisLineColor: '#e9e9e9',
-                        gridLineColor: '#e9e9e9',
+                        axisLineColor: gridColor,
+                        gridLineColor: gridColor,
                         gridLineWidth: 1,
-                        xRangePad: 10, // padding on either end of line
-                        rollPeriod: 7, // rolling average
                         highlightCircleSize: 4.5,
                         labelsSeparateLines: true,
+                        xRangePad: 10, // padding on either ends of line
+                        rollPeriod: 7, // rolling average
                         interactionModel: {}, // disable range selector, pan/zoom, touch events
+                        legendFormatter: function (data) {
+                            let date = data.xHTML,
+                                views = data.series[0].yHTML,
+                                options = {
+                                    day: 'numeric',
+                                    month: 'long',
+                                    year: 'numeric'
+                                };
+
+                            date = new Date(date).toLocaleString('en-GB', options);
+                            return `${date}<br /><b>Pageviews: ${views}</b>`;
+                        },
+                        drawCallback: function (graph, is_initial) {
+                            if (is_initial) graph.setAnnotations(annotations);
+                        },
+                        // underlayCallback: function(canvas, area, g) {
+                        //     canvas.fillStyle = '#f9f9f9';
+                        //     canvas.fillRect(area.x, area.y, area.w, area.h);
+                        // },
                         axes: {
                             y: {
                                 drawAxis: false,
@@ -110,20 +123,43 @@ document.addEventListener('DOMContentLoaded', (function() {
                                 }
                             },
                             x: {
+                                axisLineColor: 'transparent',
                                 drawGrid: false,
                                 pixelsPerLabel: 50,
                                 axisLineWidth: 1,
                                 axisLabelFormatter: function (date) {
-                                    return date.toLocaleString('en', {month: 'short'});
+                                    return date.toLocaleString('en-GB', {month: 'short'});
                                 }
                             }
-                        },
-                        drawCallback: function (g, is_initial) {
-                            if (is_initial) g.setAnnotations(annotations);
                         }
                     }
-                );
-        });
+                ),
+                annotations = [{
+                	x: "2019/07/24",
+                	text: "Release of God Wars Dungeon"
+                }, {
+                	x: "2019/11/13",
+                	text: "Release of Chef's Assistant"
+                }, {
+                	x: "2020/02/04",
+                	text: "Partyhat duplication bug"
+                }, {
+                	x: "2020/03/14",
+                	text: "Start of coronavirus pandemic"
+                }, {
+                	x: "2020/06/03",
+                	text: "Twisted bow glitch"
+                }];
+
+            annotations.forEach((note, i) => {
+                note.series = 'Pageviews';
+                note.shortText = i + 1;
+                note.width = 24;
+                note.height = 24;
+                note.tickHeight = 20;
+                note.tickColor = noteColor;
+            });
+        }
     }
 
     function switchTabs() {
