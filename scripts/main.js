@@ -56,6 +56,53 @@ document.addEventListener('DOMContentLoaded', (function() {
         }
     }
 
+    function drawGraph() {
+        let graph = document.createElement('script'),
+            trafficSrc = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv';
+
+        let annotations = [{
+            	x: "2019/07/31",
+            	shortText: "A",
+            	text: "Release of God Wars Dungeon",
+            	tickHeight: 20
+            }, {
+            	x: "2019/11/20",
+            	shortText: "B",
+            	text: "Google privacy policy change",
+            	tickHeight: 20
+            }, {
+            	x: "2020/03/13",
+            	shortText: "C",
+            	text: "Start of coronavirus pandemic",
+            	tickHeight: 20
+            }];
+
+        annotations.forEach(note => {
+            note.series = 'Pageviews';
+            note.width = 22;
+            note.height = 22;
+        });
+
+        graph.src = 'scripts/dygraph.min.js';
+        graph.addEventListener('load', function () {
+            // disable zoom
+            let g = new Dygraph(get('.traffic-graph'), trafficSrc, {
+                        title: 'Pageviews over the past year',
+                        rollPeriod: 7,
+                        axes: {
+                            y: {labelsKMB: true},
+                            x: {drawGrid: false}
+                        },
+                        width: '700',
+                        // legend: 'follow',
+                        drawCallback: function (g, is_initial) {
+                            if (is_initial) g.setAnnotations(annotations);
+                        }
+                    });
+        });
+        document.body.appendChild(graph);
+    }
+
     function switchTabs() {
         let tabGroups = getAll('.tabs'),
             tabs = getAll('.tabs label'),
@@ -232,6 +279,7 @@ document.addEventListener('DOMContentLoaded', (function() {
     }
 
     gainPerspective();
+    drawGraph();
     switchTabs();
     startQuiz();
 })(), false);

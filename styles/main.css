@@ -744,6 +744,24 @@ header {
 }
 
 /* --------------
+       DYGRAPH
+   -------------- */
+
+.dygraph-axis-label {
+    color: var(--text-02);
+}
+
+.dygraph-annotation {
+    border-radius: 10em;
+}
+
+.dygraph-legend {
+    background: transparent;
+    left: 65px !important; /* inline style */
+    top: 40px !important; /* inline style */
+}
+
+/* --------------
       SECTIONS
    -------------- */
 

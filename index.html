@@ -9,7 +9,10 @@
     <title>2020 Year in Review – The RuneScape Wikis</title>
     <link rel="preload" href="styles/main.css" as="style">
     <link rel="preload" href="scripts/main.js" as="script">
+    <link rel="preload" href="styles/dygraph.min.css" as="style">
+    <link rel="preload" href="scripts/dygraph.min.js" as="script">
     <!-- @TODO: minify css and js before this goes live -->
+    <link rel="stylesheet" href="styles/dygraph.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/main.js" defer></script>
 </head>
@@ -217,6 +220,7 @@
                 </div>
             </dl>
             <p>Cras sed egestas nisi. Duis in laoreet turpis. Morbi ullamcorper arcu quis lorem mattis, tempor congue enim sagittis. Fusce ut auctor dui, non tristique nisl. Donec faucibus est lacus, ut consectetur justo iaculis nec. Praesent cursus est sed lacinia vehicula. Ut leo risus, dignissim vitae arcu vel, sollicitudin tincidunt dolor.</p>
+            <div class="traffic-graph"></div>
         </section>
         <!-- COMMUNITY STATS -->
         <section>
@@ -365,7 +369,7 @@
         <section>
             <h2>Very fun trivia quiz</h2>
             <p>Cras sed egestas nisi. Duis in laoreet turpis. Morbi ullamcorper arcu quis lorem mattis, tempor congue enim sagittis. Fusce ut auctor dui, non tristique nisl. Donec faucibus est lacus, ut consectetur justo iaculis nec. Praesent cursus est sed lacinia vehicula. Ut leo risus, dignissim vitae arcu vel, sollicitudin tincidunt dolor.</p>
-            <div class="quiz"><span style="color: #9e2929">If you're seeing this message instead of the quiz, something's gone wrong. Try reloading the page or checking that JavaScript is enabled.</span></div>
+            <div class="quiz"><span style="color: #9e2929">If you're seeing this message, something's gone wrong with the quiz. Try reloading the page and checking if JavaScript is enabled.</span></div>
             <div class="quiz-results"></div>
             <template class="template-group">
                 <div class="quiz-group unanswered">
@@ -382,9 +386,9 @@
             <h3>About Weird Gloop</h3>
             <div>Morbi ullamcorper arcu quis lorem mattis, tempor congue enim sagittis. Fusce ut auctor dui, non tristique nisl. Donec faucibus est lacus, ut consectetur justo iaculis nec.</div>
             <div class="socials">
-                <a class="social discord" href="https://discord.gg/runescapewiki" target="_blank" rel="noopener">Our Discord</a>
-                <a class="social twitter" href="https://twitter.com/RSWiki" target="_blank" rel="noopener">@RSWiki</a>
-                <a class="social twitter" href="https://twitter.com/OSRS_Wiki" target="_blank" rel="noopener">@OSRS_Wiki</a>
+                <a class="social button discord" href="https://discord.gg/runescapewiki" target="_blank" rel="noopener">Our Discord</a>
+                <a class="social button twitter" href="https://twitter.com/RSWiki" target="_blank" rel="noopener">@RSWiki</a>
+                <a class="social button twitter" href="https://twitter.com/OSRS_Wiki" target="_blank" rel="noopener">@OSRS_Wiki</a>
             </div>
         </div>
         <div class="links">
