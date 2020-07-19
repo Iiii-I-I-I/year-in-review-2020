@@ -57,50 +57,73 @@ document.addEventListener('DOMContentLoaded', (function() {
     }
 
     function drawGraph() {
-        let graph = document.createElement('script'),
-            trafficSrc = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv';
-
-        let annotations = [{
-            	x: "2019/07/31",
-            	shortText: "A",
-            	text: "Release of God Wars Dungeon",
-            	tickHeight: 20
+        let dygraph = document.createElement('script'),
+            csv = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv',
+            annotations = [{
+            	x: "2019/07/24",
+            	text: "Release of God Wars Dungeon"
             }, {
-            	x: "2019/11/20",
-            	shortText: "B",
-            	text: "Google privacy policy change",
-            	tickHeight: 20
+            	x: "2019/11/13",
+            	text: "Release of Chef's Assistant"
             }, {
-            	x: "2020/03/13",
-            	shortText: "C",
-            	text: "Start of coronavirus pandemic",
-            	tickHeight: 20
+            	x: "2020/02/04",
+            	text: "Partyhat duplication bug"
+            }, {
+            	x: "2020/03/14",
+            	text: "Start of coronavirus pandemic"
+            }, {
+            	x: "2020/06/03",
+            	text: "Twisted bow glitch"
             }];
 
-        annotations.forEach(note => {
-            note.series = 'Pageviews';
-            note.width = 22;
-            note.height = 22;
+        annotations.forEach((anno, i) => {
+            anno.series = 'Pageviews';
+            anno.shortText = i + 1;
+            anno.width = 24;
+            anno.height = 24;
+            anno.tickHeight = 25;
+            anno.tickWidth = 2;
+            anno.tickColor = '#4ab1ef';
         });
 
-        graph.src = 'scripts/dygraph.min.js';
-        graph.addEventListener('load', function () {
-            // disable zoom
-            let g = new Dygraph(get('.traffic-graph'), trafficSrc, {
-                        title: 'Pageviews over the past year',
-                        rollPeriod: 7,
+        document.body.appendChild(dygraph);
+        dygraph.src = 'scripts/dygraph.min.js';
+        dygraph.addEventListener('load', function () {
+            let g = new Dygraph(get('.traffic-graph'), csv, {
+                        title: 'Daily combined pageviews for all wikis',
+                        width: '750',
+                        color: '#438ab5',
+                        strokeWidth: 3,
+                        axisLineColor: '#e9e9e9',
+                        gridLineColor: '#e9e9e9',
+                        gridLineWidth: 1,
+                        xRangePad: 10, // padding on either end of line
+                        rollPeriod: 7, // rolling average
+                        highlightCircleSize: 4.5,
+                        labelsSeparateLines: true,
+                        interactionModel: {}, // disable range selector, pan/zoom, touch events
                         axes: {
-                            y: {labelsKMB: true},
-                            x: {drawGrid: false}
+                            y: {
+                                drawAxis: false,
+                                valueFormatter: function (views) {
+                                    return Math.round(views).toLocaleString();
+                                }
+                            },
+                            x: {
+                                drawGrid: false,
+                                pixelsPerLabel: 50,
+                                axisLineWidth: 1,
+                                axisLabelFormatter: function (date) {
+                                    return date.toLocaleString('en', {month: 'short'});
+                                }
+                            }
                         },
-                        width: '700',
-                        // legend: 'follow',
                         drawCallback: function (g, is_initial) {
                             if (is_initial) g.setAnnotations(annotations);
                         }
-                    });
+                    }
+                );
         });
-        document.body.appendChild(graph);
     }
 
     function switchTabs() {

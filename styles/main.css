@@ -747,18 +747,37 @@ header {
        DYGRAPH
    -------------- */
 
+.traffic-graph {
+    margin-top: 3em;
+}
+
 .dygraph-axis-label {
     color: var(--text-02);
 }
 
 .dygraph-annotation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+    color: white !important; /* inline style */
+    border: none !important; /* inline style */
     border-radius: 10em;
+    background-color: #4ab1ef;
 }
 
 .dygraph-legend {
-    background: transparent;
-    left: 65px !important; /* inline style */
+    background: var(--bg-02);
+    width: auto;
+    padding: .5em .75em;
+    left: 15px !important; /* inline style */
     top: 40px !important; /* inline style */
+}
+
+.dygraph-axis-label-x {
+    margin-top: .5em;
+    overflow: visible;
 }
 
 /* --------------
