@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                         highlightCircleSize: 4.5,
                         labelsSeparateLines: true,
                         xRangePad: 10, // padding on either ends of line
-                        rollPeriod: 7, // rolling average
+                        rollPeriod: 7, // rolling average (days)
                         interactionModel: {}, // disable range selector, pan/zoom, touch events
                         annotationMouseOverHandler: function (annotation) {
                             annotation.div.classList.remove('tooltip-hidden');
@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                         axes: {
                             y: {
                                 drawAxis: false,
+                                valueRange: [null, 5000000],
                                 valueFormatter: function (views) {
                                     return Math.round(views).toLocaleString();
                                 }
@@ -137,22 +138,33 @@ document.addEventListener('DOMContentLoaded', (function() {
 
             let annotations = [{
                 	x: "2019/07/24",
-                	text: "Release of the Temple of Aminishi"
+                	text: "Song of the Elves is released",
+                    tickHeight: 20
                 }, {
-                	x: "2019/11/13",
-                	text: "Release of While Guthix Sleeps"
+                	x: "2019/09/26",
+                	text: "The Fremennik Exiles is released"
                 }, {
-                	x: "2020/02/04",
-                	text: "Partyhat duplication bug discovered"
+                	x: "2019/12/25",
+                	text: "Traffic drops around Christmas Day"
+                }, {
+                	x: "2020/02/06",
+                	text: "The Nightmare of Ashihama is released"
                 }, {
                 	x: "2020/03/14",
-                	text: "Traffic increase from COVID-19 pandemic"
+                	text: "Traffic rises sharply due to pandemic",
+                    tickHeight: 20
                 }, {
-                	x: "2020/04/06",
-                	text: "Release of Old School RuneScape 2"
+                	x: "2020/04/20",
+                	text: "Just showing off tickHeight differences",
+                    tickHeight: 10
                 }, {
-                	x: "2020/06/03",
-                	text: "Twisted bow glitch discovered"
+                	x: "2020/05/01",
+                	text: "Various states begin easing restrictions",
+                    tickHeight: 27
+                }, {
+                	x: "2020/06/04",
+                	text: "Sins of the Father is released",
+                    tickHeight: 20
                 }],
                 tooltips = [];
 
@@ -161,7 +173,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 note.shortText = i + 1;
                 note.width = 24;
                 note.height = 24;
-                note.tickHeight = 15;
+                if (note.tickHeight === undefined) note.tickHeight = 15;
                 note.tickColor = noteColor;
                 note.cssClass = `tooltip-hidden annotation-${i + 1}`;
 
