@@ -754,11 +754,13 @@ header {
 .traffic-container {
     background-color: var(--bg-03);
     border-radius: var(--border-radius);
-    padding: 1.5em 2em 2.25em;
-    margin-top: 3em;
+    padding: 1.5em 2em 2.5em;
+    margin-top: 2.5em;
     box-shadow: var(--shadow-03);
 }
+
 .traffic-graph {
+    width: 100%;
     height: 320px; /* so content doesn't shift after graph loads */
 }
 
@@ -770,16 +772,18 @@ header {
 
 .dygraph-axis-label-x {
     color: var(--text-02);
-    margin-top: .5em;
+    font-size: .85rem;
+    margin-top: .75em;
 }
 
 .dygraph-legend {
-    font-size: .9em;
+    font-size: .85rem;
+    line-height: 1.4;
     background: var(--bg-03);
     padding-right: .75em;
     width: auto;
     left: 0 !important; /* inline style */
-    top: 40px !important; /* inline style */
+    top: 35px !important; /* inline style */
 }
 
 .dygraph-annotation {
@@ -791,9 +795,7 @@ header {
     font-weight: bold;
     color: white !important; /* inline style */
     border: none !important; /* inline style */
-    border-radius: .35em;
-    background-color: #4ab1ef;
-    box-shadow: var(--shadow-02);
+    border-radius: .4em;
 }
 
 .tooltip-hidden .dygraph-tooltip {
@@ -806,19 +808,11 @@ header {
     bottom: 0;
     transform: translate(-43%, 0);
 
-    border-radius: .35em;
+    border-radius: .4em;
     width: 175px;
     padding: .25em .5em;
     pointer-events: none;
     box-shadow: var(--shadow-02);
-}
-
-@media screen and (prefers-color-scheme: dark) {
-
-    .dygraph-annotation {
-        background-color: #438ab5;
-    }
-
 }
 
 /* --------------

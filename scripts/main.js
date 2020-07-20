@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', (function() {
         }
     }
 
+    // uses dygraphs library <http://dygraphs.com/>
     function drawGraph() {
         let script = document.createElement('script'),
             trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv';
@@ -67,8 +68,7 @@ document.addEventListener('DOMContentLoaded', (function() {
         });
 
         function graphStuff() {
-            let graphWidth = get('.traffic-graph').clientWidth,
-                lineColor,
+            let lineColor,
                 gridColor,
                 noteColor;
 
@@ -78,14 +78,13 @@ document.addEventListener('DOMContentLoaded', (function() {
                 noteColor = '#438ab5';
             } else {
                 gridColor = '#efefef';
-                lineColor = '#438ab5';
-                noteColor = '#4ab1ef';
+                lineColor = '#4ab1ef';
+                noteColor = '#318cc4';
             }
 
             let graph = new Dygraph(get('.traffic-graph'), trafficData, {
                         title: 'Daily pageviews for all wikis',
                         titleHeight: 35,
-                        width: graphWidth,
                         color: lineColor,
                         strokeWidth: 3,
                         axisLineColor: gridColor,
@@ -104,6 +103,11 @@ document.addEventListener('DOMContentLoaded', (function() {
                             annotation.div.classList.add('tooltip-hidden');
                             annotation.div.style.zIndex = '1';
                         },
+                        drawCallback: function (dygraph, is_initial) {
+                            getAll('.dygraph-annotation').forEach(note => {
+                                note.style.backgroundColor = noteColor;
+                            });
+                        },
                         legendFormatter: function (data) {
                             let date = data.xHTML,
                                 views = data.series[0].yHTML,
@@ -114,18 +118,19 @@ document.addEventListener('DOMContentLoaded', (function() {
                                 };
 
                             date = new Date(date).toLocaleString('en-GB', options);
-                            return `${date}<br /><b>Pageviews: <span style="color: ${lineColor}">${views}</span></b>`;
+                            return `${date}<br /><b>Pageviews: <span style="color: ${noteColor}">${views}</span></b>`;
                         },
                         axes: {
                             y: {
                                 drawAxis: false,
-                                valueRange: [null, 5000000],
+                                valueRange: [null, 4750000],
                                 valueFormatter: function (views) {
                                     return Math.round(views).toLocaleString();
                                 }
                             },
                             x: {
-                                axisLineColor: 'transparent',
+                                axisLineColor: gridColor,
+                                axisLineWidth: 1,
                                 drawGrid: false,
                                 pixelsPerLabel: 50,
                                 axisLabelFormatter: function (date) {
@@ -137,33 +142,33 @@ document.addEventListener('DOMContentLoaded', (function() {
                 );
 
             let annotations = [{
-                	x: "2019/07/24",
-                	text: "Song of the Elves is released",
+                    x: "2019/07/24",
+                    text: "Song of the Elves is released",
                     tickHeight: 20
                 }, {
-                	x: "2019/09/26",
-                	text: "The Fremennik Exiles is released"
+                    x: "2019/09/26",
+                    text: "The Fremennik Exiles is released"
                 }, {
-                	x: "2019/12/25",
-                	text: "Traffic drops around Christmas Day"
+                    x: "2019/12/25",
+                    text: "Traffic drops around Christmas Day"
                 }, {
-                	x: "2020/02/06",
-                	text: "The Nightmare of Ashihama is released"
+                    x: "2020/02/06",
+                    text: "The Nightmare of Ashihama is released"
                 }, {
-                	x: "2020/03/14",
-                	text: "Traffic rises sharply due to pandemic",
+                    x: "2020/03/14",
+                    text: "Traffic rises sharply due to pandemic",
                     tickHeight: 20
                 }, {
-                	x: "2020/04/20",
-                	text: "Just showing off tickHeight differences",
-                    tickHeight: 10
+                    x: "2020/04/20",
+                    text: "Just showing off tickHeight differences",
+                    tickHeight: 12
                 }, {
-                	x: "2020/05/01",
-                	text: "Various states begin easing restrictions",
+                    x: "2020/05/01",
+                    text: "Traffic drops as US gradually reopens",
                     tickHeight: 27
                 }, {
-                	x: "2020/06/04",
-                	text: "Sins of the Father is released",
+                    x: "2020/06/04",
+                    text: "Sins of the Father is released",
                     tickHeight: 20
                 }],
                 tooltips = [];
