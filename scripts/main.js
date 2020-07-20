@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', (function() {
 
     function drawGraph() {
         let script = document.createElement('script'),
-            csv = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv';
+            trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv';
 
         document.body.appendChild(script);
         script.src = 'scripts/dygraph.min.js';
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 noteColor;
 
             if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                gridColor = '#393939';
+                gridColor = '#292929';
                 lineColor = '#4ab1ef';
                 noteColor = '#438ab5';
             } else {
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 noteColor = '#4ab1ef';
             }
 
-            let graph = new Dygraph(get('.traffic-graph'), csv, {
+            let graph = new Dygraph(get('.traffic-graph'), trafficData, {
                         title: 'Daily pageviews for all wikis',
                         titleHeight: 35,
                         width: graphWidth,
@@ -96,6 +96,14 @@ document.addEventListener('DOMContentLoaded', (function() {
                         xRangePad: 10, // padding on either ends of line
                         rollPeriod: 7, // rolling average
                         interactionModel: {}, // disable range selector, pan/zoom, touch events
+                        annotationMouseOverHandler: function (annotation) {
+                            annotation.div.classList.remove('tooltip-hidden');
+                            annotation.div.style.zIndex = '100'; // make sure tooltip appears on top of nearby annotations
+                        },
+                        annotationMouseOutHandler: function (annotation) {
+                            annotation.div.classList.add('tooltip-hidden');
+                            annotation.div.style.zIndex = '1';
+                        },
                         legendFormatter: function (data) {
                             let date = data.xHTML,
                                 views = data.series[0].yHTML,
@@ -106,15 +114,8 @@ document.addEventListener('DOMContentLoaded', (function() {
                                 };
 
                             date = new Date(date).toLocaleString('en-GB', options);
-                            return `${date}<br /><b>Pageviews: ${views}</b>`;
+                            return `${date}<br /><b>Pageviews: <span style="color: ${lineColor}">${views}</span></b>`;
                         },
-                        drawCallback: function (graph, is_initial) {
-                            if (is_initial) graph.setAnnotations(annotations);
-                        },
-                        // underlayCallback: function(canvas, area, g) {
-                        //     canvas.fillStyle = '#f9f9f9';
-                        //     canvas.fillRect(area.x, area.y, area.w, area.h);
-                        // },
                         axes: {
                             y: {
                                 drawAxis: false,
@@ -126,26 +127,29 @@ document.addEventListener('DOMContentLoaded', (function() {
                                 axisLineColor: 'transparent',
                                 drawGrid: false,
                                 pixelsPerLabel: 50,
-                                axisLineWidth: 1,
                                 axisLabelFormatter: function (date) {
                                     return date.toLocaleString('en-GB', {month: 'short'});
                                 }
                             }
                         }
                     }
-                ),
-                annotations = [{
+                );
+
+            let annotations = [{
                 	x: "2019/07/24",
-                	text: "Release of God Wars Dungeon"
+                	text: "Release of the Temple of Aminishi"
                 }, {
                 	x: "2019/11/13",
-                	text: "Release of Chef's Assistant"
+                	text: "Release of While Guthix Sleeps"
                 }, {
                 	x: "2020/02/04",
                 	text: "Partyhat duplication bug"
                 }, {
                 	x: "2020/03/14",
-                	text: "Start of coronavirus pandemic"
+                	text: "Start of COVID-19 pandemic"
+                }, {
+                	x: "2020/04/06",
+                	text: "Release of RuneScape 4"
                 }, {
                 	x: "2020/06/03",
                 	text: "Twisted bow glitch"
@@ -156,8 +160,24 @@ document.addEventListener('DOMContentLoaded', (function() {
                 note.shortText = i + 1;
                 note.width = 24;
                 note.height = 24;
-                note.tickHeight = 20;
+                note.tickHeight = 15;
                 note.tickColor = noteColor;
+                note.cssClass = `tooltip-hidden annotation-${i + 1}`;
+
+                let tooltip = document.createElement('div');
+
+                tooltip.classList.add('dygraph-tooltip', `tooltip-${i + 1}`);
+                tooltip.textContent = note.text;
+                tooltip.style.background = noteColor;
+                get('.traffic-graph').appendChild(tooltip); // store them here temporarily
+            });
+
+            graph.ready(function () {
+                graph.setAnnotations(annotations);
+                getAll('.dygraph-tooltip').forEach((tooltip, i) => {
+                    get(`.annotation-${i + 1}`).appendChild(tooltip);
+                    get(`.annotation-${i + 1}`).removeAttribute('title');
+                });
             });
         }
     }
