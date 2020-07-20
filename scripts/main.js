@@ -143,17 +143,18 @@ document.addEventListener('DOMContentLoaded', (function() {
                 	text: "Release of While Guthix Sleeps"
                 }, {
                 	x: "2020/02/04",
-                	text: "Partyhat duplication bug"
+                	text: "Partyhat duplication bug discovered"
                 }, {
                 	x: "2020/03/14",
-                	text: "Start of COVID-19 pandemic"
+                	text: "Traffic increase from COVID-19 pandemic"
                 }, {
                 	x: "2020/04/06",
-                	text: "Release of RuneScape 4"
+                	text: "Release of Old School RuneScape 2"
                 }, {
                 	x: "2020/06/03",
-                	text: "Twisted bow glitch"
-                }];
+                	text: "Twisted bow glitch discovered"
+                }],
+                tooltips = [];
 
             annotations.forEach((note, i) => {
                 note.series = 'Pageviews';
@@ -169,12 +170,12 @@ document.addEventListener('DOMContentLoaded', (function() {
                 tooltip.classList.add('dygraph-tooltip', `tooltip-${i + 1}`);
                 tooltip.textContent = note.text;
                 tooltip.style.background = noteColor;
-                get('.traffic-graph').appendChild(tooltip); // store them here temporarily
+                tooltips.push(tooltip);
             });
 
             graph.ready(function () {
                 graph.setAnnotations(annotations);
-                getAll('.dygraph-tooltip').forEach((tooltip, i) => {
+                tooltips.forEach((tooltip, i) => {
                     get(`.annotation-${i + 1}`).appendChild(tooltip);
                     get(`.annotation-${i + 1}`).removeAttribute('title');
                 });
