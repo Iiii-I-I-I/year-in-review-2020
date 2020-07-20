@@ -751,8 +751,14 @@ header {
        DYGRAPH
    -------------- */
 
-.traffic-graph {
+.traffic-container {
+    background-color: var(--bg-03);
+    border-radius: var(--border-radius);
+    padding: 1.5em 2em 2.25em;
     margin-top: 3em;
+    box-shadow: var(--shadow-03);
+}
+.traffic-graph {
     height: 320px; /* so content doesn't shift after graph loads */
 }
 
@@ -769,7 +775,7 @@ header {
 
 .dygraph-legend {
     font-size: .9em;
-    background: var(--bg-02);
+    background: var(--bg-03);
     padding-right: .75em;
     width: auto;
     left: 0 !important; /* inline style */

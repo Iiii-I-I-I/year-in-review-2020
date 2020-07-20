@@ -73,11 +73,11 @@ document.addEventListener('DOMContentLoaded', (function() {
                 noteColor;
 
             if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                gridColor = '#292929';
+                gridColor = '#333';
                 lineColor = '#4ab1ef';
                 noteColor = '#438ab5';
             } else {
-                gridColor = '#ececec';
+                gridColor = '#efefef';
                 lineColor = '#438ab5';
                 noteColor = '#4ab1ef';
             }
