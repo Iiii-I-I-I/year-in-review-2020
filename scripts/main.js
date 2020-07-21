@@ -56,29 +56,26 @@ document.addEventListener('DOMContentLoaded', (function() {
         }
     }
 
-    // uses dygraphs library <http://dygraphs.com/>
+    // uses dygraphs library <http://dygraphs.com/> and crosshair plugin
     function drawGraph() {
-        graphStuff();
+        let gridColor,
+            lineColor,
+            noteColor,
+            trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv';
 
-        function graphStuff() {
-            let gridColor,
-                lineColor,
-                noteColor,
-                trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv';
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            gridColor = '#393939';
+            hairColor = '#414141';
+            lineColor = '#2985bd';
+            noteColor = '#1d72a7';
+        } else {
+            gridColor = '#efefef';
+            hairColor = '#e8e8e8';
+            lineColor = '#50aee6';
+            noteColor = '#318cc4';
+        }
 
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                gridColor = '#393939';
-                hairColor = '#414141';
-                lineColor = '#2985bd';
-                noteColor = '#1d72a7';
-            } else {
-                gridColor = '#efefef';
-                hairColor = '#e8e8e8';
-                lineColor = '#50aee6';
-                noteColor = '#318cc4';
-            }
-
-            let graph = new Dygraph(get('.traffic-graph'), trafficData, {
+        let graph = new Dygraph(get('.traffic-graph'), trafficData, {
                     color: lineColor,
                     strokeWidth: 3,
                     axisLineColor: gridColor,
@@ -141,63 +138,62 @@ document.addEventListener('DOMContentLoaded', (function() {
                 }
             );
 
-            let annotations = [{
-                    x: "2019/07/24",
-                    text: "Song of the Elves is released",
-                    tickHeight: 20
-                }, {
-                    x: "2019/09/26",
-                    text: "The Fremennik Exiles is released"
-                }, {
-                    x: "2019/12/25",
-                    text: "Traffic drops around Christmas Day"
-                }, {
-                    x: "2020/02/06",
-                    text: "The Nightmare of Ashihama is released"
-                }, {
-                    x: "2020/03/14",
-                    text: "Traffic rises due to COVID-19 pandemic",
-                    tickHeight: 20
-                }, {
-                    x: "2020/04/20",
-                    text: "Just showing off tickHeight differences",
-                    tickHeight: 12
-                }, {
-                    x: "2020/05/01",
-                    text: "Traffic drops as US gradually reopens",
-                    tickHeight: 27
-                }, {
-                    x: "2020/06/04",
-                    text: "Sins of the Father is released",
-                    tickHeight: 20
-                }],
-                tooltips = [];
+        let annotations = [{
+                x: "2019/07/24",
+                text: "Song of the Elves is released",
+                tickHeight: 20
+            }, {
+                x: "2019/09/26",
+                text: "The Fremennik Exiles is released"
+            }, {
+                x: "2019/12/25",
+                text: "Traffic drops around Christmas Day"
+            }, {
+                x: "2020/02/06",
+                text: "The Nightmare of Ashihama is released"
+            }, {
+                x: "2020/03/14",
+                text: "Traffic rises due to COVID-19 pandemic",
+                tickHeight: 20
+            }, {
+                x: "2020/04/20",
+                text: "Just showing off tickHeight differences",
+                tickHeight: 12
+            }, {
+                x: "2020/05/01",
+                text: "Traffic drops as US gradually reopens",
+                tickHeight: 27
+            }, {
+                x: "2020/06/04",
+                text: "Sins of the Father is released",
+                tickHeight: 20
+            }],
+            tooltips = [];
 
-            annotations.forEach((note, i) => {
-                note.series = 'Pageviews';
-                note.shortText = i + 1;
-                note.width = 24;
-                note.height = 24;
-                if (note.tickHeight === undefined) note.tickHeight = 15;
-                note.tickColor = noteColor;
-                note.cssClass = `tooltip-hidden annotation-${i + 1}`;
+        annotations.forEach((note, i) => {
+            note.series = 'Pageviews';
+            note.shortText = i + 1;
+            note.width = 24;
+            note.height = 24;
+            if (note.tickHeight === undefined) note.tickHeight = 15;
+            note.tickColor = noteColor;
+            note.cssClass = `tooltip-hidden annotation-${i + 1}`;
 
-                let tooltip = document.createElement('div');
+            let tooltip = document.createElement('div');
 
-                tooltip.classList.add('dygraph-tooltip', `tooltip-${i + 1}`);
-                tooltip.textContent = note.text;
-                tooltip.style.background = noteColor;
-                tooltips.push(tooltip);
+            tooltip.classList.add('dygraph-tooltip', `tooltip-${i + 1}`);
+            tooltip.textContent = note.text;
+            tooltip.style.background = noteColor;
+            tooltips.push(tooltip);
+        });
+
+        graph.ready(function () {
+            graph.setAnnotations(annotations);
+            tooltips.forEach((tooltip, i) => {
+                get(`.annotation-${i + 1}`).appendChild(tooltip);
+                get(`.annotation-${i + 1}`).removeAttribute('title');
             });
-
-            graph.ready(function () {
-                graph.setAnnotations(annotations);
-                tooltips.forEach((tooltip, i) => {
-                    get(`.annotation-${i + 1}`).appendChild(tooltip);
-                    get(`.annotation-${i + 1}`).removeAttribute('title');
-                });
-            });
-        }
+        });
     }
 
     function switchTabs() {
