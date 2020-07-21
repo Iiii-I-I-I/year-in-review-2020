@@ -79,67 +79,67 @@ document.addEventListener('DOMContentLoaded', (function() {
             }
 
             let graph = new Dygraph(get('.traffic-graph'), trafficData, {
-                        color: lineColor,
-                        strokeWidth: 3,
-                        axisLineColor: gridColor,
-                        gridLineColor: gridColor,
-                        gridLineWidth: 1,
-                        highlightCircleSize: 5,
-                        labelsDiv: get('.traffic-legend'),
-                        labelsSeparateLines: true,
-                        xRangePad: 10,
-                        rollPeriod: 7,
-                        interactionModel: {}, // disable range selector, pan/zoom, touch events
-                        annotationMouseOverHandler: function (annotation) {
-                            annotation.div.classList.remove('tooltip-hidden');
-                            annotation.div.style.zIndex = '100'; // make sure tooltip appears on top of nearby annotations
-                        },
-                        annotationMouseOutHandler: function (annotation) {
-                            annotation.div.classList.add('tooltip-hidden');
-                            annotation.div.style.zIndex = '1';
-                        },
-                        drawCallback: function (dygraph, is_initial) {
-                            getAll('.dygraph-annotation').forEach(note => {
-                                note.style.backgroundColor = noteColor;
-                            });
-                        },
-                        legendFormatter: function (data) {
-                            let date = data.xHTML,
-                                views = data.series[0].yHTML,
-                                options = {
-                                    day: 'numeric',
-                                    month: 'long',
-                                    year: 'numeric'
-                                };
+                    color: lineColor,
+                    strokeWidth: 3,
+                    axisLineColor: gridColor,
+                    gridLineColor: gridColor,
+                    gridLineWidth: 1,
+                    highlightCircleSize: 5,
+                    labelsDiv: get('.traffic-legend'),
+                    labelsSeparateLines: true,
+                    xRangePad: 10,
+                    rollPeriod: 7,
+                    interactionModel: {}, // disable range selector, pan/zoom, touch events
+                    annotationMouseOverHandler: function (annotation) {
+                        annotation.div.classList.remove('tooltip-hidden');
+                        annotation.div.style.zIndex = '100'; // make sure tooltip appears on top of nearby annotations
+                    },
+                    annotationMouseOutHandler: function (annotation) {
+                        annotation.div.classList.add('tooltip-hidden');
+                        annotation.div.style.zIndex = '1';
+                    },
+                    drawCallback: function (dygraph, is_initial) {
+                        getAll('.dygraph-annotation').forEach(note => {
+                            note.style.backgroundColor = noteColor;
+                        });
+                    },
+                    legendFormatter: function (data) {
+                        let date = data.xHTML,
+                            views = data.series[0].yHTML,
+                            options = {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            };
 
-                            date = new Date(date).toLocaleString('en-GB', options);
-                            return `${date}<br /><b>Pageviews: <span style="color: ${noteColor}">${views}</span></b>`;
-                        },
-                        axes: {
-                            y: {
-                                drawAxis: false,
-                                valueRange: [null, 4750000],
-                                valueFormatter: function (views) {
-                                    return Math.round(views).toLocaleString();
-                                }
-                            },
-                            x: {
-                                axisLineWidth: 1,
-                                drawGrid: false,
-                                pixelsPerLabel: 50,
-                                axisLabelFormatter: function (date) {
-                                    return date.toLocaleString('en-GB', {month: 'short'});
-                                }
+                        date = new Date(date).toLocaleString('en-GB', options);
+                        return `${date}<br /><b>Pageviews: <span style="color: ${noteColor}">${views}</span></b>`;
+                    },
+                    axes: {
+                        y: {
+                            drawAxis: false,
+                            valueRange: [null, 4750000],
+                            valueFormatter: function (views) {
+                                return Math.round(views).toLocaleString();
                             }
                         },
-                        plugins: [
-                            new Dygraph.Plugins.Crosshair({
-                                direction: 'vertical',
-                                crosshairColor: hairColor
-                            })
-                        ]
-                    }
-                );
+                        x: {
+                            axisLineWidth: 1,
+                            drawGrid: false,
+                            pixelsPerLabel: 50,
+                            axisLabelFormatter: function (date) {
+                                return date.toLocaleString('en-GB', {month: 'short'});
+                            }
+                        }
+                    },
+                    plugins: [
+                        new Dygraph.Plugins.Crosshair({
+                            direction: 'vertical',
+                            crosshairColor: hairColor
+                        })
+                    ]
+                }
+            );
 
             let annotations = [{
                     x: "2019/07/24",
