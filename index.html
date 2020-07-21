@@ -7,13 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="The 2020 Year in Review for the official RuneScape Wikis.">
     <title>2020 Year in Review – The RuneScape Wikis</title>
+
     <link rel="preload" href="styles/main.css" as="style">
     <link rel="preload" href="scripts/main.js" as="script">
     <link rel="preload" href="styles/dygraph.min.css" as="style">
     <link rel="preload" href="scripts/dygraph.min.js" as="script">
-    <!-- @TODO: minify css and js before this goes live -->
+    <link rel="preload" href="scripts/crosshair.min.js" as="script">
+
     <link rel="stylesheet" href="styles/dygraph.min.css">
     <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/dygraph.min.js"></script>
+    <script src="scripts/crosshair.min.js"></script>
     <script src="scripts/main.js" defer></script>
 </head>
 <body>
@@ -221,6 +225,8 @@
             </dl>
             <p>Cras sed egestas nisi. Duis in laoreet turpis. Morbi ullamcorper arcu quis lorem mattis, tempor congue enim sagittis. Fusce ut auctor dui, non tristique nisl. Donec faucibus est lacus, ut consectetur justo iaculis nec. Praesent cursus est sed lacinia vehicula. Ut leo risus, dignissim vitae arcu vel, sollicitudin tincidunt dolor.</p>
             <div class="traffic-container">
+                <div class="traffic-title">Daily pageviews for all wikis</div>
+                <div class="traffic-legend"></div>
                 <div class="traffic-graph"></div>
             </div>
         </section>

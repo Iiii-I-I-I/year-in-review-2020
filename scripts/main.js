@@ -58,42 +58,37 @@ document.addEventListener('DOMContentLoaded', (function() {
 
     // uses dygraphs library <http://dygraphs.com/>
     function drawGraph() {
-        let script = document.createElement('script'),
-            trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv';
-
-        document.body.appendChild(script);
-        script.src = 'scripts/dygraph.min.js';
-        script.addEventListener('load', function () {
-            graphStuff();
-        });
+        graphStuff();
 
         function graphStuff() {
-            let lineColor,
-                gridColor,
-                noteColor;
+            let gridColor,
+                lineColor,
+                noteColor,
+                trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv';
 
             if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                gridColor = '#333';
-                lineColor = '#4ab1ef';
-                noteColor = '#438ab5';
+                gridColor = '#393939';
+                hairColor = '#414141';
+                lineColor = '#2985bd';
+                noteColor = '#1d72a7';
             } else {
                 gridColor = '#efefef';
-                lineColor = '#4ab1ef';
+                hairColor = '#e8e8e8';
+                lineColor = '#50aee6';
                 noteColor = '#318cc4';
             }
 
             let graph = new Dygraph(get('.traffic-graph'), trafficData, {
-                        title: 'Daily pageviews for all wikis',
-                        titleHeight: 35,
                         color: lineColor,
                         strokeWidth: 3,
                         axisLineColor: gridColor,
                         gridLineColor: gridColor,
                         gridLineWidth: 1,
-                        highlightCircleSize: 4.5,
+                        highlightCircleSize: 5,
+                        labelsDiv: get('.traffic-legend'),
                         labelsSeparateLines: true,
-                        xRangePad: 10, // padding on either ends of line
-                        rollPeriod: 7, // rolling average (days)
+                        xRangePad: 10,
+                        rollPeriod: 7,
                         interactionModel: {}, // disable range selector, pan/zoom, touch events
                         annotationMouseOverHandler: function (annotation) {
                             annotation.div.classList.remove('tooltip-hidden');
@@ -129,7 +124,6 @@ document.addEventListener('DOMContentLoaded', (function() {
                                 }
                             },
                             x: {
-                                axisLineColor: gridColor,
                                 axisLineWidth: 1,
                                 drawGrid: false,
                                 pixelsPerLabel: 50,
@@ -137,7 +131,13 @@ document.addEventListener('DOMContentLoaded', (function() {
                                     return date.toLocaleString('en-GB', {month: 'short'});
                                 }
                             }
-                        }
+                        },
+                        plugins: [
+                            new Dygraph.Plugins.Crosshair({
+                                direction: 'vertical',
+                                crosshairColor: hairColor
+                            })
+                        ]
                     }
                 );
 
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                     text: "The Nightmare of Ashihama is released"
                 }, {
                     x: "2020/03/14",
-                    text: "Traffic rises sharply due to pandemic",
+                    text: "Traffic rises due to COVID-19 pandemic",
                     tickHeight: 20
                 }, {
                     x: "2020/04/20",
