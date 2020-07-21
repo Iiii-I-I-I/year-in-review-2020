@@ -61,7 +61,11 @@ document.addEventListener('DOMContentLoaded', (function() {
         let gridColor,
             lineColor,
             noteColor,
-            trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv';
+            trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv',
+            dateOptions = {
+                day: 'numeric',
+                month: 'long'
+            };
 
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             gridColor = '#393939';
@@ -84,8 +88,8 @@ document.addEventListener('DOMContentLoaded', (function() {
                     highlightCircleSize: 5,
                     labelsDiv: get('.traffic-legend'),
                     labelsSeparateLines: true,
-                    xRangePad: 10,
                     rollPeriod: 7,
+                    fillGraph: true,
                     interactionModel: {}, // disable range selector, pan/zoom, touch events
                     annotationMouseOverHandler: function (annotation) {
                         annotation.div.classList.remove('tooltip-hidden');
@@ -112,15 +116,10 @@ document.addEventListener('DOMContentLoaded', (function() {
                     },
                     legendFormatter: function (data) {
                         let date = data.xHTML,
-                            views = data.series[0].yHTML,
-                            dateOptions = {
-                                day: 'numeric',
-                                month: 'short',
-                                year: 'numeric'
-                            };
+                            views = data.series[0].yHTML;
 
                         date = new Date(date).toLocaleString('en-GB', dateOptions);
-                        return `${date}<br /><b>Pageviews: <span style="color: ${noteColor}">${views}</span></b>`;
+                        return `${date}<br /><b>Views: <span style="color: ${noteColor}">${views}</span></b>`;
                     },
                     axes: {
                         y: {
@@ -155,6 +154,10 @@ document.addEventListener('DOMContentLoaded', (function() {
                 x: "2019/09/26",
                 text: "The Fremennik Exiles is released"
             }, {
+                x: "2019/11/14",
+                text: "The Twisted League is released",
+                tickHeight: 20
+            }, {
                 x: "2019/12/25",
                 text: "Traffic drops around Christmas Day"
             }, {
@@ -162,7 +165,8 @@ document.addEventListener('DOMContentLoaded', (function() {
                 text: "The Nightmare of Ashihama is released"
             }, {
                 x: "2020/03/14",
-                text: "Traffic begins to rise during pandemic"
+                text: "Traffic begins to rise during pandemic",
+                tickHeight: 24
             }, {
                 x: "2020/04/20",
                 text: "Just showing off tickHeight differences",
@@ -170,7 +174,7 @@ document.addEventListener('DOMContentLoaded', (function() {
             }, {
                 x: "2020/05/01",
                 text: "Traffic drops as US gradually reopens",
-                tickHeight: 27
+                tickHeight: 25
             }, {
                 x: "2020/06/04",
                 text: "Sins of the Father is released"
@@ -182,18 +186,12 @@ document.addEventListener('DOMContentLoaded', (function() {
             note.shortText = i + 1;
             note.width = 24;
             note.height = 24;
-            if (note.tickHeight === undefined) note.tickHeight = 18;
-            note.tickColor = noteColor;
+            if (note.tickHeight === undefined) note.tickHeight = 17;
             note.cssClass = `tooltip-hidden annotation-${i + 1}`;
 
             let tooltip = document.createElement('div'),
                 tooltipDate = document.createElement('div'),
-                tooltipText = document.createElement('div'),
-                dateOptions = {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric'
-                };
+                tooltipText = document.createElement('div');
 
             tooltip.classList.add('tooltip', `tooltip-${i + 1}`);
             tooltip.style.background = noteColor;
