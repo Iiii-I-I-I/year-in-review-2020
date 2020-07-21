@@ -96,6 +96,16 @@ document.addEventListener('DOMContentLoaded', (function() {
                         annotation.div.style.zIndex = '1';
                     },
                     drawCallback: function (dygraph, is_initial) {
+                        if (is_initial) {
+                            dygraph.setAnnotations(annotations);
+                            tooltips.forEach((tooltip, i) => {
+                                let annotation = get(`.annotation-${i + 1}`);
+
+                                annotation.appendChild(tooltip);
+                                annotation.removeAttribute('title');
+                            });
+                        }
+
                         getAll('.dygraph-annotation').forEach(note => {
                             note.style.backgroundColor = noteColor;
                         });
@@ -103,13 +113,13 @@ document.addEventListener('DOMContentLoaded', (function() {
                     legendFormatter: function (data) {
                         let date = data.xHTML,
                             views = data.series[0].yHTML,
-                            options = {
+                            dateOptions = {
                                 day: 'numeric',
-                                month: 'long',
+                                month: 'short',
                                 year: 'numeric'
                             };
 
-                        date = new Date(date).toLocaleString('en-GB', options);
+                        date = new Date(date).toLocaleString('en-GB', dateOptions);
                         return `${date}<br /><b>Pageviews: <span style="color: ${noteColor}">${views}</span></b>`;
                     },
                     axes: {
@@ -140,8 +150,7 @@ document.addEventListener('DOMContentLoaded', (function() {
 
         let annotations = [{
                 x: "2019/07/24",
-                text: "Song of the Elves is released",
-                tickHeight: 20
+                text: "Song of the Elves is released"
             }, {
                 x: "2019/09/26",
                 text: "The Fremennik Exiles is released"
@@ -153,8 +162,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 text: "The Nightmare of Ashihama is released"
             }, {
                 x: "2020/03/14",
-                text: "Traffic rises due to COVID-19 pandemic",
-                tickHeight: 20
+                text: "Traffic begins to rise during pandemic"
             }, {
                 x: "2020/04/20",
                 text: "Just showing off tickHeight differences",
@@ -165,8 +173,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 tickHeight: 27
             }, {
                 x: "2020/06/04",
-                text: "Sins of the Father is released",
-                tickHeight: 20
+                text: "Sins of the Father is released"
             }],
             tooltips = [];
 
@@ -175,24 +182,27 @@ document.addEventListener('DOMContentLoaded', (function() {
             note.shortText = i + 1;
             note.width = 24;
             note.height = 24;
-            if (note.tickHeight === undefined) note.tickHeight = 15;
+            if (note.tickHeight === undefined) note.tickHeight = 18;
             note.tickColor = noteColor;
             note.cssClass = `tooltip-hidden annotation-${i + 1}`;
 
-            let tooltip = document.createElement('div');
+            let tooltip = document.createElement('div'),
+                tooltipDate = document.createElement('div'),
+                tooltipText = document.createElement('div'),
+                dateOptions = {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                };
 
-            tooltip.classList.add('dygraph-tooltip', `tooltip-${i + 1}`);
-            tooltip.textContent = note.text;
+            tooltip.classList.add('tooltip', `tooltip-${i + 1}`);
             tooltip.style.background = noteColor;
-            tooltips.push(tooltip);
-        });
+            tooltip.appendChild(tooltipDate);
+            tooltip.appendChild(tooltipText);
 
-        graph.ready(function () {
-            graph.setAnnotations(annotations);
-            tooltips.forEach((tooltip, i) => {
-                get(`.annotation-${i + 1}`).appendChild(tooltip);
-                get(`.annotation-${i + 1}`).removeAttribute('title');
-            });
+            tooltipDate.textContent = new Date(note.x).toLocaleString('en-GB', dateOptions);
+            tooltipText.textContent = note.text;
+            tooltips.push(tooltip);
         });
     }
 

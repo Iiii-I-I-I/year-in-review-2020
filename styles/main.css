@@ -775,12 +775,13 @@ header {
 .traffic-legend {
     position: absolute;
     left: 2rem;
+    width: 170px;
     z-index: 2;
 
     font-size: .85rem;
     line-height: 1.4;
     background: var(--bg-03);
-    padding: 0 10px 10px 0;
+    padding-bottom: 10px;
 }
 
 .dygraph-axis-label-x {
@@ -802,21 +803,28 @@ header {
     border-radius: .4em;
 }
 
-.tooltip-hidden .dygraph-tooltip {
+.tooltip-hidden .tooltip {
     display: none;
 }
 
-.dygraph-tooltip {
+.tooltip {
     position: absolute;
     left: 0;
     bottom: 0;
     transform: translate(-43%, 0);
 
+    font-weight: normal;
+    text-align: left;
+    line-height: 1.3;
     border-radius: .4em;
-    min-width: 175px;
-    padding: .25em .5em;
+    width: 180px;
+    padding: .45em .8em;
     pointer-events: none;
     box-shadow: var(--shadow-02);
+}
+
+.tooltip div:first-of-type {
+    color: rgba(255, 255, 255, .75);
 }
 
 /* --------------
