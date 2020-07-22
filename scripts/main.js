@@ -87,7 +87,6 @@ document.addEventListener('DOMContentLoaded', (function() {
                     gridLineWidth: 1,
                     highlightCircleSize: 5,
                     labelsDiv: get('.traffic-legend'),
-                    labelsSeparateLines: true,
                     rollPeriod: 7,
                     fillGraph: true,
                     interactionModel: {}, // disable range selector, pan/zoom, touch events
@@ -107,19 +106,23 @@ document.addEventListener('DOMContentLoaded', (function() {
 
                                 annotation.appendChild(tooltip);
                                 annotation.removeAttribute('title');
+                                annotation.style.backgroundColor = noteColor;
                             });
-                        }
 
-                        getAll('.dygraph-annotation').forEach(note => {
-                            note.style.backgroundColor = noteColor;
-                        });
+                            // minor visual fixes
+                            let firstMonthLabel = get('.dygraph-roller').nextSibling,
+                                lastMonthLabel = get('.annotation-1').previousSibling;
+
+                            firstMonthLabel.style.left = '0';
+                            lastMonthLabel.style.textAlign = 'center';
+                        }
                     },
                     legendFormatter: function (data) {
                         let date = data.xHTML,
                             views = data.series[0].yHTML;
 
                         date = new Date(date).toLocaleString('en-GB', dateOptions);
-                        return `${date}<br /><b>Views: <span style="color: ${noteColor}">${views}</span></b>`;
+                        return `<div>${date}</div><div><b>Views: <span style="color: ${noteColor}">${views}</span></b></div>`;
                     },
                     axes: {
                         y: {
@@ -130,7 +133,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                             }
                         },
                         x: {
-                            axisLineWidth: 1,
+                            axisLineColor: 'transparent',
                             drawGrid: false,
                             pixelsPerLabel: 50,
                             axisLabelFormatter: function (date) {
@@ -155,11 +158,8 @@ document.addEventListener('DOMContentLoaded', (function() {
                 text: "The Fremennik Exiles is released"
             }, {
                 x: "2019/11/14",
-                text: "The Twisted League is released",
+                text: "Twisted League is released",
                 tickHeight: 20
-            }, {
-                x: "2019/12/25",
-                text: "Traffic drops around Christmas Day"
             }, {
                 x: "2020/02/06",
                 text: "The Nightmare of Ashihama is released"
