@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', (function() {
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             gridColor = '#393939';
             hairColor = '#414141';
-            lineColor = '#2985bd';
-            noteColor = '#1d72a7';
+            lineColor = '#389dda';
+            noteColor = '#196a9c';
         } else {
             gridColor = '#efefef';
             hairColor = '#e8e8e8';
@@ -121,15 +121,15 @@ document.addEventListener('DOMContentLoaded', (function() {
                         let date = data.xHTML,
                             views = data.series[0].yHTML;
 
-                        date = new Date(date).toLocaleString('en-GB', dateOptions);
-                        return `<div>${date}</div><div><b>Views: <span style="color: ${noteColor}">${views}</span></b></div>`;
+                        date = new Date(date).toLocaleString(undefined, dateOptions);
+                        return `<div>${date}</div><div><b>Views: <span style="color: ${lineColor}">${views}</span></b></div>`;
                     },
                     axes: {
                         y: {
                             drawAxis: false,
                             valueRange: [null, 4750000],
-                            valueFormatter: function (views) {
-                                return Math.round(views).toLocaleString();
+                            valueFormatter: function (num, opts, series, dygraph, row, col) {
+                                return Math.round(dygraph.getValue(row, col)).toLocaleString();
                             }
                         },
                         x: {
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                             drawGrid: false,
                             pixelsPerLabel: 50,
                             axisLabelFormatter: function (date) {
-                                return date.toLocaleString('en-GB', {month: 'short'});
+                                return date.toLocaleString(undefined, {month: 'short'});
                             }
                         }
                     },
@@ -165,16 +165,16 @@ document.addEventListener('DOMContentLoaded', (function() {
                 text: "The Nightmare of Ashihama is released"
             }, {
                 x: "2020/03/14",
-                text: "Traffic begins to rise during pandemic",
-                tickHeight: 24
+                text: "Traffic rises during the COVID-19 pandemic",
+                tickHeight: 25
             }, {
                 x: "2020/04/20",
                 text: "Just showing off tickHeight differences",
-                tickHeight: 12
+                tickHeight: 15
             }, {
                 x: "2020/05/01",
                 text: "Traffic drops as US gradually reopens",
-                tickHeight: 25
+                tickHeight: 30
             }, {
                 x: "2020/06/04",
                 text: "Sins of the Father is released"
@@ -186,8 +186,8 @@ document.addEventListener('DOMContentLoaded', (function() {
             note.shortText = i + 1;
             note.width = 24;
             note.height = 24;
-            if (note.tickHeight === undefined) note.tickHeight = 17;
             note.cssClass = `tooltip-hidden annotation-${i + 1}`;
+            if (note.tickHeight === undefined) note.tickHeight = 17;
 
             let tooltip = document.createElement('div'),
                 tooltipDate = document.createElement('div'),
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', (function() {
             tooltip.appendChild(tooltipDate);
             tooltip.appendChild(tooltipText);
 
-            tooltipDate.textContent = new Date(note.x).toLocaleString('en-GB', dateOptions);
+            tooltipDate.textContent = new Date(note.x).toLocaleString(undefined, dateOptions);
             tooltipText.textContent = note.text;
             tooltips.push(tooltip);
         });
