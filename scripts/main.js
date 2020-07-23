@@ -273,20 +273,17 @@ document.addEventListener('DOMContentLoaded', (function() {
 
         function buildQuiz() {
             let quiz = get('.quiz'),
+                buttonGroup = document.createElement('div'),
                 total,
                 questions,
                 correct = 0,
                 answered = 0;
 
-            quiz.classList.add('quiz-hidden'); // hide quiz questions before starting
-            quiz.textContent = ''; // clear warning about quiz not working
-
-            let buttonGroup = document.createElement('div');
-
+            quiz.appendChild(buttonGroup);
             buttonGroup.classList.add('quiz-button-group');
             createButton('Take the<br />RuneScape quiz', 'rs');
             createButton('Take the Old School<br />RuneScape quiz', 'osrs');
-            quiz.appendChild(buttonGroup);
+            createButton('Take the RuneScape<br />Classic quiz (fake)', 'rsc');
 
             function createButton(buttonText, gameVersion) {
                 let button = document.createElement('button');
@@ -294,7 +291,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 button.classList.add('quiz-start', 'button');
                 button.innerHTML = buttonText;
                 button.addEventListener('click', function () {
-                    quiz.classList.remove('quiz-hidden');
+                    get('div', quiz).style.display = 'none';
                     get('.quiz-button-group').remove();
                     setupQuestions(gameVersion);
                 });
@@ -309,6 +306,9 @@ document.addEventListener('DOMContentLoaded', (function() {
                     case 'osrs':
                         questions = request.response[0].osrs;
                         break;
+                    case 'rsc':
+                        quiz.textContent = 'no quiz for u';
+                        return;
                     // pt-br? classic? idk
                 }
                 total = questions.length;
@@ -356,37 +356,53 @@ document.addEventListener('DOMContentLoaded', (function() {
                         answered += 1;
                         this.parentElement.parentElement.classList.remove('unanswered');
                         if (answered === total) showResults();
-                        // console.log(`Correct: ${correct}, answered: ${answered}, total: ${total}`);
                     }
                 });
             }
 
             function showResults() {
                 let resultsNode = get('.quiz-results'),
-                    scoreNode = document.createElement('div'),
-                    descNode = document.createElement('div'),
+                    scoreNode = document.createElement('h3'),
+                    descNode = document.createElement('p'),
+                    resetNode = document.createElement('p'),
                     score = correct / total;
 
                 resultsNode.style.display = 'block';
                 resultsNode.appendChild(scoreNode);
                 resultsNode.appendChild(descNode);
+                resultsNode.appendChild(resetNode);
 
-                descNode.classList.add('results-description');
-                scoreNode.classList.add('results-number');
+                // descNode.classList.add('results-description');
+                // scoreNode.classList.add('results-number');
                 scoreNode.textContent = `You answered ${correct} out of ${total} questions correctly.`;
+                scoreNode.style.fontSize = '1.5em';
+                descNode.style.marginBottom = '.5rem';
 
                 if (score === 1) {
-                    descNode.textContent = 'congrats! have you considered signing up for our OSWF tasks?';
+                    descNode.textContent = 'congrats! you should sign up for our OSWF tasks and help us blahblah.';
                 } else if (score >= 0.75) {
                     descNode.textContent = 'pretty good. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
                 } else if (score >= 0.50) {
                     descNode.textContent = 'it\'s okay i guess. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
                 } else if (score >= 0.25) {
                     descNode.textContent = 'sit kid';
-                } else if (score < 0.25 && score !== 0) {
+                } else if (0 > score < 0.25) {
                     descNode.textContent = 'you fucking donkey. you absolute turnip. you idiot sandwich';
                 } else {
                     descNode.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life';
+                }
+
+                resetNode.innerHTML = 'Would you like to try one of <span class="link reset-quiz" role="button">the other versions of the quiz</span>?'
+                get('.reset-quiz').addEventListener('click', resetQuiz);
+
+                function resetQuiz() {
+                    get('div', quiz).style.display = 'block';
+                    getAll('.quiz-group').forEach(group => {
+                        group.remove();
+                    });
+                    resultsNode.textContent = '';
+                    resultsNode.style.display = 'none';
+                    buildQuiz();
                 }
             }
         }

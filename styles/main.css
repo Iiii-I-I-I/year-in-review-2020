@@ -114,12 +114,12 @@ h1 {
 
 h2 {
     font-size: 1.75em;
-    margin: 0 0 1rem;
 }
 
 h2,
 h3 {
     line-height: 1.2;
+    margin: 0 0 1rem;
 }
 
 section:not(:first-of-type) {
@@ -130,12 +130,13 @@ p {
     margin: 0 0 2em;
 }
 
-a.link {
+.link {
     color: #2985bd;
     text-decoration: none;
+    cursor: pointer; /* for non-<a> links */
 }
 
-a.link:hover {
+.link:hover {
     text-decoration: underline;
 }
 
@@ -892,7 +893,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    margin: 1em auto 0;
     height: 7em;
 }
 
@@ -901,12 +902,8 @@ header {
     background-color: #7db381;
     border: none;
     margin: .5em;
+    padding: .5em;
     height: 100%;
-    overflow: visible;
-}
-
-.quiz-hidden .quiz-group {
-    display: none;
 }
 
 .quiz-group {
@@ -981,23 +978,12 @@ header {
 
 .quiz-results {
     display: none;
-    border-top: 1px solid #bbb;
+    border-top: 1px solid #ddd;
     padding-top: 2.5em;
     margin-top: 3em;
 }
 
-.results-number {
-    color: var(--text-01);
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: .5rem;
-}
-
 @media screen and (prefers-color-scheme: dark) {
-
-    .quiz-hidden::before {
-        background-image: linear-gradient(rgba(17, 17, 17, 0.5), var(--bg-02));
-    }
 
     .quiz-start {
         color: var(--text-01);
