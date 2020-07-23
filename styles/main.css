@@ -309,8 +309,8 @@ header {
     box-shadow: var(--shadow-02);
 
     /* needed for gainPerspective() in main.js */
-    transition: .5s ease;
-    transform: perspective(500px);
+    transition: .75s ease;
+    transform: perspective(750px);
 }
 
 /* background image on a pseudo-element so it can be manipulated separately */
@@ -566,11 +566,11 @@ header {
 }
 
 .section-rs .stat {
-    --stat-color: #4ab1ef;
+    --stat-color: #5cb1e4;
 }
 
 .section-osrs .stat {
-    --stat-color: #7bc722;
+    --stat-color: #70c653;
 }
 
 .section-ptbr .stat {
@@ -677,6 +677,7 @@ header {
     background-color: var(--bg-01);
     margin: 3em auto 2em;
     border-radius: calc(var(--border-radius) + var(--tab-gap));
+    /* box-shadow: var(--shadow-03); */
     width: 85%;
     max-width: 35em;
 
@@ -777,6 +778,7 @@ header {
     left: 2rem;
     font-size: .85rem;
     line-height: 1.4;
+    pointer-events: none;
     z-index: 2;
 }
 
@@ -886,41 +888,25 @@ header {
     margin-top: 3em;
 }
 
-/* fade questions and limit height before starting */
-.quiz-hidden {
-    max-height: 500px;
-    overflow: hidden;
-    position: relative;
-}
-
-.quiz-hidden::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: linear-gradient(rgba(252, 252, 252, .5), var(--bg-02));
-}
-
 .quiz-button-group {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     width: 100%;
-    height: 90%;
+    height: 7em;
 }
 
 .quiz-start {
+    flex: 1;
     background-color: #7db381;
     border: none;
     margin: .5em;
+    height: 100%;
+    overflow: visible;
 }
 
 .quiz-hidden .quiz-group {
-    -webkit-user-select: none;
-    user-select: none;
+    display: none;
 }
 
 .quiz-group {

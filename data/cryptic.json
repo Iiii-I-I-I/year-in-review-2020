@@ -1,5 +1,6 @@
 [{
-	"rs": [{
+	"rs": [
+		{
 			"question": "Which tavern is found in Falador?",
 			"answers": {
 				"a": "Blue Moon Inn",
@@ -96,8 +97,10 @@
 			},
 			"correctAnswer": "d",
 			"explanation": "A letter written by Sir Gerry, who lies dying outside the entrance to the God Wars Dungeon, describes his efforts to \"investigate the dwarf's drunken claims\"."
-		}],
-	"osrs": [{
+		}
+	],
+	"osrs": [
+		{
 			"question": "Which game is better?",
 			"answers": {
 				"a": "RuneScape",
@@ -115,6 +118,7 @@
 				"c": "16",
 				"d": "20"
 			},
-			"correctAnswer": "d"
-		}]
+			"correctAnswer": "c"
+		}
+	]
 }]

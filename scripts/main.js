@@ -110,8 +110,9 @@ document.addEventListener('DOMContentLoaded', (function() {
                             });
 
                             // minor visual fixes
-                            let firstMonthLabel = get('.dygraph-roller').nextSibling,
-                                lastMonthLabel = get('.annotation-1').previousSibling;
+                            let labels = getAll('.dygraph-axis-label-x'),
+                                firstMonthLabel = labels[0].parentNode,
+                                lastMonthLabel = labels[labels.length - 1].parentNode;
 
                             firstMonthLabel.style.left = '0';
                             lastMonthLabel.style.textAlign = 'center';
@@ -262,119 +263,129 @@ document.addEventListener('DOMContentLoaded', (function() {
     function startQuiz() {
         let request = new XMLHttpRequest(),
             requestURL = `https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review${ /* CHEATERS BEGONE */'' }-2020/master/data/cryptic.json`,
-            myQuestions;
+            questions;
 
         request.open('GET', requestURL);
         request.responseType = 'json';
         request.send();
         request.addEventListener('load', function () {
-            myQuestions = request.response;
+            questions = request.response;
             buildQuiz();
         });
 
         function buildQuiz() {
             let quiz = get('.quiz'),
-                total = myQuestions.length,
+                buttonGroup = document.createElement('div'),
                 correct = 0,
-                answered = 0;
+                answered = 0,
+                total,
+                game;
 
             quiz.classList.add('quiz-hidden'); // limit height of quiz section before starting
             quiz.textContent = ''; // clear warning about quiz not working
-
-            let buttonGroup = document.createElement('div');
-
-            buttonGroup.classList.add('quiz-button-group');
             quiz.appendChild(buttonGroup);
-            createStartButton('Take RS quiz');
-            createStartButton('Take OSRS quiz');
+            buttonGroup.classList.add('quiz-button-group');
+            createButton('RuneScape', 'rs');
+            createButton('Old School RuneScape', 'osrs');
 
-            myQuestions.forEach((currQuestion, i) => {
-                let group = get('.template-group').content.cloneNode(true),
-                    number = get('.quiz-number', group),
-                    question = get('.quiz-question', group),
-                    explanation = get('.quiz-explanation', group);
-
-                // fill in <template> with content
-                number.textContent = `Question ${i + 1}`;
-                question.textContent = currQuestion.question;
-                Object.keys(currQuestion.answers).forEach(answer => {
-                    let choice = document.createElement('div');
-
-                    choice.classList.add('quiz-choice');
-                    choice.textContent = currQuestion.answers[answer];
-                    get('.quiz-choice-group', group).appendChild(choice);
-                });
-
-                let choiceGroup = getAll('.quiz-choice', group);
-
-                choiceGroup.forEach(choice => choice.addEventListener('click', checkAnswer));
-                quiz.appendChild(group);
-
-                function checkAnswer() {
-                    let selectedAnswer = this.textContent,
-                        correctAnswer = currQuestion.answers[currQuestion.correctAnswer];
-
-                    if (selectedAnswer === correctAnswer) {
-                        this.classList.add('selected', 'correct');
-                        correct += 1;
-                    } else {
-                        let correctIndex = Object.keys(currQuestion.answers).indexOf(currQuestion.correctAnswer);
-
-                        // reveal correct answer if wrong one is chosen
-                        choiceGroup[correctIndex].classList.add('not-selected', 'correct');
-                        this.classList.add('selected', 'incorrect');
-                    }
-
-                    // stop user from choosing again
-                    choiceGroup.forEach(choice => choice.removeEventListener('click', checkAnswer));
-                    if (currQuestion.explanation) explanation.textContent = currQuestion.explanation;
-                    this.parentElement.parentElement.classList.remove('unanswered');
-
-                    answered += 1;
-                    if (answered === total) showResults();
-                }
-            });
-
-            function showResults() {
-                let results = get('.quiz-results'),
-                    numbers = document.createElement('div'),
-                    desc = document.createElement('div'),
-                    score = correct / total;
-
-                results.style.display = 'block';
-                results.appendChild(numbers);
-                results.appendChild(desc);
-
-                desc.classList.add('results-description');
-                numbers.classList.add('results-number');
-                numbers.textContent = `You answered ${correct} out of ${total} questions correctly.`;
-
-                if (score === 1) {
-                    desc.textContent = 'congrats! have you considered signing up for our OSWF tasks?';
-                } else if (score >= 0.75) {
-                    desc.textContent = 'pretty good. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
-                } else if (score >= 0.50) {
-                    desc.textContent = 'it\'s okay i guess. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
-                } else if (score >= 0.25) {
-                    desc.textContent = 'sit kid';
-                } else if (score < 0.25 && score !== 0) {
-                    desc.textContent = 'you fucking donkey. you absolute turnip. you idiot sandwich';
-                } else {
-                    desc.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life';
-                }
-            }
-
-            function createStartButton(text, game) {
+            function createButton(text, game) {
                 let button = document.createElement('button');
 
                 button.classList.add('quiz-start', 'button');
-                button.textContent = text;
+                button.innerHTML = text;
                 button.addEventListener('click', function () {
+                    if (game === 'rs') {
+                        questions = questions[0].rs;
+                    } else {
+                        questions = questions[0].osrs;
+                    }
+
+                    total = questions.length;
                     quiz.classList.remove('quiz-hidden');
                     get('.quiz-button-group').remove();
-                    // load rs or osrs
+                    setupQuestions();
                 });
                 buttonGroup.appendChild(button);
+            }
+
+            function setupQuestions() {
+                questions.forEach((question, i) => {
+                    let group = get('.template-group').content.cloneNode(true),
+                        numberNode = get('.quiz-number', group),
+                        questionNode = get('.quiz-question', group),
+                        explanationNode = get('.quiz-explanation', group);
+
+                    // fill in <template> with content
+                    numberNode.textContent = `Question ${i + 1}`;
+                    questionNode.textContent = question.question;
+                    Object.keys(question.answers).forEach(answer => {
+                        let choice = document.createElement('div');
+
+                        choice.classList.add('quiz-choice');
+                        choice.textContent = question.answers[answer];
+                        get('.quiz-choice-group', group).appendChild(choice);
+                    });
+
+                    let choiceGroup = getAll('.quiz-choice', group);
+
+                    choiceGroup.forEach(choice => choice.addEventListener('click', checkAnswer));
+                    quiz.appendChild(group);
+
+                    function checkAnswer() {
+                        let selectedAnswer = this.textContent,
+                        correctAnswer = question.answers[question.correctAnswer];
+
+                        if (selectedAnswer === correctAnswer) {
+                            this.classList.add('selected', 'correct');
+                            correct += 1;
+                        } else {
+                            let correctIndex = Object.keys(question.answers).indexOf(question.correctAnswer);
+
+                            // reveal correct answer if wrong one is chosen
+                            choiceGroup[correctIndex].classList.add('not-selected', 'correct');
+                            this.classList.add('selected', 'incorrect');
+                        }
+
+                        // stop user from choosing again
+                        choiceGroup.forEach(choice => choice.removeEventListener('click', checkAnswer));
+                        if (question.explanation) explanationNode.textContent = question.explanation;
+                        this.parentElement.parentElement.classList.remove('unanswered');
+
+                        answered += 1;
+                        if (answered === total) showResults();
+
+                        console.log(`Correct: ${correct}, answered: ${answered}, total: ${total}`);
+                    }
+                });
+            }
+
+            function showResults() {
+                let resultsNode = get('.quiz-results'),
+                    scoreNode = document.createElement('div'),
+                    descNode = document.createElement('div'),
+                    score = correct / total;
+
+                resultsNode.style.display = 'block';
+                resultsNode.appendChild(scoreNode);
+                resultsNode.appendChild(descNode);
+
+                descNode.classList.add('results-description');
+                scoreNode.classList.add('results-number');
+                scoreNode.textContent = `You answered ${correct} out of ${total} questions correctly.`;
+
+                if (score === 1) {
+                    descNode.textContent = 'congrats! have you considered signing up for our OSWF tasks?';
+                } else if (score >= 0.75) {
+                    descNode.textContent = 'pretty good. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
+                } else if (score >= 0.50) {
+                    descNode.textContent = 'it\'s okay i guess. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
+                } else if (score >= 0.25) {
+                    descNode.textContent = 'sit kid';
+                } else if (score < 0.25 && score !== 0) {
+                    descNode.textContent = 'you fucking donkey. you absolute turnip. you idiot sandwich';
+                } else {
+                    descNode.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life';
+                }
             }
         }
     }
