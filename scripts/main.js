@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', (function() {
     }
 
     // based on <https://technokami.in/3d-hover-effect-using-javascript-animations-css-html>
-    function gainPerspective() {
+    function initCards() {
         let cards = getAll('.wiki-card');
 
         // throttle the rate at which moveHandler updates (delay is in milliseconds)
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', (function() {
     }
 
     // uses dygraphs library <http://dygraphs.com/> and crosshair plugin
-    function drawGraph() {
+    function initGraph() {
         let gridColor,
             lineColor,
             noteColor,
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', (function() {
         });
     }
 
-    function switchTabs() {
+    function initTabs() {
         let tabGroups = getAll('.tabs'),
             tabs = getAll('.tabs label'),
             enterDuration = 275, // --anim-slow
@@ -260,60 +260,63 @@ document.addEventListener('DOMContentLoaded', (function() {
     }
 
     // design and ux stolen from NYT quizzes <https://www.nytimes.com/spotlight/news-quiz>
-    function startQuiz() {
+    function initQuiz() {
         let request = new XMLHttpRequest(),
-            requestURL = `https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review${ /* CHEATERS BEGONE */'' }-2020/master/data/cryptic.json`,
-            questions;
+            requestURL = `https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review${ /* CHEATERS BEGONE */'' }-2020/master/data/cryptic.json`;
 
         request.open('GET', requestURL);
         request.responseType = 'json';
         request.send();
         request.addEventListener('load', function () {
-            questions = request.response;
             buildQuiz();
         });
 
         function buildQuiz() {
             let quiz = get('.quiz'),
-                buttonGroup = document.createElement('div'),
-                correct = 0,
-                answered = 0,
                 total,
-                game;
+                questions,
+                correct = 0,
+                answered = 0;
 
-            quiz.classList.add('quiz-hidden'); // limit height of quiz section before starting
+            quiz.classList.add('quiz-hidden'); // hide quiz questions before starting
             quiz.textContent = ''; // clear warning about quiz not working
-            quiz.appendChild(buttonGroup);
-            buttonGroup.classList.add('quiz-button-group');
-            createButton('RuneScape', 'rs');
-            createButton('Old School RuneScape', 'osrs');
 
-            function createButton(text, game) {
+            let buttonGroup = document.createElement('div');
+
+            buttonGroup.classList.add('quiz-button-group');
+            createButton('Take the<br />RuneScape quiz', 'rs');
+            createButton('Take the Old School<br />RuneScape quiz', 'osrs');
+            quiz.appendChild(buttonGroup);
+
+            function createButton(buttonText, gameVersion) {
                 let button = document.createElement('button');
 
                 button.classList.add('quiz-start', 'button');
-                button.innerHTML = text;
+                button.innerHTML = buttonText;
                 button.addEventListener('click', function () {
-                    if (game === 'rs') {
-                        questions = questions[0].rs;
-                    } else {
-                        questions = questions[0].osrs;
-                    }
-
-                    total = questions.length;
                     quiz.classList.remove('quiz-hidden');
                     get('.quiz-button-group').remove();
-                    setupQuestions();
+                    setupQuestions(gameVersion);
                 });
                 buttonGroup.appendChild(button);
             }
 
-            function setupQuestions() {
+            function setupQuestions(gameVersion) {
+                switch (gameVersion) {
+                    case 'rs':
+                        questions = request.response[0].rs;
+                        break;
+                    case 'osrs':
+                        questions = request.response[0].osrs;
+                        break;
+                    // pt-br? classic? idk
+                }
+                total = questions.length;
                 questions.forEach((question, i) => {
-                    let group = get('.template-group').content.cloneNode(true),
-                        numberNode = get('.quiz-number', group),
-                        questionNode = get('.quiz-question', group),
-                        explanationNode = get('.quiz-explanation', group);
+                    let groupNode = get('.template-group').content.cloneNode(true),
+                        numberNode = get('.quiz-number', groupNode),
+                        questionNode = get('.quiz-question', groupNode),
+                        explanationNode = get('.quiz-explanation', groupNode);
 
                     // fill in <template> with content
                     numberNode.textContent = `Question ${i + 1}`;
@@ -323,17 +326,17 @@ document.addEventListener('DOMContentLoaded', (function() {
 
                         choice.classList.add('quiz-choice');
                         choice.textContent = question.answers[answer];
-                        get('.quiz-choice-group', group).appendChild(choice);
+                        get('.quiz-choice-group', groupNode).appendChild(choice);
                     });
 
-                    let choiceGroup = getAll('.quiz-choice', group);
+                    let choiceNodes = getAll('.quiz-choice', groupNode);
 
-                    choiceGroup.forEach(choice => choice.addEventListener('click', checkAnswer));
-                    quiz.appendChild(group);
+                    choiceNodes.forEach(choice => choice.addEventListener('click', checkAnswer));
+                    quiz.appendChild(groupNode);
 
                     function checkAnswer() {
                         let selectedAnswer = this.textContent,
-                        correctAnswer = question.answers[question.correctAnswer];
+                            correctAnswer = question.answers[question.correctAnswer];
 
                         if (selectedAnswer === correctAnswer) {
                             this.classList.add('selected', 'correct');
@@ -342,19 +345,18 @@ document.addEventListener('DOMContentLoaded', (function() {
                             let correctIndex = Object.keys(question.answers).indexOf(question.correctAnswer);
 
                             // reveal correct answer if wrong one is chosen
-                            choiceGroup[correctIndex].classList.add('not-selected', 'correct');
+                            choiceNodes[correctIndex].classList.add('not-selected', 'correct');
                             this.classList.add('selected', 'incorrect');
                         }
 
                         // stop user from choosing again
-                        choiceGroup.forEach(choice => choice.removeEventListener('click', checkAnswer));
+                        choiceNodes.forEach(choice => choice.removeEventListener('click', checkAnswer));
                         if (question.explanation) explanationNode.textContent = question.explanation;
-                        this.parentElement.parentElement.classList.remove('unanswered');
 
                         answered += 1;
+                        this.parentElement.parentElement.classList.remove('unanswered');
                         if (answered === total) showResults();
-
-                        console.log(`Correct: ${correct}, answered: ${answered}, total: ${total}`);
+                        // console.log(`Correct: ${correct}, answered: ${answered}, total: ${total}`);
                     }
                 });
             }
@@ -390,8 +392,8 @@ document.addEventListener('DOMContentLoaded', (function() {
         }
     }
 
-    gainPerspective();
-    drawGraph();
-    switchTabs();
-    startQuiz();
+    initCards();
+    initGraph();
+    initTabs();
+    initQuiz();
 })(), false);
