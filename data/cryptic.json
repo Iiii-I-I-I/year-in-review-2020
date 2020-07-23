@@ -1,98 +1,120 @@
 [{
-	"question": "Which tavern is found in Falador?",
-	"answers": {
-		"a": "Blue Moon Inn",
-		"b": "Pick and Lute",
-		"c": "Rising Sun",
-		"d": "Poison Arrow"
-	},
-	"correctAnswer": "c",
-	"explanation": "The Blue Moon Inn is found in Varrock, the Pick and Lute in Taverley, and the Poison Arrow in Ardougne."
-}, {
-	"question": "According to the natural history quiz in the Varrock Museum, how did wyverns die out?",
-	"answers": {
-		"a": "Climate change",
-		"b": "Disease",
-		"c": "Marauding adventurers",
-		"d": "Janet Reno"
-	},
-	"correctAnswer": "a"
-}, {
-	"question": "Count Draynor, weakened after isolation from Morytania, is killed by the player during Vampyre Slayer. Which vampyre is he related to?",
-	"answers": {
-		"a": "Alexei Jovkai",
-		"b": "Vanstrom Klause",
-		"c": "Tenebra Remanis",
-		"d": "Vanescula Drakan"
-	},
-	"correctAnswer": "d",
-	"explanation": "Count Draynor Drakan also has two brothers, Lowerniel Drakan and Ranis Drakan."
-}, {
-	"question": "Which tree in RuneScape is a misspelling of a real-life tree?",
-	"answers": {
-		"a": "Acadia tree",
-		"b": "Sassafras tree",
-		"c": "Eucalyptus tree",
-		"d": "Dramen tree"
-	},
-	"correctAnswer": "a",
-	"explanation": "Acadia is an accidental misspelling of acacia; the developers decided to keep it because they liked it better."
-}, {
-	"question": "During which quest does Sigmund tie Zanik to the tracks of the Dorgesh-Kaan–Keldagrim train system?",
-	"answers": {
-		"a": "Another Slice of H.A.M.",
-		"b": "Death to the Dorgeshuun",
-		"c": "Land of the Goblins",
-		"d": "The Chosen Commander"
-	},
-	"correctAnswer": "a"
-}, {
-	"question": "Who founded the Moon Clan?",
-	"answers": {
-		"a": "Pauline Polaris",
-		"b": "The Oneiromancer",
-		"c": "Janet Reno",
-		"d": "V"
-	},
-	"correctAnswer": "c",
-	"explanation": "Janet Reno was an American lawyer who served as the Attorney General of the United States from 1993 until 2001 under Bill Clinton."
-}, {
-	"question": "Kranon the Ambassador, corrupted after a ritual that summoned Xau-Tak, was originally a member of which race?",
-	"answers": {
-		"a": "Naragi",
-		"b": "Dragonkin",
-		"c": "Chthonians",
-		"d": "Ilujanka"
-	},
-	"correctAnswer": "b",
-	"explanation": "\"Kerapac objects, of course. As do some of the remaining council. . . . They tell me that it's dark magic. That there is something wrong about it. . . . Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
-}, {
-	"question": "Of the four following cities, which one is furthest south?",
-	"answers": {
-		"a": "Yanille",
-		"b": "Al Kharid",
-		"c": "Brimhaven",
-		"d": "Lletya"
-	},
-	"correctAnswer": "a"
-}, {
-	"question": "Which spell was used to summon Zamorak during Evil Dave's Big Day Out?",
-	"answers": {
-		"a": "Um nahi listic durooo-rah",
-		"b": "Carlem Aber Camerinthum Purchai Gabindo",
-		"c": "Dominoes Ad Nauseum, Romanes Eunt Domus",
-		"d": "Ika tha nke rius Zanka Tdaterius"
-	},
-	"correctAnswer": "b",
-	"explanation": "The same spell was previously used in the Demon Slayer quest, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
-}, {
-	"question": "The God Wars Dungeon, frozen for thousands of years, eventually thawed in the Fifth Age. Who rediscovered the temple and its combatants?",
-	"answers": {
-		"a": "The Temple Knights",
-		"b": "The White Knights",
-		"c": "Orlando Smith",
-		"d": "Drunken Dwarf"
-	},
-	"correctAnswer": "d",
-	"explanation": "A letter written by Sir Gerry, who lies dying outside the entrance to the God Wars Dungeon, describes his efforts to \"investigate the dwarf's drunken claims\"."
+	"rs": [{
+			"question": "Which tavern is found in Falador?",
+			"answers": {
+				"a": "Blue Moon Inn",
+				"b": "Pick and Lute",
+				"c": "Rising Sun",
+				"d": "Poison Arrow"
+			},
+			"correctAnswer": "c",
+			"explanation": "The Blue Moon Inn is found in Varrock, the Pick and Lute in Taverley, and the Poison Arrow in Ardougne."
+		}, {
+			"question": "According to the natural history quiz in the Varrock Museum, how did wyverns die out?",
+			"answers": {
+				"a": "Climate change",
+				"b": "Disease",
+				"c": "Marauding adventurers",
+				"d": "Janet Reno"
+			},
+			"correctAnswer": "a"
+		}, {
+			"question": "Count Draynor, weakened after isolation from Morytania, is killed by the player during Vampyre Slayer. Which vampyre is he related to?",
+			"answers": {
+				"a": "Alexei Jovkai",
+				"b": "Vanstrom Klause",
+				"c": "Tenebra Remanis",
+				"d": "Vanescula Drakan"
+			},
+			"correctAnswer": "d",
+			"explanation": "Count Draynor Drakan also has two brothers, Lowerniel Drakan and Ranis Drakan."
+		}, {
+			"question": "Which tree in RuneScape is a misspelling of a real-life tree?",
+			"answers": {
+				"a": "Acadia tree",
+				"b": "Sassafras tree",
+				"c": "Eucalyptus tree",
+				"d": "Dramen tree"
+			},
+			"correctAnswer": "a",
+			"explanation": "Acadia is an accidental misspelling of acacia; the developers decided to keep it because they liked it better."
+		}, {
+			"question": "During which quest does Sigmund tie Zanik to the tracks of the Dorgesh-Kaan–Keldagrim train system?",
+			"answers": {
+				"a": "Another Slice of H.A.M.",
+				"b": "Death to the Dorgeshuun",
+				"c": "Land of the Goblins",
+				"d": "The Chosen Commander"
+			},
+			"correctAnswer": "a"
+		}, {
+			"question": "Who founded the Moon Clan?",
+			"answers": {
+				"a": "Pauline Polaris",
+				"b": "The Oneiromancer",
+				"c": "Janet Reno",
+				"d": "V"
+			},
+			"correctAnswer": "c",
+			"explanation": "Janet Reno was an American lawyer who served as the Attorney General of the United States from 1993 until 2001 under Bill Clinton."
+		}, {
+			"question": "Kranon the Ambassador, corrupted after a ritual that summoned Xau-Tak, was originally a member of which race?",
+			"answers": {
+				"a": "Naragi",
+				"b": "Dragonkin",
+				"c": "Chthonians",
+				"d": "Ilujanka"
+			},
+			"correctAnswer": "b",
+			"explanation": "\"Kerapac objects, of course. As do some of the remaining council. . . . They tell me that it's dark magic. That there is something wrong about it. . . . Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
+		}, {
+			"question": "Of the four following cities, which one is furthest south?",
+			"answers": {
+				"a": "Yanille",
+				"b": "Al Kharid",
+				"c": "Brimhaven",
+				"d": "Lletya"
+			},
+			"correctAnswer": "a"
+		}, {
+			"question": "Which spell was used to summon Zamorak during Evil Dave's Big Day Out?",
+			"answers": {
+				"a": "Um nahi listic durooo-rah",
+				"b": "Carlem Aber Camerinthum Purchai Gabindo",
+				"c": "Dominoes Ad Nauseum, Romanes Eunt Domus",
+				"d": "Ika tha nke rius Zanka Tdaterius"
+			},
+			"correctAnswer": "b",
+			"explanation": "The same spell was previously used in the Demon Slayer quest, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
+		}, {
+			"question": "The God Wars Dungeon, frozen for thousands of years, eventually thawed in the Fifth Age. Who rediscovered the temple and its combatants?",
+			"answers": {
+				"a": "The Temple Knights",
+				"b": "The White Knights",
+				"c": "Orlando Smith",
+				"d": "Drunken Dwarf"
+			},
+			"correctAnswer": "d",
+			"explanation": "A letter written by Sir Gerry, who lies dying outside the entrance to the God Wars Dungeon, describes his efforts to \"investigate the dwarf's drunken claims\"."
+		}],
+	"osrs": [{
+			"question": "Which game is better?",
+			"answers": {
+				"a": "RuneScape",
+				"b": "Old School RuneScape",
+				"c": "RuneScape Classic",
+				"d": "Fortnite"
+			},
+			"correctAnswer": "d",
+			"explanation": "lmao"
+		}, {
+			"question": "How many administrators are there on the Old School RuneScape Wiki?",
+			"answers": {
+				"a": "8",
+				"b": "12",
+				"c": "16",
+				"d": "20"
+			},
+			"correctAnswer": "d"
+		}]
 }]
