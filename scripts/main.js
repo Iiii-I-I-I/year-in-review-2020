@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', (function() {
+    'use strict';
+
     function get(selector, scope = document) {
         return scope.querySelector(selector);
     }
@@ -59,6 +61,7 @@ document.addEventListener('DOMContentLoaded', (function() {
     // uses dygraphs library <http://dygraphs.com/> and crosshair plugin
     function initGraph() {
         let gridColor,
+            hairColor,
             lineColor,
             noteColor,
             trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv',
@@ -79,7 +82,7 @@ document.addEventListener('DOMContentLoaded', (function() {
             noteColor = '#318cc4';
         }
 
-        let graph = new Dygraph(get('.traffic-graph'), trafficData, {
+        let g = new Dygraph(get('.traffic-graph'), trafficData, {
                     color: lineColor,
                     strokeWidth: 3,
                     axisLineColor: gridColor,
@@ -151,35 +154,37 @@ document.addEventListener('DOMContentLoaded', (function() {
                 }
             );
 
-        let annotations = [{
-                x: "2019/07/24",
-                text: "Song of the Elves is released"
-            }, {
-                x: "2019/09/26",
-                text: "The Fremennik Exiles is released"
-            }, {
-                x: "2019/11/14",
-                text: "Twisted League is released",
-                tickHeight: 20
-            }, {
-                x: "2020/02/06",
-                text: "The Nightmare of Ashihama is released"
-            }, {
-                x: "2020/03/14",
-                text: "Traffic rises during the COVID-19 pandemic",
-                tickHeight: 25
-            }, {
-                x: "2020/04/20",
-                text: "Just showing off tickHeight differences",
-                tickHeight: 15
-            }, {
-                x: "2020/05/01",
-                text: "Traffic drops as US gradually reopens",
-                tickHeight: 30
-            }, {
-                x: "2020/06/04",
-                text: "Sins of the Father is released"
-            }],
+        let annotations = [
+                {
+                    x: "2019/07/24",
+                    text: "Song of the Elves is released"
+                }, {
+                    x: "2019/09/26",
+                    text: "The Fremennik Exiles is released"
+                }, {
+                    x: "2019/11/14",
+                    text: "Twisted League is released",
+                    tickHeight: 20
+                }, {
+                    x: "2020/02/06",
+                    text: "The Nightmare of Ashihama is released"
+                }, {
+                    x: "2020/03/14",
+                    text: "Traffic rises during the COVID-19 pandemic",
+                    tickHeight: 25
+                }, {
+                    x: "2020/04/20",
+                    text: "Just showing off tickHeight differences",
+                    tickHeight: 15
+                }, {
+                    x: "2020/05/01",
+                    text: "Traffic drops as US gradually reopens",
+                    tickHeight: 30
+                }, {
+                    x: "2020/06/04",
+                    text: "Sins of the Father is released"
+                }
+            ],
             tooltips = [];
 
         annotations.forEach((note, i) => {
@@ -211,11 +216,11 @@ document.addEventListener('DOMContentLoaded', (function() {
             enterDuration = 275, // --anim-slow
             exitDuration = 150; // --anim-fast
 
-        function clickBitch() {
-            let nextIndex = this.dataset.index,
+        function clickBitch(event) {
+            let nextIndex = event.currentTarget.dataset.index,
                 currIndex = get('.tabs').style.getPropertyValue('--index'),
-                nextRadio = getAll('.tab-' + this.dataset.game),
-                nextVisible = getAll('.section-' + this.dataset.game),
+                nextRadio = getAll('.tab-' + event.currentTarget.dataset.game),
+                nextVisible = getAll('.section-' + event.currentTarget.dataset.game),
                 currVisible = getAll('.section-visible');
 
             // @TODO: animate via absolute positioning
@@ -334,19 +339,19 @@ document.addEventListener('DOMContentLoaded', (function() {
                     choiceNodes.forEach(choice => choice.addEventListener('click', checkAnswer));
                     quiz.appendChild(groupNode);
 
-                    function checkAnswer() {
-                        let selectedAnswer = this.textContent,
+                    function checkAnswer(event) {
+                        let selectedAnswer = event.currentTarget.textContent,
                             correctAnswer = question.answers[question.correctAnswer];
 
                         if (selectedAnswer === correctAnswer) {
-                            this.classList.add('selected', 'correct');
+                            event.currentTarget.classList.add('selected', 'correct');
                             correct += 1;
                         } else {
                             let correctIndex = Object.keys(question.answers).indexOf(question.correctAnswer);
 
                             // reveal correct answer if wrong one is chosen
                             choiceNodes[correctIndex].classList.add('not-selected', 'correct');
-                            this.classList.add('selected', 'incorrect');
+                            event.currentTarget.classList.add('selected', 'incorrect');
                         }
 
                         // stop user from choosing again
@@ -354,7 +359,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                         if (question.explanation) explanationNode.textContent = question.explanation;
 
                         answered += 1;
-                        this.parentElement.parentElement.classList.remove('unanswered');
+                        event.currentTarget.parentElement.parentElement.classList.remove('unanswered');
                         if (answered === total) showResults();
                     }
                 });
@@ -392,7 +397,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                     descNode.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life';
                 }
 
-                resetNode.innerHTML = 'Would you like to try one of <span class="link reset-quiz" role="button">the other versions of the quiz</span>?'
+                resetNode.innerHTML = 'Would you like to try one of <span class="link reset-quiz" role="button">the other versions of the quiz</span>?';
                 get('.reset-quiz').addEventListener('click', resetQuiz);
 
                 function resetQuiz() {
