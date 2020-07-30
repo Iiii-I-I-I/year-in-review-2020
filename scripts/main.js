@@ -81,6 +81,50 @@ document.addEventListener('DOMContentLoaded', (function() {
             lineColor = '#50aee6';
         }
 
+        let annotations = [
+                {
+                    x: "2019/07/24",
+                    text: "Song of the Elves is released"
+                }, {
+                    x: "2019/09/26",
+                    text: "The Fremennik Exiles is released"
+                }, {
+                    x: "2019/11/14",
+                    text: "Twisted League is released",
+                    tickHeight: 20
+                }, {
+                    x: "2020/02/06",
+                    text: "The Nightmare of Ashihama is released"
+                }, {
+                    x: "2020/03/14",
+                    text: "Traffic rises during the COVID-19 pandemic",
+                    tickHeight: 25
+                }, {
+                    x: "2020/04/20",
+                    text: "Just showing off tickHeight differences",
+                    tickHeight: 15
+                }, {
+                    x: "2020/05/01",
+                    text: "Traffic drops as US gradually reopens",
+                    tickHeight: 30
+                }, {
+                    x: "2020/06/04",
+                    text: "Sins of the Father is released"
+                }
+            ],
+            tooltips = [];
+
+        annotations.forEach((note, i) => {
+            note.series = 'Pageviews';
+            note.shortText = i + 1;
+            note.width = 24;
+            note.height = 24;
+            note.cssClass = `tooltip-hidden annotation-${i + 1}`;
+            if (note.tickHeight === undefined) note.tickHeight = 17;
+
+            createTooltip(note.x, note.text);
+        });
+
         graph = new Dygraph(get('.traffic-graph'), trafficData, {
                     color: lineColor,
                     strokeWidth: 3,
@@ -105,6 +149,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                             dygraph.setAnnotations(annotations);
                         }
 
+                        // insert tooltips inside their respective annotations
                         tooltips.forEach((tooltip, i) => {
                             const annotation = get(`.annotation-${i + 1}`);
 
@@ -153,50 +198,6 @@ document.addEventListener('DOMContentLoaded', (function() {
                     ]
                 }
             );
-
-        let annotations = [
-                {
-                    x: "2019/07/24",
-                    text: "Song of the Elves is released"
-                }, {
-                    x: "2019/09/26",
-                    text: "The Fremennik Exiles is released"
-                }, {
-                    x: "2019/11/14",
-                    text: "Twisted League is released",
-                    tickHeight: 20
-                }, {
-                    x: "2020/02/06",
-                    text: "The Nightmare of Ashihama is released"
-                }, {
-                    x: "2020/03/14",
-                    text: "Traffic rises during the COVID-19 pandemic",
-                    tickHeight: 25
-                }, {
-                    x: "2020/04/20",
-                    text: "Just showing off tickHeight differences",
-                    tickHeight: 15
-                }, {
-                    x: "2020/05/01",
-                    text: "Traffic drops as US gradually reopens",
-                    tickHeight: 30
-                }, {
-                    x: "2020/06/04",
-                    text: "Sins of the Father is released"
-                }
-            ],
-            tooltips = [];
-
-        annotations.forEach((note, i) => {
-            note.series = 'Pageviews';
-            note.shortText = i + 1;
-            note.width = 24;
-            note.height = 24;
-            note.cssClass = `tooltip-hidden annotation-${i + 1}`;
-            if (note.tickHeight === undefined) note.tickHeight = 17;
-
-            createTooltip(note.x, note.text);
-        });
 
         // tooltips are the date/description popups shown when hovering over annotations
         function createTooltip(date, text) {
