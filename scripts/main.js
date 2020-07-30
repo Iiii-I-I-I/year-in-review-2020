@@ -25,24 +25,24 @@ document.addEventListener('DOMContentLoaded', (function() {
             };
         }
 
-        function moveHandler(e) {
+        function moveHandler(event) {
             // get position of mouse cursor within element
-            let rect = e.currentTarget.getBoundingClientRect(),
-                xVal = e.clientX - rect.left,
-                yVal = e.clientY - rect.top;
+            let rect = event.currentTarget.getBoundingClientRect(),
+                xVal = event.clientX - rect.left,
+                yVal = event.clientY - rect.top;
 
             // calculate rotation value along the axes
             const multiplier = 15,
-                  cardWidth = e.currentTarget.clientWidth,
-                  cardHeight = e.currentTarget.clientHeight,
+                  cardWidth = event.currentTarget.clientWidth,
+                  cardHeight = event.currentTarget.clientHeight,
                   yRotate = multiplier * ((xVal - cardWidth / 2) / cardWidth),
                   xRotate = -multiplier * ((yVal - cardHeight / 2) / cardHeight);
 
             // generate string for transform and apply styles
             const transform = `perspective(750px) scale(1.05) rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
 
-            e.currentTarget.style.transform = transform;
-            e.currentTarget.classList.add('card-hover');
+            event.currentTarget.style.transform = transform;
+            event.currentTarget.classList.add('card-hover');
         }
 
         // when viewport is < 500px the cards are full width and should not rotate
@@ -60,29 +60,28 @@ document.addEventListener('DOMContentLoaded', (function() {
 
     // uses dygraphs library <http://dygraphs.com/> and crosshair plugin
     function initGraph() {
-        let gridColor,
+        let graph,
+            gridColor,
             hairColor,
             lineColor,
-            noteColor,
             trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv',
             dateOptions = {
                 day: 'numeric',
-                month: 'long'
+                month: 'long',
+                year: 'numeric'
             };
 
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             gridColor = '#393939';
             hairColor = '#414141';
             lineColor = '#389dda';
-            noteColor = '#196a9c';
         } else {
             gridColor = '#efefef';
             hairColor = '#e8e8e8';
             lineColor = '#50aee6';
-            noteColor = '#318cc4';
         }
 
-        let g = new Dygraph(get('.traffic-graph'), trafficData, {
+        graph = new Dygraph(get('.traffic-graph'), trafficData, {
                     color: lineColor,
                     strokeWidth: 3,
                     axisLineColor: gridColor,
@@ -99,27 +98,27 @@ document.addEventListener('DOMContentLoaded', (function() {
                     },
                     annotationMouseOutHandler: function (annotation) {
                         annotation.div.classList.add('tooltip-hidden');
-                        annotation.div.style.zIndex = '1';
+                        annotation.div.style.removeProperty('z-index');
                     },
-                    drawCallback: function (dygraph, is_initial) {
-                        if (is_initial) {
+                    drawCallback: function (dygraph, isInitial) {
+                        if (isInitial) {
                             dygraph.setAnnotations(annotations);
-                            tooltips.forEach((tooltip, i) => {
-                                let annotation = get(`.annotation-${i + 1}`);
-
-                                annotation.appendChild(tooltip);
-                                annotation.removeAttribute('title');
-                                annotation.style.backgroundColor = noteColor;
-                            });
-
-                            // minor visual fixes
-                            let labels = getAll('.dygraph-axis-label-x'),
-                                firstMonthLabel = labels[0].parentNode,
-                                lastMonthLabel = labels[labels.length - 1].parentNode;
-
-                            firstMonthLabel.style.left = '0';
-                            lastMonthLabel.style.textAlign = 'center';
                         }
+
+                        tooltips.forEach((tooltip, i) => {
+                            const annotation = get(`.annotation-${i + 1}`);
+
+                            annotation.appendChild(tooltip);
+                            annotation.removeAttribute('title');
+                        });
+
+                        // minor visual fixes
+                        let labels = getAll('.dygraph-axis-label-x'),
+                            firstLabel = labels[0].parentNode,
+                            lastLabel = labels[labels.length - 1].parentNode;
+
+                        firstLabel.style.left = '0';
+                        lastLabel.style.textAlign = 'center';
                     },
                     legendFormatter: function (data) {
                         let date = data.xHTML,
@@ -133,6 +132,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                             drawAxis: false,
                             valueRange: [null, 4750000],
                             valueFormatter: function (num, opts, series, dygraph, row, col) {
+                                // this is needed to get actual pageview # because rollPeriod averages it
                                 return Math.round(dygraph.getValue(row, col)).toLocaleString();
                             }
                         },
@@ -195,19 +195,23 @@ document.addEventListener('DOMContentLoaded', (function() {
             note.cssClass = `tooltip-hidden annotation-${i + 1}`;
             if (note.tickHeight === undefined) note.tickHeight = 17;
 
-            let tooltip = document.createElement('div'),
-                tooltipDate = document.createElement('div'),
-                tooltipText = document.createElement('div');
-
-            tooltip.classList.add('tooltip', `tooltip-${i + 1}`);
-            tooltip.style.background = noteColor;
-            tooltip.appendChild(tooltipDate);
-            tooltip.appendChild(tooltipText);
-
-            tooltipDate.textContent = new Date(note.x).toLocaleString(undefined, dateOptions);
-            tooltipText.textContent = note.text;
-            tooltips.push(tooltip);
+            createTooltip(note.x, note.text);
         });
+
+        // tooltips are the date/description popups shown when hovering over annotations
+        function createTooltip(date, text) {
+            let tooltip = document.createElement('div'),
+                dateNode = document.createElement('div'),
+                textNode = document.createElement('div');
+
+            tooltip.classList.add('tooltip');
+            tooltip.appendChild(dateNode);
+            tooltip.appendChild(textNode);
+
+            dateNode.textContent = new Date(date).toLocaleString(undefined, dateOptions);
+            textNode.textContent = text;
+            tooltips.push(tooltip);
+        }
     }
 
     function initTabs() {
@@ -314,9 +318,15 @@ document.addEventListener('DOMContentLoaded', (function() {
                     case 'rsc':
                         quiz.textContent = 'no quiz for u';
                         return;
-                    // pt-br? classic? idk
                 }
+
+                // pt-br version? classic version?
+                // more possible question formats:
+                //     listen to audio
+                //     identify images
+
                 total = questions.length;
+
                 questions.forEach((question, i) => {
                     let groupNode = get('.template-group').content.cloneNode(true),
                         numberNode = get('.quiz-number', groupNode),
@@ -377,8 +387,6 @@ document.addEventListener('DOMContentLoaded', (function() {
                 resultsNode.appendChild(descNode);
                 resultsNode.appendChild(resetNode);
 
-                // descNode.classList.add('results-description');
-                // scoreNode.classList.add('results-number');
                 scoreNode.textContent = `You answered ${correct} out of ${total} questions correctly.`;
                 scoreNode.style.fontSize = '1.5em';
                 descNode.style.marginBottom = '.5rem';
