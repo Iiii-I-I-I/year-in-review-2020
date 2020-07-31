@@ -205,12 +205,12 @@ document.addEventListener('DOMContentLoaded', (function() {
                 dateNode = document.createElement('div'),
                 textNode = document.createElement('div');
 
+            dateNode.textContent = new Date(date).toLocaleString(undefined, dateOptions);
+            textNode.textContent = text;
+
             tooltip.classList.add('tooltip');
             tooltip.appendChild(dateNode);
             tooltip.appendChild(textNode);
-
-            dateNode.textContent = new Date(date).toLocaleString(undefined, dateOptions);
-            textNode.textContent = text;
             tooltips.push(tooltip);
         }
     }
@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                     numberNode.textContent = `Question ${i + 1}`;
                     questionNode.textContent = question.question;
                     Object.keys(question.answers).forEach(answer => {
-                        let choice = document.createElement('div');
+                        let choice = document.createElement('li');
 
                         choice.classList.add('quiz-choice');
                         choice.textContent = question.answers[answer];
