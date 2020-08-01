@@ -95,7 +95,7 @@ html {
 body {
     color: var(--text-02);
     background: var(--bg-02);
-    font: 1em/1.45 system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font: 1em/1.45 system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
     margin: 0;
 }
 
@@ -478,6 +478,119 @@ header {
     transform: translateY(-3px);
 }
 
+/* ------------
+       TABS
+   ------------ */
+
+.tab-list {
+    --tab-count: 4;
+    --tab-gap: .275em;
+
+    display: flex;
+    position: relative;
+    z-index: 1;
+
+    background-color: var(--bg-01);
+    border-radius: calc(var(--border-radius) + var(--tab-gap));
+    margin: 3em auto 2em;
+    width: 85%;
+    max-width: 32em;
+}
+
+/* @supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)) {
+
+    .tab-list {
+        background-color: rgba(240, 240, 240, .7);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+
+} */
+
+.tab-list::before {
+    content: '';
+    position: absolute;
+    top: var(--tab-gap);
+    left: var(--tab-gap);
+    height: calc(100% - var(--tab-gap) * 2);
+    width: calc(100% / var(--tab-count) - var(--tab-gap) * 2);
+    transform: translateX(calc(var(--index) * 100% + var(--index) * var(--tab-gap) * 2));
+    transition: calc(var(--anim-slow) + var(--anim-fast)) transform var(--ease-in-out-expo);
+
+    background-color: var(--bg-03);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 6px -2px rgba(0, 0, 0, .1);
+}
+
+.tab {
+    width: calc(100% / var(--tab-count));
+    transition: calc(var(--anim-slow) + var(--anim-fast)) color ease-in-out;
+    z-index: 1;
+
+    color: var(--text-03);
+    font: .9rem/1.45 system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
+    background: none;
+    border: none;
+    border-radius: var(--border-radius); /* for :focus */
+    padding: 1em 0;
+}
+
+.tab[aria-selected="true"] {
+    color: var(--text-01);
+}
+
+/* customize focus ring */
+.tab:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #777;
+}
+
+.label-short {
+    display: none;
+}
+
+.tab-panel {
+    animation-fill-mode: both;
+    animation-timing-function: var(--ease-in-out-quad);
+}
+
+/* added via hideAndSlide() in main.js */
+.slide-left-fade-in {
+    animation-name: enter-left, fade-in;
+    animation-duration: var(--anim-slow);
+}
+
+.slide-left-fade-out {
+    animation-name: exit-left, fade-out;
+    animation-duration: var(--anim-fast);
+}
+
+.slide-right-fade-in {
+    animation-name: enter-right, fade-in;
+    animation-duration: var(--anim-slow);
+}
+
+.slide-right-fade-out {
+    animation-name: exit-right, fade-out;
+    animation-duration: var(--anim-fast);
+}
+
+@media screen and (max-width: 550px) {
+
+    .label-long {
+        display: none;
+    }
+
+    .label-short {
+        display: inline;
+    }
+
+}
+
+/* ------------
+       STATS
+   ------------ */
+
 .stats-grid {
     --breakout-margin: -4em;
 
@@ -659,93 +772,6 @@ header {
 
 }
 
-/* ------------
-       TABS
-   ------------ */
-
-.tabs {
-    --tab-count: 4;
-    --tab-gap: .3em;
-
-    position: relative;
-    overflow: hidden;
-    z-index: 1; /* stop bg flicker when switching tabs */
-
-    font-size: .9em;
-    background-color: var(--bg-01);
-    margin: 3em auto 2em;
-    border-radius: calc(var(--border-radius) + var(--tab-gap));
-    /* box-shadow: var(--shadow-03); */
-    width: 85%;
-    max-width: 35em;
-
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* @supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)) {
-
-    .tabs {
-        background-color: rgba(240, 240, 240, .7);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-    }
-
-} */
-
-.tabs::before {
-    content: '';
-    position: absolute;
-    width: calc(100% / var(--tab-count) - var(--tab-gap) * 2);
-    height: calc(100% - var(--tab-gap) * 2);
-    top: var(--tab-gap);
-    left: var(--tab-gap);
-    transform: translateX(calc(var(--index) * 100% + var(--index) * var(--tab-gap) * 2));
-    transition: calc(var(--anim-slow) + var(--anim-fast)) transform var(--ease-in-out-expo);
-
-    background-color: var(--bg-03);
-    border-radius: var(--border-radius);
-    box-shadow: 0 3px 8px -2px rgba(0, 0, 0, .1);
-}
-
-.tabs input {
-    position: absolute;
-    opacity: 0;
-}
-
-.tabs label {
-    position: relative;
-    float: left;
-    width: calc(100% / var(--tab-count));
-    transition: calc(var(--anim-slow) + var(--anim-fast)) color var(--ease-in-out-expo);
-
-    color: var(--text-03);
-    text-align: center;
-    padding: 14px 0;
-}
-
-.tabs input:checked + label {
-    color: var(--text-01);
-}
-
-.label-short {
-    display: none;
-}
-
-@media screen and (max-width: 550px) {
-
-    .label-long {
-        display: none;
-    }
-
-    .label-short {
-        display: inline;
-    }
-
-}
-
 /* --------------
        DYGRAPH
    -------------- */
@@ -849,44 +875,6 @@ header {
         background-color: #196a9c;
     }
 
-}
-
-/* --------------
-      SECTIONS
-   -------------- */
-
-.section-rs,
-.section-osrs,
-.section-ptbr,
-.section-rsc {
-    display: none;
-    animation-fill-mode: both;
-    animation-timing-function: var(--ease-in-out-quad);
-}
-
-.stats-grid.section-visible {
-    display: grid;
-}
-
-/* added via tabSwitcher() in main.js */
-.slide-left-fade-in {
-    animation-name: enter-left, fade-in;
-    animation-duration: var(--anim-slow);
-}
-
-.slide-left-fade-out {
-    animation-name: exit-left, fade-out;
-    animation-duration: var(--anim-fast);
-}
-
-.slide-right-fade-in {
-    animation-name: enter-right, fade-in;
-    animation-duration: var(--anim-slow);
-}
-
-.slide-right-fade-out {
-    animation-name: exit-right, fade-out;
-    animation-duration: var(--anim-fast);
 }
 
 /* --------------

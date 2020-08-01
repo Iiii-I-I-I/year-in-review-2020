@@ -215,58 +215,96 @@ document.addEventListener('DOMContentLoaded', (function() {
         }
     }
 
+    // based on <https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Tab_Role>
     function initTabs() {
-        let tabGroups = getAll('.tabs'),
-            tabs = getAll('.tabs label'),
-            enterDuration = 275, // --anim-slow
-            exitDuration = 150; // --anim-fast
+        let tabs = getAll('.tab'),
+            tabLists = getAll('.tab-list');
 
-        function clickBitch(event) {
-            let nextIndex = event.currentTarget.dataset.index,
-                currIndex = get('.tabs').style.getPropertyValue('--index'),
-                nextRadio = getAll('.tab-' + event.currentTarget.dataset.game),
-                nextVisible = getAll('.section-' + event.currentTarget.dataset.game),
-                currVisible = getAll('.section-visible');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', changeTabs);
+        });
 
-            // @TODO: animate via absolute positioning
-            function hideAndSlide(direction) {
-                // fade out and hide old sections
-                currVisible.forEach(section => {
-                    section.classList.add('slide-' + direction + '-fade-out');
-                    setTimeout(() => {
-                        section.classList.remove('section-visible');
-                        section.classList.remove('slide-' + direction + '-fade-out');
-                    }, exitDuration);
-                });
+        // enable arrow key navigation between tabs
+        tabLists.forEach(tabList => {
+            let tabFocus = 0;
 
-                // fade in and show new sections
-                nextVisible.forEach(section => {
-                    setTimeout(() => {
-                        section.classList.add('section-visible');
-                        section.classList.add('slide-' + direction + '-fade-in');
-                    }, exitDuration);
-                    setTimeout(() => {
-                        section.classList.remove('slide-' + direction + '-fade-in');
-                    }, enterDuration + exitDuration);
-                });
+            tabList.addEventListener('keydown', event => {
+                let tabs = getAll('.tab', event.currentTarget.parentNode);
 
-                // update --index number for .tabs::before
-                tabGroups.forEach(tabGroup => tabGroup.style.setProperty('--index', nextIndex));
+                // move right
+                if (event.keyCode === 39 || event.keyCode === 37) {
+                    tabs[tabFocus].setAttribute('tabindex', -1);
+                    if (event.keyCode === 39) {
+                        tabFocus++;
+                        // if at the end, move to the start
+                        if (tabFocus >= tabs.length) {
+                            tabFocus = 0;
+                        }
+                        // move left
+                    } else if (event.keyCode === 37) {
+                        tabFocus--;
+                        // if at the start, move to the end
+                        if (tabFocus < 0) {
+                            tabFocus = tabs.length - 1;
+                        }
+                    }
 
-                // update all radio inputs to match the one being clicked
-                nextRadio.forEach(radio => radio.checked = true);
-            }
+                    tabs[tabFocus].setAttribute('tabindex', 0);
+                    tabs[tabFocus].focus();
+                }
+            });
+        });
 
-            if (currIndex === nextIndex) {
+        function changeTabs(event) {
+            let target = event.currentTarget,
+                parent = target.parentNode, // aka .tab-list
+                grandparent = parent.parentNode; // aka .tabs-whole
+
+            let tabArray = Array.prototype.slice.call(getAll('.tab', parent)),
+                currTabIndex = tabArray.indexOf(get('.tab[aria-selected="true"]', parent)),
+                nextTabIndex = tabArray.indexOf(target, parent);
+
+            if (currTabIndex === nextTabIndex) {
                 return;
-            } else if (currIndex > nextIndex) {
+            } else if (currTabIndex > nextTabIndex) {
                 hideAndSlide('left');
             } else {
                 hideAndSlide('right');
             }
-        }
 
-        tabs.forEach(tab => tab.addEventListener('click', clickBitch));
+            function hideAndSlide(direction) {
+                let panels = getAll('.tab-panel', grandparent),
+                    currPanel = get('.tab-panel:not([hidden])', grandparent),
+                    nextPanel = get(`#${target.getAttribute('aria-controls')}`),
+                    enterDuration = 275, // --anim-slow
+                    exitDuration = 150; // --anim-fast
+
+                // deselect current tab
+                get('.tab[aria-selected="true"]', parent).setAttribute('aria-selected', false);
+
+                // select clicked tab
+                target.setAttribute('aria-selected', true);
+
+                // fade out and hide old panel
+                currPanel.classList.add('slide-' + direction + '-fade-out');
+                setTimeout(function () {
+                    currPanel.setAttribute('hidden', '');
+                    currPanel.classList.remove('slide-' + direction + '-fade-out');
+                }, exitDuration);
+
+                // fade in and show new panel
+                setTimeout(function () {
+                    nextPanel.removeAttribute('hidden');
+                    nextPanel.classList.add('slide-' + direction + '-fade-in');
+                }, exitDuration);
+                setTimeout(function () {
+                    nextPanel.classList.remove('slide-' + direction + '-fade-in');
+                }, enterDuration + exitDuration);
+
+                // set --index for .tabs-list::before background
+                parent.style.setProperty('--index', nextTabIndex);
+            }
+        }
     }
 
     // design and ux stolen from NYT quizzes <https://www.nytimes.com/spotlight/news-quiz>
