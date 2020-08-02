@@ -58,6 +58,99 @@ document.addEventListener('DOMContentLoaded', (function() {
         }
     }
 
+    // based on <https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Tab_Role>
+    function initTabs() {
+        let tabs = getAll('.tab'),
+            tabLists = getAll('.tab-list');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', changeTabs);
+        });
+
+        // enable arrow key navigation between tabs
+        tabLists.forEach(tabList => {
+            let tabFocus = 0;
+
+            tabList.addEventListener('keydown', event => {
+                let tabs = getAll('.tab', event.currentTarget.parentNode);
+
+                // move right
+                if (event.keyCode === 39 || event.keyCode === 37) {
+                    tabs[tabFocus].setAttribute('tabindex', -1);
+                    if (event.keyCode === 39) {
+                        tabFocus++;
+                        // if at the end, move to the start
+                        if (tabFocus >= tabs.length) {
+                            tabFocus = 0;
+                        }
+                        // move left
+                    } else if (event.keyCode === 37) {
+                        tabFocus--;
+                        // if at the start, move to the end
+                        if (tabFocus < 0) {
+                            tabFocus = tabs.length - 1;
+                        }
+                    }
+
+                    tabs[tabFocus].setAttribute('tabindex', 0);
+                    tabs[tabFocus].focus();
+                }
+            });
+        });
+
+        function changeTabs(event) {
+            let target = event.currentTarget,
+                parent = target.parentNode, // aka .tab-list
+                grandparent = parent.parentNode; // aka .tabs-whole
+
+            let tabArray = Array.prototype.slice.call(getAll('.tab', parent)),
+                currTab = get('.tab[aria-selected="true"]', parent),
+                currTabIndex = tabArray.indexOf(currTab),
+                nextTabIndex = tabArray.indexOf(target, parent);
+
+            if (currTabIndex === nextTabIndex) {
+                return;
+            } else if (currTabIndex > nextTabIndex) {
+                hideAndSlide('left');
+            } else {
+                hideAndSlide('right');
+            }
+
+            function hideAndSlide(direction) {
+                let panels = getAll('.tab-panel', grandparent),
+                    currPanel = get('.tab-panel:not([hidden])', grandparent),
+                    nextPanel = get(`#${target.getAttribute('aria-controls')}`),
+                    enterDuration = 275, // --anim-slow
+                    exitDuration = 150; // --anim-fast
+
+                // deselect current tab
+                currTab.setAttribute('aria-selected', false);
+
+                // select clicked tab
+                target.setAttribute('aria-selected', true);
+
+                // fade out and hide old panel
+                currPanel.classList.add(`slide-${direction}-fade-out`);
+                setTimeout(function () {
+                    currPanel.setAttribute('hidden', '');
+                    currPanel.classList.remove(`slide-${direction}-fade-out`);
+                }, exitDuration);
+
+                // fade in and show new panel
+                setTimeout(function () {
+                    nextPanel.removeAttribute('hidden');
+                    nextPanel.classList.add(`slide-${direction}-fade-in`);
+                }, exitDuration);
+                setTimeout(function () {
+                    nextPanel.classList.remove(`slide-${direction}-fade-in`);
+                }, enterDuration + exitDuration);
+
+                // set --index for .tabs-list::before background
+                parent.style.setProperty('--index', nextTabIndex);
+            }
+        }
+    }
+
     // uses dygraphs library <http://dygraphs.com/> and crosshair plugin
     function initGraph() {
         let graph,
@@ -215,98 +308,6 @@ document.addEventListener('DOMContentLoaded', (function() {
         }
     }
 
-    // based on <https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Tab_Role>
-    function initTabs() {
-        let tabs = getAll('.tab'),
-            tabLists = getAll('.tab-list');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', changeTabs);
-        });
-
-        // enable arrow key navigation between tabs
-        tabLists.forEach(tabList => {
-            let tabFocus = 0;
-
-            tabList.addEventListener('keydown', event => {
-                let tabs = getAll('.tab', event.currentTarget.parentNode);
-
-                // move right
-                if (event.keyCode === 39 || event.keyCode === 37) {
-                    tabs[tabFocus].setAttribute('tabindex', -1);
-                    if (event.keyCode === 39) {
-                        tabFocus++;
-                        // if at the end, move to the start
-                        if (tabFocus >= tabs.length) {
-                            tabFocus = 0;
-                        }
-                        // move left
-                    } else if (event.keyCode === 37) {
-                        tabFocus--;
-                        // if at the start, move to the end
-                        if (tabFocus < 0) {
-                            tabFocus = tabs.length - 1;
-                        }
-                    }
-
-                    tabs[tabFocus].setAttribute('tabindex', 0);
-                    tabs[tabFocus].focus();
-                }
-            });
-        });
-
-        function changeTabs(event) {
-            let target = event.currentTarget,
-                parent = target.parentNode, // aka .tab-list
-                grandparent = parent.parentNode; // aka .tabs-whole
-
-            let tabArray = Array.prototype.slice.call(getAll('.tab', parent)),
-                currTabIndex = tabArray.indexOf(get('.tab[aria-selected="true"]', parent)),
-                nextTabIndex = tabArray.indexOf(target, parent);
-
-            if (currTabIndex === nextTabIndex) {
-                return;
-            } else if (currTabIndex > nextTabIndex) {
-                hideAndSlide('left');
-            } else {
-                hideAndSlide('right');
-            }
-
-            function hideAndSlide(direction) {
-                let panels = getAll('.tab-panel', grandparent),
-                    currPanel = get('.tab-panel:not([hidden])', grandparent),
-                    nextPanel = get(`#${target.getAttribute('aria-controls')}`),
-                    enterDuration = 275, // --anim-slow
-                    exitDuration = 150; // --anim-fast
-
-                // deselect current tab
-                get('.tab[aria-selected="true"]', parent).setAttribute('aria-selected', false);
-
-                // select clicked tab
-                target.setAttribute('aria-selected', true);
-
-                // fade out and hide old panel
-                currPanel.classList.add('slide-' + direction + '-fade-out');
-                setTimeout(function () {
-                    currPanel.setAttribute('hidden', '');
-                    currPanel.classList.remove('slide-' + direction + '-fade-out');
-                }, exitDuration);
-
-                // fade in and show new panel
-                setTimeout(function () {
-                    nextPanel.removeAttribute('hidden');
-                    nextPanel.classList.add('slide-' + direction + '-fade-in');
-                }, exitDuration);
-                setTimeout(function () {
-                    nextPanel.classList.remove('slide-' + direction + '-fade-in');
-                }, enterDuration + exitDuration);
-
-                // set --index for .tabs-list::before background
-                parent.style.setProperty('--index', nextTabIndex);
-            }
-        }
-    }
-
     // design and ux stolen from NYT quizzes <https://www.nytimes.com/spotlight/news-quiz>
     function initQuiz() {
         let request = new XMLHttpRequest(),
@@ -461,7 +462,7 @@ document.addEventListener('DOMContentLoaded', (function() {
     }
 
     initCards();
-    initGraph();
     initTabs();
+    initGraph();
     initQuiz();
 })(), false);
