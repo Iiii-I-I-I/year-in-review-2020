@@ -531,7 +531,7 @@ header {
     font: .9rem/1.45 system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
     background: none;
     border: none;
-    border-radius: var(--border-radius); /* for :focus */
+    border-radius: calc(var(--border-radius) + var(--tab-gap)); /* for :focus */
     padding: 1em 0;
 }
 
@@ -539,10 +539,9 @@ header {
     color: var(--text-01);
 }
 
-/* customize focus ring */
-.tab:focus {
+/* hide focus ring when using a mouse (but not when using a keyboard) */
+.js-focus-visible .tab:focus:not(.focus-visible) {
     outline: none;
-    box-shadow: 0 0 0 2px #777;
 }
 
 .label-short {
@@ -785,9 +784,10 @@ header {
     position: relative;
 }
 
+/* so content doesn't shift after graph loads */
 .traffic-graph {
-    width: 100%;
-    height: 300px; /* so content doesn't shift after graph loads */
+    width: 100% !important;
+    height: 300px !important;
 }
 
 .traffic-title {

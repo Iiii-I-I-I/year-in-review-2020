@@ -99,14 +99,14 @@ document.addEventListener('DOMContentLoaded', (function() {
         });
 
         function changeTabs(event) {
-            let target = event.currentTarget,
-                parent = target.parentNode, // aka .tab-list
+            let nextTab = event.currentTarget,
+                parent = nextTab.parentNode, // aka .tab-list
                 grandparent = parent.parentNode; // aka .tabs-whole
 
             let tabArray = Array.prototype.slice.call(getAll('.tab', parent)),
                 currTab = get('.tab[aria-selected="true"]', parent),
                 currTabIndex = tabArray.indexOf(currTab),
-                nextTabIndex = tabArray.indexOf(target, parent);
+                nextTabIndex = tabArray.indexOf(nextTab);
 
             if (currTabIndex === nextTabIndex) {
                 return;
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', (function() {
             function hideAndSlide(direction) {
                 let panels = getAll('.tab-panel', grandparent),
                     currPanel = get('.tab-panel:not([hidden])', grandparent),
-                    nextPanel = get(`#${target.getAttribute('aria-controls')}`),
+                    nextPanel = get(`#${nextTab.getAttribute('aria-controls')}`),
                     enterDuration = 275, // --anim-slow
                     exitDuration = 150; // --anim-fast
 
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 currTab.setAttribute('aria-selected', false);
 
                 // select clicked tab
-                target.setAttribute('aria-selected', true);
+                nextTab.setAttribute('aria-selected', true);
 
                 // fade out and hide old panel
                 currPanel.classList.add(`slide-${direction}-fade-out`);
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                     nextPanel.classList.remove(`slide-${direction}-fade-in`);
                 }, enterDuration + exitDuration);
 
-                // set --index for .tabs-list::before background
+                // set --index for sliding background on .tab-list::before
                 parent.style.setProperty('--index', nextTabIndex);
             }
         }
