@@ -100,8 +100,7 @@ document.addEventListener('DOMContentLoaded', (function() {
 
         function changeTabs(event) {
             let nextTab = event.currentTarget,
-                parent = nextTab.parentNode, // aka .tab-list
-                grandparent = parent.parentNode; // aka .tabs-whole
+                parent = nextTab.parentNode; // aka .tab-list
 
             let tabArray = Array.prototype.slice.call(getAll('.tab', parent)),
                 currTab = get('.tab[aria-selected="true"]', parent),
@@ -117,8 +116,7 @@ document.addEventListener('DOMContentLoaded', (function() {
             }
 
             function hideAndSlide(direction) {
-                let panels = getAll('.tab-panel', grandparent),
-                    currPanel = get('.tab-panel:not([hidden])', grandparent),
+                let currPanel = get(`#${currTab.getAttribute('aria-controls')}`),
                     nextPanel = get(`#${nextTab.getAttribute('aria-controls')}`),
                     enterDuration = 275, // --anim-slow
                     exitDuration = 150; // --anim-fast
@@ -340,7 +338,6 @@ document.addEventListener('DOMContentLoaded', (function() {
                 button.classList.add('quiz-start', 'button');
                 button.innerHTML = buttonText;
                 button.addEventListener('click', function () {
-                    get('div', quiz).style.display = 'none';
                     get('.quiz-button-group').remove();
                     setupQuestions(gameVersion);
                 });
@@ -439,7 +436,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                     descNode.textContent = 'it\'s okay i guess. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
                 } else if (score >= 0.25) {
                     descNode.textContent = 'sit kid';
-                } else if (0 > score < 0.25) {
+                } else if (score > 0) {
                     descNode.textContent = 'you fucking donkey. you absolute turnip. you idiot sandwich';
                 } else {
                     descNode.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life';
@@ -449,7 +446,6 @@ document.addEventListener('DOMContentLoaded', (function() {
                 get('.reset-quiz').addEventListener('click', resetQuiz);
 
                 function resetQuiz() {
-                    get('div', quiz).style.display = 'block';
                     getAll('.quiz-group').forEach(group => {
                         group.remove();
                     });
