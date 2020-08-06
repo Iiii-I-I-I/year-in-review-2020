@@ -587,7 +587,7 @@ header {
    ------------ */
 
 .stats-grid {
-    --breakout-margin: -4.5em;
+    --breakout-margin: -5em;
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -612,8 +612,13 @@ header {
 
 .stat .icon {
     display: block;
+    color: var(--text-03);
+    background-color: var(--bg-01);
+    border-radius: .4em;
+    width: 36px;
+    height: 36px;
+    padding: 6px;
     margin-bottom: .5em;
-    opacity: .6;
 }
 
 /* stat number */
@@ -698,8 +703,8 @@ header {
         filter: brightness(.9) contrast(1.1);
     }
 
-    .icon {
-        filter: invert(1);
+    .stat .icon {
+        background-color: var(--bg-02);
     }
 
     .section-rs .stat {
@@ -774,7 +779,7 @@ header {
 .traffic-container {
     background-color: var(--bg-03);
     border-radius: var(--border-radius);
-    padding: 1.5em 2em 2.5em;
+    padding: 1.5em 2em 2.25em;
     margin-top: 2.5em;
     box-shadow: var(--shadow-03);
     position: relative;
