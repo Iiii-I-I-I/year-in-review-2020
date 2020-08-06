@@ -27,8 +27,8 @@
         0 6px 10px -4px rgba(0, 0, 0, .2),
         0 18px 30px -8px rgba(0, 0, 0, .07);
     --shadow-03:
-        0 5px 12px -4px rgba(0, 0, 0, .05),
-        0 15px 30px 0 rgba(0, 0, 0, .04);
+        0 4px 10px -4px rgba(0, 0, 0, .05),
+        0 12px 24px 0 rgba(0, 0, 0, .04);
 
     --border-radius: .7em;
 
@@ -491,7 +491,7 @@ header {
 .tab-list {
     --tab-count: 4;
     --tab-gap: 5px;
-    --border-radius: .55em;
+    --border-radius: .6em;
 
     display: flex;
     position: relative;
@@ -528,7 +528,7 @@ header {
     font: .9rem/1.45 var(--font-stack); /* override default button styles */
     background: none;
     border: none;
-    padding: 1em 0;
+    padding: .95em 0;
 }
 
 .tab[aria-selected="true"] {
@@ -629,7 +629,7 @@ header {
 /* stat description */
 .stat dd {
     margin-left: 0;
-    font-size: .9em;
+    font-size: .85em;
 }
 
 /* browser/country stats */
@@ -869,6 +869,14 @@ header {
     .dygraph-annotation,
     .tooltip {
         background-color: #196a9c;
+    }
+
+}
+
+@media screen and (max-width: 900px) {
+
+    .traffic-container {
+        padding: 1em 1.5em 1.75em;
     }
 
 }

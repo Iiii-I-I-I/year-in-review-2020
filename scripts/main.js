@@ -99,11 +99,11 @@ document.addEventListener('DOMContentLoaded', (function() {
         });
 
         function changeTabs(event) {
-            let nextTab = event.currentTarget,
-                parent = nextTab.parentNode; // aka .tab-list
+            let parent = event.currentTarget.parentNode, // aka .tab-list
+                currTab = get('.tab[aria-selected="true"]', parent),
+                nextTab = event.currentTarget;
 
             let tabArray = Array.prototype.slice.call(getAll('.tab', parent)),
-                currTab = get('.tab[aria-selected="true"]', parent),
                 currTabIndex = tabArray.indexOf(currTab),
                 nextTabIndex = tabArray.indexOf(nextTab);
 
@@ -127,18 +127,16 @@ document.addEventListener('DOMContentLoaded', (function() {
                 // select clicked tab
                 nextTab.setAttribute('aria-selected', true);
 
-                // fade out and hide old panel
+                // hide old panel, reveal new panel
                 currPanel.classList.add(`slide-${direction}-fade-out`);
+
                 setTimeout(function () {
                     currPanel.setAttribute('hidden', '');
                     currPanel.classList.remove(`slide-${direction}-fade-out`);
+                    nextPanel.classList.add(`slide-${direction}-fade-in`);
+                    nextPanel.removeAttribute('hidden');
                 }, exitDuration);
 
-                // fade in and show new panel
-                setTimeout(function () {
-                    nextPanel.removeAttribute('hidden');
-                    nextPanel.classList.add(`slide-${direction}-fade-in`);
-                }, exitDuration);
                 setTimeout(function () {
                     nextPanel.classList.remove(`slide-${direction}-fade-in`);
                 }, enterDuration + exitDuration);
