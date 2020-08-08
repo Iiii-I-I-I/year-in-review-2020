@@ -1,4 +1,48 @@
 /* ------------
+       FONTS
+   ------------ */
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Inter-Regular'),
+         url('../fonts/Inter-Regular.woff2?v=3.13') format('woff2'),
+         url('../fonts/Inter-Regular.woff?v=3.13') format('woff');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Inter-Italic'),
+         url('../fonts/Inter-Italic.woff2?v=3.13') format('woff2'),
+         url('../fonts/Inter-Italic.woff?v=3.13') format('woff');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: local('Inter-Bold'),
+         url('../fonts/Inter-Bold.woff2?v=3.13') format('woff2'),
+         url('../fonts/Inter-Bold.woff?v=3.13') format('woff');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: local('Inter-ExtraBold'),
+         url('../fonts/Inter-ExtraBold.woff2?v=3.13') format('woff2'),
+         url('../fonts/Inter-ExtraBold.woff?v=3.13') format('woff');
+}
+
+/* ------------
       BASICS
    ------------ */
 
@@ -17,7 +61,7 @@
     --text-02: rgba(0, 0, 0, .7);
     --text-03: rgba(0, 0, 0, .55);
 
-    --font-stack: system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
+    --font-stack: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
 
     --shadow-01:
         0 30px 60px -8px rgba(50, 50, 93, .2),
@@ -27,8 +71,8 @@
         0 6px 10px -4px rgba(0, 0, 0, .2),
         0 18px 30px -8px rgba(0, 0, 0, .07);
     --shadow-03:
-        0 4px 10px -4px rgba(0, 0, 0, .05),
-        0 12px 24px 0 rgba(0, 0, 0, .04);
+        0 4px 8px -4px rgba(0, 0, 0, .05),
+        0 9px 18px 0 rgba(0, 0, 0, .04);
 
     --border-radius: .7em;
 
@@ -66,32 +110,8 @@
 
 }
 
-@media screen and (prefers-reduced-motion) {
-
-    :root {
-        /* --anim-length: 0; */
-    }
-
-}
-
 html {
     font-size: 16px;
-}
-
-@media screen and (min-width: 900px) {
-
-    html {
-        font-size: 17px;
-    }
-
-}
-
-@media screen and (min-width: 1400px) {
-
-    html {
-        font-size: 18px;
-    }
-
 }
 
 body {
@@ -105,6 +125,7 @@ h1,
 h2,
 h3 {
     color: var(--text-01);
+    font-weight: 800;
 }
 
 h1 {
@@ -144,10 +165,34 @@ code {
     font-family: ui-monospace, 'Menlo', 'Courier', monospace;
 }
 
+@media screen and (prefers-reduced-motion) {
+
+    :root {
+        --anim-length: 0;
+    }
+
+}
+
 @media screen and (prefers-color-scheme: dark) {
 
     .link {
         color: #46a2da;
+    }
+
+}
+
+@media screen and (min-width: 900px) {
+
+    html {
+        font-size: 17px;
+    }
+
+}
+
+@media screen and (min-width: 1400px) {
+
+    html {
+        font-size: 18px;
     }
 
 }
@@ -272,7 +317,6 @@ header {
 .h1-container span:nth-child(1) {
     animation-delay: .2s;
     font-size: calc(var(--header-size) * 2.5);
-    font-weight: 600;
 }
 
 .h1-container span:nth-child(2) {
@@ -499,6 +543,7 @@ header {
 
     background-color: var(--bg-01);
     border-radius: calc(var(--border-radius) + var(--tab-gap));
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, .025);
     margin: 2.5em auto 1em;
     width: 85%;
     max-width: 32em;
@@ -612,12 +657,12 @@ header {
 
 .stat .icon {
     display: block;
-    color: var(--text-03);
-    background-color: var(--bg-01);
+    color: var(--stat-color);
+    /* background-color: var(--bg-01);
     border-radius: .4em;
     width: 36px;
     height: 36px;
-    padding: 6px;
+    padding: 6px; */
     margin-bottom: .5em;
 }
 
@@ -626,7 +671,7 @@ header {
     display: block;
     color: var(--stat-color);
     font-size: 3em;
-    font-weight: bold;
+    font-weight: 800;
     line-height: 1;
     margin-bottom: .5rem;
 }
@@ -645,7 +690,7 @@ header {
 
 .stat li {
     color: var(--text-03);
-    font-size: .9em;
+    font-size: .85em;
     background-color: var(--bg-01);
     filter: brightness(1.015);
     border-radius: calc(var(--border-radius) * .4);
@@ -793,7 +838,6 @@ header {
 
 .traffic-title {
     color: var(--text-01);
-    font-size: 1.1rem;
     font-weight: bold;
     margin-bottom: .25em;
 }
@@ -900,7 +944,7 @@ header {
 
 .quiz-start {
     flex: 1;
-    background-color: #7db381;
+    background-color: #62b468;
     border: none;
     margin: .5em;
     padding: .5em;
