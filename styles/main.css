@@ -658,12 +658,7 @@ header {
 
 .stat-icon {
     display: block;
-    color: var(--stat-color);
-    /* background-color: var(--bg-01);
-    border-radius: .4em;
-    width: 36px;
-    height: 36px;
-    padding: 6px; */
+    color: var(--text-03);
     margin-bottom: .75em;
 }
 
@@ -680,12 +675,16 @@ header {
 /* stat description */
 .stat dd {
     margin: 0 0 .75em 0;
+    font-size: .9em;
+}
+
+.change {
+    color: var(--text-02);
     font-size: .85em;
 }
 
-.stat .change {
-    color: var(--text-03);
-    font-size: .85em;
+.change b {
+    color: var(--stat-color);
 }
 
 .change-icon {
@@ -693,7 +692,7 @@ header {
     display: inline-block;
     margin: 0 .25em 0 0;
     position: relative;
-    top: .2em;
+    top: .25em;
 }
 
 /* browser/country stats */
@@ -737,19 +736,19 @@ header {
 }
 
 .section-rs .stat {
-    --stat-color: #5cb1e4;
+    --stat-color: #4eabe4;
 }
 
 .section-osrs .stat {
-    --stat-color: #70c653;
+    --stat-color: #61bf41;
 }
 
 .section-ptbr .stat {
-    --stat-color: #a09dfd;
+    --stat-color: #908df4;
 }
 
 .section-rsc .stat {
-    --stat-color: #ec9385;
+    --stat-color: #e28779;
 }
 
 @media screen and (prefers-color-scheme: dark) {
