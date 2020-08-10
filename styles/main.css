@@ -71,7 +71,7 @@
         0 6px 10px -4px rgba(0, 0, 0, .2),
         0 18px 30px -8px rgba(0, 0, 0, .07);
     --shadow-03:
-        0 3px 8px -2px rgba(0, 0, 0, .06),
+        0 4px 10px -2px rgba(0, 0, 0, .05),
         0 9px 18px 0 rgba(0, 0, 0, .04);
 
     --border-radius: .7em;
@@ -129,12 +129,14 @@ h3 {
 }
 
 h1 {
+    letter-spacing: -0.02em;
     line-height: 1;
     margin: 0;
 }
 
 h2 {
     font-size: 2em;
+    letter-spacing: -0.017em;
 }
 
 h2,
@@ -149,6 +151,7 @@ section:not(:first-of-type) {
 
 p {
     margin: 0 0 1.5em;
+    letter-spacing: -0.005em;
 }
 
 .link {
@@ -348,13 +351,12 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     height: 9em;
     padding: 1em 1.75em;
-    position: relative;
 
     text-decoration: none;
-    background-color: var(--bg-01);
-    border-radius: calc(var(--border-radius) * 1.1);
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow-02);
 
     /* needed for gainPerspective() in main.js */
@@ -365,17 +367,14 @@ header {
 /* background image on a pseudo-element so it can be manipulated separately */
 .wiki-card::before {
     content: '';
-    display: block;
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     z-index: -1;
 
     opacity: 0.6;
     filter: saturate(0.75);
-    border-radius: calc(var(--border-radius) * 1.1);
+    border-radius: var(--border-radius);
     background-position: center;
     background-size: cover;
 }
@@ -383,16 +382,13 @@ header {
 /* box-shadow on a pseudo-element so it can be manipulated separately */
 .wiki-card::after {
     content: '';
-    display: block;
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
 
-    border-radius: calc(var(--border-radius) * 1.1);
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow-01);
-    transition: .5s ease;
+    transition: .4s ease;
     opacity: 0;
 }
 
@@ -450,7 +446,7 @@ header {
 @media screen and (prefers-color-scheme: dark) {
 
     .wiki-card::before {
-        filter: brightness(.5);
+        filter: brightness(.75);
     }
 
 }
@@ -520,13 +516,50 @@ header {
     font-weight: bold;
     text-decoration: none;
     padding: 1.25em 1.75em;
-    box-shadow: var(--shadow-02);
-    border-radius: var(--border-radius);
+    border-radius: calc(var(--border-radius) * .8);
     transition: transform .3s var(--ease-in-out-expo);
 }
 
 .button:hover {
     transform: translateY(-3px);
+}
+
+blockquote {
+    position: relative;
+    background-color: var(--bg-01);
+    border-radius: var(--border-radius);
+    width: max-content;
+    padding: 2em 2.5em;
+    margin: 3em auto;
+    overflow: hidden;
+}
+
+blockquote::before {
+    content: '“';
+    position: absolute;
+    top: -13px;
+    left: -13px;
+    font-size: 10em;
+    font-weight: bold;
+    font-family: 'Garamond', 'Baskerville', 'Georgia', serif;
+    line-height: 1;
+    opacity: .1;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+blockquote p {
+    font-size: 1.25em;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+
+    blockquote {
+        background-color: var(--bg-03);
+    }
+
 }
 
 /* ------------
@@ -545,7 +578,7 @@ header {
     background-color: var(--bg-01);
     border-radius: calc(var(--border-radius) + var(--tab-gap));
     box-shadow: inset 0 2px 4px -1px rgba(0, 0, 0, .025);
-    margin: 2.5em auto 1em;
+    margin: 2.5em auto 1.5em;
     width: 85%;
     max-width: 32em;
 }
@@ -633,7 +666,7 @@ header {
    ------------ */
 
 .stats-grid {
-    --breakout-margin: -5em;
+    --breakout-margin: 0;
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -740,7 +773,7 @@ header {
 }
 
 .section-osrs .stat {
-    --stat-color: #61bf41;
+    --stat-color: #d6a175;
 }
 
 .section-ptbr .stat {
@@ -748,7 +781,7 @@ header {
 }
 
 .section-rsc .stat {
-    --stat-color: #e28779;
+    --stat-color: #61bf41;
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -766,7 +799,7 @@ header {
     }
 
     .section-osrs .stat {
-        --stat-color: #58980d;
+        --stat-color: #a67348;
     }
 
     .section-ptbr .stat {
@@ -774,7 +807,7 @@ header {
     }
 
     .section-rsc .stat {
-        --stat-color: #b96a5e;
+        --stat-color: #58980d;
     }
 
 }
@@ -817,11 +850,23 @@ header {
 
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (min-width: 900px) {
 
     .stats-grid {
+        --breakout-margin: -3em;
+    }
+
+}
+
+@media screen and (min-width: 1100px) {
+
+    /* .stats-grid {
         margin-left: 0;
         margin-right: 0;
+    } */
+
+    .stats-grid {
+        --breakout-margin: -7em;
     }
 
 }
@@ -1080,17 +1125,26 @@ header {
        FOOTER
    -------------- */
 
-footer.container {
+footer {
+    background-color: var(--bg-01);
+    font-size: .9em;
+    padding: 8em 0;
+    margin-top: 5em;
+}
+
+footer .container {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    font-size: .85em;
-    margin-top: 10em;
-    margin-bottom: 10em;
+    max-width: 900px;
 }
 
 footer h3 {
-    margin-bottom: .5em;
+    color: var(--text-02);
+}
+
+footer p {
+    color: var(--text-03);
 }
 
 .about {
@@ -1101,53 +1155,58 @@ footer h3 {
     margin-left: 3em;
 }
 
-.links ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-}
-
-.links li {
-    margin-bottom: .35em;
-}
-
 .socials {
-    margin-top: 1.5em;
+    display: grid;
+    grid-gap: .5em;
 }
 
 .social {
-    display: inline-block;
+    padding: .85em 1.75em;
 }
 
-.social + .social {
-    margin-left: .75em;
+.social-icon {
+    margin-right: .4em;
 }
 
 .discord {
-    background-color: #7389da;
+    color: #576598;
+    background-color: #d6dfff;
 }
 
 .twitter {
-    background-color: #1ea1f1;
+    color: #1d73a7;
+    background-color: #d4edfd;
+}
+
+.twitter .social-icon {
+    position: relative;
+    top: 1px;
 }
 
 @media screen and (prefers-color-scheme: dark) {
 
     .discord {
-        background-color: #4760bf;
+        background-color: #1b2446;
     }
 
     .twitter {
-        background-color: #037dc7;
+        background-color: #06304a;
     }
 
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (min-width: 700px) {
 
-    .links {
-        flex: 1 100%;
-        margin: 1.5em 0 0;
+    .socials {
+        grid-gap: .65em;
+        grid: repeat(2, 1fr) / repeat(2, 1fr);
+    }
+
+    .discord {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-row: 1 / 3;
     }
 
 }
