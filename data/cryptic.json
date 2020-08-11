@@ -23,7 +23,7 @@
                 "correctAnswer": "a"
             },
             {
-                "question": "Count Draynor, weakened after isolation from Morytania, is killed by the player during Vampyre Slayer. Which vampyre is he related to?",
+                "question": "Count Draynor, weakened after isolation from Morytania, is killed by the player during Vampyre Slayer. Which of the following is he related to?",
                 "answers": {
                     "a": "Alexei Jovkai",
                     "b": "Vanstrom Klause",
@@ -42,7 +42,7 @@
                     "d": "Dramen tree"
                 },
                 "correctAnswer": "a",
-                "explanation": "Acadia is an accidental misspelling of acacia; the developers decided to keep it because they liked it better."
+                "explanation": "Acadia is an accidental misspelling of acacia; the developers decided to keep it because <a class='link' href='https://www.reddit.com/r/runescape/comments/6fgvda/acadia_trees/dii234m/' target='_blank' rel='noopener'>they liked it better</a>."
             },
             {
                 "question": "During which quest does Sigmund tie Zanik to the tracks of the Dorgesh-Kaan–Keldagrim train system?",
@@ -63,7 +63,7 @@
                     "d": "V"
                 },
                 "correctAnswer": "c",
-                "explanation": "Janet Reno was an American lawyer who served as the Attorney General of the United States from 1993 until 2001 under Bill Clinton."
+                "explanation": "<a class='link' href='https://en.wikipedia.org/wiki/Janet_Reno' target='_blank' rel='noopener'>Janet Reno</a> was an American lawyer who served as the Attorney General of the United States from 1993 until 2001 under Bill Clinton."
             },
             {
                 "question": "Kranon the Ambassador, corrupted after a ritual that summoned Xau-Tak, was originally a member of which race?",
@@ -95,7 +95,7 @@
                     "d": "Ika tha nke rius Zanka Tdaterius"
                 },
                 "correctAnswer": "b",
-                "explanation": "The same spell was previously used in the Demon Slayer quest, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
+                "explanation": "The same spell was previously used in the <a class='link' href='https://runescape.wiki/w/Demon_Slayer_(historical)' target='_blank' rel='noopener'>Demon Slayer quest</a>, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
             },
             {
                 "question": "The God Wars Dungeon, frozen for thousands of years, eventually thawed in the Fifth Age. Who rediscovered the temple and its combatants?",
@@ -106,7 +106,7 @@
                     "d": "Drunken Dwarf"
                 },
                 "correctAnswer": "d",
-                "explanation": "A letter written by Sir Gerry, who lies dying outside the entrance to the God Wars Dungeon, describes his efforts to \"investigate the dwarf's drunken claims\"."
+                "explanation": "<a class='link' href='https://runescape.wiki/w/Knight%27s_notes_(opened)' target='_blank' rel='noopener'>A letter</a> written by Sir Gerry, who lies dying outside the entrance to the God Wars Dungeon, describes his efforts to \"investigate the dwarf's drunken claims\"."
             }
         ],
         "osrs": [

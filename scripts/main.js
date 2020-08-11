@@ -401,7 +401,9 @@ document.addEventListener('DOMContentLoaded', (function() {
 
                         // stop user from choosing again
                         choiceNodes.forEach(choice => choice.removeEventListener('click', checkAnswer));
-                        if (question.explanation) explanationNode.textContent = question.explanation;
+
+                        // add explanation for answer if there is one
+                        if (question.explanation) explanationNode.innerHTML = question.explanation;
 
                         answered += 1;
                         event.currentTarget.parentElement.parentElement.classList.remove('unanswered');
@@ -414,17 +416,15 @@ document.addEventListener('DOMContentLoaded', (function() {
                 let resultsNode = get('.quiz-results'),
                     scoreNode = document.createElement('h3'),
                     descNode = document.createElement('p'),
-                    resetNode = document.createElement('p'),
                     score = correct / total;
 
                 resultsNode.style.display = 'block';
                 resultsNode.appendChild(scoreNode);
                 resultsNode.appendChild(descNode);
-                resultsNode.appendChild(resetNode);
 
                 scoreNode.textContent = `You answered ${correct} out of ${total} questions correctly.`;
-                scoreNode.style.fontSize = '1.5em';
-                descNode.style.marginBottom = '.5rem';
+                scoreNode.style.fontSize = '1.25em';
+                descNode.style.marginBottom = '0';
 
                 if (score === 1) {
                     descNode.textContent = 'congrats! you should sign up for our OSWF tasks and help us blahblah.';
@@ -433,14 +433,14 @@ document.addEventListener('DOMContentLoaded', (function() {
                 } else if (score >= 0.50) {
                     descNode.textContent = 'it\'s okay i guess. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
                 } else if (score >= 0.25) {
-                    descNode.textContent = 'sit kid';
+                    descNode.textContent = 'sit kid.';
                 } else if (score > 0) {
-                    descNode.textContent = 'you fucking donkey. you absolute turnip. you idiot sandwich';
+                    descNode.textContent = 'you fucking donkey. you absolute turnip. you idiot sandwich.';
                 } else {
-                    descNode.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life';
+                    descNode.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life.';
                 }
 
-                resetNode.innerHTML = 'Would you like to try one of <span class="link reset-quiz" role="button">the other versions of the quiz</span>?';
+                descNode.innerHTML += ' Would you like to try one of <span class="link reset-quiz" role="button">the other quizzes</span>?';
                 get('.reset-quiz').addEventListener('click', resetQuiz);
 
                 function resetQuiz() {
