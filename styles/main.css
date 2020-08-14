@@ -292,6 +292,7 @@ header {
     justify-content: center;
     align-items: center;
     flex-flow: row wrap;
+    background-color: var(--bg-01);
     /* transform: skewY(-4deg); */
 }
 
@@ -495,16 +496,18 @@ header {
 .container {
     max-width: 800px;
     padding: 0 2em;
-    margin: 2em auto;
+    margin: auto;
+}
+
+main.container {
+    margin-top: 8rem;
 }
 
 .button {
-    color: rgba(255, 255, 255, .9);
     font-family: var(--font-stack);
     font-size: 1em;
     font-weight: bold;
-    text-decoration: none;
-    padding: 1.25em 1.75em;
+    border: none;
     border-radius: calc(var(--border-radius) * .8);
     transition: filter .2s var(--ease-in-out-expo);
 }
@@ -518,7 +521,7 @@ blockquote {
     background-color: var(--bg-01);
     border-radius: var(--border-radius);
     width: max-content;
-    padding: 2em 2.5em;
+    padding: 2em 3em;
     margin: 3em auto;
     overflow: hidden;
 }
@@ -541,6 +544,7 @@ blockquote::before {
 
 blockquote p {
     font-size: 1.25em;
+    margin-top: .5em;
 }
 
 blockquote cite {
@@ -553,6 +557,30 @@ blockquote cite {
 
 .theme-dark blockquote {
     background-color: var(--bg-03);
+}
+
+/* ------------------
+      THEME SWITCH
+   ------------------ */
+
+.toogle {
+    position: fixed;
+    left: 1.5em;
+    bottom: 1.5em;
+
+    font-weight: normal;
+    background-color: #ddd;
+    padding: .7em 1em;
+    border-radius: var(--border-radius);
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.theme-dark .toogle {
+    color: var(--text-02);
+    background-color: #333;
 }
 
 /* ------------
@@ -825,6 +853,10 @@ blockquote cite {
         margin: -0.25rem 1.5rem 0 0;
     }
 
+    .change {
+        clear: both;
+    }
+
     .stat-icon {
         display: none;
     }
@@ -985,7 +1017,6 @@ blockquote cite {
     flex: 1;
     color: #477539;
     background-color: #d9f1d1;
-    border: none;
     margin: .5em;
     padding: .5em;
     height: 100%;
@@ -1068,8 +1099,8 @@ blockquote cite {
 }
 
 .theme-dark .quiz-start {
-    color: #9bab9c;
-    background-color: #203821;
+    color: #93ad95;
+    background-color: #173a18;
 }
 
 .theme-dark .quiz-choice {
@@ -1113,13 +1144,11 @@ footer {
     background-color: var(--bg-01);
     font-size: .9em;
     padding: 8em 0;
-    margin-top: 5em;
+    margin-top: 8rem;
 }
 
 footer .container {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
     max-width: 900px;
 }
 
@@ -1129,6 +1158,10 @@ footer p {
 
 .about {
     flex: 1;
+}
+
+.about p:last-of-type {
+    margin-bottom: 0;
 }
 
 .links {
@@ -1141,6 +1174,7 @@ footer p {
 }
 
 .social {
+    text-decoration: none;
     padding: .85em 1.5em;
 }
 
@@ -1172,6 +1206,26 @@ footer p {
 .theme-dark .twitter {
     color: #81b1ce;
     background-color: #06304a;
+}
+
+@media screen and (max-width: 501px) {
+
+    footer {
+        padding: 5em 0;
+    }
+
+    footer .container {
+        flex-direction: column;
+    }
+
+    .links {
+        margin: 2em 0 0;
+    }
+
+    .socials {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
 }
 
 @media screen and (min-width: 700px) {

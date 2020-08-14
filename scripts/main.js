@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', (function() {
         return scope.querySelectorAll(selector);
     }
 
-    function initThemes() {
+    function initToogle() {
         let toogle = get('.toogle');
 
         toogle.addEventListener('click', function () {
@@ -356,20 +356,20 @@ document.addEventListener('DOMContentLoaded', (function() {
             createButton('Take the Old School<br />RuneScape quiz', 'osrs');
             createButton('Take the RuneScape<br />Classic quiz (fake)', 'rsc');
 
-            function createButton(buttonText, gameVersion) {
+            function createButton(text, game) {
                 let button = document.createElement('button');
 
                 button.classList.add('quiz-start', 'button');
-                button.innerHTML = buttonText;
+                button.innerHTML = text;
                 button.addEventListener('click', function () {
                     get('.quiz-button-group').remove();
-                    setupQuestions(gameVersion);
+                    setupQuestions(game);
                 });
                 buttonGroup.appendChild(button);
             }
 
-            function setupQuestions(gameVersion) {
-                switch (gameVersion) {
+            function setupQuestions(game) {
+                switch (game) {
                     case 'rs':
                         questions = request.response[0].rs;
                         break;
@@ -470,18 +470,17 @@ document.addEventListener('DOMContentLoaded', (function() {
                 get('.reset-quiz').addEventListener('click', resetQuiz);
 
                 function resetQuiz() {
-                    getAll('.quiz-group').forEach(group => {
-                        group.remove();
-                    });
+                    quiz.textContent = '';
                     resultsNode.textContent = '';
-                    resultsNode.style.display = 'none';
+                    resultsNode.removeAttribute('style');
+                    get('#quiz').scrollIntoView();
                     buildQuiz();
                 }
             }
         }
     }
 
-    initThemes();
+    initToogle();
     initCards();
     initTabs();
     initGraph();
