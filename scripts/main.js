@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', (function() {
         return scope.querySelectorAll(selector);
     }
 
+    function initThemes() {
+        let toogle = get('.toogle');
+
+        toogle.addEventListener('click', function () {
+            document.body.classList.toggle('theme-dark');
+        });
+    }
+
     // based on <https://technokami.in/3d-hover-effect-using-javascript-animations-css-html>
     function initCards() {
         let cards = getAll('.wiki-card');
@@ -150,9 +158,6 @@ document.addEventListener('DOMContentLoaded', (function() {
     // uses dygraphs library <http://dygraphs.com/> and crosshair plugin
     function initGraph() {
         let graph,
-            gridColor,
-            hairColor,
-            lineColor,
             trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv',
             dateOptions = {
                 day: 'numeric',
@@ -160,61 +165,15 @@ document.addEventListener('DOMContentLoaded', (function() {
                 year: 'numeric'
             };
 
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            gridColor = '#393939';
-            hairColor = '#414141';
-            lineColor = '#389dda';
-        } else {
-            gridColor = '#efefef';
-            hairColor = '#e8e8e8';
+        // keep in sync with colors in themeCallback()
+        let gridColor = '#efefef',
+            hairColor = '#e8e8e8',
             lineColor = '#50aee6';
-        }
 
-        let annotations = [
-                {
-                    x: "2019/07/24",
-                    text: "Song of the Elves is released"
-                }, {
-                    x: "2019/09/26",
-                    text: "The Fremennik Exiles is released"
-                }, {
-                    x: "2019/11/14",
-                    text: "Twisted League is released",
-                    tickHeight: 20
-                }, {
-                    x: "2020/02/06",
-                    text: "The Nightmare of Ashihama is released"
-                }, {
-                    x: "2020/03/14",
-                    text: "Traffic rises during the COVID-19 pandemic",
-                    tickHeight: 25
-                }, {
-                    x: "2020/04/20",
-                    text: "Just showing off tickHeight differences",
-                    tickHeight: 15
-                }, {
-                    x: "2020/05/01",
-                    text: "Traffic drops as US gradually reopens",
-                    tickHeight: 30
-                }, {
-                    x: "2020/06/04",
-                    text: "Sins of the Father is released"
-                }
-            ],
-            tooltips = [];
+        drawGraph();
 
-        annotations.forEach((note, i) => {
-            note.series = 'Pageviews';
-            note.shortText = i + 1;
-            note.width = 24;
-            note.height = 24;
-            note.cssClass = `tooltip-hidden annotation-${i + 1}`;
-            if (note.tickHeight === undefined) note.tickHeight = 17;
-
-            createTooltip(note.x, note.text);
-        });
-
-        graph = new Dygraph(get('.traffic-graph'), trafficData, {
+        function drawGraph() {
+            graph = new Dygraph(get('.traffic-graph'), trafficData, {
                     color: lineColor,
                     strokeWidth: 3,
                     axisLineColor: gridColor,
@@ -287,6 +246,73 @@ document.addEventListener('DOMContentLoaded', (function() {
                     ]
                 }
             );
+        }
+
+        // redraw graph with new colors when switching to dark mode
+        let themeObserver = new MutationObserver(themeSwitcher);
+
+        themeObserver.observe(document.body, {attributes: true});
+
+        function themeSwitcher(mutationList) {
+            if (mutationList[0].attributeName === 'class') {
+                if (mutationList[0].target.classList.contains('theme-dark')) {
+                    gridColor = '#393939';
+                    hairColor = '#414141';
+                    lineColor = '#389dda';
+                } else {
+                    gridColor = '#efefef';
+                    hairColor = '#e8e8e8';
+                    lineColor = '#50aee6';
+                }
+
+                drawGraph();
+            }
+        }
+
+        // create annotations
+        let annotations = [
+                {
+                    x: "2019/07/24",
+                    text: "Song of the Elves is released"
+                }, {
+                    x: "2019/09/26",
+                    text: "The Fremennik Exiles is released"
+                }, {
+                    x: "2019/11/14",
+                    text: "Twisted League is released",
+                    tickHeight: 20
+                }, {
+                    x: "2020/02/06",
+                    text: "The Nightmare of Ashihama is released"
+                }, {
+                    x: "2020/03/14",
+                    text: "Traffic rises during the COVID-19 pandemic",
+                    tickHeight: 25
+                }, {
+                    x: "2020/04/20",
+                    text: "Just showing off tickHeight differences",
+                    tickHeight: 15
+                }, {
+                    x: "2020/05/01",
+                    text: "Traffic drops as US gradually reopens",
+                    tickHeight: 30
+                }, {
+                    x: "2020/06/04",
+                    text: "Sins of the Father is released"
+                }
+            ],
+            tooltips = [];
+
+        annotations.forEach((note, i) => {
+            note.series = 'Pageviews';
+            note.shortText = i + 1;
+            note.width = 24;
+            note.height = 24;
+            note.cssClass = `tooltip-hidden annotation-${i + 1}`;
+            if (note.tickHeight === undefined) note.tickHeight = 17;
+
+            createTooltip(note.x, note.text);
+        });
 
         // tooltips are the date/description popups shown when hovering over annotations
         function createTooltip(date, text) {
@@ -455,6 +481,7 @@ document.addEventListener('DOMContentLoaded', (function() {
         }
     }
 
+    initThemes();
     initCards();
     initTabs();
     initGraph();
