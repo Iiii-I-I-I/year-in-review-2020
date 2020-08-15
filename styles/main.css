@@ -168,6 +168,12 @@ code {
     font-family: ui-monospace, 'Menlo', 'Courier', monospace;
 }
 
+/* hide focus ring when using a mouse (but keep it for keyboard navigation)
+   using polyfill from <https://github.com/WICG/focus-visible> */
+.js-focus-visible :focus:not(.focus-visible) {
+    outline: none;
+}
+
 @media screen and (prefers-reduced-motion) {
 
     body {
@@ -633,11 +639,6 @@ blockquote cite {
 
 .tab[aria-selected="true"] {
     color: var(--text-01);
-}
-
-/* hide focus ring when using a mouse (but keep it for keyboard navigation) */
-.js-focus-visible .tab:focus:not(.focus-visible) {
-    outline: none;
 }
 
 .label-short {

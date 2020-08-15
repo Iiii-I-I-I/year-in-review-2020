@@ -75,33 +75,36 @@ document.addEventListener('DOMContentLoaded', (function() {
             tab.addEventListener('click', changeTabs);
         });
 
-        // enable arrow key navigation between tabs
+        // make tabs keyboard accessible
         tabLists.forEach(tabList => {
-            let tabFocus = 0;
+            let tabs = getAll('.tab', tabList),
+                focus = 0;
 
             tabList.addEventListener('keydown', event => {
-                let tabs = getAll('.tab', event.currentTarget.parentNode);
-
-                // move right
                 if (event.keyCode === 39 || event.keyCode === 37) {
-                    tabs[tabFocus].setAttribute('tabindex', -1);
+                    tabs[focus].setAttribute('tabindex', -1);
+
+                    // move right
                     if (event.keyCode === 39) {
-                        tabFocus++;
+                        focus++;
+
                         // if at the end, move to the start
-                        if (tabFocus >= tabs.length) {
-                            tabFocus = 0;
+                        if (focus >= tabs.length) {
+                            focus = 0;
                         }
-                        // move left
-                    } else if (event.keyCode === 37) {
-                        tabFocus--;
+                    }
+                    // move left
+                    else if (event.keyCode === 37) {
+                        focus--;
+
                         // if at the start, move to the end
-                        if (tabFocus < 0) {
-                            tabFocus = tabs.length - 1;
+                        if (focus < 0) {
+                            focus = tabs.length - 1;
                         }
                     }
 
-                    tabs[tabFocus].setAttribute('tabindex', 0);
-                    tabs[tabFocus].focus();
+                    tabs[focus].setAttribute('tabindex', 0);
+                    tabs[focus].focus();
                 }
             });
         });
@@ -405,35 +408,92 @@ document.addEventListener('DOMContentLoaded', (function() {
                         get('.quiz-choice-group', groupNode).appendChild(choice);
                     });
 
+                    // validate answer
                     let choiceNodes = getAll('.quiz-choice', groupNode);
 
                     choiceNodes.forEach(choice => choice.addEventListener('click', checkAnswer));
                     quiz.appendChild(groupNode);
 
                     function checkAnswer(event) {
-                        let selectedAnswer = event.currentTarget.textContent,
+                        let choice = event.currentTarget,
+                            selectedAnswer = choice.textContent,
                             correctAnswer = question.answers[question.correctAnswer];
 
                         if (selectedAnswer === correctAnswer) {
-                            event.currentTarget.classList.add('selected', 'correct');
+                            choice.classList.add('selected', 'correct');
                             correct += 1;
                         } else {
                             let correctIndex = Object.keys(question.answers).indexOf(question.correctAnswer);
 
                             // reveal correct answer if wrong one is chosen
                             choiceNodes[correctIndex].classList.add('not-selected', 'correct');
-                            event.currentTarget.classList.add('selected', 'incorrect');
+                            choice.classList.add('selected', 'incorrect');
                         }
 
                         // stop user from choosing again
                         choiceNodes.forEach(choice => choice.removeEventListener('click', checkAnswer));
 
-                        // add explanation for answer if there is one
+                        // stop keyHandler() focusing when input is not via keyboard
+                        choice.blur();
+                        choice.setAttribute('tabindex', -1);
+
+                        // add explanation for correct answer
                         if (question.explanation) explanationNode.innerHTML = question.explanation;
 
                         answered += 1;
-                        event.currentTarget.parentElement.parentElement.classList.remove('unanswered');
+                        choice.parentElement.parentElement.classList.remove('unanswered');
                         if (answered === total) showResults();
+                    }
+                });
+
+                // make quiz keyboard accessible
+                getAll('.quiz-group').forEach(quizGroup => {
+                    let choices = getAll('.quiz-choice', quizGroup),
+                        focus = 0;
+
+                    quizGroup.addEventListener('keydown', keyHandler);
+
+                    choices.forEach((choice, i) => {
+                        // add tabindex attribute
+                        choice.setAttribute('tabindex', (i === 0) ? 0 : -1);
+
+                        // simulate click with enter key
+                        choice.addEventListener('keydown', event => {
+                            if (event.keyCode === 13) {
+                                choice.click();
+                                quizGroup.removeEventListener('keydown', keyHandler);
+                            }
+                        });
+                    });
+
+                    // listen for up/down arrow keys
+                    function keyHandler(event) {
+                        if (event.keyCode === 38 || event.keyCode === 40) {
+                            event.preventDefault(); // stop page from scrolling
+                            choices[focus].setAttribute('tabindex', -1);
+
+                            // move down
+                            if (event.keyCode === 40) {
+                                focus++;
+
+                                // if at the end, move to the start
+                                if (focus >= choices.length) {
+                                    focus = 0;
+                                }
+                            }
+                            // move up
+                            else if (event.keyCode === 38) {
+                                focus--;
+
+                                // if at the start, move to the end
+                                if (focus < 0) {
+                                    focus = choices.length - 1;
+                                }
+                            }
+
+                            choices[focus].setAttribute('tabindex', 0);
+                            choices[focus].focus();
+                        }
                     }
                 });
             }
