@@ -13,17 +13,18 @@ document.addEventListener('DOMContentLoaded', (function() {
     // requires the target to have .focus and .elements properties
     // eg. target.focus = 0;
     //     target.elements = getAll('.focusable-elements');
-    //     target.addEventListener('keydown', handleArrowKeys);
-    function handleArrowKeys(event) {
-        let target = event.currentTarget;
+    //     target.addEventListener('keydown', keyHandler);
+    function keyHandler(event) {
+        let target = event.currentTarget,
+            key = event.keyCode;
 
         // listen for arrow keys
-        if ([37, 38, 39, 40].includes(event.keyCode)) {
+        if ([37, 38, 39, 40].includes(key)) {
             event.preventDefault(); // stop page from scrolling when up/down is pressed
             target.elements[target.focus].setAttribute('tabindex', -1);
 
             // move to next element
-            if ([39, 40].includes(event.keyCode)) {
+            if ([39, 40].includes(key)) {
                 target.focus++;
 
                 // if at the end, move to the start
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                 }
             }
             // move to previous element
-            else if ([37, 38].includes(event.keyCode)) {
+            else if ([37, 38].includes(key)) {
                 target.focus--;
 
                 // if at the start, move to the end
@@ -116,7 +117,7 @@ document.addEventListener('DOMContentLoaded', (function() {
         tabLists.forEach(tabList => {
             tabList.focus = 0;
             tabList.elements = getAll('.tab', tabList);
-            tabList.addEventListener('keydown', handleArrowKeys);
+            tabList.addEventListener('keydown', keyHandler);
         });
 
         function changeTabs(event) {
@@ -371,11 +372,6 @@ document.addEventListener('DOMContentLoaded', (function() {
             createButton('The Old School<br />RuneScape quiz', 'osrs');
             createButton('The RuneScape<br />Classic quiz (fake)', 'rsc');
 
-            // arrow between buttons instead of tabbing
-            buttonGroup.focus = 0;
-            buttonGroup.elements = getAll('.quiz-start', buttonGroup);
-            buttonGroup.addEventListener('keydown', handleArrowKeys);
-
             function createButton(text, game) {
                 let button = document.createElement('button');
 
@@ -414,55 +410,58 @@ document.addEventListener('DOMContentLoaded', (function() {
                         numberNode = get('.quiz-number', groupNode),
                         questionNode = get('.quiz-question', groupNode),
                         explanationNode = get('.quiz-explanation', groupNode),
-                        answerKeys = Object.keys(question.answers),
-                        choiceNodes = [];
+                        answers = Object.keys(question.answers),
+                        choices = [];
 
-                    // fill in <template> with content
+                    // fill in <template> with JSON
                     numberNode.textContent = `Question ${i + 1}`;
                     questionNode.textContent = question.question;
 
-                    answerKeys.forEach(answer => {
+                    answers.forEach(answer => {
                         let choice = document.createElement('li');
 
                         choice.classList.add('quiz-choice');
+                        choice.answerKey = answer;
                         choice.textContent = question.answers[answer];
+                        choices.push(choice);
                         get('.quiz-choice-group', groupNode).appendChild(choice);
-                        choiceNodes.push(choice);
                     });
 
+                    // insert completed question in DOM
                     quiz.appendChild(groupNode);
 
                     // validate choice
-                    choiceNodes.forEach(choice => choice.addEventListener('click', checkAnswer));
+                    choices.forEach(choice => choice.addEventListener('click', checkAnswer));
 
                     function checkAnswer(event) {
                         let choice = event.currentTarget,
-                            selectedAnswer = choice.textContent,
-                            correctAnswer = question.answers[question.correctAnswer];
+                            selectedKey = choice.answerKey,
+                            correctKey = question.correctAnswer,
+                            explanation = question.explanation;
 
-                        if (selectedAnswer === correctAnswer) {
+                        if (selectedKey === correctKey) {
                             choice.classList.add('selected', 'correct');
                             correct++;
                         } else {
-                            let correctIndex = answerKeys.indexOf(question.correctAnswer);
-
                             // reveal correct answer if wrong one is chosen
-                            choiceNodes[correctIndex].classList.add('not-selected', 'correct');
+                            let correctNode = choices.find(choice => choice.answerKey === correctKey);
+
+                            correctNode.classList.add('not-selected', 'correct');
                             choice.classList.add('selected', 'incorrect');
                         }
 
                         // stop user from choosing again
-                        choiceNodes.forEach(choice => choice.removeEventListener('click', checkAnswer));
+                        choices.forEach(choice => choice.removeEventListener('click', checkAnswer));
+                        choice.closest('.quiz-group').classList.remove('unanswered');
 
-                        // stop handleArrowKeys() focusing when input is not via keyboard
+                        // stop keyHandler() focusing when input is not via keyboard
                         choice.blur();
                         choice.setAttribute('tabindex', -1);
 
                         // add explanation for correct answer
-                        if (question.explanation) explanationNode.innerHTML = question.explanation;
+                        if (explanation) explanationNode.innerHTML = explanation;
 
                         answered++;
-                        choice.parentElement.parentElement.classList.remove('unanswered');
                         if (answered === total) showResults();
                     }
                 });
@@ -471,17 +470,17 @@ document.addEventListener('DOMContentLoaded', (function() {
                 getAll('.quiz-group').forEach(quizGroup => {
                     quizGroup.focus = 0;
                     quizGroup.elements = getAll('.quiz-choice', quizGroup);
-                    quizGroup.addEventListener('keydown', handleArrowKeys);
+                    quizGroup.addEventListener('keydown', keyHandler);
 
                     quizGroup.elements.forEach((choice, i) => {
-                        // add tabindex attribute
+                        // add tabindex="0" for first element, "-1" for the rest
                         choice.setAttribute('tabindex', (i === 0) ? 0 : -1);
 
                         // simulate click with enter key
                         choice.addEventListener('keydown', event => {
                             if (event.keyCode === 13) {
                                 choice.click();
-                                quizGroup.removeEventListener('keydown', handleArrowKeys);
+                                quizGroup.removeEventListener('keydown', keyHandler);
                             }
                         });
                     });
