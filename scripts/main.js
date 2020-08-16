@@ -9,6 +9,43 @@ document.addEventListener('DOMContentLoaded', (function() {
         return scope.querySelectorAll(selector);
     }
 
+    // lets the reader use arrow keys to focus elements inside a target element,
+    // requires the target to have .focus and .elements properties
+    // eg. target.focus = 0;
+    //     target.elements = getAll('.focusable-elements');
+    //     target.addEventListener('keydown', handleArrowKeys);
+    function handleArrowKeys(event) {
+        let target = event.currentTarget;
+
+        // listen for arrow keys
+        if ([37, 38, 39, 40].includes(event.keyCode)) {
+            event.preventDefault(); // stop page from scrolling when up/down is pressed
+            target.elements[target.focus].setAttribute('tabindex', -1);
+
+            // move to next element
+            if ([39, 40].includes(event.keyCode)) {
+                target.focus++;
+
+                // if at the end, move to the start
+                if (target.focus >= target.elements.length) {
+                    target.focus = 0;
+                }
+            }
+            // move to previous element
+            else if ([37, 38].includes(event.keyCode)) {
+                target.focus--;
+
+                // if at the start, move to the end
+                if (target.focus < 0) {
+                    target.focus = target.elements.length - 1;
+                }
+            }
+
+            target.elements[target.focus].setAttribute('tabindex', 0);
+            target.elements[target.focus].focus();
+        }
+    }
+
     function initToogle() {
         let toogle = get('.toogle');
 
@@ -77,36 +114,9 @@ document.addEventListener('DOMContentLoaded', (function() {
 
         // make tabs keyboard accessible
         tabLists.forEach(tabList => {
-            let tabs = getAll('.tab', tabList),
-                focus = 0;
-
-            tabList.addEventListener('keydown', event => {
-                if (event.keyCode === 39 || event.keyCode === 37) {
-                    tabs[focus].setAttribute('tabindex', -1);
-
-                    // move right
-                    if (event.keyCode === 39) {
-                        focus++;
-
-                        // if at the end, move to the start
-                        if (focus >= tabs.length) {
-                            focus = 0;
-                        }
-                    }
-                    // move left
-                    else if (event.keyCode === 37) {
-                        focus--;
-
-                        // if at the start, move to the end
-                        if (focus < 0) {
-                            focus = tabs.length - 1;
-                        }
-                    }
-
-                    tabs[focus].setAttribute('tabindex', 0);
-                    tabs[focus].focus();
-                }
-            });
+            tabList.focus = 0;
+            tabList.elements = getAll('.tab', tabList);
+            tabList.addEventListener('keydown', handleArrowKeys);
         });
 
         function changeTabs(event) {
@@ -347,17 +357,24 @@ document.addEventListener('DOMContentLoaded', (function() {
 
         function buildQuiz() {
             let quiz = get('.quiz'),
-                buttonGroup = document.createElement('div'),
                 total,
                 questions,
                 correct = 0,
                 answered = 0;
 
+            let buttonGroup = document.createElement('div');
+
             quiz.appendChild(buttonGroup);
             buttonGroup.classList.add('quiz-button-group');
-            createButton('Take the<br />RuneScape quiz', 'rs');
-            createButton('Take the Old School<br />RuneScape quiz', 'osrs');
-            createButton('Take the RuneScape<br />Classic quiz (fake)', 'rsc');
+
+            createButton('The<br />RuneScape quiz', 'rs');
+            createButton('The Old School<br />RuneScape quiz', 'osrs');
+            createButton('The RuneScape<br />Classic quiz (fake)', 'rsc');
+
+            // arrow between buttons instead of tabbing
+            buttonGroup.focus = 0;
+            buttonGroup.elements = getAll('.quiz-start', buttonGroup);
+            buttonGroup.addEventListener('keydown', handleArrowKeys);
 
             function createButton(text, game) {
                 let button = document.createElement('button');
@@ -368,6 +385,7 @@ document.addEventListener('DOMContentLoaded', (function() {
                     get('.quiz-button-group').remove();
                     setupQuestions(game);
                 });
+
                 buttonGroup.appendChild(button);
             }
 
@@ -395,24 +413,27 @@ document.addEventListener('DOMContentLoaded', (function() {
                     let groupNode = get('.template-group').content.cloneNode(true),
                         numberNode = get('.quiz-number', groupNode),
                         questionNode = get('.quiz-question', groupNode),
-                        explanationNode = get('.quiz-explanation', groupNode);
+                        explanationNode = get('.quiz-explanation', groupNode),
+                        answerKeys = Object.keys(question.answers),
+                        choiceNodes = [];
 
                     // fill in <template> with content
                     numberNode.textContent = `Question ${i + 1}`;
                     questionNode.textContent = question.question;
-                    Object.keys(question.answers).forEach(answer => {
+
+                    answerKeys.forEach(answer => {
                         let choice = document.createElement('li');
 
                         choice.classList.add('quiz-choice');
                         choice.textContent = question.answers[answer];
                         get('.quiz-choice-group', groupNode).appendChild(choice);
+                        choiceNodes.push(choice);
                     });
 
-                    // validate answer
-                    let choiceNodes = getAll('.quiz-choice', groupNode);
-
-                    choiceNodes.forEach(choice => choice.addEventListener('click', checkAnswer));
                     quiz.appendChild(groupNode);
+
+                    // validate choice
+                    choiceNodes.forEach(choice => choice.addEventListener('click', checkAnswer));
 
                     function checkAnswer(event) {
                         let choice = event.currentTarget,
@@ -421,9 +442,9 @@ document.addEventListener('DOMContentLoaded', (function() {
 
                         if (selectedAnswer === correctAnswer) {
                             choice.classList.add('selected', 'correct');
-                            correct += 1;
+                            correct++;
                         } else {
-                            let correctIndex = Object.keys(question.answers).indexOf(question.correctAnswer);
+                            let correctIndex = answerKeys.indexOf(question.correctAnswer);
 
                             // reveal correct answer if wrong one is chosen
                             choiceNodes[correctIndex].classList.add('not-selected', 'correct');
@@ -433,14 +454,14 @@ document.addEventListener('DOMContentLoaded', (function() {
                         // stop user from choosing again
                         choiceNodes.forEach(choice => choice.removeEventListener('click', checkAnswer));
 
-                        // stop keyHandler() focusing when input is not via keyboard
+                        // stop handleArrowKeys() focusing when input is not via keyboard
                         choice.blur();
                         choice.setAttribute('tabindex', -1);
 
                         // add explanation for correct answer
                         if (question.explanation) explanationNode.innerHTML = question.explanation;
 
-                        answered += 1;
+                        answered++;
                         choice.parentElement.parentElement.classList.remove('unanswered');
                         if (answered === total) showResults();
                     }
@@ -448,12 +469,11 @@ document.addEventListener('DOMContentLoaded', (function() {
 
                 // make quiz keyboard accessible
                 getAll('.quiz-group').forEach(quizGroup => {
-                    let choices = getAll('.quiz-choice', quizGroup),
-                        focus = 0;
+                    quizGroup.focus = 0;
+                    quizGroup.elements = getAll('.quiz-choice', quizGroup);
+                    quizGroup.addEventListener('keydown', handleArrowKeys);
 
-                    quizGroup.addEventListener('keydown', keyHandler);
-
-                    choices.forEach((choice, i) => {
+                    quizGroup.elements.forEach((choice, i) => {
                         // add tabindex attribute
                         choice.setAttribute('tabindex', (i === 0) ? 0 : -1);
 
@@ -461,40 +481,10 @@ document.addEventListener('DOMContentLoaded', (function() {
                         choice.addEventListener('keydown', event => {
                             if (event.keyCode === 13) {
                                 choice.click();
-                                quizGroup.removeEventListener('keydown', keyHandler);
+                                quizGroup.removeEventListener('keydown', handleArrowKeys);
                             }
                         });
                     });
-
-                    // listen for up/down arrow keys
-                    function keyHandler(event) {
-                        if (event.keyCode === 38 || event.keyCode === 40) {
-                            event.preventDefault(); // stop page from scrolling
-                            choices[focus].setAttribute('tabindex', -1);
-
-                            // move down
-                            if (event.keyCode === 40) {
-                                focus++;
-
-                                // if at the end, move to the start
-                                if (focus >= choices.length) {
-                                    focus = 0;
-                                }
-                            }
-                            // move up
-                            else if (event.keyCode === 38) {
-                                focus--;
-
-                                // if at the start, move to the end
-                                if (focus < 0) {
-                                    focus = choices.length - 1;
-                                }
-                            }
-
-                            choices[focus].setAttribute('tabindex', 0);
-                            choices[focus].focus();
-                        }
-                    }
                 });
             }
 
