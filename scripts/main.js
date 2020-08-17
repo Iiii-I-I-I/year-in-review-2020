@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', (function() {
+document.addEventListener('DOMContentLoaded', (function () {
     'use strict';
 
     function get(selector, scope = document) {
@@ -173,18 +173,29 @@ document.addEventListener('DOMContentLoaded', (function() {
     function initGraph() {
         let graph,
             trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv',
+            gridColor,
+            hairColor,
+            lineColor,
             dateOptions = {
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric'
             };
 
-        // keep in sync with colors in themeCallback()
-        let gridColor = '#efefef',
-            hairColor = '#e8e8e8',
-            lineColor = '#50aee6';
-
+        setColors();
         drawGraph();
+
+        function setColors() {
+            if (document.body.classList.contains('theme-dark')) {
+                gridColor = '#393939';
+                hairColor = '#414141';
+                lineColor = '#389dda';
+            } else {
+                gridColor = '#efefef';
+                hairColor = '#e8e8e8';
+                lineColor = '#50aee6';
+            }
+        }
 
         function drawGraph() {
             graph = new Dygraph(get('.traffic-graph'), trafficData, {
@@ -262,23 +273,14 @@ document.addEventListener('DOMContentLoaded', (function() {
             );
         }
 
-        // redraw graph with new colors when switching to dark mode
-        let themeObserver = new MutationObserver(themeSwitcher);
-
+        // watch body element for class changes
+        let themeObserver = new MutationObserver(switchThemes);
         themeObserver.observe(document.body, {attributes: true});
 
-        function themeSwitcher(mutationList) {
-            if (mutationList[0].attributeName === 'class') {
-                if (mutationList[0].target.classList.contains('theme-dark')) {
-                    gridColor = '#393939';
-                    hairColor = '#414141';
-                    lineColor = '#389dda';
-                } else {
-                    gridColor = '#efefef';
-                    hairColor = '#e8e8e8';
-                    lineColor = '#50aee6';
-                }
-
+        // redraw graph with new colors when switching themes
+        function switchThemes(target) {
+            if (target[0].attributeName === 'class') {
+                setColors();
                 drawGraph();
             }
         }

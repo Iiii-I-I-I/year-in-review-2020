@@ -25,6 +25,11 @@
     <!-- @TODO: cut down bootstrap-icons.svg to only sprites needed -->
 </head>
 <body>
+    <script>
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('theme-dark');
+        }
+    </script>
     <header>
         <div class="h1-container">
             <h1>
