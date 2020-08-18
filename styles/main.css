@@ -142,7 +142,9 @@ h3 {
 }
 
 section:not(:first-of-type) {
-    margin-top: 8rem;
+    margin-top: 6rem;
+    padding-top: 5rem;
+    border-top: 1px solid #ddd;
 }
 
 p {
@@ -160,10 +162,6 @@ p {
     text-decoration: underline;
 }
 
-.theme-dark .link {
-    color: #46a2da;
-}
-
 code {
     font-family: ui-monospace, 'Menlo', 'Courier', monospace;
 }
@@ -172,6 +170,14 @@ code {
    using polyfill from <https://github.com/WICG/focus-visible> */
 .js-focus-visible :focus:not(.focus-visible) {
     outline: none;
+}
+
+.theme-dark .link {
+    color: #46a2da;
+}
+
+.theme-dark section {
+    border-color: #444;
 }
 
 @media screen and (prefers-reduced-motion) {

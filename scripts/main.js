@@ -10,40 +10,40 @@ document.addEventListener('DOMContentLoaded', (function () {
     }
 
     // lets the reader use arrow keys to focus elements inside a target element,
-    // requires the target to have .focus and .elements properties
-    // eg. target.focus = 0;
-    //     target.elements = getAll('.focusable-elements');
-    //     target.addEventListener('keydown', keyHandler);
+    // requires the target element to have .focus and .elements properties
+    // eg. parent.focus = 0;
+    //     parent.elements = parent.querySelector('.elements-to-focus-on');
+    //     parent.addEventListener('keydown', keyHandler);
     function keyHandler(event) {
         let target = event.currentTarget,
-            key = event.keyCode;
+            elements = target.elements,
+            key = event.key;
 
-        // listen for arrow keys
-        if ([37, 38, 39, 40].includes(key)) {
-            event.preventDefault(); // stop page from scrolling when up/down is pressed
-            target.elements[target.focus].setAttribute('tabindex', -1);
+        if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(key)) {
+            event.preventDefault(); // stop page from scrolling with arrow keys
+            elements[target.focus].setAttribute('tabindex', -1);
 
             // move to next element
-            if ([39, 40].includes(key)) {
+            if (['ArrowDown', 'ArrowRight'].includes(key)) {
                 target.focus++;
 
                 // if at the end, move to the start
-                if (target.focus >= target.elements.length) {
+                if (target.focus >= elements.length) {
                     target.focus = 0;
                 }
             }
             // move to previous element
-            else if ([37, 38].includes(key)) {
+            else if (['ArrowUp', 'ArrowLeft'].includes(key)) {
                 target.focus--;
 
                 // if at the start, move to the end
                 if (target.focus < 0) {
-                    target.focus = target.elements.length - 1;
+                    target.focus = elements.length - 1;
                 }
             }
 
-            target.elements[target.focus].setAttribute('tabindex', 0);
-            target.elements[target.focus].focus();
+            elements[target.focus].setAttribute('tabindex', 0);
+            elements[target.focus].focus();
         }
     }
 
@@ -417,13 +417,12 @@ document.addEventListener('DOMContentLoaded', (function () {
                     // fill in <template> with JSON
                     numberNode.textContent = `Question ${i + 1}`;
                     questionNode.textContent = question.question;
-
                     answers.forEach(answer => {
                         let choice = document.createElement('li');
 
                         choice.classList.add('quiz-choice');
-                        choice.answerKey = answer;
                         choice.textContent = question.answers[answer];
+                        choice.answerKey = answer;
                         choices.push(choice);
                         get('.quiz-choice-group', groupNode).appendChild(choice);
                     });
@@ -523,7 +522,7 @@ document.addEventListener('DOMContentLoaded', (function () {
                     quiz.textContent = '';
                     resultsNode.textContent = '';
                     resultsNode.removeAttribute('style');
-                    get('#quiz').scrollIntoView();
+                    get('#quiz').scrollIntoView({behavior: 'smooth'});
                     buildQuiz();
                 }
             }
