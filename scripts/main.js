@@ -222,12 +222,25 @@ document.addEventListener('DOMContentLoaded', (function () {
                             dygraph.setAnnotations(annotations);
                         }
 
-                        // insert tooltips inside their respective annotations
                         tooltips.forEach((tooltip, i) => {
-                            const annotation = get(`.annotation-${i + 1}`);
+                            let annotation = get(`.annotation-${i + 1}`),
+                                tooltipRect = tooltip.getBoundingClientRect(),
+                                leftPos = tooltipRect.left,
+                                rightPos = document.body.clientWidth - tooltipRect.right,
+                                margin = 10;
 
+                            // insert tooltip inside its respective annotation
                             annotation.appendChild(tooltip);
                             annotation.removeAttribute('title');
+
+                            // reposition tooltip if it goes offscreen
+                            if (leftPos < 0) {
+                                tooltip.style.left = -leftPos + margin + 'px';
+                                console.log(tooltip);
+                            } else if (rightPos < 0) {
+                                tooltip.style.left = rightPos - margin + 'px';
+                                console.log(tooltip);
+                            }
                         });
 
                         // minor visual fixes
@@ -306,15 +319,15 @@ document.addEventListener('DOMContentLoaded', (function () {
                 ],
                 tooltips = [];
 
-            annotations.forEach((note, i) => {
-                note.series = 'Pageviews';
-                note.shortText = i + 1;
-                note.width = 24;
-                note.height = 24;
-                note.cssClass = `tooltip-hidden annotation-${i + 1}`;
-                if (note.tickHeight === undefined) note.tickHeight = 17;
+            annotations.forEach((annotation, i) => {
+                annotation.series = 'Pageviews';
+                annotation.shortText = i + 1;
+                annotation.width = 24;
+                annotation.height = 24;
+                annotation.cssClass = `tooltip-hidden annotation-${i + 1}`;
+                if (annotation.tickHeight === undefined) annotation.tickHeight = 17;
 
-                createTooltip(note.x, note.text);
+                createTooltip(annotation.x, annotation.text);
             });
 
             function createTooltip(date, text) {
@@ -414,7 +427,7 @@ document.addEventListener('DOMContentLoaded', (function () {
                         answers = Object.keys(question.answers),
                         choices = [];
 
-                    // fill in <template> with JSON
+                    // fill in <template> with data
                     numberNode.textContent = `Question ${i + 1}`;
                     questionNode.textContent = question.question;
                     answers.forEach(answer => {
@@ -443,10 +456,10 @@ document.addEventListener('DOMContentLoaded', (function () {
                             choice.classList.add('selected', 'correct');
                             correct++;
                         } else {
-                            // reveal correct answer if wrong one is chosen
-                            let correctNode = choices.find(choice => choice.answerKey === correctKey);
+                            // reveal correct answer in addition to user's choice
+                            let correct = choices.find(c => c.answerKey === correctKey);
 
-                            correctNode.classList.add('not-selected', 'correct');
+                            correct.classList.add('not-selected', 'correct');
                             choice.classList.add('selected', 'incorrect');
                         }
 
