@@ -296,11 +296,13 @@ code {
 header {
     --header-size: 5.5rem;
 
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-flow: row wrap;
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
     background-color: var(--bg-01);
 }
 
@@ -324,6 +326,123 @@ header {
 
 .title .bottom {
     font-size: calc(var(--header-size) * 1.15);
+}
+
+.plants {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.plants-side {
+    --spread: -25px;
+
+    display: flex;
+    position: absolute;
+}
+
+.plants-top {
+    top: var(--spread);
+    left: var(--spread);
+    right: var(--spread);
+}
+
+.plants-top .plant {
+    transform-origin: top;
+}
+
+.plants-bottom {
+    align-items: flex-end;
+    bottom: var(--spread);
+    left: var(--spread);
+    right: var(--spread);
+}
+
+.plants-bottom .plant {
+    background-position: bottom;
+}
+
+.plant {
+    --size-tall: 40vmin;
+    --size-wide: 50vmin;
+    /* --size-tall: 350px;
+    --size-wide: 450px; */
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    left: var(--left);
+    right: var(--right);
+    transform: translateY(var(--translate, 0)) scale(var(--scale, 1));
+}
+
+.plant-1 {
+    background-image: url(../images/plants/plant-01.svg);
+}
+
+.plant-2 {
+    background-image: url(../images/plants/plant-02.svg);
+}
+
+.plant-3 {
+    background-image: url(../images/plants/plant-03.svg);
+}
+
+.plant-4 {
+    background-image: url(../images/plants/plant-04.svg);
+}
+
+.plant-5 {
+    background-image: url(../images/plants/plant-05.svg);
+}
+
+.plant-6 {
+    background-image: url(../images/plants/plant-06.svg);
+}
+
+.plant-7 {
+    background-image: url(../images/plants/plant-07.svg);
+}
+
+.plant-8 {
+    background-image: url(../images/plants/plant-08.svg);
+}
+
+.plant-9 {
+    background-image: url(../images/plants/plant-09.svg);
+}
+
+.plant-10 {
+    background-image: url(../images/plants/plant-10.svg);
+}
+
+.plant-11 {
+    background-image: url(../images/plants/plant-11.svg);
+}
+
+.plant-1,
+.plant-4,
+.plant-7,
+.plant-8,
+.plant-10,
+.plant-11 {
+    width: var(--size-wide);
+    height: var(--size-wide);
+}
+
+.plant-2,
+.plant-3,
+.plant-5,
+.plant-6,
+.plant-9 {
+    width: var(--size-tall);
+    height: var(--size-tall);
+}
+
+.plant:nth-child(3n) {
+    z-index: 1;
 }
 
 @media screen and (max-width: 900px), screen and (max-height: 900px) {
@@ -741,7 +860,7 @@ section + section {
     --stat-color: #4eabe4;
 }
 .section-osrs .stat {
-    --stat-color: #cb976c;
+    --stat-color: #c79b77;
 }
 .section-ptbr .stat {
     --stat-color: #908df4;
