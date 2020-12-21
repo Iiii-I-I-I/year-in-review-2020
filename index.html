@@ -9,11 +9,11 @@
     <title>2020 Year in Review – The RuneScape Wikis</title>
 
     <link rel="preload" href="styles/main.css" as="style">
-    <link rel="preload" href="styles/dygraph.min.css" as="style">
-    <link rel="preload" href="scripts/dygraph.min.js" as="script">
-    <link rel="preload" href="scripts/crosshair.min.js" as="script">
-    <link rel="preload" href="scripts/focus-visible.min.js" as="script">
     <link rel="preload" href="scripts/main.js" as="script">
+    <link rel="preload" href="fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Inter-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
 
     <link rel="stylesheet" href="styles/dygraph.min.css">
     <link rel="stylesheet" href="styles/main.css">
@@ -31,14 +31,12 @@
         }
     </script>
     <header>
-        <div class="h1-container">
-            <h1>
-                <span>2020</span>
-                <span>Weird Gloop</span>
-                <span>Year in Review</span>
-            </h1>
-        </div>
-        <section class="wiki-cards">
+        <h1 class="title">
+            <span class="top">2020</span>
+            <span class="center">Weird Gloop</span>
+            <span class="bottom">Year in Review</span>
+        </h1>
+        <!-- <section class="wiki-cards">
             <a class="wiki-card card-rs" href="https://runescape.wiki" target="_blank" rel="noopener">
                 <span>RuneScape Wiki</span>
             </a>
@@ -51,7 +49,7 @@
             <a class="wiki-card card-rsc" href="https://classic.runescape.wiki" target="_blank" rel="noopener">
                 <span>RuneScape Classic Wiki</span>
             </a>
-        </section>
+        </section> -->
     </header>
     <main class="container">
         <button class="toogle button" type="button">toogle</button>
@@ -83,202 +81,202 @@
                     </button>
                 </div>
                 <div id="group-1-panel-1" class="tab-panel" role="tabpanel" aria-labelledby="group-1-tab-1">
-                    <dl class="stats-grid section-rs">
+                    <div class="stats-grid section-rs">
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#binoculars-fill"/></svg>
-                            <dt>225m</dt>
-                            <dd>Total <b>pageviews</b> for the RuneScape Wiki this year</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>133%</b> from last year</div>
+                            <div class="stat-value">225<abbr>m</abbr></div>
+                            <div class="stat-description">Total <b>pageviews</b> for the RuneScape Wiki this year</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>133%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#people-fill"/></svg>
-                            <dt>5.5m</dt>
-                            <dd>Total <b>visitors</b> for the RuneScape Wiki this year</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>108%</b> from last year</div>
+                            <div class="stat-value">5.5<abbr>m</abbr></div>
+                            <div class="stat-description">Total <b>visitors</b> to the RuneScape Wiki this year</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>108%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#keyboard-fill"/></svg>
-                            <dt>1.1m</dt>
-                            <dd>Uses of the in-game <b><code>/wiki</code> command</b> this year</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>47%</b> from last year</div>
+                            <div class="stat-value">1.1<abbr>m</abbr></div>
+                            <div class="stat-description">Uses of the in-game <b><code>/wiki</code> command</b> this year</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>47%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#watch"/></svg>
-                            <dt>9:59</dt>
-                            <dd>Average <b>time spent</b> per session, ending after 30 mins. of inactivity</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>12%</b> from last year</div>
+                            <div class="stat-value">9:59</div>
+                            <div class="stat-description">Average <b>time spent</b> per session, ending after 30 mins. of inactivity</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>12%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#geo-alt"/></svg>
-                            <div style="font-size: .9em">Top <b>countries of origin</b></div>
+                            <div class="stat-description">Top <b>countries of origin</b></div>
                             <ol>
-                                <li style="--bar-size: 44%"><span>USA</span> (44%)</li>
-                                <li style="--bar-size: 13%"><span>UK</span> (13%)</li>
-                                <li style="--bar-size: 7%"><span>Canada</span> (7%)</li>
-                                <li style="--bar-size: 5%"><span>Netherlands</span> (5%)</li>
+                                <li style="--bar-size: 44%"><span>United States (44%)</span></li>
+                                <li style="--bar-size: 13%"><span>United Kingdom (13%)</span></li>
+                                <li style="--bar-size: 7%"><span>Canada (7%)</span></li>
+                                <li style="--bar-size: 5%"><span>Netherlands (5%)</span></li>
                             </ol>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#laptop"/></svg>
-                            <div style="font-size: .9em">Most used <b>web browsers</b></div>
+                            <div class="stat-description">Most used <b>web browsers</b></div>
                             <ol>
-                                <li style="--bar-size: 63%"><span>Chrome</span> (63%)</li>
-                                <li style="--bar-size: 20%"><span>Safari</span> (20%)</li>
-                                <li style="--bar-size: 6%"><span>Edge</span> (6%)</li>
-                                <li style="--bar-size: 5%"><span>Firefox</span> (5%)</li>
+                                <li style="--bar-size: 63%"><span>Chrome (63%)</span></li>
+                                <li style="--bar-size: 20%"><span>Safari (20%)</span></li>
+                                <li style="--bar-size: 6%"><span>Edge (6%)</span></li>
+                                <li style="--bar-size: 5%"><span>Firefox (5%)</span></li>
                             </ol>
                         </div>
-                    </dl>
+                    </div>
                 </div>
                 <div id="group-1-panel-2" class="tab-panel" role="tabpanel" aria-labelledby="group-1-tab-2" hidden>
-                    <dl class="stats-grid section-osrs">
+                    <div class="stats-grid section-osrs">
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#binoculars-fill"/></svg>
-                            <dt>557m</dt>
-                            <dd>Total <b>pageviews</b> for the Old School Wiki this year</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>133%</b> from last year</div>
+                            <div class="stat-value">557<abbr>m</abbr></div>
+                            <div class="stat-description">Total <b>pageviews</b> for the Old School RuneScape Wiki this year</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>133%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#people-fill"/></svg>
-                            <dt>12.1m</dt>
-                            <dd>Total <b>visitors</b> for the Old School Wiki this year</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>108%</b> from last year</div>
+                            <div class="stat-value">12.1<abbr>m</abbr></div>
+                            <div class="stat-description">Total <b>visitors</b> to the Old School RuneScape Wiki this year</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>108%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#collection-fill"/></svg>
-                            <dt>4.27</dt>
-                            <dd>Average number of <b>pages viewed</b> per session</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>47%</b> from last year</div>
+                            <div class="stat-value">4.27</div>
+                            <div class="stat-description">Average number of <b>pages viewed</b> per session</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>47%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#watch"/></svg>
-                            <dt>9:23</dt>
-                            <dd>Average <b>time spent</b> per session, ending after 30 mins. of inactivity</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>12%</b> from last year</div>
+                            <div class="stat-value">9:23</div>
+                            <div class="stat-description">Average <b>time spent</b> per session, ending after 30 mins. of inactivity</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>12%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#geo-alt"/></svg>
-                            <div style="font-size: .9em">Top <b>countries of origin</b></div>
+                            <div class="stat-description">Top <b>countries of origin</b></div>
                             <ol>
-                                <li style="--bar-size: 45%"><span>USA</span> (45%)</li>
-                                <li style="--bar-size: 13%"><span>UK</span> (13%)</li>
-                                <li style="--bar-size: 7%"><span>Canada</span> (7%)</li>
-                                <li style="--bar-size: 5%"><span>Netherlands</span> (5%)</li>
+                                <li style="--bar-size: 45%"><span>United States (45%)</span></li>
+                                <li style="--bar-size: 13%"><span>United Kingdom (13%)</span></li>
+                                <li style="--bar-size: 7%"><span>Canada (7%)</span></li>
+                                <li style="--bar-size: 5%"><span>Netherlands (5%)</span></li>
                             </ol>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#laptop"/></svg>
-                            <div style="font-size: .9em">Most used <b>web browsers</b></div>
+                            <div class="stat-description">Most used <b>web browsers</b></div>
                             <ol>
-                                <li style="--bar-size: 55%"><span>Chrome</span> (55%)</li>
-                                <li style="--bar-size: 33%"><span>Safari</span> (33%)</li>
-                                <li style="--bar-size: 4%"><span>Edge</span> (4%)</li>
-                                <li style="--bar-size: 4%"><span>Firefox</span> (4%)</li>
+                                <li style="--bar-size: 55%"><span>Chrome (55%)</span></li>
+                                <li style="--bar-size: 33%"><span>Safari (33%)</span></li>
+                                <li style="--bar-size: 4%"><span>Edge (4%)</span></li>
+                                <li style="--bar-size: 4%"><span>Firefox (4%)</span></li>
                             </ol>
                         </div>
-                    </dl>
+                    </div>
                 </div>
                 <div id="group-1-panel-3" class="tab-panel" role="tabpanel" aria-labelledby="group-1-tab-3" hidden>
-                    <dl class="stats-grid section-ptbr">
+                    <div class="stats-grid section-ptbr">
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#binoculars-fill"/></svg>
-                            <dt>406k</dt>
-                            <dd>Total <b>pageviews</b> for the PT-BR Wiki this year</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>133%</b> from last year</div>
+                            <div class="stat-value">406<abbr>k</abbr></div>
+                            <div class="stat-description">Total <b>pageviews</b> for the PT-BR RuneScape Wiki this year</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>133%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#people-fill"/></svg>
-                            <dt>53k</dt>
-                            <dd>Total <b>visitors</b> for the PT-BR Wiki this year</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>108%</b> from last year</div>
+                            <div class="stat-value">53<abbr>k</abbr></div>
+                            <div class="stat-description">Total <b>visitors</b> to the PT-BR RuneScape Wiki this year</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>108%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#collection-fill"/></svg>
-                            <dt>2.28</dt>
-                            <dd>Average number of <b>pages viewed</b> per session</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>47%</b> from last year</div>
+                            <div class="stat-value">2.28</div>
+                            <div class="stat-description">Average number of <b>pages viewed</b> per session</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>47%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#watch"/></svg>
-                            <dt>3:13</dt>
-                            <dd>Average <b>time spent</b> per session, ending after 30 mins. of inactivity</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>12%</b> from last year</div>
+                            <div class="stat-value">3:13</div>
+                            <div class="stat-description">Average <b>time spent</b> per session, ending after 30 mins. of inactivity</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>12%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#geo-alt"/></svg>
-                            <div style="font-size: .9em">Top <b>countries of origin</b></div>
+                            <div class="stat-description">Top <b>countries of origin</b></div>
                             <ol>
-                                <li style="--bar-size: 84%"><span>Brazil</span> (84%)</li>
-                                <li style="--bar-size: 6%"><span>USA</span> (6%)</li>
-                                <li style="--bar-size: 5%"><span>Portugal</span> (5%)</li>
-                                <li style="--bar-size: 1%"><span>Venezuela</span> (1%)</li>
+                                <li style="--bar-size: 84%"><span>Brazil (84%)</span></li>
+                                <li style="--bar-size: 6%"><span>United States (6%)</span></li>
+                                <li style="--bar-size: 5%"><span>Portugal (5%)</span></li>
+                                <li style="--bar-size: 1%"><span>Venezuela (1%)</span></li>
                             </ol>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#laptop"/></svg>
-                            <div style="font-size: .9em">Most used <b>web browsers</b></div>
+                            <div class="stat-description">Most used <b>web browsers</b></div>
                             <ol>
-                                <li style="--bar-size: 78%"><span>Chrome</span> (78%)</li>
-                                <li style="--bar-size: 5%"><span>Internet Explorer</span> (5%)</li>
-                                <li style="--bar-size: 5%"><span>Safari</span> (5%)</li>
-                                <li style="--bar-size: 4%"><span>Firefox</span> (4%)</li>
+                                <li style="--bar-size: 78%"><span>Chrome (78%)</span></li>
+                                <li style="--bar-size: 5%"><span>Internet Explorer (5%)</span></li>
+                                <li style="--bar-size: 5%"><span>Safari (5%)</span></li>
+                                <li style="--bar-size: 4%"><span>Firefox (4%)</span></li>
                             </ol>
                         </div>
-                    </dl>
+                    </div>
                 </div>
                 <div id="group-1-panel-4" class="tab-panel" role="tabpanel" aria-labelledby="group-1-tab-4" hidden>
-                    <dl class="stats-grid section-rsc">
+                    <div class="stats-grid section-rsc">
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#binoculars-fill"/></svg>
-                            <dt>258k</dt>
-                            <dd>Total <b>pageviews</b> for the RuneScape Classic Wiki this year</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>133%</b> from last year</div>
+                            <div class="stat-value">258<abbr>k</abbr></div>
+                            <div class="stat-description">Total <b>pageviews</b> for the RuneScape Classic Wiki this year</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>133%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#people-fill"/></svg>
-                            <dt>104k</dt>
-                            <dd>Total <b>visitors</b> for the RuneScape Classic Wiki this year</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>108%</b> from last year</div>
+                            <div class="stat-value">104<abbr>k</abbr></div>
+                            <div class="stat-description">Total <b>visitors</b> to the RuneScape Classic Wiki this year</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>108%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#collection-fill"/></svg>
-                            <dt>2.16</dt>
-                            <dd>Average number of <b>pages viewed</b> per session</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>47%</b> from last year</div>
+                            <div class="stat-value">2.16</div>
+                            <div class="stat-description">Average number of <b>pages viewed</b> per session</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>47%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#watch"/></svg>
-                            <dt>1:18</dt>
-                            <dd>Average <b>time spent</b> per session, ending after 30 mins. of inactivity</dd>
-                            <div class="change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>12%</b> from last year</div>
+                            <div class="stat-value">1:18</div>
+                            <div class="stat-description">Average <b>time spent</b> per session, ending after 30 mins. of inactivity</div>
+                            <div class="stat-change"><svg class="change-icon" width="16" height="16"><use href="images/icons/bootstrap-icons.svg#caret-up-fill"/></svg>Up <b>12%</b> from last year</div>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#geo-alt"/></svg>
-                            <div style="font-size: .9em">Top <b>countries of origin</b></div>
+                            <div class="stat-description">Top <b>countries of origin</b></div>
                             <ol>
-                                <li style="--bar-size: 83%"><span>USA</span> (83%)</li>
-                                <li style="--bar-size: 4%"><span>UK</span> (4%)</li>
-                                <li style="--bar-size: 2%"><span>Canada</span> (2%)</li>
-                                <li style="--bar-size: 1%"><span>Netherlands</span> (1%)</li>
+                                <li style="--bar-size: 83%"><span>United States (83%)</span></li>
+                                <li style="--bar-size: 4%"><span>United Kingdom (4%)</span></li>
+                                <li style="--bar-size: 2%"><span>Canada (2%)</span></li>
+                                <li style="--bar-size: 1%"><span>Netherlands (1%)</span></li>
                             </ol>
                         </div>
                         <div class="stat">
                             <svg class="stat-icon" width="24" height="24"><use href="images/icons/bootstrap-icons.svg#laptop"/></svg>
-                            <div style="font-size: .9em">Most used <b>web browsers</b></div>
+                            <div class="stat-description">Most used <b>web browsers</b></div>
                             <ol>
-                                <li style="--bar-size: 69%"><span>Internet Explorer</span> (69%)</li>
-                                <li style="--bar-size: 21%"><span>Chrome</span> (21%)</li>
-                                <li style="--bar-size: 3%"><span>Firefox</span> (3%)</li>
-                                <li style="--bar-size: 2%"><span>Edge</span> (2%)</li>
+                                <li style="--bar-size: 69%"><span>Internet Explorer (69%)</span></li>
+                                <li style="--bar-size: 21%"><span>Chrome (21%)</span></li>
+                                <li style="--bar-size: 3%"><span>Firefox (3%)</span></li>
+                                <li style="--bar-size: 2%"><span>Edge (2%)</span></li>
                             </ol>
                         </div>
-                    </dl>
+                    </div>
                 </div>
             </div>
             <p>Across both wikis we launched <a class="link" target="_blank" rel="noopener" href="https://runescape.wiki/w/RuneScape:One_Small_Wiki_Favour">One Small Wiki Favour</a>, a programme to reward new editors with bonds in-game for their contributions to the wiki. This has gotten over a hundred new editors involved and helped complete numerous wiki projects.</p>
             <p>In a RuneFest first, our editors hosted a panel to discuss all things wiki. It was a huge opportunity to talk with Jagex Moderators, who provided invaluable collaboration on a number of wiki projects. Check out a recording of the livestream!</p>
             <div class="traffic-container">
-                <div class="traffic-title">Daily pageviews for all wikis</div>
+                <div class="traffic-title">Daily pageviews, all wikis</div>
                 <div class="traffic-legend"></div>
                 <div class="traffic-graph"></div>
             </div>

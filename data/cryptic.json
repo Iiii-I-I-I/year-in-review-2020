@@ -31,7 +31,7 @@
                     "d": "Vanescula Drakan"
                 },
                 "correctAnswer": "d",
-                "explanation": "Count Draynor Drakan also has two brothers, Lowerniel Drakan and Ranis Drakan."
+                "explanation": "Count Draynor Drakan also has two brothers: Lowerniel Drakan and Ranis Drakan."
             },
             {
                 "question": "Which tree in RuneScape is a misspelling of a real-life tree?",
@@ -74,7 +74,7 @@
                     "d": "Ilujanka"
                 },
                 "correctAnswer": "b",
-                "explanation": "\"Kerapac objects, of course. As do some of the remaining council. ... They tell me that it's dark magic. That there is something wrong about it. ... Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
+                "explanation": "\"Kerapac objects, of course. As do some of the remaining council. ... They tell me that it's dark magic. ... Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
             },
             {
                 "question": "Of the four following cities, which one is furthest south?",
@@ -95,7 +95,7 @@
                     "d": "Ika tha nke rius Zanka Tdaterius"
                 },
                 "correctAnswer": "b",
-                "explanation": "The same spell was previously used in the <a class='link' href='https://runescape.wiki/w/Demon_Slayer_(historical)' target='_blank' rel='noopener'>Demon Slayer quest</a>, before it was reworked in 2013, to banish the demon Delrith (albeit with the words in random order)."
+                "explanation": "The same spell was previously used in <a class='link' href='https://runescape.wiki/w/Demon_Slayer_(historical)' target='_blank' rel='noopener'>Demon Slayer</a>, before it was reworked in 2013, to banish the demon Delrith (albeit with word order randomised)."
             },
             {
                 "question": "The God Wars Dungeon, frozen for thousands of years, eventually thawed in the Fifth Age. Who rediscovered the temple and its combatants?",

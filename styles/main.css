@@ -8,8 +8,8 @@
     font-weight: 400;
     font-display: swap;
     src: local('Inter-Regular'),
-         url('../fonts/Inter-Regular.woff2?v=3.13') format('woff2'),
-         url('../fonts/Inter-Regular.woff?v=3.13') format('woff');
+         url('../fonts/Inter-Regular.woff2') format('woff2'),
+         url('../fonts/Inter-Regular.woff') format('woff');
 }
 
 @font-face {
@@ -18,8 +18,8 @@
     font-weight: 400;
     font-display: swap;
     src: local('Inter-Italic'),
-         url('../fonts/Inter-Italic.woff2?v=3.13') format('woff2'),
-         url('../fonts/Inter-Italic.woff?v=3.13') format('woff');
+         url('../fonts/Inter-Italic.woff2') format('woff2'),
+         url('../fonts/Inter-Italic.woff') format('woff');
 }
 
 @font-face {
@@ -28,8 +28,8 @@
     font-weight: 700;
     font-display: swap;
     src: local('Inter-Bold'),
-         url('../fonts/Inter-Bold.woff2?v=3.13') format('woff2'),
-         url('../fonts/Inter-Bold.woff?v=3.13') format('woff');
+         url('../fonts/Inter-Bold.woff2') format('woff2'),
+         url('../fonts/Inter-Bold.woff') format('woff');
 }
 
 @font-face {
@@ -38,8 +38,8 @@
     font-weight: 800;
     font-display: swap;
     src: local('Inter-ExtraBold'),
-         url('../fonts/Inter-ExtraBold.woff2?v=3.13') format('woff2'),
-         url('../fonts/Inter-ExtraBold.woff?v=3.13') format('woff');
+         url('../fonts/Inter-ExtraBold.woff2') format('woff2'),
+         url('../fonts/Inter-ExtraBold.woff') format('woff');
 }
 
 /* ------------
@@ -57,13 +57,13 @@ html {
 }
 
 body {
-    --bg-01: #f4f4f4;
+    --bg-01: #f4f5f6;
     --bg-02: #fcfcfc;
     --bg-03: #fff;
 
-    --text-01: rgba(0, 0, 0, .75);
-    --text-02: rgba(0, 0, 0, .7);
-    --text-03: rgba(0, 0, 0, .55);
+    --text-01: #3a454a;
+    --text-02: #404a4e;
+    --text-03: #777f83;
 
     --font-stack: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
 
@@ -72,8 +72,8 @@ body {
         0 18px 36px -10px rgba(0, 0, 0, .3),
         0 -12px 36px -6px rgba(0, 0, 0, .025);
     --shadow-02:
-        0 6px 10px -4px rgba(0, 0, 0, .2),
-        0 18px 30px -8px rgba(0, 0, 0, .07);
+        0 6px 10px -4px rgba(0, 0, 0, .3),
+        0 12px 30px -8px rgba(0, 0, 0, .1);
     --shadow-03:
         0 4px 8px -4px rgba(0, 0, 0, .05),
         0 12px 24px 0 rgba(0, 0, 0, .04);
@@ -81,8 +81,8 @@ body {
     --border-radius: .6em;
 
     --anim-length: 10px;
-    --anim-slow: 275ms;
-    --anim-fast: 150ms;
+    --anim-slow: 350ms;
+    --anim-fast: 125ms;
 
     --ease-in-out-expo: cubic-bezier(0.4, 0, 0.2, 1);
     --ease-in-out-quad: cubic-bezier(0.46, 0.03, 0.52, 0.96);
@@ -113,7 +113,7 @@ body.theme-dark {
 body {
     color: var(--text-02);
     background-color: var(--bg-02);
-    font: 1em/1.45 var(--font-stack);
+    font: 1em/1.5 var(--font-stack);
     margin: 0;
 }
 
@@ -133,9 +133,10 @@ h1 {
 h2 {
     font-size: 2em;
     letter-spacing: -0.017em;
+    line-height: 1.2;
+    margin: 0 0 1rem;
 }
 
-h2,
 h3 {
     line-height: 1.2;
     margin: 0 0 1rem;
@@ -162,6 +163,10 @@ p {
     text-decoration: underline;
 }
 
+.theme-dark .link {
+    color: #46a2da;
+}
+
 code {
     font-family: ui-monospace, 'Menlo', 'Courier', monospace;
 }
@@ -170,14 +175,6 @@ code {
    using polyfill from <https://github.com/WICG/focus-visible> */
 .js-focus-visible :focus:not(.focus-visible) {
     outline: none;
-}
-
-.theme-dark .link {
-    color: #46a2da;
-}
-
-.theme-dark section {
-    border-color: #444;
 }
 
 @media screen and (prefers-reduced-motion) {
@@ -297,7 +294,7 @@ code {
    -------------- */
 
 header {
-    --header-size: 4rem;
+    --header-size: 5.5rem;
 
     height: 100vh;
     display: flex;
@@ -305,39 +302,41 @@ header {
     align-items: center;
     flex-flow: row wrap;
     background-color: var(--bg-01);
-    /* transform: skewY(-4deg); */
 }
 
-.h1-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-self: flex-end;
-    margin: -3em 0 3.5em;
+.title {
+    margin-top: -1em;
 }
 
-.h1-container span {
+.title > span {
     display: block;
-    animation: 1.4s both var(--ease-out-quad);
-    animation-name: fade-in, enter-top;
 }
 
-.h1-container span:nth-child(1) {
-    animation-delay: .2s;
-    font-size: calc(var(--header-size) * 2.5);
+.title .top {
+    font-size: calc(var(--header-size) * 2.4);
 }
 
-.h1-container span:nth-child(2) {
-    animation-delay: .5s;
+.title .center {
     color: var(--text-03);
     font-size: var(--header-size);
-    margin: .1em 0 -0.1em;
+    margin: -0.25em 0 -0.1em;
 }
 
-.h1-container span:nth-child(3) {
-    animation-delay: .8s;
-    font-size: calc(var(--header-size) * 1.25);
+.title .bottom {
+    font-size: calc(var(--header-size) * 1.15);
 }
+
+@media screen and (max-width: 900px), screen and (max-height: 900px) {
+
+    header {
+        --header-size: 11vmin;
+    }
+
+}
+
+/* -------------
+       CARDS
+   ------------- */
 
 /* @TODO: at <900px make it overflow and scroll */
 .wiki-cards {
@@ -382,9 +381,10 @@ header {
     border-radius: var(--border-radius);
     background-position: center;
     background-size: cover;
+    transform: translateZ(0); /* force GPU to fix filter: causing background-size: to be 1px off */
 }
 
-/* box-shadow on a pseudo-element so it can be manipulated separately */
+/* larger box-shadow on a pseudo-element so it can be manipulated separately */
 .wiki-card::after {
     content: '';
     position: absolute;
@@ -454,14 +454,6 @@ header {
 
 @media screen and (max-width: 501px) {
 
-    header {
-        height: initial;
-    }
-
-    .h1-container {
-        margin-top: 5em;
-    }
-
     .wiki-cards {
         grid-template-columns: none;
         grid-gap: .75em;
@@ -471,24 +463,12 @@ header {
         height: 7em;
     }
 
-    .container {
-        margin-top: 5em;
-    }
-
 }
 
 @media screen and (min-width: 501px) and (max-width: 900px) {
 
     .wiki-cards {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-@media screen and (max-width: 900px) {
-
-    header {
-        --header-size: 3.25rem;
     }
 
 }
@@ -515,8 +495,12 @@ main.container {
     margin-top: 8rem;
 }
 
+section + section {
+    margin-top: 6rem;
+}
+
 .button {
-    font-family: var(--font-stack);
+    font-family: inherit;
     font-size: 1em;
     font-weight: bold;
     border: none;
@@ -526,50 +510,15 @@ main.container {
 }
 
 .button:hover {
-    filter: brightness(.95) saturate(1.4);
+    filter: brightness(.95) saturate(1.3);
 }
 
-blockquote {
-    position: relative;
-    background-color: var(--bg-01);
-    border-radius: var(--border-radius);
-    width: max-content;
-    padding: 2em 3em;
-    margin: 3em auto;
-    overflow: hidden;
-}
-
-blockquote::before {
-    content: open-quote;
-    position: absolute;
-    top: -13px;
-    left: -14px;
-    font-size: 10em;
-    font-weight: bold;
-    font-family: 'Garamond', 'Baskerville', 'Georgia', serif;
-    line-height: 1;
-    opacity: .075;
-
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-blockquote p {
-    font-size: 1.25em;
-    margin: .5em 0 1em;
-}
-
-blockquote cite {
-    font-style: normal;
+.theme-dark section {
+    border-color: #444;
 }
 
 .theme-dark .button:hover {
     filter: brightness(1.25) saturate(.8);
-}
-
-.theme-dark blockquote {
-    background-color: var(--bg-03);
 }
 
 /* ------------------
@@ -626,7 +575,7 @@ blockquote cite {
     height: calc(100% - var(--tab-gap) * 2);
     width: calc(100% / var(--tab-count) - var(--tab-gap) * 2);
     transform: translateX(calc(var(--index) * 100% + var(--index) * var(--tab-gap) * 2));
-    transition: calc(var(--anim-slow) + var(--anim-fast)) transform var(--ease-in-out-expo);
+    transition: transform calc(var(--anim-slow) + var(--anim-fast)) var(--ease-in-out-expo);
 
     background-color: var(--bg-03);
     border-radius: var(--border-radius);
@@ -635,7 +584,7 @@ blockquote cite {
 
 .tab {
     width: calc(100% / var(--tab-count));
-    transition: calc(var(--anim-slow) + var(--anim-fast)) color ease-in-out;
+    transition: color calc(var(--anim-slow) + var(--anim-fast)) ease-in-out;
     z-index: 1;
 
     color: var(--text-03);
@@ -701,11 +650,7 @@ blockquote cite {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1em;
-    margin: 0 var(--breakout-margin) 3em;
-}
-
-.stat-header {
-    margin: 0 0 .7rem;
+    margin: 0 var(--breakout-margin) 3.5em;
 }
 
 .stat {
@@ -713,49 +658,46 @@ blockquote cite {
     padding: 1.25em;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-03);
-}
-
-.stat h3 {
-    font-size: 1.1em;
+    will-change: transform; /* prevent strange one-pixel up/down shift in ff/chrome */
 }
 
 .stat-icon {
     display: block;
     color: var(--text-03);
-    margin-bottom: .75em;
+    margin-bottom: .85em;
 }
 
-/* stat number */
-.stat dt {
-    display: block;
+.stat-value {
     color: var(--stat-color);
     font-size: 3em;
     font-weight: 800;
+    letter-spacing: -0.03ch;
     line-height: 1;
-    margin-bottom: .25rem;
 }
 
-/* stat description */
-.stat dd {
-    margin: 0 0 1em 0;
+.stat abbr {
+    margin-left: .05em;
+}
+
+.stat-description {
     font-size: .9em;
+    margin-top: .1rem;
 }
 
-.change {
-    color: var(--text-02);
+.stat-change {
     font-size: .85em;
-}
-
-.change b {
-    color: var(--stat-color);
+    margin-top: .85rem;
 }
 
 .change-icon {
-    color: var(--text-03);
-    display: inline-block;
-    margin: 0 .25em 0 0;
     position: relative;
-    top: .25em;
+    top: .2em;
+    margin-right: .25em;
+}
+
+.stat-change b {
+    color: var(--stat-color);
+    filter: brightness(.95);
 }
 
 /* browser/country stats */
@@ -765,19 +707,23 @@ blockquote cite {
 }
 
 .stat li {
-    color: var(--text-03);
     font-size: .85em;
     background-color: var(--bg-01);
-    filter: brightness(1.015);
-    border-radius: calc(var(--border-radius) * .4);
+    border-radius: calc(var(--border-radius) * .45);
 
     position: relative;
-    padding: 0 .5em;
+    padding: .05em .5em;
     list-style: none;
+    overflow: hidden;
 }
 
 .stat li + li {
-    margin-top: .4em;
+    margin-top: .5em;
+}
+
+.stat li span {
+    color: var(--text-01);
+    mix-blend-mode: luminosity;
 }
 
 .stat li::before {
@@ -787,31 +733,21 @@ blockquote cite {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: -1;
-
     background: linear-gradient(to right, var(--stat-color) var(--bar-size), transparent 0);
-    border-radius: calc(var(--border-radius) * .4);
-    filter: brightness(1.15) saturate(.7);
-}
-
-.stat li span {
-    color: var(--text-02);
+    filter: brightness(1.2) saturate(.7);
 }
 
 .section-rs .stat {
     --stat-color: #4eabe4;
 }
-
 .section-osrs .stat {
-    --stat-color: #d6a175;
+    --stat-color: #cb976c;
 }
-
 .section-ptbr .stat {
     --stat-color: #908df4;
 }
-
 .section-rsc .stat {
-    --stat-color: #61bf41;
+    --stat-color: #65b948;
 }
 
 .theme-dark .stat li {
@@ -890,11 +826,6 @@ blockquote cite {
 
 @media screen and (min-width: 1100px) {
 
-    /* .stats-grid {
-        margin-left: 0;
-        margin-right: 0;
-    } */
-
     .stats-grid {
         --breakout-margin: -7em;
     }
@@ -909,7 +840,7 @@ blockquote cite {
     background-color: var(--bg-03);
     border-radius: var(--border-radius);
     padding: 1.5em 2em 2.25em;
-    margin-top: 2.5em;
+    margin-top: 3em;
     box-shadow: var(--shadow-03);
     position: relative;
 }
@@ -921,7 +852,6 @@ blockquote cite {
 }
 
 .traffic-title {
-    color: var(--text-01);
     font-weight: bold;
     margin-bottom: .25em;
 }
@@ -955,13 +885,16 @@ blockquote cite {
 }
 
 .dygraph-annotation {
+    --tip-color: #198ec3;
+    --tip-color: #4f616b;
+
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: visible;
 
     font-weight: bold;
-    background-color: #0087c4;
+    background-color: var(--tip-color);
     color: white !important; /* override inline style */
     border: none !important; /* override inline style */
     border-radius: calc(var(--border-radius) * .6);
@@ -970,7 +903,7 @@ blockquote cite {
 
 .tooltip-hidden .tooltip {
     opacity: 0;
-    transform: translate(calc(-50% + 12px), 5px);
+    transform: translate(calc(-50% + 12px), 4px);
 }
 
 .tooltip {
@@ -978,10 +911,10 @@ blockquote cite {
     left: 0;
     bottom: 0;
     opacity: 1;
-    transform: translate(calc(-50% + 12px), 0); /* 12px = half of annotation width */
+    transform: translate3d(calc(-50% + 12px), 0, 0); /* 12px = half of annotation width */
     transition: .2s ease;
 
-    background-color: #0087c4;
+    background-color: var(--tip-color);
     font-weight: normal;
     text-align: left;
     line-height: 1.3;
@@ -1015,20 +948,16 @@ blockquote cite {
    -------------- */
 
 .quiz-button-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1em;
     margin: 2em auto 0;
-    height: 7em;
 }
 
 .quiz-start {
-    flex: 1;
-    color: #477539;
-    background-color: #d9f1d1;
-    margin: .5em;
-    padding: .5em;
-    height: 100%;
+    color: var(--text-02);
+    background-color: var(--bg-01);
+    padding: 2em .5em;
 }
 
 .quiz-group {
@@ -1059,12 +988,11 @@ blockquote cite {
     background-color: var(--bg-01);
     border-radius: calc(var(--border-radius) * .6);
     padding: .6em 1.2em;
-    transition: .2s ease;
-    transition-property: background-color, color;
+    transition: filter .2s var(--ease-in-out-expo);
 }
 
 .unanswered .quiz-choice:hover {
-    background-color: #e9e9e9;
+    filter: brightness(.95) saturate(1.3);
     cursor: pointer;
 }
 
@@ -1095,7 +1023,7 @@ blockquote cite {
 
 .quiz-explanation {
     color: var(--text-03);
-    margin-top: 1em;
+    margin-top: 1.2em;
 }
 
 .quiz-results {
@@ -1137,12 +1065,68 @@ blockquote cite {
     background-color: var(--bg-03);
 }
 
+@media screen and (max-width: 450px) {
+
+    .quiz-button-group {
+        grid-template-columns: none;
+    }
+
+    .quiz-start {
+        padding: 1em .5em;
+    }
+
+}
+
 @media screen and (max-width: 600px) {
 
     .quiz-group {
         width: 100%;
     }
 
+}
+
+/* --------------
+       QUOTE
+   -------------- */
+
+blockquote {
+    position: relative;
+    background-color: var(--bg-01);
+    border-radius: var(--border-radius);
+    width: max-content;
+    padding: 2em 3em;
+    margin: 3em auto;
+    overflow: hidden;
+}
+
+blockquote::before {
+    content: '“';
+    position: absolute;
+    top: -10px;
+    left: -15px;
+    font-size: 10em;
+    font-weight: bold;
+    font-family: 'Garamond', 'Baskerville', 'Georgia', serif;
+    line-height: 1;
+    opacity: .075;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+blockquote p {
+    font-size: 1.1em;
+    font-style: italic;
+    margin: .5em 0 1em;
+}
+
+blockquote cite {
+    font-style: normal;
+}
+
+.theme-dark blockquote {
+    background-color: var(--bg-03);
 }
 
 /* --------------
@@ -1184,7 +1168,7 @@ footer p {
 
 .social {
     text-decoration: none;
-    padding: .85em 1.5em;
+    padding: 1em 1.5em;
 }
 
 .social-icon {

@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', (function () {
         }
     }
 
+    // don't care about storing this preference because users are not likely to return
     function initToogle() {
         let toogle = get('.toogle');
 
@@ -63,9 +64,9 @@ document.addEventListener('DOMContentLoaded', (function () {
         function throttleMoveHandler(delay) {
             let time = Date.now();
 
-            return function (e) {
+            return function (event) {
                 if ((time + delay - Date.now()) < 0) {
-                    moveHandler(e);
+                    moveHandler(event);
                     time = Date.now();
                 }
             };
@@ -74,15 +75,15 @@ document.addEventListener('DOMContentLoaded', (function () {
         function moveHandler(event) {
             // get position of mouse cursor within element
             let rect = event.currentTarget.getBoundingClientRect(),
-                xVal = event.clientX - rect.left,
-                yVal = event.clientY - rect.top;
+                xPos = event.clientX - rect.left,
+                yPos = event.clientY - rect.top;
 
             // calculate rotation value along the axes
             const multiplier = 15,
                   cardWidth = event.currentTarget.clientWidth,
                   cardHeight = event.currentTarget.clientHeight,
-                  yRotate = multiplier * ((xVal - cardWidth / 2) / cardWidth),
-                  xRotate = -multiplier * ((yVal - cardHeight / 2) / cardHeight);
+                  yRotate = multiplier * ((xPos - cardWidth / 2) / cardWidth),
+                  xRotate = -multiplier * ((yPos - cardHeight / 2) / cardHeight);
 
             // generate string for transform and apply styles
             const transform = `perspective(750px) scale(1.05) rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
@@ -138,29 +139,27 @@ document.addEventListener('DOMContentLoaded', (function () {
             }
 
             function hideAndSlide(direction) {
-                let currPanel = get(`#${currTab.getAttribute('aria-controls')}`),
-                    nextPanel = get(`#${nextTab.getAttribute('aria-controls')}`),
-                    enterDuration = 275, // --anim-slow
-                    exitDuration = 150; // --anim-fast
+                let currPanel = get('#' + currTab.getAttribute("aria-controls")),
+                    nextPanel = get('#' + nextTab.getAttribute("aria-controls")),
+                    enterDuration = 350, // --anim-slow
+                    exitDuration = 125; // --anim-fast
 
-                // deselect current tab
+                // deselect current tab, select clicked tab
                 currTab.setAttribute('aria-selected', false);
-
-                // select clicked tab
                 nextTab.setAttribute('aria-selected', true);
 
                 // hide old panel, reveal new panel
-                currPanel.classList.add(`slide-${direction}-fade-out`);
+                currPanel.classList.add('slide', `slide-${direction}-fade-out`);
 
-                setTimeout(function () {
+                window.setTimeout(function () {
                     currPanel.setAttribute('hidden', '');
-                    currPanel.classList.remove(`slide-${direction}-fade-out`);
-                    nextPanel.classList.add(`slide-${direction}-fade-in`);
+                    currPanel.classList.remove('slide', `slide-${direction}-fade-out`);
                     nextPanel.removeAttribute('hidden');
+                    nextPanel.classList.add('slide', `slide-${direction}-fade-in`);
                 }, exitDuration);
 
-                setTimeout(function () {
-                    nextPanel.classList.remove(`slide-${direction}-fade-in`);
+                window.setTimeout(function () {
+                    nextPanel.classList.remove('slide', `slide-${direction}-fade-in`);
                 }, enterDuration + exitDuration);
 
                 // set --index for sliding background on .tab-list::before
@@ -186,14 +185,17 @@ document.addEventListener('DOMContentLoaded', (function () {
         drawGraph();
 
         function setColors() {
+            // tooltip color is set in main.css
             if (document.body.classList.contains('theme-dark')) {
                 gridColor = '#393939';
                 hairColor = '#414141';
                 lineColor = '#389dda';
             } else {
                 gridColor = '#efefef';
+                // hairColor = '#e8e8e8';
+                // lineColor = '#50aee6';
                 hairColor = '#e8e8e8';
-                lineColor = '#50aee6';
+                lineColor = '#91a0aa';
             }
         }
 
@@ -236,10 +238,8 @@ document.addEventListener('DOMContentLoaded', (function () {
                             // reposition tooltip if it goes offscreen
                             if (leftPos < 0) {
                                 tooltip.style.left = -leftPos + margin + 'px';
-                                console.log(tooltip);
                             } else if (rightPos < 0) {
                                 tooltip.style.left = rightPos - margin + 'px';
-                                console.log(tooltip);
                             }
                         });
 
@@ -256,12 +256,12 @@ document.addEventListener('DOMContentLoaded', (function () {
                             views = data.series[0].yHTML;
 
                         date = new Date(date).toLocaleString(undefined, dateOptions);
-                        return `<div>${date}</div><div><b>Views: <span style="color: ${lineColor}">${views}</span></b></div>`;
+                        return `<div>${date}</div><div><b>Views: ${views}</b></div>`;
                     },
                     axes: {
                         y: {
                             drawAxis: false,
-                            valueRange: [null, 4750000],
+                            valueRange: [0, 4750000],
                             valueFormatter: function (num, opts, series, dygraph, row, col) {
                                 // this is needed to get actual pageview # because rollPeriod averages it
                                 return Math.round(dygraph.getValue(row, col)).toLocaleString();
@@ -295,23 +295,22 @@ document.addEventListener('DOMContentLoaded', (function () {
                         text: "The Fremennik Exiles is released"
                     }, {
                         x: "2019/11/14",
-                        text: "Twisted League is released",
-                        tickHeight: 20
+                        text: "Twisted League is released"
                     }, {
                         x: "2020/02/06",
                         text: "The Nightmare of Ashihama is released"
                     }, {
                         x: "2020/03/14",
                         text: "Traffic rises during the COVID-19 pandemic",
-                        tickHeight: 25
+                        tickHeight: 30
                     }, {
-                        x: "2020/04/20",
-                        text: "Just showing off tickHeight differences",
-                        tickHeight: 15
+                        x: "2020/04/18",
+                        text: "Just demoing tickHeight differences",
+                        tickHeight: 10
                     }, {
                         x: "2020/05/01",
                         text: "Traffic drops as US gradually reopens",
-                        tickHeight: 30
+                        tickHeight: 27
                     }, {
                         x: "2020/06/04",
                         text: "Sins of the Father is released"
@@ -319,13 +318,15 @@ document.addEventListener('DOMContentLoaded', (function () {
                 ],
                 tooltips = [];
 
+            // @TODO: increase tick height and change thickness
             annotations.forEach((annotation, i) => {
                 annotation.series = 'Pageviews';
                 annotation.shortText = i + 1;
                 annotation.width = 24;
                 annotation.height = 24;
                 annotation.cssClass = `tooltip-hidden annotation-${i + 1}`;
-                if (annotation.tickHeight === undefined) annotation.tickHeight = 17;
+                annotation.tickWidth = 2;
+                if (annotation.tickHeight === undefined) annotation.tickHeight = 24;
 
                 createTooltip(annotation.x, annotation.text);
             });
@@ -379,12 +380,11 @@ document.addEventListener('DOMContentLoaded', (function () {
 
             let buttonGroup = document.createElement('div');
 
-            quiz.appendChild(buttonGroup);
             buttonGroup.classList.add('quiz-button-group');
-
             createButton('The<br />RuneScape quiz', 'rs');
             createButton('The Old School<br />RuneScape quiz', 'osrs');
             createButton('The RuneScape<br />Classic quiz (fake)', 'rsc');
+            quiz.appendChild(buttonGroup);
 
             function createButton(text, game) {
                 let button = document.createElement('button');
@@ -412,6 +412,7 @@ document.addEventListener('DOMContentLoaded', (function () {
                         return;
                 }
 
+                // @TODO:
                 // pt-br version? classic version?
                 // more possible question formats:
                 //     listen to audio
