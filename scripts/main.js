@@ -242,14 +242,6 @@ document.addEventListener('DOMContentLoaded', (function () {
                                 tooltip.style.left = rightPos - margin + 'px';
                             }
                         });
-
-                        // minor visual fixes
-                        let labels = getAll('.dygraph-axis-label-x'),
-                            firstLabel = labels[0].parentNode,
-                            lastLabel = labels[labels.length - 1].parentNode;
-
-                        firstLabel.style.left = '0';
-                        lastLabel.style.textAlign = 'center';
                     },
                     legendFormatter: function (data) {
                         let date = data.xHTML,
@@ -261,7 +253,7 @@ document.addEventListener('DOMContentLoaded', (function () {
                     axes: {
                         y: {
                             drawAxis: false,
-                            valueRange: [0, 4750000],
+                            valueRange: [0, 5500000],
                             valueFormatter: function (num, opts, series, dygraph, row, col) {
                                 // this is needed to get actual pageview # because rollPeriod averages it
                                 return Math.round(dygraph.getValue(row, col)).toLocaleString();
@@ -288,15 +280,6 @@ document.addEventListener('DOMContentLoaded', (function () {
             // create annotations
             let annotations = [
                     {
-                        x: "2019/07/24",
-                        text: "Song of the Elves is released"
-                    }, {
-                        x: "2019/09/26",
-                        text: "The Fremennik Exiles is released"
-                    }, {
-                        x: "2019/11/14",
-                        text: "Twisted League is released"
-                    }, {
                         x: "2020/02/06",
                         text: "The Nightmare of Ashihama is released"
                     }, {
@@ -304,21 +287,26 @@ document.addEventListener('DOMContentLoaded', (function () {
                         text: "Traffic rises during the COVID-19 pandemic",
                         tickHeight: 30
                     }, {
-                        x: "2020/04/18",
-                        text: "Just demoing tickHeight differences",
-                        tickHeight: 10
-                    }, {
                         x: "2020/05/01",
-                        text: "Traffic drops as US gradually reopens",
-                        tickHeight: 27
+                        text: "Traffic drops as US gradually reopens"
                     }, {
                         x: "2020/06/04",
-                        text: "Sins of the Father is released"
+                        text: "Sins of the Father is released",
+                        tickHeight: 25
+                    }, {
+                        x: "2020/07/16",
+                        text: "Ferox Enclave is released"
+                    }, {
+                        x: "2020/10/14",
+                        text: "RuneScape is released on Steam"
+                    }, {
+                        x: "2020/10/28",
+                        text: "Trailblazer League begins",
+                        tickHeight: 45
                     }
-                ],
-                tooltips = [];
+                ];
+            let tooltips = [];
 
-            // @TODO: increase tick height and change thickness
             annotations.forEach((annotation, i) => {
                 annotation.series = 'Pageviews';
                 annotation.shortText = i + 1;
@@ -326,7 +314,7 @@ document.addEventListener('DOMContentLoaded', (function () {
                 annotation.height = 24;
                 annotation.cssClass = `tooltip-hidden annotation-${i + 1}`;
                 annotation.tickWidth = 2;
-                if (annotation.tickHeight === undefined) annotation.tickHeight = 24;
+                if (annotation.tickHeight === undefined) annotation.tickHeight = 20;
 
                 createTooltip(annotation.x, annotation.text);
             });
