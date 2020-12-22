@@ -744,7 +744,6 @@ section + section {
     padding: 1.25em;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-03);
-    will-change: transform; /* prevent strange one-pixel up/down shift in ff/chrome */
 }
 
 .stat-icon {
