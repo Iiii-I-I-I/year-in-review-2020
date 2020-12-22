@@ -10,13 +10,13 @@
 
     <link rel="preload" href="styles/main.css" as="style">
     <link rel="preload" href="scripts/main.js" as="script">
-    <link rel="preload" href="fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="scripts/parallax.min.js" as="script">
     <link rel="preload" href="fonts/Inter-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
     <link rel="stylesheet" href="styles/dygraph.min.css">
     <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/parallax.min.js" defer></script>
     <script src="scripts/dygraph.min.js" defer></script>
     <script src="scripts/crosshair.min.js" defer></script>
     <script src="scripts/focus-visible.min.js" defer></script>
@@ -38,24 +38,24 @@
         </h1>
         <div class="plants">
             <div class="plants-side plants-top">
-                <div class="plant plant-3" style="--left: -3vw"></div>
-                <div class="plant plant-4" style="--left: 16vw; --scale: 1.25"></div>
-                <div class="plant plant-1" style="--left: 41vw; --scale: 1.25"></div>
-                <div class="plant plant-11" style="--left: 64vw"></div>
-                <div class="plant plant-6" style="--right: 1vw; --scale: 1.05"></div>
+                <div class="plant plant-3" data-depth="0.4" style="--left: -4vw; --width: 40vmin"></div>
+                <div class="plant plant-4" data-depth="0.3" style="--left: 10vw; --width: 60vmin"></div>
+                <div class="plant plant-1" data-depth="0.2" style="--left: 37vw; --width: 58vmin"></div>
+                <div class="plant plant-11" data-depth="0.35" style="--left: 61vw; --width: 50vmin"></div>
+                <div class="plant plant-6" data-depth="0.2" style="--left: 78vw; --width: 40vmin"></div>
             </div>
             <div class="plants-side plants-bottom">
-                <div class="plant plant-5" style="--left: -3vw"></div>
-                <div class="plant plant-10" style="--left: 5vw; --translate: -25px; --scale: 1.1"></div>
-                <div class="plant plant-9" style="--left: 24vw; --translate: 40px; --scale: 1.1"></div>
-                <div class="plant plant-2" style="--left: 33vw; --translate: 20px"></div>
-                <div class="plant plant-7" style="--left: 55vw; --translate: -40px; --scale: 1.2"></div>
-                <div class="plant plant-8" style="--right: -2vw"></div>
+                <div class="plant plant-5" data-depth="0.4" style="--left: -5vw; --width: 32vmin"></div>
+                <div class="plant plant-10" data-depth="0.3" style="--left: 3vw; --width: 50vmin"></div>
+                <div class="plant plant-9" data-depth="0.2" style="--left: 24vw; --width: 27vmin; --top: 50px"></div>
+                <div class="plant plant-2" data-depth="0.35" style="--left: 33vw; --width: 40vmin; --top: 30px"></div>
+                <div class="plant plant-7" data-depth="0.3" style="--left: 55vw; --width: 50vmin"></div>
+                <div class="plant plant-8" data-depth="0.2" style="--left: 73vw; --width: 47vmin"></div>
             </div>
         </div>
     </header>
     <main class="container">
-        <button class="toogle button" type="button">toogle</button>
+        <!-- <button class="toogle button" type="button">toogle</button> -->
         <!-- INTRO -->
         <section>
             <p>2020 has been a humanitarian disaster on a global scale and a fantastic year of growth for the RuneScapes Wiki. We've forged new collaborations and built new tools to make us the best possible resource for <i>RuneScape</i>, <i>Old School RuneScape</i>, and <i>RuneScape Classic</i>. We are Weird Gloop, the organisation behind the site, and we'd like to share this year's successes with you.</p>

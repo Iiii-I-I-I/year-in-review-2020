@@ -7,8 +7,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Inter-Regular'),
-         url('../fonts/Inter-Regular.woff2') format('woff2'),
+    src: url('../fonts/Inter-Regular.woff2') format('woff2'),
          url('../fonts/Inter-Regular.woff') format('woff');
 }
 
@@ -17,8 +16,7 @@
     font-style: italic;
     font-weight: 400;
     font-display: swap;
-    src: local('Inter-Italic'),
-         url('../fonts/Inter-Italic.woff2') format('woff2'),
+    src: url('../fonts/Inter-Italic.woff2') format('woff2'),
          url('../fonts/Inter-Italic.woff') format('woff');
 }
 
@@ -27,8 +25,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: local('Inter-Bold'),
-         url('../fonts/Inter-Bold.woff2') format('woff2'),
+    src: url('../fonts/Inter-Bold.woff2') format('woff2'),
          url('../fonts/Inter-Bold.woff') format('woff');
 }
 
@@ -37,8 +34,7 @@
     font-style: normal;
     font-weight: 800;
     font-display: swap;
-    src: local('Inter-ExtraBold'),
-         url('../fonts/Inter-ExtraBold.woff2') format('woff2'),
+    src: url('../fonts/Inter-ExtraBold.woff2') format('woff2'),
          url('../fonts/Inter-ExtraBold.woff') format('woff');
 }
 
@@ -315,7 +311,8 @@ header {
 }
 
 .title .top {
-    font-size: calc(var(--header-size) * 2.4);
+    font-size: calc(var(--header-size) * 2.5);
+    letter-spacing: -0.05em;
 }
 
 .title .center {
@@ -339,43 +336,36 @@ header {
 .plants-side {
     --spread: -25px;
 
-    display: flex;
     position: absolute;
+    left: var(--spread);
+    right: var(--spread);
+    height: calc(100% + var(--spread) * -2);
 }
 
 .plants-top {
     top: var(--spread);
-    left: var(--spread);
-    right: var(--spread);
-}
-
-.plants-top .plant {
-    transform-origin: top;
 }
 
 .plants-bottom {
-    align-items: flex-end;
     bottom: var(--spread);
-    left: var(--spread);
-    right: var(--spread);
+}
+
+.plant {
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    width: var(--width);
+    height: 100%;
+    margin-left: var(--left);
+    margin-top: var(--top);
+}
+
+.plant:nth-child(3n) {
+    z-index: 1;
 }
 
 .plants-bottom .plant {
     background-position: bottom;
-}
-
-.plant {
-    --size-tall: 40vmin;
-    --size-wide: 50vmin;
-    /* --size-tall: 350px;
-    --size-wide: 450px; */
-
-    background-repeat: no-repeat;
-    background-size: contain;
-    position: absolute;
-    left: var(--left);
-    right: var(--right);
-    transform: translateY(var(--translate, 0)) scale(var(--scale, 1));
 }
 
 .plant-1 {
@@ -420,29 +410,6 @@ header {
 
 .plant-11 {
     background-image: url(../images/plants/plant-11.svg);
-}
-
-.plant-1,
-.plant-4,
-.plant-7,
-.plant-8,
-.plant-10,
-.plant-11 {
-    width: var(--size-wide);
-    height: var(--size-wide);
-}
-
-.plant-2,
-.plant-3,
-.plant-5,
-.plant-6,
-.plant-9 {
-    width: var(--size-tall);
-    height: var(--size-tall);
-}
-
-.plant:nth-child(3n) {
-    z-index: 1;
 }
 
 @media screen and (max-width: 900px), screen and (max-height: 900px) {

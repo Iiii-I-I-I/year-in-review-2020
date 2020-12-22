@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', (function () {
+(function () {
     'use strict';
 
     function get(selector, scope = document) {
@@ -102,6 +102,22 @@ document.addEventListener('DOMContentLoaded', (function () {
                     card.classList.remove('card-hover');
                 });
             });
+        }
+    }
+
+    // uses <https://github.com/wagerfield/parallax>, plant illustrations by Merds
+    function initPlants() {
+        if (!window.matchMedia('(prefers-reduced-motion)').matches) {
+            let scenes = [get('.plants-top'), get('.plants-bottom')];
+
+            for (let scene of scenes) {
+                let plants = new Parallax(scene, {
+                    relativeInput: true,
+                    hoverOnly: true,
+                    originX: 0.28,
+                    limitY: 0 // no vertical movement
+                });
+            }
         }
     }
 
@@ -531,9 +547,10 @@ document.addEventListener('DOMContentLoaded', (function () {
         }
     }
 
-    initToogle();
+    // initToogle();
+    initPlants();
     initCards();
     initTabs();
     initGraph();
     initQuiz();
-})(), false);
+}());
