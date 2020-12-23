@@ -240,7 +240,7 @@ code {
 @keyframes enter-left {
 
    0% {
-       transform: translateX(calc(var(--anim-length) / (3/4)));
+       transform: translateX(calc(var(--anim-length) / .85));
    }
 
    100% {
@@ -264,7 +264,7 @@ code {
 @keyframes enter-right {
 
    0% {
-       transform: translateX(calc(var(--anim-length) * -1 / (3/4)));
+       transform: translateX(calc(var(--anim-length) / -0.85));
    }
 
    100% {
@@ -826,13 +826,13 @@ section + section {
     --stat-color: #4eabe4;
 }
 .section-osrs .stat {
-    --stat-color: #c79b77;
+    --stat-color: #ce986c;
 }
 .section-ptbr .stat {
     --stat-color: #908df4;
 }
 .section-rsc .stat {
-    --stat-color: #65b948;
+    --stat-color: #69bb4c;
 }
 
 .theme-dark .stat li {
@@ -924,7 +924,7 @@ section + section {
 .traffic-container {
     background-color: var(--bg-03);
     border-radius: var(--border-radius);
-    padding: 1.5em 2em 2.25em;
+    padding: 1.5em 2em;
     margin-top: 3em;
     box-shadow: var(--shadow-03);
     position: relative;
@@ -945,28 +945,35 @@ section + section {
     position: absolute;
     left: 2rem;
     font-size: .85rem;
+    background-color: var(--bg-03);
     line-height: 1.4;
     pointer-events: none;
-    z-index: 2;
+    z-index: 1;
 }
 
 .traffic-legend div:first-of-type {
-    display: inline-block;
-    background-color: var(--bg-03);
     padding: 7px 8px 0 0;
 }
 
 .traffic-legend div:last-of-type {
-    background-color: var(--bg-03);
-    padding: 4px 8px 4px 0;
-    margin-top: -4px;
+    padding: 0 8px 4px 0;
 }
 
-.dygraph-axis-label-x {
-    color: var(--text-02);
-    background-color: var(--bg-03);
+.traffic-labels {
+    display: flex;
+    justify-content: space-between;
     font-size: .85rem;
     padding-top: .75em;
+    width: calc(100% - 5px);
+}
+
+.month-label {
+    flex: 1;
+    text-align: center;
+}
+
+.short-month {
+    display: none;
 }
 
 .dygraph-annotation {
@@ -978,17 +985,14 @@ section + section {
     align-items: center;
     overflow: visible;
 
-    font-weight: bold;
-    background-color: var(--tip-color);
     color: white !important; /* override inline style */
+    font-weight: bold;
+    line-height: 1;
+    background-color: var(--tip-color);
     border: none !important; /* override inline style */
-    border-radius: calc(var(--border-radius) * .6);
+    /* border-radius: calc(var(--border-radius) * .6); */
+    border-radius: 10em;
     cursor: default; /* don't want text cursor appearing */
-}
-
-.tooltip-hidden .tooltip {
-    opacity: 0;
-    transform: translate(calc(-50% + 12px), 4px);
 }
 
 .tooltip {
@@ -997,14 +1001,14 @@ section + section {
     bottom: 0;
     opacity: 1;
     transform: translate3d(calc(-50% + 12px), 0, 0); /* 12px = half of annotation width */
-    transition: .2s ease;
+    transition: .25s var(--ease-out-quad);
 
     background-color: var(--tip-color);
     font-weight: normal;
     text-align: left;
     line-height: 1.3;
     border-radius: calc(var(--border-radius) * .7);
-    width: 180px;
+    width: 200px;
     padding: .6em .9em;
     pointer-events: none;
     box-shadow: var(--shadow-02);
@@ -1012,7 +1016,12 @@ section + section {
 
 .tooltip div:first-of-type {
     color: rgba(255, 255, 255, .75);
-    margin-bottom: .2em;
+    margin-bottom: .1em;
+}
+
+.tooltip-hidden .tooltip {
+    opacity: 0;
+    transform: translate(calc(-50% + 12px), 4px);
 }
 
 .theme-dark .dygraph-annotation,
@@ -1020,10 +1029,26 @@ section + section {
     background-color: #196a9c;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 500px) {
 
     .traffic-container {
-        padding: 1em 1.5em 1.75em;
+        padding: 1em;
+    }
+
+    .short-month {
+        display: inline;
+    }
+
+    .long-month {
+        display: none;
+    }
+
+}
+
+@media screen and (min-width: 500px) and (max-width: 900px) {
+
+    .traffic-container {
+        padding: 1em 1.5em;
     }
 
 }

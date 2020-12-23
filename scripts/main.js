@@ -112,9 +112,8 @@
 
             for (let scene of scenes) {
                 let plants = new Parallax(scene, {
-                    relativeInput: true,
                     hoverOnly: true,
-                    originX: 0.28,
+                    originX: 0.45,
                     limitY: 0 // no vertical movement
                 });
             }
@@ -190,12 +189,7 @@
             trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv',
             gridColor,
             hairColor,
-            lineColor,
-            dateOptions = {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            };
+            lineColor;
 
         setColors();
         drawGraph();
@@ -216,7 +210,14 @@
         }
 
         function drawGraph() {
-            graph = new Dygraph(get('.traffic-graph'), trafficData, {
+            let locale = 'default',
+                dateOptions = {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                };
+
+            let graph = new Dygraph(get('.traffic-graph'), trafficData, {
                     color: lineColor,
                     strokeWidth: 3,
                     axisLineColor: gridColor,
@@ -238,6 +239,24 @@
                     drawCallback: function (dygraph, isInitial) {
                         if (isInitial) {
                             dygraph.setAnnotations(annotations);
+
+                            // create my own x-axis month labels (default ones are misaligned)
+                            for (let i = 0; i < 12; i++) {
+                                let month = new Date(2020, i).toLocaleString(locale, { month: 'short' }),
+                                    labelNode = document.createElement('div'),
+                                    shortLabel = document.createElement('span'),
+                                    longLabel = document.createElement('span');
+
+                                labelNode.classList.add('month-label');
+                                shortLabel.classList.add('short-month');
+                                shortLabel.textContent = month.substring(0, 1);
+                                longLabel.classList.add('long-month');
+                                longLabel.textContent = month;
+
+                                labelNode.appendChild(shortLabel);
+                                labelNode.appendChild(longLabel);
+                                get('.traffic-labels').appendChild(labelNode);
+                            }
                         }
 
                         tooltips.forEach((tooltip, i) => {
@@ -263,25 +282,24 @@
                         let date = data.xHTML,
                             views = data.series[0].yHTML;
 
-                        date = new Date(date).toLocaleString(undefined, dateOptions);
+                        date = new Date(date).toLocaleString(locale, dateOptions);
                         return `<div>${date}</div><div><b>Views: ${views}</b></div>`;
                     },
                     axes: {
                         y: {
                             drawAxis: false,
-                            valueRange: [0, 5500000],
-                            valueFormatter: function (num, opts, series, dygraph, row, col) {
-                                // this is needed to get actual pageview # because rollPeriod averages it
-                                return Math.round(dygraph.getValue(row, col)).toLocaleString();
+                            includeZero: true,
+                            valueFormatter: function (num, opts, series, graph, row, col) {
+                                // returns value that's been averaged over rollPeriod option above
+                                return (Math.round(num / 1000) * 1000).toLocaleString(locale);
+
+                                // returns original un-averaged value for this point
+                                // return graph.getValue(row, col).toLocaleString();
                             }
                         },
                         x: {
-                            axisLineColor: 'transparent',
-                            drawGrid: false,
-                            pixelsPerLabel: 50,
-                            axisLabelFormatter: function (date) {
-                                return date.toLocaleString(undefined, {month: 'short'});
-                            }
+                            drawAxis: false,
+                            drawGrid: false
                         }
                     },
                     plugins: [
@@ -300,11 +318,11 @@
                         text: "The Nightmare of Ashihama is released"
                     }, {
                         x: "2020/03/14",
-                        text: "Traffic rises during the COVID-19 pandemic",
+                        text: "Traffic rises as COVID-19 lockdowns begin",
                         tickHeight: 30
                     }, {
                         x: "2020/05/01",
-                        text: "Traffic drops as US gradually reopens"
+                        text: "Traffic drops as US states gradually reopen"
                     }, {
                         x: "2020/06/04",
                         text: "Sins of the Father is released",
@@ -340,7 +358,7 @@
                     dateNode = document.createElement('div'),
                     textNode = document.createElement('div');
 
-                dateNode.textContent = new Date(date).toLocaleString(undefined, dateOptions);
+                dateNode.textContent = new Date(date).toLocaleString(locale, dateOptions);
                 textNode.textContent = text;
 
                 tooltip.classList.add('tooltip');
