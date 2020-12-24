@@ -14,7 +14,6 @@
     <link rel="preload" href="fonts/Inter-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
-    <link rel="stylesheet" href="styles/dygraph.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/parallax.min.js" defer></script>
     <script src="scripts/dygraph.min.js" defer></script>
@@ -26,9 +25,9 @@
 </head>
 <body>
     <script>
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.body.classList.add('theme-dark');
-        }
+        // if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        //     document.body.classList.add('theme-dark');
+        // }
     </script>
     <header>
         <h1 class="title">
@@ -278,7 +277,7 @@
             </div>
             <p>Across both wikis we launched <a class="link" target="_blank" rel="noopener" href="https://runescape.wiki/w/RuneScape:One_Small_Wiki_Favour">One Small Wiki Favour</a>, a programme to reward new editors with bonds in-game for their contributions to the wiki. This has gotten over a hundred new editors involved and helped complete numerous wiki projects.</p>
             <p>In a RuneFest first, our editors hosted a panel to discuss all things wiki. It was a huge opportunity to talk with Jagex Moderators, who provided invaluable collaboration on a number of wiki projects. Check out a recording of the livestream!</p>
-            <p>Idea: separate out each wiki into its own chart? Make a stacked chart?</p>
+            <p><b>Ideas: separate out each wiki into its own chart? Make a stacked graph?</b></p>
             <div class="traffic-container">
                 <div class="traffic-title">Combined pageviews <span style="color: var(--text-03)">(7-day rolling average)</span></div>
                 <div class="traffic-legend"></div>
@@ -300,20 +299,22 @@
                     <div class="quiz-explanation"></div>
                 </div>
             </template>
-            <!-- <section class="wiki-cards">
-                <a class="wiki-card card-rs" href="https://runescape.wiki" target="_blank" rel="noopener">
-                    <span>RuneScape Wiki</span>
-                </a>
-                <a class="wiki-card card-osrs" href="https://oldschool.runescape.wiki" target="_blank" rel="noopener">
-                    <span>Old School RuneScape Wiki</span>
-                </a>
-                <a class="wiki-card card-ptbr" href="https://pt.runescape.wiki" target="_blank" rel="noopener">
-                    <span>Portuguese-Brazilian RuneScape Wiki</span>
-                </a>
-                <a class="wiki-card card-rsc" href="https://classic.runescape.wiki" target="_blank" rel="noopener">
-                    <span>RuneScape Classic Wiki</span>
-                </a>
-            </section> -->
+            <template class="template-buttons">
+                <section class="wiki-cards">
+                    <a class="wiki-card card-rs" href="https://runescape.wiki" target="_blank" rel="noopener">
+                        <span>RuneScape Wiki</span>
+                    </a>
+                    <a class="wiki-card card-osrs" href="https://oldschool.runescape.wiki" target="_blank" rel="noopener">
+                        <span>Old School RuneScape Wiki</span>
+                    </a>
+                    <a class="wiki-card card-ptbr" href="https://pt.runescape.wiki" target="_blank" rel="noopener">
+                        <span>Portuguese-Brazilian RuneScape Wiki</span>
+                    </a>
+                    <a class="wiki-card card-rsc" href="https://classic.runescape.wiki" target="_blank" rel="noopener">
+                        <span>RuneScape Classic Wiki</span>
+                    </a>
+                </section>
+            </template>
         </section>
         <!-- CLOSING -->
         <section>

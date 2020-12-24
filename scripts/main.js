@@ -227,7 +227,20 @@
                     labelsDiv: get('.traffic-legend'),
                     rollPeriod: 7,
                     fillGraph: true,
-                    interactionModel: {}, // disable range selector, pan/zoom, touch events
+                    interactionModel: {
+                        // allow user to drag finger across graph to see pageview numbers
+                        'touchmove': function (event) {
+                            let coords = event.touches[0];
+                            let simulation = new MouseEvent('mousemove', {
+                                    clientX: coords.clientX,
+                                    clientY: coords.clientY
+                                }
+                            );
+
+                            event.preventDefault();
+                            event.target.dispatchEvent(simulation);
+                        }
+                    },
                     annotationMouseOverHandler: function (annotation) {
                         annotation.div.classList.remove('tooltip-hidden');
                         annotation.div.style.zIndex = '100'; // make sure tooltip appears on top of nearby annotations
@@ -260,17 +273,18 @@
                         }
 
                         tooltips.forEach((tooltip, i) => {
-                            let annotation = get(`.annotation-${i + 1}`),
-                                tooltipRect = tooltip.getBoundingClientRect(),
-                                leftPos = tooltipRect.left,
-                                rightPos = document.body.clientWidth - tooltipRect.right,
-                                margin = 10;
-
                             // insert tooltip inside its respective annotation
+                            let annotation = get(`.annotation-${i + 1}`);
+
                             annotation.appendChild(tooltip);
                             annotation.removeAttribute('title');
 
                             // reposition tooltip if it goes offscreen
+                            let tooltipRect = tooltip.getBoundingClientRect(),
+                                leftPos = tooltipRect.left,
+                                rightPos = document.body.clientWidth - tooltipRect.right,
+                                margin = 16;
+
                             if (leftPos < 0) {
                                 tooltip.style.left = -leftPos + margin + 'px';
                             } else if (rightPos < 0) {
@@ -280,12 +294,16 @@
                     },
                     legendFormatter: function (data) {
                         let date = data.xHTML,
-                            views = data.series[0].yHTML;
+                            pageviews = data.series[0].yHTML;
 
                         date = new Date(date).toLocaleString(locale, dateOptions);
-                        return `<div>${date}</div><div><b>Views: ${views}</b></div>`;
+                        return `<div class="traffic-date">${date}</div><div class="traffic-views"><b>Views: ${pageviews}</b></div>`;
                     },
                     axes: {
+                        x: {
+                            drawAxis: false,
+                            drawGrid: false
+                        },
                         y: {
                             drawAxis: false,
                             includeZero: true,
@@ -296,10 +314,6 @@
                                 // returns original un-averaged value for this point
                                 // return graph.getValue(row, col).toLocaleString();
                             }
-                        },
-                        x: {
-                            drawAxis: false,
-                            drawGrid: false
                         }
                     },
                     plugins: [
@@ -358,6 +372,7 @@
                     dateNode = document.createElement('div'),
                     textNode = document.createElement('div');
 
+                dateNode.classList.add('tooltip-date');
                 dateNode.textContent = new Date(date).toLocaleString(locale, dateOptions);
                 textNode.textContent = text;
 
