@@ -202,8 +202,6 @@
                 lineColor = '#389dda';
             } else {
                 gridColor = '#efefef';
-                // hairColor = '#e8e8e8';
-                // lineColor = '#50aee6';
                 hairColor = '#e8e8e8';
                 lineColor = '#91a0aa';
             }
@@ -213,8 +211,7 @@
             let locale = 'default',
                 dateOptions = {
                     day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
+                    month: 'long'
                 };
 
             let graph = new Dygraph(get('.traffic-graph'), trafficData, {
@@ -223,7 +220,8 @@
                     axisLineColor: gridColor,
                     gridLineColor: gridColor,
                     gridLineWidth: 1,
-                    highlightCircleSize: 5,
+                    highlightCircleSize: 4,
+                    xRangePad: 4, // must match highlightCircleSize
                     labelsDiv: get('.traffic-legend'),
                     rollPeriod: 7,
                     fillGraph: true,
@@ -243,7 +241,7 @@
                     },
                     annotationMouseOverHandler: function (annotation) {
                         annotation.div.classList.remove('tooltip-hidden');
-                        annotation.div.style.zIndex = '100'; // make sure tooltip appears on top of nearby annotations
+                        annotation.div.style.zIndex = '100'; // make sure tooltip appears on top of annotations
                     },
                     annotationMouseOutHandler: function (annotation) {
                         annotation.div.classList.add('tooltip-hidden');
@@ -253,14 +251,14 @@
                         if (isInitial) {
                             dygraph.setAnnotations(annotations);
 
-                            // create my own x-axis month labels (default ones are misaligned)
+                            // create custom x-axis labels (default ones are misaligned)
                             for (let i = 0; i < 12; i++) {
                                 let month = new Date(2020, i).toLocaleString(locale, { month: 'short' }),
                                     labelNode = document.createElement('div'),
                                     shortLabel = document.createElement('span'),
                                     longLabel = document.createElement('span');
 
-                                labelNode.classList.add('month-label');
+                                labelNode.classList.add('x-label');
                                 shortLabel.classList.add('short-month');
                                 shortLabel.textContent = month.substring(0, 1);
                                 longLabel.classList.add('long-month');
@@ -268,7 +266,21 @@
 
                                 labelNode.appendChild(shortLabel);
                                 labelNode.appendChild(longLabel);
-                                get('.traffic-labels').appendChild(labelNode);
+                                get('.traffic-x-labels').appendChild(labelNode);
+                            }
+
+                            // create custom y-axis labels (can't position default ones over top of graph)
+                            let yAxisLabels = document.createElement('div');
+
+                            yAxisLabels.classList.add('traffic-y-labels');
+                            get('.traffic-graph').appendChild(yAxisLabels);
+
+                            for (let i = 0; i <= 5; i++) {
+                                let viewLabel = document.createElement('div');
+
+                                viewLabel.classList.add('y-label');
+                                viewLabel.textContent = i + ((i !== 0) ? 'M' : '');
+                                yAxisLabels.appendChild(viewLabel);
                             }
                         }
 
@@ -293,11 +305,18 @@
                         });
                     },
                     legendFormatter: function (data) {
-                        let date = data.xHTML,
-                            pageviews = data.series[0].yHTML;
+                        let date, actual, average, change;
 
-                        date = new Date(date).toLocaleString(locale, dateOptions);
-                        return `<div class="traffic-date">${date}</div><div class="traffic-views"><b>Views: ${pageviews}</b></div>`;
+                        if (data.x) {
+                            date = new Date(data.xHTML).toLocaleString(locale, dateOptions);
+                            actual = data.series[0].yHTML.actual; // currently unused
+                            average = data.series[0].yHTML.average;
+                            change = data.series[0].yHTML.change;
+                        }
+
+                        return `<div class="traffic-legend-date">${date}</div>
+                                <div class="traffic-legend-actual">Pageviews: ${average}</div>
+                                <div class="traffic-legend-rounded">7-day change: ${change}</div>`;
                     },
                     axes: {
                         x: {
@@ -308,20 +327,32 @@
                             drawAxis: false,
                             includeZero: true,
                             valueFormatter: function (num, opts, series, graph, row, col) {
-                                // returns value that's been averaged over rollPeriod option above
-                                return (Math.round(num / 1000) * 1000).toLocaleString(locale);
+                                // original un-averaged value for this point
+                                let actualValue = graph.getValue(row, col);
 
-                                // returns original un-averaged value for this point
-                                // return graph.getValue(row, col).toLocaleString();
+                                // 7-day change
+                                let previousWeek = graph.getValue(row - 7, col);
+                                let weekChange = Math.round((actualValue - previousWeek) / previousWeek * 100);
+
+                                if (weekChange < 0) {
+                                    // replace default hyphen (VERY WRONG) with actual negative symbol
+                                    weekChange = '−' + weekChange.toString().substring(1);
+                                } else {
+                                    // plus sign for positive numbers
+                                    weekChange = '+' + weekChange;
+                                }
+
+                                // 7-day change not possible for first 7 days
+                                if (row < 7) weekChange = '–';
+
+                                return {
+                                    actual: actualValue.toLocaleString(locale),
+                                    average: Math.round(num).toLocaleString(locale), // averaged over rollPeriod
+                                    change: weekChange + '%'
+                                };
                             }
                         }
-                    },
-                    plugins: [
-                        new Dygraph.Plugins.Crosshair({
-                            direction: 'vertical',
-                            crosshairColor: hairColor
-                        })
-                    ]
+                    }
                 }
             );
 
@@ -333,7 +364,7 @@
                     }, {
                         x: "2020/03/14",
                         text: "Traffic rises as COVID-19 lockdowns begin",
-                        tickHeight: 30
+                        tickHeight: 25
                     }, {
                         x: "2020/05/01",
                         text: "Traffic drops as US states gradually reopen"
@@ -342,11 +373,9 @@
                         text: "Sins of the Father is released",
                         tickHeight: 25
                     }, {
-                        x: "2020/07/16",
-                        text: "Ferox Enclave is released"
-                    }, {
                         x: "2020/10/14",
-                        text: "RuneScape is released on Steam"
+                        text: "RuneScape is released on Steam",
+                        tickHeight: 25
                     }, {
                         x: "2020/10/28",
                         text: "Trailblazer League begins",
@@ -362,7 +391,7 @@
                 annotation.height = 24;
                 annotation.cssClass = `tooltip-hidden annotation-${i + 1}`;
                 annotation.tickWidth = 2;
-                if (annotation.tickHeight === undefined) annotation.tickHeight = 20;
+                if (annotation.tickHeight === undefined) annotation.tickHeight = 16;
 
                 createTooltip(annotation.x, annotation.text);
             });

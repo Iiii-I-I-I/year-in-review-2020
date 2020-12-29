@@ -44,8 +44,8 @@ html {
 }
 
 body {
-    --bg-01: #f4f5f6;
-    --bg-02: #fcfcfc;
+    --bg-01: #f2f3f3;
+    --bg-02: #fafafa;
     --bg-03: #fff;
 
     --text-01: #3a454a;
@@ -629,8 +629,8 @@ section + section {
 
 .tab-list {
     --tab-count: 4;
-    --tab-gap: 5px;
-    --border-radius: .5em;
+    --tab-gap: 6px;
+    --border-radius: .55em;
 
     display: flex;
     position: relative;
@@ -668,7 +668,7 @@ section + section {
     font: .9rem/1.45 var(--font-stack); /* override default button styles */
     background: none;
     border: none;
-    padding: .95em 0 .9em;
+    padding: 1em;
 }
 
 .tab[aria-selected="true"] {
@@ -680,6 +680,7 @@ section + section {
 }
 
 .tab-panel {
+    transform: translate3d(0, 0, 0);
     animation-fill-mode: both;
     animation-timing-function: var(--ease-in-out-quad);
 }
@@ -913,59 +914,79 @@ section + section {
    -------------- */
 
 .traffic-container {
+    --range-pad: 6px; /* must be >= xRangePad option for dygraph in main.js */
+
     background-color: var(--bg-03);
     border-radius: var(--border-radius);
-    padding: 1.5em 2em;
+    padding: 1.5em 1.75em 1.35em;
     margin-top: 3em;
     box-shadow: var(--shadow-03);
     position: relative;
 }
 
-/* so content doesn't shift after graph loads */
 .traffic-graph {
-    width: 100% !important;
-    height: 300px !important;
+    position: relative; /* for .traffic-y-labels */
 }
 
 .traffic-title {
     font-weight: bold;
-    margin-bottom: .25em;
+    margin: 0 0 .25em var(--range-pad);
 }
 
 .traffic-legend {
     position: absolute;
-    left: 2rem;
-    font-size: .85rem;
+    font-size: .8rem;
     background-color: var(--bg-03);
+    padding: 4px 8px 4px var(--range-pad);
     line-height: 1.4;
     pointer-events: none;
     white-space: nowrap;
     z-index: 1;
 }
 
-.traffic-date {
-    padding: 7px 8px 0 0;
+.traffic-legend-date {
+    font-weight: bold;
 }
 
-.traffic-views {
-    padding: 0 8px 4px 0;
+.traffic-legend-rounded {
+    color: var(--text-03);
 }
 
-.traffic-labels {
+.traffic-x-labels {
     display: flex;
     justify-content: space-between;
-    font-size: .85rem;
+    width: calc(100% - var(--range-pad) * 3);
+    font-size: .8rem;
     padding-top: .75em;
-    width: calc(100% - 5px);
+    margin-left: var(--range-pad);
 }
 
-.month-label {
+.x-label {
     flex: 1;
     text-align: center;
 }
 
 .short-month {
     display: none;
+}
+
+.traffic-y-labels {
+    position: absolute;
+    left: var(--range-pad);
+    bottom: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    pointer-events: none;
+}
+
+.y-label {
+    display: flex;
+    align-items: flex-end;
+    height: 53px;
+    color: var(--text-03);
+    font-size: .7rem;
+    letter-spacing: .1ch;
+    opacity: .8;
 }
 
 .dygraph-annotation {
@@ -1007,7 +1028,7 @@ section + section {
 }
 
 .tooltip-date {
-    color: rgba(255, 255, 255, .75);
+    font-weight: bold;
     margin-bottom: .1em;
 }
 
@@ -1023,14 +1044,6 @@ section + section {
 
 @media screen and (max-width: 500px) {
 
-    .traffic-container {
-        padding: 1em;
-    }
-
-    .traffic-legend {
-        left: 1.25em;
-    }
-
     .short-month {
         display: inline;
     }
@@ -1041,10 +1054,14 @@ section + section {
 
 }
 
-@media screen and (min-width: 500px) and (max-width: 900px) {
+@media screen and (max-width: 800px) {
 
     .traffic-container {
-        padding: 1em 1.5em;
+        padding: 1em;
+    }
+
+    .traffic-legend {
+        left: 1rem;
     }
 
 }
