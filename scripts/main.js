@@ -198,12 +198,10 @@
             // tooltip color is set in main.css
             if (document.body.classList.contains('theme-dark')) {
                 gridColor = '#393939';
-                hairColor = '#414141';
                 lineColor = '#389dda';
             } else {
                 gridColor = '#efefef';
-                hairColor = '#e8e8e8';
-                lineColor = '#91a0aa';
+                lineColor = '#4296ca';
             }
         }
 
@@ -316,7 +314,7 @@
 
                         return `<div class="traffic-legend-date">${date}</div>
                                 <div class="traffic-legend-actual">Pageviews: ${average}</div>
-                                <div class="traffic-legend-rounded">7-day change: ${change}</div>`;
+                                <div class="traffic-legend-rounded">14-day change: ${change}</div>`;
                     },
                     axes: {
                         x: {
@@ -328,27 +326,27 @@
                             includeZero: true,
                             valueFormatter: function (num, opts, series, graph, row, col) {
                                 // original un-averaged value for this point
-                                let actualValue = graph.getValue(row, col);
+                                let currentValue = graph.getValue(row, col);
 
-                                // 7-day change
-                                let previousWeek = graph.getValue(row - 7, col);
-                                let weekChange = Math.round((actualValue - previousWeek) / previousWeek * 100);
+                                // 14-day change
+                                let twoWeeksAgo = graph.getValue(row - 14, col);
+                                let change = Math.round((currentValue - twoWeeksAgo) / twoWeeksAgo * 100);
 
-                                if (weekChange < 0) {
+                                if (change < 0) {
                                     // replace default hyphen (VERY WRONG) with actual negative symbol
-                                    weekChange = '−' + weekChange.toString().substring(1);
+                                    change = '−' + change.toString().substring(1);
                                 } else {
                                     // plus sign for positive numbers
-                                    weekChange = '+' + weekChange;
+                                    change = '+' + change;
                                 }
 
-                                // 7-day change not possible for first 7 days
-                                if (row < 7) weekChange = '–';
+                                // 14-day change not possible for first 14 days
+                                if (row < 14) change = '–';
 
                                 return {
-                                    actual: actualValue.toLocaleString(locale),
-                                    average: Math.round(num).toLocaleString(locale), // averaged over rollPeriod
-                                    change: weekChange + '%'
+                                    actual: currentValue.toLocaleString(locale),
+                                    average: Math.round(num).toLocaleString(locale), // auto-averaged over rollPeriod
+                                    change: change + '%'
                                 };
                             }
                         }

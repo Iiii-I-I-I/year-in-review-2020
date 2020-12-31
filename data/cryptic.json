@@ -23,7 +23,7 @@
                 "correctAnswer": "a"
             },
             {
-                "question": "Count Draynor, weakened after isolation from Morytania, is killed by the player during Vampyre Slayer. Which of the following is he related to?",
+                "question": "Count Draynor, weakened after isolation from Morytania, is killed by the player during Vampyre Slayer. Who of the following is he related to?",
                 "answers": {
                     "a": "Alexei Jovkai",
                     "b": "Vanstrom Klause",
@@ -42,7 +42,7 @@
                     "d": "Dramen tree"
                 },
                 "correctAnswer": "a",
-                "explanation": "Acadia is an accidental misspelling of acacia; the developers decided to keep it because <a class='link' href='https://www.reddit.com/r/runescape/comments/6fgvda/acadia_trees/dii234m/' target='_blank' rel='noopener'>they liked it better</a>."
+                "explanation": "Acadia (instead of <a class='link' href='https://en.wikipedia.org/wiki/Vachellia_tortilis' target='_blank' rel='noopener'>acacia</a>) was a mistake that the developers decided to keep because <a class='link' href='https://www.reddit.com/r/runescape/comments/6fgvda/acadia_trees/dii234m/' target='_blank' rel='noopener'>they liked it better</a>."
             },
             {
                 "question": "During which quest does Sigmund tie Zanik to the tracks of the Dorgesh-Kaan–Keldagrim train system?",
@@ -74,7 +74,7 @@
                     "d": "Ilujanka"
                 },
                 "correctAnswer": "b",
-                "explanation": "\"Kerapac objects, of course. As do some of the remaining council. ... They tell me that it's dark magic. ... Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
+                "explanation": "\"<a class='link' href='https://runescape.wiki/w/Umbral_Diplomacy' target='_blank' rel='noopener'>Kerapac objects, of course.</a> As do some of the remaining council. ... They tell me that it's dark magic. ... Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
             },
             {
                 "question": "Of the four following cities, which one is furthest south?",
