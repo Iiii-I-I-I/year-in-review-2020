@@ -34,6 +34,16 @@
                 "explanation": "Count Draynor Drakan also has two brothers: Lowerniel Drakan and Ranis Drakan."
             },
             {
+                "question": "Following the end of the Great Revision, the Dragonkin came out of hiding and settled on Anachronia, where they built the city of Orthen. Where were the Dragonkin located prior to Orthen?",
+                "answers": {
+                    "a": "Kethsi",
+                    "b": "The Abyss",
+                    "c": "Edgeville",
+                    "d": "Zanaris"
+                },
+                "correctAnswer": "b"
+            },
+            {
                 "question": "Which tree in RuneScape is a misspelling of a real-life tree?",
                 "answers": {
                     "a": "Acadia tree",
@@ -55,15 +65,24 @@
                 "correctAnswer": "a"
             },
             {
-                "question": "Who founded the Moon Clan?",
+                "question": "Raksha, the Shadow Colossus, is a rex dinosaur mutated by immense amounts of anima through contact with an Elder Artefact. Which of his combat mechanics is not shared with any other boss?",
                 "answers": {
-                    "a": "Pauline Polaris",
-                    "b": "The Oneiromancer",
-                    "c": "Janet Reno",
-                    "d": "V"
+                    "a": "Minion spawning",
+                    "b": "Charge",
+                    "c": "Shadow pools",
+                    "d": "Falling rocks"
                 },
-                "correctAnswer": "c",
-                "explanation": "<a class='link' href='https://en.wikipedia.org/wiki/Janet_Reno' target='_blank' rel='noopener'>Janet Reno</a> was an American lawyer who served as the Attorney General of the United States from 1993 until 2001 under Bill Clinton."
+                "correctAnswer": "c"
+            },
+            {
+                "question": "Of the four following cities, which one is furthest south?",
+                "answers": {
+                    "a": "Yanille",
+                    "b": "Al Kharid",
+                    "c": "Brimhaven",
+                    "d": "Lletya"
+                },
+                "correctAnswer": "a"
             },
             {
                 "question": "Kranon the Ambassador, corrupted after a ritual that summoned Xau-Tak, was originally a member of which race?",
@@ -77,16 +96,6 @@
                 "explanation": "\"<a class='link' href='https://runescape.wiki/w/Umbral_Diplomacy' target='_blank' rel='noopener'>Kerapac objects, of course.</a> As do some of the remaining council. ... They tell me that it's dark magic. ... Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
             },
             {
-                "question": "Of the four following cities, which one is furthest south?",
-                "answers": {
-                    "a": "Yanille",
-                    "b": "Al Kharid",
-                    "c": "Brimhaven",
-                    "d": "Lletya"
-                },
-                "correctAnswer": "a"
-            },
-            {
                 "question": "Which spell was used to summon Zamorak during Evil Dave's Big Day Out?",
                 "answers": {
                     "a": "Um nahi listic durooo-rah",
@@ -95,7 +104,7 @@
                     "d": "Ika tha nke rius Zanka Tdaterius"
                 },
                 "correctAnswer": "b",
-                "explanation": "The same spell was previously used in <a class='link' href='https://runescape.wiki/w/Demon_Slayer_(historical)' target='_blank' rel='noopener'>Demon Slayer</a>, before it was reworked in 2013, to banish the demon Delrith (albeit with word order randomised)."
+                "explanation": "The same spell was previously used in <a class='link' href='https://runescape.wiki/w/Demon_Slayer_(historical)' target='_blank' rel='noopener'>Demon Slayer</a>, before it was reworked in 2013, to banish the demon Delrith."
             },
             {
                 "question": "The God Wars Dungeon, frozen for thousands of years, eventually thawed in the Fifth Age. Who rediscovered the temple and its combatants?",
@@ -111,26 +120,107 @@
         ],
         "osrs": [
             {
-                "question": "Which game is better?",
+                "question": "Assuming you haven't completed Prince Ali Rescue, how much does it cost to pass through the toll gate between Lumbridge and Al Kharid?",
                 "answers": {
-                    "a": "RuneScape",
-                    "b": "Old School RuneScape",
-                    "c": "RuneScape Classic",
-                    "d": "Fortnite"
+                    "a": "5 coins",
+                    "b": "10 coins",
+                    "c": "15 coins",
+                    "d": "20 coins"
                 },
-                "correctAnswer": "d",
-                "explanation": "lmao"
+                "correctAnswer": "b"
             },
             {
-                "question": "How many administrators are there on the Old School RuneScape Wiki?",
+                "question": "Which quest must be completed in order to unlock the ability to wield a dragon sword?",
                 "answers": {
-                    "a": "8",
-                    "b": "12",
-                    "c": "16",
-                    "d": "20"
+                    "a": "Lost City",
+                    "b": "Monkey Madness I",
+                    "c": "Heroes' Quest",
+                    "d": "There is no quest requirement"
+                },
+                "correctAnswer": "d"
+            },
+            {
+                "question": "The Hallowed Sepulchre is an ancient burial site for the old kingdom of Hallowvale. How many floors does it have?",
+                "answers": {
+                    "a": "Four",
+                    "b": "Five",
+                    "c": "Six",
+                    "d": "Seven"
+                },
+                "correctAnswer": "b"
+            },
+            {
+                "question": "The Nightmare is a boss located deep in the Sisterhood Santuary, but it wasn't always found there. From where did The Nightmare originate?",
+                "answers": {
+                    "a": "Morytania",
+                    "b": "Great Kourend",
+                    "c": "Wushanko Isles",
+                    "d": "The Wilderness"
                 },
                 "correctAnswer": "c",
-                "explanation": "and they're all gay"
+                "explanation": "The Nightmare was driven away from Ashihama, an island in the <a class='link' href='https://oldschool.runescape.wiki/w/Wushanko_Isles' target='_blank' rel='noopener'>Wushanko Isles</a>, and it fled westwards until it reached the coastal town of Slepe."
+            },
+            {
+                "question": "The Wintertodt was imprisoned behind the Doors of Dinh over a thousand years ago by Lord Lovakengj II. How was the Wintertodt referred to back then?",
+                "answers": {
+                    "a": "The Winter Beast",
+                    "b": "The Winter Soldier",
+                    "c": "The Winter Winds",
+                    "d": "It's always been known as the Wintertodt"
+                },
+                "correctAnswer": "a",
+                "explanation": "<a class='link' href='https://oldschool.runescape.wiki/w/Winter's_End' target='_blank' rel='noopener'>Winter's End</a>, a book in the Arceuus Library, reads: \"A master smith has come forth, with plans to defeat Winter Beast! May we finally defeat the Beast after five decades of terror?\"."
+            },
+            {
+                "question": "Trailblazer League was a temporary game mode where players chose a set number of regions to play in, starting with Misthalin. Out of the nine regions, how many could a player access?",
+                "answers": {
+                    "a": "Four",
+                    "b": "Five",
+                    "c": "Six",
+                    "d": "Seven"
+                },
+                "correctAnswer": "b",
+                "explanation": "Players begin with Misthalin, can unlock Karamja for free, and then can choose three more out of Asgarnia, the Fremennik Isles, Kandarin, the Kharidian Desert, Morytania, Tirannwn, and the Wilderness."
+            },
+            {
+                "question": "Which of the following is not a variant of wyvern?",
+                "answers": {
+                    "a": "Taloned wyvern",
+                    "b": "Spitting wyvern",
+                    "c": "Strong-tailed wyvern",
+                    "d": "Ancient wyvern"
+                },
+                "correctAnswer": "c"
+            },
+            {
+                "question": "The Sisterhood was established by a group of Saradominist healers who defected to Zamorak after the fall of Hallowvale. Who is the founder of the order?",
+                "answers": {
+                    "a": "Phosani",
+                    "b": "Efaritay",
+                    "c": "Insela",
+                    "d": "Otrava"
+                },
+                "correctAnswer": "a"
+            },
+            {
+                "question": "During the Theatre of Blood, one can see the remains of the three mercenaries in various boss rooms. Which boss killed the melee mercenary?",
+                "answers": {
+                    "a": "The Maiden of Sugadinti",
+                    "b": "Pestilent Bloat",
+                    "c": "Sotetseg",
+                    "d": "Xarpus"
+                },
+                "correctAnswer": "d"
+            },
+            {
+                "question": "Why is Commander Zilyana in possession of the Armadyl crossbow?",
+                "answers": {
+                    "a": "She obtained it after defeating Kree'arra",
+                    "b": "She stole the crossbow as a trophy",
+                    "c": "Saradomin created it to defeat Armadyl",
+                    "d": "Armadyl gave it to her"
+                },
+                "correctAnswer": "b"
             }
         ]
     }
