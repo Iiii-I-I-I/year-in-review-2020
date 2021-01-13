@@ -13,16 +13,6 @@
                 "explanation": "The Blue Moon Inn is found in Varrock, the Pick and Lute in Taverley, and the Poison Arrow in Ardougne."
             },
             {
-                "question": "According to the natural history quiz in the Varrock Museum, how did wyverns die out?",
-                "answers": {
-                    "a": "Climate change",
-                    "b": "Disease",
-                    "c": "Marauding adventurers",
-                    "d": "Janet Reno"
-                },
-                "correctAnswer": "a"
-            },
-            {
                 "question": "Count Draynor, weakened after isolation from Morytania, is killed by the player during Vampyre Slayer. Which of the following was he related to?",
                 "answers": {
                     "a": "Alexei Jovkai",
@@ -34,14 +24,24 @@
                 "explanation": "<a class='link' href='https://runescape.wiki/w/Count_Draynor' target='_blank' rel='noopener'>Draynor Drakan</a> also has two brothers: <a class='link' href='https://runescape.wiki/w/Lowerniel_Drakan' target='_blank' rel='noopener'>Lowerniel Drakan</a> and <a class='link' href='https://runescape.wiki/w/Ranis_Drakan' target='_blank' rel='noopener'>Ranis Drakan</a>."
             },
             {
-                "question": "The Dragonkin fled their homeworld and arrived on Gielinor 60,000 years ago, where they built the city of Orthen. What were the Dragonkin fleeing from?",
+                "question": "According to the natural history quiz in the Varrock Museum, how did wyverns die out?",
+                "answers": {
+                    "a": "Climate change",
+                    "b": "Disease",
+                    "c": "Marauding adventurers",
+                    "d": "Janet Reno"
+                },
+                "correctAnswer": "a"
+            },
+            {
+                "question": "The Dragonkin fled their homeworld and arrived on Gielinor before the First Age, where they built the city of Orthen. What were the Dragonkin fleeing from?",
                 "answers": {
                     "a": "A wave of natural disasters that devastated their cities",
-                    "b": "The end of their universe, caused by the Elder Gods",
+                    "b": "Enslavement of their race by the Mahjarrat",
                     "c": "A series of wars that killed most of the population",
-                    "d": "Enslavement of their race by the Mahjarrat"
+                    "d": "The end of their universe, caused by the Elder Gods"
                 },
-                "correctAnswer": "b",
+                "correctAnswer": "d",
                 "explanation": "<a class='link' href='https://runescape.wiki/w/Reldo%27s_ages_seventeenth_edition' target='_blank' rel='noopener'>According to Reldo</a>: \"This reptilian species had survived the destruction of their universe and the creation of ours by hiding, and now sought out the most habitable planet, which happened to be Gielinor.\""
             },
             {
@@ -66,16 +66,6 @@
                 "correctAnswer": "a"
             },
             {
-                "question": "Raksha, the Shadow Colossus, is a rex dinosaur imprisoned beneath Anachronia. Which of his combat mechanics is not shared with any other boss?",
-                "answers": {
-                    "a": "Minion spawning",
-                    "b": "Charge",
-                    "c": "Shadow pools",
-                    "d": "Falling rocks"
-                },
-                "correctAnswer": "c"
-            },
-            {
                 "question": "Of the four following cities, which one is furthest south?",
                 "answers": {
                     "a": "Yanille",
@@ -86,26 +76,25 @@
                 "correctAnswer": "a"
             },
             {
-                "question": "Kranon the Ambassador, corrupted after a ritual that summoned Xau-Tak, was originally a member of which race?",
+                "question": "Raksha, the Shadow Colossus, is a rex dinosaur imprisoned beneath Anachronia. Which of his combat mechanics is not shared with any other boss?",
                 "answers": {
-                    "a": "Naragi",
-                    "b": "Dragonkin",
-                    "c": "Chthonians",
-                    "d": "Ilujanka"
+                    "a": "Minion spawning",
+                    "b": "Charge",
+                    "c": "Shadow pools",
+                    "d": "Falling rocks"
                 },
-                "correctAnswer": "b",
-                "explanation": "\"<a class='link' href='https://runescape.wiki/w/Umbral_Diplomacy' target='_blank' rel='noopener'>Kerapac objects, of course.</a> As do some of the remaining council. ... They tell me that it's dark magic. ... Let them rant. I go now to create a new future, free from chains, where we can forge our own destiny.\""
+                "correctAnswer": "c"
             },
             {
-                "question": "Which spell was used to summon Zamorak during Evil Dave's Big Day Out?",
+                "question": "Which spell is used by non-player characters to teleport players to the rune essence mine?",
                 "answers": {
-                    "a": "Um nahi listic durooo-rah",
-                    "b": "Carlem Aber Camerinthum Purchai Gabindo",
-                    "c": "Dominoes Ad Nauseum, Romanes Eunt Domus",
-                    "d": "Ika tha nke rius Zanka Tdaterius"
+                    "a": "Dominoes ad nauseum, romanes eunt domus",
+                    "b": "Senventior disthinte molesko",
+                    "c": "Senventior disthine molenko",
+                    "d": "Um nahi listic durooo-rah"
                 },
-                "correctAnswer": "b",
-                "explanation": "The same spell was previously used in <a class='link' href='https://runescape.wiki/w/Demon_Slayer_(historical)' target='_blank' rel='noopener'>Demon Slayer</a>, before it was reworked in 2013, to banish the demon Delrith."
+                "correctAnswer": "c",
+                "explanation": "If you picked B, you were close, but that <a class='link' href='https://runescape.wiki/w/Senventior_Disthinte_Molesko' target='_blank' rel='noopener'>teleports players to the Sorceress's Garden</a>."
             },
             {
                 "question": "The God Wars Dungeon, frozen for thousands of years, eventually thawed in the Fifth Age. Who rediscovered the temple and its combatants?",
