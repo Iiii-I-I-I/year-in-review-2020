@@ -130,16 +130,6 @@
                 "correctAnswer": "d"
             },
             {
-                "question": "What does Arceuus House specialize in in the kingdom of Great Kourend?",
-                "answers": {
-                    "a": "Mining, agriculture, and research",
-                    "b": "Magic, research, and academia",
-                    "c": "Military, magic, and research",
-                    "d": "Magic, smithing, and academia"
-                },
-                "correctAnswer": "b"
-            },
-            {
                 "question": "The Nightmare is a boss located deep in the Sisterhood Santuary, but it wasn't always found there. Where is the Nightmare originally from?",
                 "answers": {
                     "a": "Morytania",
@@ -180,6 +170,16 @@
                 },
                 "correctAnswer": "b",
                 "explanation": "Players begin with Misthalin, can unlock Karamja for free, and then can choose three more out of Asgarnia, the Fremennik Isles, Kandarin, the Kharidian Desert, Morytania, Tirannwn, and the Wilderness."
+            },
+            {
+                "question": "Which island is furthest from Rellekka?",
+                "answers": {
+                    "a": "Miscellania",
+                    "b": "Jatizso",
+                    "c": "Neitiznot",
+                    "d": "Waterbirth Island"
+                },
+                "correctAnswer": "c"
             },
             {
                 "question": "Before the Hallowed Sepulchre fell during the God Wars, it was fortified with traps by Saradominist priests. Who were its defences meant to keep out?",
