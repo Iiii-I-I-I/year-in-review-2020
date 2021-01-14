@@ -358,26 +358,32 @@
             let annotations = [
                     {
                         x: "2020/02/06",
-                        text: "The Nightmare of Ashihama is released"
+                        text: "The Nightmare of Ashihama is released",
+                        tickHeight: 16
                     }, {
                         x: "2020/03/14",
-                        text: "Traffic rises as COVID-19 lockdowns begin",
-                        tickHeight: 25
+                        text: "Traffic rises as COVID-19 lockdowns begin"
+                    }, {
+                        x: "2020/03/30",
+                        text: "The Archaeology skill is released",
+                        tickHeight: 35
                     }, {
                         x: "2020/05/01",
-                        text: "Traffic drops as US states gradually reopen"
+                        text: "Traffic drops as US states gradually reopen",
+                        tickHeight: 16
                     }, {
                         x: "2020/06/04",
-                        text: "Sins of the Father is released",
-                        tickHeight: 25
+                        text: "Sins of the Father is released"
                     }, {
                         x: "2020/10/14",
-                        text: "RuneScape is released on Steam",
-                        tickHeight: 25
+                        text: "RuneScape is released on Steam"
                     }, {
                         x: "2020/10/28",
                         text: "Trailblazer League begins",
                         tickHeight: 45
+                    }, {
+                        x: "2020/12/07",
+                        text: "Raksha, the Shadow Colossus is released"
                     }
                 ];
             let tooltips = [];
@@ -389,7 +395,7 @@
                 annotation.height = 24;
                 annotation.cssClass = `tooltip-hidden annotation-${i + 1}`;
                 annotation.tickWidth = 2;
-                if (annotation.tickHeight === undefined) annotation.tickHeight = 16;
+                if (annotation.tickHeight === undefined) annotation.tickHeight = 25;
 
                 createTooltip(annotation.x, annotation.text);
             });
@@ -437,17 +443,17 @@
 
         function buildQuiz() {
             let quiz = get('.quiz'),
-                total,
                 questions,
+                total = 10,
                 correct = 0,
                 answered = 0;
 
             let buttonGroup = document.createElement('div');
 
             buttonGroup.classList.add('quiz-button-group');
-            createButton('The<br />RuneScape quiz', 'rs');
-            createButton('The Old School<br />RuneScape quiz', 'osrs');
-            createButton('The RuneScape<br />Classic quiz (fake)', 'rsc');
+            createButton('RuneScape quiz', 'rs');
+            createButton('Old School RuneScape quiz', 'osrs');
+            // createButton('The RuneScape<br />Classic quiz (fake)', 'rsc');
             quiz.appendChild(buttonGroup);
 
             function createButton(text, game) {
@@ -471,18 +477,13 @@
                     case 'osrs':
                         questions = request.response[0].osrs;
                         break;
-                    case 'rsc':
-                        quiz.textContent = 'no quiz for u';
-                        return;
+                    // case 'rsc':
+                    //     quiz.textContent = 'no quiz for u';
+                    //     break;
                 }
 
-                // @TODO:
-                // pt-br version? classic version?
-                // more possible question formats:
-                //     listen to audio
-                //     identify images
-
-                total = questions.length;
+                // add class for css
+                quiz.classList.add(game);
 
                 questions.forEach((question, i) => {
                     let groupNode = get('.template-group').content.cloneNode(true),
@@ -598,8 +599,11 @@
 
                 function resetQuiz() {
                     quiz.textContent = '';
+                    quiz.classList.remove(quiz.classList.item(1));
+
                     resultsNode.textContent = '';
                     resultsNode.removeAttribute('style');
+
                     get('#quiz').scrollIntoView({behavior: 'smooth'});
                     buildQuiz();
                 }

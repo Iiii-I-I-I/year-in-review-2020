@@ -146,7 +146,8 @@ p {
     cursor: pointer; /* for non-<a> links */
 }
 
-.link:hover {
+.link:hover,
+.link:focus {
     text-decoration: underline;
 }
 
@@ -586,7 +587,8 @@ section + section {
     cursor: pointer;
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
     filter: brightness(.95) saturate(1.3);
 }
 
@@ -784,12 +786,14 @@ section + section {
 }
 
 .stat li {
+    display: flex;
+    justify-content: space-between;
     font-size: .85em;
     background-color: var(--bg-01);
     border-radius: calc(var(--border-radius) * .45);
 
     position: relative;
-    padding: .05em .5em;
+    padding: .05em .6em .05em .5em;
     list-style: none;
     overflow: hidden;
 }
@@ -801,6 +805,10 @@ section + section {
 .stat li span {
     color: var(--text-01);
     mix-blend-mode: luminosity;
+}
+
+.stat li span:last-of-type {
+    color: #63686b;
 }
 
 .stat li::before {
@@ -1072,7 +1080,7 @@ section + section {
 
 .quiz-button-group {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 1em;
     margin: 2em auto 0;
 }
@@ -1086,15 +1094,13 @@ section + section {
 .quiz-group {
     width: 75%;
     margin: 3.5em auto 0;
-}
-
-.quiz-group:not(:first-child) {
     border-top: 1px solid #ddd;
     padding-top: 3em;
 }
 
 .quiz-number {
     font-weight: bold;
+    margin-bottom: .25em;
 }
 
 .quiz-question {
@@ -1118,14 +1124,23 @@ section + section {
 }
 
 .unanswered .quiz-choice {
-    color: #22455d;
-    background-color: #edf3f7;
     transition: filter .2s var(--ease-in-out-expo);
 }
 
-.unanswered .quiz-choice:hover {
+.unanswered .quiz-choice:hover,
+.unanswered .quiz-choice:focus {
     filter: brightness(.97) saturate(1.7);
     cursor: pointer;
+}
+
+.rs .unanswered .quiz-choice {
+    color: #22455d;
+    background-color: #edf3f7;
+}
+
+.osrs .unanswered .quiz-choice {
+    color: #5a4a2c;
+    background-color: #f5f3ef;
 }
 
 .selected,
@@ -1154,8 +1169,8 @@ section + section {
 }
 
 .quiz-explanation {
+    font-size: .95em;
     color: var(--text-03);
-    line-height: 1.4;
     margin-top: 1.2em;
 }
 
@@ -1202,6 +1217,7 @@ section + section {
 
     .quiz-button-group {
         grid-template-columns: none;
+        grid-gap: .5em;
     }
 
     .quiz-start {
