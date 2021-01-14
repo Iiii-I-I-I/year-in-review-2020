@@ -130,17 +130,17 @@
                 "correctAnswer": "d"
             },
             {
-                "question": "The Hallowed Sepulchre is an ancient burial site for the old kingdom of Hallowvale. How many floors does it have?",
+                "question": "What does Arceuus House specialize in in the kingdom of Great Kourend?",
                 "answers": {
-                    "a": "Four",
-                    "b": "Five",
-                    "c": "Six",
-                    "d": "Seven"
+                    "a": "Mining, agriculture, and research",
+                    "b": "Magic, research, and academia",
+                    "c": "Military, magic, and research",
+                    "d": "Magic, smithing, and academia"
                 },
                 "correctAnswer": "b"
             },
             {
-                "question": "The Nightmare is a boss located deep in the Sisterhood Santuary, but it wasn't always found there. From where did The Nightmare originate?",
+                "question": "The Nightmare is a boss located deep in the Sisterhood Santuary, but it wasn't always found there. Where is the Nightmare originally from?",
                 "answers": {
                     "a": "Morytania",
                     "b": "Great Kourend",
@@ -149,28 +149,6 @@
                 },
                 "correctAnswer": "c",
                 "explanation": "The Nightmare was driven away from Ashihama, an island in the <a class='link' href='https://oldschool.runescape.wiki/w/Wushanko_Isles' target='_blank' rel='noopener'>Wushanko Isles</a>, and it fled westwards until it reached the coastal town of Slepe."
-            },
-            {
-                "question": "The Wintertodt was imprisoned behind the Doors of Dinh over a thousand years ago by Lord Lovakengj II. How was the Wintertodt referred to back then?",
-                "answers": {
-                    "a": "The Winter Beast",
-                    "b": "The Winter Soldier",
-                    "c": "The Winter Winds",
-                    "d": "It's always been known as the Wintertodt"
-                },
-                "correctAnswer": "a",
-                "explanation": "<a class='link' href='https://oldschool.runescape.wiki/w/Winter%27s_End' target='_blank' rel='noopener'>Winter's End</a>, a book in the Arceuus Library, reads: \"A master smith has come forth, with plans to defeat the Winter Beast! May we finally defeat the Beast after five decades of terror?\"."
-            },
-            {
-                "question": "Trailblazer League was a temporary game mode where players chose a set number of regions to play in, starting with Misthalin. Out of the nine regions, how many could a player access?",
-                "answers": {
-                    "a": "Four",
-                    "b": "Five",
-                    "c": "Six",
-                    "d": "Seven"
-                },
-                "correctAnswer": "b",
-                "explanation": "Players begin with Misthalin, can unlock Karamja for free, and then can choose three more out of Asgarnia, the Fremennik Isles, Kandarin, the Kharidian Desert, Morytania, Tirannwn, and the Wilderness."
             },
             {
                 "question": "Which of the following is not a variant of wyvern?",
@@ -183,34 +161,57 @@
                 "correctAnswer": "c"
             },
             {
-                "question": "The Sisterhood was established by a group of Saradominist healers who defected to Zamorak after the fall of Hallowvale. Who is the founder of the order?",
+                "question": "The townspeople of Slepe are afflicted with the sleeper plague until the adventurer frees them during Sins of the Father. What was the cause of the plague?",
                 "answers": {
-                    "a": "Phosani",
-                    "b": "Efaritay",
-                    "c": "Insela",
-                    "d": "Otrava"
+                    "a": "A potion was mixed in with the town's local beer",
+                    "b": "The townspeople willingly put themselves to sleep",
+                    "c": "The Sisterhood contaminated the town's water supply",
+                    "d": "The cause is still unknown"
                 },
                 "correctAnswer": "a"
             },
             {
-                "question": "During the Theatre of Blood, one can see the remains of the three mercenaries in various boss rooms. Which boss killed the melee mercenary?",
+                "question": "Trailblazer League was a temporary game mode where players chose a set number of regions to play in, starting with Misthalin. Of the nine regions, how many could a player access?",
                 "answers": {
-                    "a": "The Maiden of Sugadinti",
-                    "b": "Pestilent Bloat",
-                    "c": "Sotetseg",
-                    "d": "Xarpus"
+                    "a": "Four",
+                    "b": "Five",
+                    "c": "Six",
+                    "d": "Seven"
                 },
-                "correctAnswer": "d"
+                "correctAnswer": "b",
+                "explanation": "Players begin with Misthalin, can unlock Karamja for free, and then can choose three more out of Asgarnia, the Fremennik Isles, Kandarin, the Kharidian Desert, Morytania, Tirannwn, and the Wilderness."
+            },
+            {
+                "question": "Before the Hallowed Sepulchre fell during the God Wars, it was fortified with traps by Saradominist priests. Who were its defences meant to keep out?",
+                "answers": {
+                    "a": "Vampyres",
+                    "b": "Demons",
+                    "c": "Trolls",
+                    "d": "Gods"
+                },
+                "correctAnswer": "a",
+                "explanation": "The Hallowed Sepulchre is found beneath the former Saradominist kingdom of <a class='link' href='https://oldschool.runescape.wiki/w/Hallowvale' target='_blank' rel='noopener'>Hallowvale</a>, renamed \"Morytania\" by the vampyres after their victory in the Third Age."
+            },
+            {
+                "question": "If you kill another player wearing a fire cape locked with the Trouver parchment, how many coins are dropped?",
+                "answers": {
+                    "a": "50,000 coins",
+                    "b": "375,000 coins",
+                    "c": "500,000 coins",
+                    "d": "1,000,000 coins"
+                },
+                "correctAnswer": "c",
+                "explanation": "The number of coins dropped upon death was <a class='link' href='https://oldschool.runescape.wiki/w/Trouver_parchment' target='_blank' rel='noopener'>increased in June 2020</a> from 75% to 100% of the cost to lock the item."
             },
             {
                 "question": "Why is Commander Zilyana in possession of the Armadyl crossbow?",
                 "answers": {
-                    "a": "She obtained it after defeating Kree'arra",
-                    "b": "She stole the crossbow as a trophy",
+                    "a": "Armadyl gifted it to her when they were still allies",
+                    "b": "It was originally called the Saradomin crossbow, but she renamed it",
                     "c": "Saradomin created it to defeat Armadyl",
-                    "d": "Armadyl gave it to her"
+                    "d": "She stole it from Kree'arra as a trophy"
                 },
-                "correctAnswer": "b"
+                "correctAnswer": "d"
             }
         ]
     }
