@@ -34,7 +34,17 @@
                 "correctAnswer": "a"
             },
             {
-                "question": "The Dragonkin fled their homeworld and arrived on Gielinor before the First Age, where they built the city of Orthen. What were the Dragonkin fleeing from?",
+                "question": "During which quest does Sigmund tie Zanik to the tracks of the Dorgesh-Kaan–Keldagrim train system?",
+                "answers": {
+                    "a": "Another Slice of H.A.M.",
+                    "b": "Death to the Dorgeshuun",
+                    "c": "Land of the Goblins",
+                    "d": "The Chosen Commander"
+                },
+                "correctAnswer": "a"
+            },
+            {
+                "question": "The Dragonkin fled their homeworld and arrived on Gielinor pre-First Age, where they built the city of Orthen. What were they fleeing from?",
                 "answers": {
                     "a": "A wave of natural disasters that devastated their cities",
                     "b": "Enslavement of their race by the Mahjarrat",
@@ -54,16 +64,6 @@
                 },
                 "correctAnswer": "a",
                 "explanation": "Acadia (instead of <a class='link' href='https://en.wikipedia.org/wiki/Vachellia_tortilis' target='_blank' rel='noopener'>acacia</a>) was a mistake that the developers decided to keep because <a class='link' href='https://www.reddit.com/r/runescape/comments/6fgvda/acadia_trees/dii234m/' target='_blank' rel='noopener'>they liked it better</a>."
-            },
-            {
-                "question": "During which quest does Sigmund tie Zanik to the tracks of the Dorgesh-Kaan–Keldagrim train system?",
-                "answers": {
-                    "a": "Another Slice of H.A.M.",
-                    "b": "Death to the Dorgeshuun",
-                    "c": "Land of the Goblins",
-                    "d": "The Chosen Commander"
-                },
-                "correctAnswer": "a"
             },
             {
                 "question": "Of the four following cities, which one is furthest south?",
@@ -209,7 +209,7 @@
                     "a": "Armadyl gifted it to her when they were still allies",
                     "b": "It was originally called the Saradomin crossbow, but she renamed it",
                     "c": "Saradomin created it to defeat Armadyl",
-                    "d": "She stole it from Kree'arra as a trophy"
+                    "d": "She stole it from Kree'arra in an ambush during the God Wars"
                 },
                 "correctAnswer": "d"
             }
