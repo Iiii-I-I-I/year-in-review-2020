@@ -79,14 +79,14 @@
                 yPos = event.clientY - rect.top;
 
             // calculate rotation value along the axes
-            const multiplier = 15,
+            const multiplier = 17,
                   cardWidth = event.currentTarget.clientWidth,
                   cardHeight = event.currentTarget.clientHeight,
                   yRotate = multiplier * ((xPos - cardWidth / 2) / cardWidth),
                   xRotate = -multiplier * ((yPos - cardHeight / 2) / cardHeight);
 
             // generate string for transform and apply styles
-            const transform = `perspective(750px) scale(1.05) rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
+            const transform = `perspective(500px) scale(1.05) rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
 
             event.currentTarget.style.transform = transform;
             event.currentTarget.classList.add('card-hover');
@@ -273,7 +273,7 @@
                             yAxisLabels.classList.add('traffic-y-labels');
                             get('.traffic-graph').appendChild(yAxisLabels);
 
-                            for (let i = 0; i <= 5; i++) {
+                            for (let i = 0; i <= 7; i++) {
                                 let viewLabel = document.createElement('div');
 
                                 viewLabel.classList.add('y-label');
@@ -324,6 +324,7 @@
                         y: {
                             drawAxis: false,
                             includeZero: true,
+                            valueRange: [null, 8000000],
                             valueFormatter: function (num, opts, series, graph, row, col) {
                                 // original un-averaged value for this point
                                 let currentValue = graph.getValue(row, col);
@@ -359,18 +360,18 @@
                     {
                         x: "2020/02/06",
                         text: "The Nightmare of Ashihama is released",
-                        tickHeight: 16
+                        tickHeight: 15
                     }, {
                         x: "2020/03/14",
                         text: "Traffic rises as COVID-19 lockdowns begin"
                     }, {
                         x: "2020/03/30",
                         text: "The Archaeology skill is released",
-                        tickHeight: 35
+                        tickHeight: 30
                     }, {
                         x: "2020/05/01",
                         text: "Traffic drops as US states gradually reopen",
-                        tickHeight: 16
+                        tickHeight: 15
                     }, {
                         x: "2020/06/04",
                         text: "Sins of the Father is released"
@@ -382,8 +383,8 @@
                         text: "Trailblazer League begins",
                         tickHeight: 45
                     }, {
-                        x: "2020/12/07",
-                        text: "Raksha, the Shadow Colossus is released"
+                        x: "2020/12/25",
+                        text: "Traffic dips around Christmas and holidays"
                     }
                 ];
             let tooltips = [];
@@ -451,8 +452,8 @@
             let buttonGroup = document.createElement('div');
 
             buttonGroup.classList.add('quiz-button-group');
-            createButton('RuneScape quiz', 'rs');
-            createButton('Old School RuneScape quiz', 'osrs');
+            createButton('RuneScape', 'rs');
+            createButton('Old School RuneScape', 'osrs');
             // createButton('The RuneScape<br />Classic quiz (fake)', 'rsc');
             quiz.appendChild(buttonGroup);
 
@@ -460,8 +461,9 @@
                 let button = document.createElement('button');
 
                 button.classList.add('quiz-start', 'button');
-                button.innerHTML = text;
+                button.textContent = text;
                 button.addEventListener('click', function () {
+                    get('.pick').style.display = 'none';
                     get('.quiz-button-group').remove();
                     setupQuestions(game);
                 });
@@ -580,21 +582,15 @@
                 scoreNode.style.fontSize = '1.25em';
                 descNode.style.marginBottom = '0';
 
-                if (score === 1) {
-                    descNode.textContent = 'congrats! you should sign up for our OSWF tasks and help us blahblah.';
-                } else if (score >= 0.75) {
-                    descNode.textContent = 'pretty good. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
-                } else if (score >= 0.50) {
-                    descNode.textContent = 'it\'s okay i guess. For more trivia questions like these, follow us on Twitter at @blahblahblah.';
-                } else if (score >= 0.25) {
-                    descNode.textContent = 'sit kid.';
-                } else if (score > 0) {
-                    descNode.textContent = 'you fucking donkey. you absolute turnip. you idiot sandwich.';
+                if (score >= 0.7) {
+                    descNode.textContent = 'Very good. If you haven\'t already, you should sign up for our OSWF tasks and help us blahblah.';
+                } else if (score > 0.3) {
+                    descNode.textContent = 'it\'s okay i guess.';
                 } else {
                     descNode.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life.';
                 }
 
-                descNode.innerHTML += ' Would you like to try one of <span class="link reset-quiz" role="button">the other quizzes</span>?';
+                descNode.innerHTML += ' Would you like to try <span class="link reset-quiz" role="button">our other quiz</span>?';
                 get('.reset-quiz').addEventListener('click', resetQuiz);
 
                 function resetQuiz() {
@@ -604,6 +600,7 @@
                     resultsNode.textContent = '';
                     resultsNode.removeAttribute('style');
 
+                    get('.pick').style.display = 'block';
                     get('#quiz').scrollIntoView({behavior: 'smooth'});
                     buildQuiz();
                 }

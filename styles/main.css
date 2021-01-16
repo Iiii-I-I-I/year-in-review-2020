@@ -76,7 +76,7 @@ body {
     --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-body.theme-dark {
+/* body.theme-dark {
     --bg-01: #0a0a0a;
     --bg-02: #111;
     --bg-03: #1f1f1f;
@@ -95,7 +95,7 @@ body.theme-dark {
     --shadow-03:
         0 5px 12px -4px rgba(0, 0, 0, .25),
         0 15px 30px 0 rgba(0, 0, 0, .25);
-}
+} */
 
 body {
     color: var(--text-02);
@@ -149,14 +149,6 @@ p {
 .link:hover,
 .link:focus {
     text-decoration: underline;
-}
-
-.theme-dark .link {
-    color: #46a2da;
-}
-
-code {
-    font-family: ui-monospace, 'Menlo', 'Courier', monospace;
 }
 
 /* hide focus ring when using a mouse (but keep it for keyboard navigation)
@@ -416,17 +408,10 @@ header {
        CARDS
    ------------- */
 
-/* @TODO: at <900px make it overflow and scroll */
 .wiki-cards {
     display: grid;
-    grid-gap: 1em;
-    align-self: flex-start;
-
-    width: 100vw;
-    max-width: 75em;
-    padding: 0 2em;
-    animation: 1.2s 1.2s both var(--ease-out-quad);
-    animation-name: fade-in, enter-top;
+    grid-gap: .8em;
+    margin-top: 1.5em;
 }
 
 .wiki-card {
@@ -434,8 +419,8 @@ header {
     justify-content: center;
     align-items: center;
     position: relative;
-    height: 9em;
-    padding: 1em 1.75em;
+    height: 8em;
+    padding: 1em;
 
     text-decoration: none;
     border-radius: var(--border-radius);
@@ -477,7 +462,7 @@ header {
 
 .wiki-card span {
     color: white;
-    font-size: 1.25em;
+    font-size: 1.15em;
     font-weight: bold;
     line-height: 1.3;
     text-align: center;
@@ -526,19 +511,11 @@ header {
     background-image: url('../images/card-rsc.jpg');
 }
 
-.theme-dark .wiki-card::before {
-    filter: brightness(.75);
-}
-
 @media screen and (max-width: 501px) {
 
     .wiki-cards {
         grid-template-columns: none;
-        grid-gap: .75em;
-    }
-
-    .wiki-card {
-        height: 7em;
+        grid-gap: 1em;
     }
 
 }
@@ -547,6 +524,7 @@ header {
 
     .wiki-cards {
         grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1em;
     }
 
 }
@@ -590,39 +568,6 @@ section + section {
 .button:hover,
 .button:focus {
     filter: brightness(.95) saturate(1.3);
-}
-
-.theme-dark section {
-    border-color: #444;
-}
-
-.theme-dark .button:hover {
-    filter: brightness(1.25) saturate(.8);
-}
-
-/* ------------------
-      THEME SWITCH
-   ------------------ */
-
-.toogle {
-    position: fixed;
-    left: 1.5em;
-    bottom: 1.5em;
-    z-index: 10;
-
-    font-weight: normal;
-    background-color: #ddd;
-    padding: .7em 1em;
-    border-radius: var(--border-radius);
-
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.theme-dark .toogle {
-    color: var(--text-02);
-    background-color: #333;
 }
 
 /* ------------
@@ -735,14 +680,16 @@ section + section {
 
 .stat {
     background-color: var(--bg-03);
-    padding: 1.25em;
+    padding: 1.2em 1.25em;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-03);
 }
 
 .stat-icon {
     display: block;
-    color: var(--text-03);
+    width: 25px;
+    height: 25px;
+    color: #58666b;
     margin-bottom: .85em;
 }
 
@@ -755,7 +702,8 @@ section + section {
 }
 
 .stat abbr {
-    margin-left: .05em;
+    color: inherit;
+    margin-left: .02ch;
 }
 
 .stat-description {
@@ -764,13 +712,13 @@ section + section {
 }
 
 .stat-change {
-    font-size: .85em;
+    font-size: .8em;
     margin-top: .85rem;
 }
 
 .change-icon {
     position: relative;
-    top: .2em;
+    top: .15em;
     margin-right: .25em;
 }
 
@@ -781,7 +729,7 @@ section + section {
 
 /* browser/country stats */
 .stat ol {
-    margin: .75em 0 0;
+    margin: .5em 0 0;
     padding-left: 0;
 }
 
@@ -790,16 +738,16 @@ section + section {
     justify-content: space-between;
     font-size: .85em;
     background-color: var(--bg-01);
-    border-radius: calc(var(--border-radius) * .45);
+    border-radius: calc(var(--border-radius) * .5);
 
     position: relative;
-    padding: .05em .6em .05em .5em;
+    padding: .05em .5em;
     list-style: none;
     overflow: hidden;
 }
 
 .stat li + li {
-    margin-top: .5em;
+    margin-top: .4em;
 }
 
 .stat li span {
@@ -825,38 +773,17 @@ section + section {
 .section-rs .stat {
     --stat-color: #4eabe4;
 }
+
 .section-osrs .stat {
     --stat-color: #ce986c;
 }
+
 .section-ptbr .stat {
     --stat-color: #908df4;
 }
+
 .section-rsc .stat {
     --stat-color: #69bb4c;
-}
-
-.theme-dark .stat li {
-    background-color: var(--bg-02);
-}
-
-.theme-dark .stat li::before {
-    filter: brightness(.9) contrast(1.1);
-}
-
-.theme-dark .section-rs .stat {
-    --stat-color: #2985bd;
-}
-
-.theme-dark .section-osrs .stat {
-    --stat-color: #a67348;
-}
-
-.theme-dark .section-ptbr .stat {
-    --stat-color: #7774dc;
-}
-
-.theme-dark .section-rsc .stat {
-    --stat-color: #58980d;
 }
 
 @media screen and (max-width: 501px) {
@@ -922,7 +849,7 @@ section + section {
    -------------- */
 
 .traffic-container {
-    --range-pad: 6px; /* must be >= xRangePad option for dygraph in main.js */
+    --range-pad: 7px; /* must be >= xRangePad option for dygraph in main.js */
 
     background-color: var(--bg-03);
     border-radius: var(--border-radius);
@@ -945,7 +872,7 @@ section + section {
     position: absolute;
     font-size: .8rem;
     background-color: var(--bg-03);
-    padding: 4px 8px 4px var(--range-pad);
+    padding: 6px 8px 8px var(--range-pad);
     line-height: 1.4;
     pointer-events: none;
     white-space: nowrap;
@@ -990,10 +917,10 @@ section + section {
 .y-label {
     display: flex;
     align-items: flex-end;
-    height: 52.5px;
+    height: 37.5px;
     color: var(--text-03);
-    font-size: .7rem;
-    letter-spacing: .1ch;
+    font-size: .65rem;
+    letter-spacing: .05ch;
     opacity: .8;
 }
 
@@ -1045,11 +972,6 @@ section + section {
     transform: translateY(-4px);
 }
 
-.theme-dark .dygraph-annotation,
-.theme-dark .tooltip {
-    background-color: #196a9c;
-}
-
 @media screen and (max-width: 500px) {
 
     .short-month {
@@ -1082,13 +1004,20 @@ section + section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1em;
+    width: 85%;
     margin: 2em auto 0;
 }
 
 .quiz-start {
-    color: var(--text-02);
-    background-color: var(--bg-01);
+    color: var(--bg-01);
+    background-color: var(--text-02);
     padding: 2em .5em;
+    box-shadow: var(--shadow-02);
+    transition: .25s var(--ease-out-quad);
+}
+
+.quiz-start:hover {
+    filter: brightness(1.3) saturate(.9);
 }
 
 .quiz-group {
@@ -1145,7 +1074,7 @@ section + section {
 
 .selected,
 .not-selected {
-    padding-right: calc(1.2em + 25px); /* original padding + width of icon */
+    padding-right: calc(1.5em + 25px); /* padding + width of icon */
     background-size: 19px;
     background-repeat: no-repeat;
     background-position: calc(100% - 1.2em) center;
@@ -1183,36 +1112,6 @@ section + section {
     width: 90%;
 }
 
-.theme-dark .quiz-start {
-    color: #93ad95;
-    background-color: #173a18;
-}
-
-.theme-dark .quiz-choice {
-    background-color: var(--bg-03);
-}
-
-.theme-dark .unanswered .quiz-choice:hover {
-    color: var(--text-01);
-    background-color: #333;
-}
-
-.theme-dark .selected.correct {
-    background-color: #276b2c;
-}
-
-.theme-dark .not-selected.correct {
-    background-image: url('../images/icons/check-green-dark.svg');
-}
-
-.theme-dark .selected.incorrect {
-    background-color: #9e2929;
-}
-
-.theme-dark .quiz-results {
-    background-color: var(--bg-03);
-}
-
 @media screen and (max-width: 450px) {
 
     .quiz-button-group {
@@ -1232,49 +1131,6 @@ section + section {
         width: 100%;
     }
 
-}
-
-/* --------------
-       QUOTE
-   -------------- */
-
-blockquote {
-    position: relative;
-    background-color: var(--bg-01);
-    border-radius: var(--border-radius);
-    width: max-content;
-    padding: 2em 3em;
-    margin: 3em auto;
-    overflow: hidden;
-}
-
-blockquote::before {
-    content: '“';
-    position: absolute;
-    top: -10px;
-    left: -15px;
-    font-size: 10em;
-    font-weight: bold;
-    font-family: 'Garamond', 'Baskerville', 'Georgia', serif;
-    line-height: 1;
-    opacity: .075;
-
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-blockquote p {
-    font-size: 1.1em;
-    margin: .5em 0 1em;
-}
-
-blockquote cite {
-    font-style: normal;
-}
-
-.theme-dark blockquote {
-    background-color: var(--bg-03);
 }
 
 /* --------------
@@ -1337,16 +1193,6 @@ footer p {
     position: relative;
     top: 1px;
     left: 3px;
-}
-
-.theme-dark .discord {
-    color: #93a1d6;
-    background-color: #1b2446;
-}
-
-.theme-dark .twitter {
-    color: #81b1ce;
-    background-color: #06304a;
 }
 
 @media screen and (max-width: 501px) {
