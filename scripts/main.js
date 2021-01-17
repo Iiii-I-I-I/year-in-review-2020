@@ -47,15 +47,6 @@
         }
     }
 
-    // don't care about storing this preference because users are not likely to return
-    function initToogle() {
-        let toogle = get('.toogle');
-
-        toogle.addEventListener('click', function () {
-            document.body.classList.toggle('theme-dark');
-        });
-    }
-
     // based on <https://technokami.in/3d-hover-effect-using-javascript-animations-css-html>
     function initCards() {
         let cards = getAll('.wiki-card');
@@ -96,11 +87,11 @@
         // too lazy to use ResizeObserver
         if (document.body.clientWidth > 500) {
             cards.forEach(card => {
-                card.addEventListener('mousemove', throttleMoveHandler(30));
+                card.addEventListener('mousemove', throttleMoveHandler(30), false);
                 card.addEventListener('mouseout', function () {
                     card.removeAttribute('style');
                     card.classList.remove('card-hover');
-                });
+                }, false);
             });
         }
     }
@@ -126,14 +117,14 @@
             tabLists = getAll('.tab-list');
 
         tabs.forEach(tab => {
-            tab.addEventListener('click', changeTabs);
+            tab.addEventListener('click', changeTabs, false);
         });
 
         // make tabs keyboard accessible
         tabLists.forEach(tabList => {
             tabList.focus = 0;
             tabList.elements = getAll('.tab', tabList);
-            tabList.addEventListener('keydown', keyHandler);
+            tabList.addEventListener('keydown', keyHandler, false);
         });
 
         function changeTabs(event) {
@@ -187,7 +178,7 @@
     function initGraph() {
         let trafficData = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/traffic.csv',
             gridColor = '#efefef',
-            lineColor = '#4eabe4',
+            lineColor = '#47a2d9',
             locale = 'default',
             dateOptions = {
                 day: 'numeric',
@@ -406,7 +397,7 @@
         request.send();
         request.addEventListener('load', function () {
             buildQuiz();
-        });
+        }, false);
 
         function buildQuiz() {
             let quiz = get('.quiz'),
@@ -432,7 +423,7 @@
                     get('.pick').style.display = 'none';
                     get('.quiz-button-group').remove();
                     setupQuestions(game);
-                });
+                }, false);
 
                 buttonGroup.appendChild(button);
             }
@@ -478,7 +469,7 @@
                     quiz.appendChild(groupNode);
 
                     // validate choice
-                    choices.forEach(choice => choice.addEventListener('click', checkAnswer));
+                    choices.forEach(choice => choice.addEventListener('click', checkAnswer, false));
 
                     function checkAnswer(event) {
                         let choice = event.currentTarget,
@@ -517,7 +508,7 @@
                 getAll('.quiz-group').forEach(quizGroup => {
                     quizGroup.focus = 0;
                     quizGroup.elements = getAll('.quiz-choice', quizGroup);
-                    quizGroup.addEventListener('keydown', keyHandler);
+                    quizGroup.addEventListener('keydown', keyHandler, false);
 
                     quizGroup.elements.forEach((choice, i) => {
                         // add tabindex="0" for first element, "-1" for the rest
@@ -529,7 +520,7 @@
                                 choice.click();
                                 quizGroup.removeEventListener('keydown', keyHandler);
                             }
-                        });
+                        }, false);
                     });
                 });
             }
@@ -558,7 +549,7 @@
                 }
 
                 descNode.innerHTML += ' Would you like to try <span class="link reset-quiz" role="button">our other quiz</span>?';
-                get('.reset-quiz').addEventListener('click', resetQuiz);
+                get('.reset-quiz').addEventListener('click', resetQuiz, false);
 
                 function resetQuiz() {
                     quiz.textContent = '';
@@ -575,10 +566,57 @@
         }
     }
 
-    // initToogle();
+    function initImage() {
+        let thumb = get('.thumb');
+
+        thumb.addEventListener('mouseover', preloadFullImage, { once: true });
+        thumb.addEventListener('click', showModal, false);
+
+        function preloadFullImage(event) {
+            let preloader = document.createElement('link');
+
+            preloader.href = event.currentTarget.dataset.src;
+            preloader.rel = 'preload';
+            preloader.as = 'image';
+
+            document.head.appendChild(preloader);
+        }
+
+        function showModal(event) {
+            let modal = document.createElement('div');
+            let image = document.createElement('img');
+            let note = document.createElement('div');
+
+            modal.classList.add('modal');
+            modal.appendChild(image);
+            modal.appendChild(note);
+            modal.addEventListener('click', closeModal, false);
+
+            image.classList.add('image');
+            image.src = event.currentTarget.dataset.src;
+
+            note.classList.add('note');
+            note.textContent = 'Click anywhere or press Esc to close.';
+
+            document.addEventListener('keydown', escToClose, false);
+            document.body.style.overflow = 'hidden';
+            document.body.appendChild(modal);
+        }
+
+        function escToClose(event) {
+            if (event.key === 'Escape') closeModal();
+        }
+
+        function closeModal() {
+            get('.modal').remove();
+            document.body.removeAttribute('style'); // unset overflow: hidden
+        }
+    }
+
     initPlants();
     initCards();
     initTabs();
     initGraph();
     initQuiz();
+    initImage();
 }());

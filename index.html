@@ -54,7 +54,14 @@
         <!-- TRAFFIC STATS -->
         <section>
             <h2 id="traffic">Traffic statistics</h2>
-            <p>Something about how fat our data is. 1.5 billion total pageviews! Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here.</p>
+            <p>Something about how fat our data is. 1.5 billion pageviews this year! Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here.</p>
+            <div class="traffic-container">
+                <div class="traffic-title">Daily pageviews, 7-day average</div>
+                <div class="traffic-legend"></div>
+                <div class="traffic-graph" style="width: 100%; height: 300px"></div>
+                <div class="traffic-x-labels"></div>
+            </div>
+            <p>Mention how we're the second-biggest wiki on the internet, behind only Wikipedia, in terms of traffic (?) (according to Cookem plox). Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Breakdown of traffic by wiki:</p>
             <div class="tab-container">
                 <div class="tab-list" role="tablist" style="--index:0">
                     <button id="tab-1" class="tab" role="tab" aria-selected="true" aria-controls="panel-1" tabindex="0">
@@ -267,19 +274,12 @@
                     </div>
                 </div>
             </div>
-            <p>Mention how we're the second-biggest wiki on the internet, behind only Wikipedia, in terms of traffic (?) (according to Cookem plox) Riblet's big words here. Riblet's big words here.</p>
-            <div class="traffic-container">
-                <div class="traffic-title">Daily pageviews, 7-day average</div>
-                <div class="traffic-legend"></div>
-                <div class="traffic-graph" style="width: 100%; height: 300px"></div>
-                <div class="traffic-x-labels"></div>
-            </div>
         </section>
         <!-- COMMUNITY STATS -->
         <section>
             <h2 id="community">Community statistics</h2>
             <p>Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here.</p>
-            <div class="stats-grid" style="--stat-color: #7190e6; margin-top: 3em">
+            <div class="stats-grid" style="--stat-color: #7190e6; margin-top: 2em">
                 <div class="stat">
                     <svg class="stat-icon"><use href="images/icons/bootstrap-icons.svg#file-text-fill"/></svg>
                     <div class="stat-value">9,502</div>
@@ -303,7 +303,7 @@
                 <div class="stat">
                     <svg class="stat-icon"><use href="images/icons/bootstrap-icons.svg#credit-card-fill"/></svg>
                     <div class="stat-value">293</div>
-                    <div class="stat-description"><strong>Bonds paid</strong> to players helping with our <a class="link" target="_blank" rel="noopener" href="https://runescape.wiki/w/RuneScape:One_Small_Wiki_Favour">RSW</a> and <a class="link" target="_blank" rel="noopener" href="https://oldschool.runescape.wiki/w/RuneScape:One_Small_Wiki_Favour">OSW projects</a></div>
+                    <div class="stat-description"><strong>Bonds paid</strong> to players helping with our <a class="link" target="_blank" rel="noopener" href="https://runescape.wiki/w/RuneScape:One_Small_Wiki_Favour">RS</a> and <a class="link" target="_blank" rel="noopener" href="https://oldschool.runescape.wiki/w/RuneScape:One_Small_Wiki_Favour">OSRS projects</a></div>
                 </div>
                 <div class="stat">
                     <svg class="stat-icon"><use href="images/icons/bootstrap-icons.svg#award-fill"/></svg>
@@ -316,7 +316,7 @@
         <section>
             <h2 id="quiz">Trivia quiz</h2>
             <p>Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here.</p>
-            <p class="pick">Choose a version of the game to start. If you want to try both, you'll have the opportunity to pick again when you're done the first quiz.</p>
+            <p class="pick">Choose a version of the game to start. If you want to try both, you'll get the opportunity to choose again when you've finished the first quiz.</p>
             <div class="quiz"></div>
             <div class="quiz-results"></div>
             <template class="template-group">
@@ -333,16 +333,12 @@
             <h2 id="closing">In memoriam</h2>
             <p>Something about how happy we are to have won Community Champion in this year's <a class="link" target="_blank" rel="noopener" href="https://secure.runescape.com/m=news/10th-annual-golden-gnome-awards-the-winners-are-revealed">10th Annual Golden Gnome Awards</a>. Thank readers, editors, etc. Riblet's big words here. Riblet's big words here. Riblet's big words here.</p>
             <figure class="figure">
-                <img class="image" src="images/runefest.jpg" srcset="images/runefest@2x.jpg 2x" alt="The Golden Gnome Awards at RuneFest 2019" />
+                <img class="thumb" src="images/runefest-thumb.jpg" srcset="images/runefest-thumb@2x.jpg 2x" data-src="images/runefest-full.jpg" alt="The Golden Gnome Awards at RuneFest 2019" />
                 <figcaption>The Golden Gnome Awards at RuneFest 2019. Unfortunately, we couldn't be there in person this year.</figcaption>
             </figure>
-            <p>Paragraph about how you can get involved. Talk about Discord, link to Twitter, etc. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here.</p>
-            <p class="signature">From everyone at the RuneScape Wikis<br />(which could include you, too)<p>
-            <!-- <ul style="list-style: none; font-weight: bold">
-                <li>Discord →</li>
-                <li>@RSWiki →</li>
-                <li>@OSRS_Wiki →</li>
-            </ul> -->
+            <p>Paragraph about how you can get involved. Talk about OSWF, previous projects, future projects, how to sign up, how to access the wiki from in-game. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here.</p>
+            <p>Conclusion, something about the future. Talk about Discord, link to Twitter, etc. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here.</p>
+            <p class="signature">From all of us at the RuneScape Wikis<br />(which could include you, too)<p>
         </section>
     </main>
     <footer>
