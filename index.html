@@ -293,7 +293,7 @@
                 <div class="stat">
                     <svg class="stat-icon"><use href="images/icons/bootstrap-icons.svg#pencil-fill"/></svg>
                     <div class="stat-value">465<abbr>k</abbr></div>
-                    <div class="stat-description"><strong>Edits made</strong> by our community across all wikis</div>
+                    <div class="stat-description"><strong>Edits made</strong> by our community across all wikis, excluding bots</div>
                 </div>
                 <div class="stat">
                     <svg class="stat-icon"><use href="images/icons/bootstrap-icons.svg#people-fill"/></svg>
@@ -315,10 +315,9 @@
         <!-- TECHNICAL -->
         <section>
             <h2 id="technical">Technical changes</h2>
-            <p>Gaz, Jayden, Kitty and I are in the process of making some changes to how the wikis handle Grand Exchange prices. We are moving historical data (used for charts) off the wiki to <a class="link" target="_blank" rel="noopener" href="https://api.weirdgloop.org/">api.weirdgloop.org</a>, and changing the charts to hit this instead of transcluding the data on the wiki page. Here are the main benefits:</p>
-            <p>We get to delete roughly 73% of all revisions on the site, including 66% of RSW, 84% of OSRS, and 95% of pt-RSW. This has a huge impact on the portability of the database, both for migrations and possible future ephemeral versions of the wiki. We also get to have our bot only make ~12 edits per day instead of 18,000, which has a huge impact on the job queue, webservers, and repeated caching.</p>
-            <p>Third-party scrapers will be able to use the new API (which is heavily cached) instead of hitting our wiki web servers. The data is generally going to be updated within 15 minutes of the daily Grand Exchange update. We hope this makes it easier for people to make cool things that rely on Grand Exchange prices, especially since the official APIs are difficult to use programmatically.</p>
-            <p>(Delete this later) Copy and pasted from <a class="link" href="https://redd.it/k7gym9">https://redd.it/k7gym9</a> and <a class="link" href="https://meta.weirdgloop.org/w/Forum:PSA:_Grand_Exchange_changes">https://meta.weirdgloop.org/w/Forum:PSA:_Grand_Exchange_changes</a></p>
+            <p>This past November, we made some big changes to how we handle Grand Exchange prices. We moved historical price data off the wikis to <a class="link" target="_blank" rel="noopener" href="https://api.weirdgloop.org/">api.weirdgloop.org</a>, stopped updating each item's module page in favor of putting all prices in a single bulk module, and deleted old revisions of those item module pages (which contained historical data).</p>
+            <p>By doing so, we deleted roughly 73% of all revisions on the site, including 66% of <abbr title="RuneScape Wiki">RSW</abbr>, 84% of <abbr title="Old School RuneScape Wiki">OSRSW</abbr>, and 95% of <abbr title="Portuguese-Brazilian RuneScape Wiki">pt-RSW</abbr>. This has a huge impact on the portability of the database, both for migrations and possible future ephemeral versions of the wikis. Our Grand Exchange bot also now makes around a dozen edits a day instead of 18,000, which means better performance for caching, the job queue, and our web servers.</p>
+            <p>Third-party scrapers can use our new API (which is heavily cached) instead of hitting our wiki web servers. We hope this makes it easier for people to make cool things that rely on Grand Exchange prices, especially since the official APIs are difficult to use programmatically.</p>
         </section>
         <!-- QUIZ -->
         <section>

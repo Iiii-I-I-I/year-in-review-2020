@@ -140,6 +140,11 @@ p {
     letter-spacing: -0.005em;
 }
 
+p abbr {
+    text-decoration: none;
+    border-bottom: 2px dotted #a4aaad;
+}
+
 .link {
     color: #2073a7;
     text-decoration: none;
