@@ -130,15 +130,15 @@
                 "correctAnswer": "d"
             },
             {
-                "question": "The Nightmare is a boss located deep in the Sisterhood Santuary, but it wasn't always found there. Where is the Nightmare originally from?",
+                "question": "The Nightmare is a boss found deep in the Sisterhood Santuary, but it wasn't always located there. Where is the Nightmare originally from?",
                 "answers": {
-                    "a": "Morytania",
-                    "b": "Great Kourend",
-                    "c": "Wushanko Isles",
-                    "d": "The Wilderness"
+                    "a": "Kharazi Jungle",
+                    "b": "Catacombs of Kourend",
+                    "c": "Eastern Lands",
+                    "d": "Mount Karuulm"
                 },
                 "correctAnswer": "c",
-                "explanation": "The Nightmare was driven away from Ashihama, an island in the <a class='link' href='https://oldschool.runescape.wiki/w/Wushanko_Isles' target='_blank' rel='noopener'>Wushanko Isles</a>, and it fled westwards until it reached the coastal town of Slepe."
+                "explanation": "The Nightmare was driven away from Ashihama, an island in the <a class='link' href='https://oldschool.runescape.wiki/w/Wushanko_Isles' target='_blank' rel='noopener'>Eastern Lands</a>, and it fled westwards until it reached the coastal town of Slepe."
             },
             {
                 "question": "Which of the following is not a variant of wyvern?",
