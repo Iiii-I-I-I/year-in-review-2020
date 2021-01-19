@@ -68,15 +68,15 @@
             {
                 "question": "Of the four following cities, which one is furthest south?",
                 "answers": {
-                    "a": "Yanille",
-                    "b": "Al Kharid",
+                    "a": "Tree Gnome Stronghold"
+                    "b": "Yanille",
                     "c": "Brimhaven",
-                    "d": "Lletya"
+                    "d": "Al Kharid",
                 },
-                "correctAnswer": "a"
+                "correctAnswer": "b"
             },
             {
-                "question": "Raksha, the Shadow Colossus, is a rex dinosaur imprisoned beneath Anachronia. Which of his combat mechanics is not shared with any other boss?",
+                "question": "Raksha, the Shadow Colossus, is a solo and duo boss monster imprisoned beneath Anachronia. Which of his combat mechanics is not shared with any other boss?",
                 "answers": {
                     "a": "Minion spawning",
                     "b": "Charge",
@@ -105,7 +105,7 @@
                     "d": "Drunken Dwarf"
                 },
                 "correctAnswer": "d",
-                "explanation": "<a class='link' href='https://runescape.wiki/w/Knight%27s_notes_(opened)' target='_blank' rel='noopener'>A letter</a> written by Sir Gerry, who lies dying outside the entrance to the God Wars Dungeon, describes his efforts to \"investigate the dwarf's drunken claims\"."
+                "explanation": "<a class='link' href='https://runescape.wiki/w/Knight%27s_notes_(opened)' target='_blank' rel='noopener'>A letter</a> written by Sir Gerry, the knight who lies dying outside the entrance to the God Wars Dungeon, describes his efforts to \"investigate the dwarf's drunken claims\"."
             }
         ],
         "osrs": [
@@ -193,22 +193,21 @@
                 "explanation": "The Hallowed Sepulchre is found beneath the former Saradominist kingdom of <a class='link' href='https://oldschool.runescape.wiki/w/Hallowvale' target='_blank' rel='noopener'>Hallowvale</a>, renamed \"Morytania\" by the vampyres after their victory in the Third Age."
             },
             {
-                "question": "If you kill another player wearing a fire cape locked with the Trouver parchment, how many coins are dropped?",
+                "question": "The Wise Old Man appears in all of the following quests except for which one?",
                 "answers": {
-                    "a": "50,000 coins",
-                    "b": "375,000 coins",
-                    "c": "500,000 coins",
-                    "d": "1,000,000 coins"
+                    "a": "Swan Song",
+                    "b": "Garden of Tranquillity",
+                    "c": "Making Friends with My Arm",
+                    "d": "A Tail of Two Cats"
                 },
-                "correctAnswer": "c",
-                "explanation": "The number of coins dropped upon death was <a class='link' href='https://oldschool.runescape.wiki/w/Trouver_parchment' target='_blank' rel='noopener'>increased in June 2020</a> from 75% to 100% of the cost to lock the item."
+                "correctAnswer": "d"
             },
             {
                 "question": "Why is Commander Zilyana in possession of the Armadyl crossbow?",
                 "answers": {
                     "a": "Armadyl gifted it to her when they were still allies",
                     "b": "It was originally called the Saradomin crossbow, but she renamed it",
-                    "c": "Saradomin created it to defeat Armadyl",
+                    "c": "Saradomin crafted it specially to defeat Armadyl",
                     "d": "She stole it from Kree'arra in an ambush during the God Wars"
                 },
                 "correctAnswer": "d"
