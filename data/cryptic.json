@@ -74,7 +74,7 @@
                     "d": "Yanille"
                 },
                 "correctAnswer": "d",
-                "explanation": "This question might have been hard to visualize. Here are the towns' locations on the world map:<img class='thumb' src='images/south-map.png' srcset='images/south-map@2x.png 2x' alt='Al Kharid, Brimhaven, Entrana, and Yanille labelled on the world map' />"
+                "explanation": "This question may have been hard to visualize. Here are the towns' locations on the world map:<img class='thumb' src='images/south-map.png' srcset='images/south-map@2x.png 2x' alt='Al Kharid, Brimhaven, Entrana, and Yanille labelled on the world map' />"
             },
             {
                 "question": "Raksha, the Shadow Colossus, is a solo and duo boss monster imprisoned beneath Anachronia. Which of his combat mechanics is not shared with any other boss?",
@@ -181,7 +181,7 @@
                     "d": "Waterbirth Island"
                 },
                 "correctAnswer": "c",
-                "explanation": "This question might have been hard to visualize. Here are the islands' locations on the world map:<img class='thumb' src='images/rellekka-map.png' srcset='images/rellekka-map@2x.png 2x' alt='Rellekka, Miscellania, Jatizso, Neitiznot, and Waterbirth Island labelled on the world map' />"
+                "explanation": "This question may have been hard to visualize. Here are the islands' locations on the world map:<img class='thumb' src='images/rellekka-map.png' srcset='images/rellekka-map@2x.png 2x' alt='Rellekka, Miscellania, Jatizso, Neitiznot, and Waterbirth Island labelled on the world map' />"
             },
             {
                 "question": "Before the Hallowed Sepulchre fell during the God Wars, it was fortified with traps by Saradominist priests. Who were its defences meant to keep out?",
