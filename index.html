@@ -46,7 +46,6 @@
         </div>
     </header>
     <main class="container">
-        <!-- <button class="toogle button" type="button">toogle</button> -->
         <!-- INTRO -->
         <section>
             <p>Riblet's big words here. 2020 has been a humanitarian disaster on a global scale and a fantastic year of growth for the RuneScapes Wiki. We are Weird Gloop, the organisation behind the sites, and we'd like to share this year's successes with you.</p>
@@ -315,15 +314,15 @@
         <!-- TECHNICAL -->
         <section>
             <h2 id="technical">Technical changes</h2>
-            <p>This past November, we made some big changes to how we handle Grand Exchange prices. We moved historical price data off the wikis to <a class="link" target="_blank" rel="noopener" href="https://api.weirdgloop.org/">api.weirdgloop.org</a>, stopped updating each item's module page in favor of putting all prices in a single bulk module, and deleted old revisions of those item module pages (which contained historical data).</p>
-            <p>By doing so, we deleted roughly 73% of all revisions on the site, including 66% of <abbr title="RuneScape Wiki">RSW</abbr>, 84% of <abbr title="Old School RuneScape Wiki">OSRSW</abbr>, and 95% of <abbr title="Portuguese-Brazilian RuneScape Wiki">pt-RSW</abbr>. This has a huge impact on the portability of the database, both for migrations and possible future ephemeral versions of the wikis. Our Grand Exchange bot also now makes around a dozen edits a day instead of 18,000, which means better performance for caching, the job queue, and our web servers.</p>
-            <p>Third-party scrapers can use our new API (which is heavily cached) instead of hitting our wiki web servers. We hope this makes it easier for people to make cool things that rely on Grand Exchange prices, especially since the official APIs are difficult to use programmatically.</p>
+            <p>This past November, we made some big changes to how we handle Grand Exchange prices. We moved historical price data off the wikis to <a class="link" target="_blank" rel="noopener" href="https://api.weirdgloop.org/">api.weirdgloop.org</a>, stopped updating individual items' pages in favor of accessing prices from a single bulk module, and deleted old revisions of those item pages.</p>
+            <p>By doing so, we removed roughly 73% of all revisions on the site, including 66% of <abbr title="RuneScape Wiki">RSW</abbr>, 84% of <abbr title="Old School RuneScape Wiki">OSRSW</abbr>, and 95% of <abbr title="Portuguese-Brazilian RuneScape Wiki">pt-RSW</abbr>. This has a huge impact on the portability of the database, both for migrations and possible future ephemeral versions of the wikis. Our Grand Exchange bot now makes around a dozen edits a day instead of 18,000 (one for each item), which means better performance for caching, the job queue, and our web servers.</p>
+            <p>Third-party scrapers can use <a class="link" target="_blank" rel="noopener" href="https://api.weirdgloop.org/">our new API</a>, which is heavily cached, instead of hitting our wiki web servers. We hope this makes it easier for people to make cool things that rely on Grand Exchange prices, especially since the official APIs are difficult to use programmatically. (REPLACE THIS SENTENCE)</p>
         </section>
         <!-- QUIZ -->
         <section>
             <h2 id="quiz">Trivia quiz</h2>
             <p>Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here.</p>
-            <p class="pick">Choose a version of the game to start. If you want to try both, you'll get the opportunity to choose again when you've finished the first quiz.</p>
+            <p>Choose a version of the game to start. If you want to try both, you'll get the opportunity to choose again when you've finished the first quiz.</p>
             <div class="quiz"></div>
             <div class="quiz-results"></div>
             <template class="template-group">
@@ -340,7 +339,10 @@
             <h2 id="closing">In memoriam</h2>
             <p>Something about how happy we are to have won Community Champion in this year's <a class="link" target="_blank" rel="noopener" href="https://secure.runescape.com/m=news/10th-annual-golden-gnome-awards-the-winners-are-revealed">10th Annual Golden Gnome Awards</a>. Thank readers, editors, etc. Riblet's big words here. Riblet's big words here. Riblet's big words here.</p>
             <figure class="figure">
-                <img class="thumb" src="images/runefest-thumb.jpg" srcset="images/runefest-thumb@2x.jpg 2x" data-src="images/runefest-full.jpg" alt="The Golden Gnome Awards at RuneFest 2019" />
+                <picture class="picture" data-src-full="images/runefest-full.jpg" data-src-full-p3="images/runefest-full-p3.jpg">
+                    <source media="(color-gamut: p3)" srcset="images/runefest-thumb-p3.jpg, images/runefest-thumb-p3@2x.jpg 2x" />
+                    <img class="thumb" src="images/runefest-thumb.jpg" srcset="images/runefest-thumb@2x.jpg 2x" alt="Musicians performing onstage at the Golden Gnome Awards during RuneFest 2019" />
+                </picture>
                 <figcaption>The Golden Gnome Awards at RuneFest 2019. Unfortunately, we couldn't be there in person this year.</figcaption>
             </figure>
             <p>Paragraph about how you can get involved. Talk about OSWF, previous projects, future projects, how to sign up, how to access the wiki from in-game. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here. Riblet's big words here.</p>

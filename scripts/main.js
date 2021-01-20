@@ -340,7 +340,7 @@
                     text: "Traffic rises as COVID-19 lockdowns begin"
                 }, {
                     x: "2020/05/01",
-                    text: "Traffic drops as US states gradually reopen",
+                    text: "Traffic drops as countries worldwide reopen",
                     tickHeight: 15
                 }, {
                     x: "2020/06/04",
@@ -420,7 +420,6 @@
                 button.classList.add('quiz-start', 'button');
                 button.textContent = text;
                 button.addEventListener('click', function () {
-                    get('.pick').style.display = 'none';
                     get('.quiz-button-group').remove();
                     setupQuestions(game);
                 }, false);
@@ -528,8 +527,7 @@
             function showResults() {
                 let resultsNode = get('.quiz-results'),
                     scoreNode = document.createElement('h3'),
-                    descNode = document.createElement('p'),
-                    score = correct / total;
+                    descNode = document.createElement('p');
 
                 resultsNode.style.display = 'block';
                 resultsNode.appendChild(scoreNode);
@@ -539,16 +537,15 @@
                 scoreNode.style.fontSize = '1.25em';
                 descNode.style.marginBottom = '0';
 
-                // @TODO: write nicer messages
-                if (score >= 0.7) {
-                    descNode.textContent = 'Very good. If you haven\'t already, you should sign up for our OSWF tasks and help us blahblah.';
-                } else if (score > 0.3) {
-                    descNode.textContent = 'it\'s okay i guess.';
+                if (correct >= 7) {
+                    descNode.innerHTML = 'Very good. You should consider helping us with our <a class="link" target="_blank" rel="noopener" href="https://runescape.wiki/w/RuneScape:One_Small_Wiki_Favour">RS Wiki</a> and <a class="link" target="_blank" rel="noopener" href="https://oldschool.runescape.wiki/w/RuneScape:One_Small_Wiki_Favour">OSRS Wiki projects</a> – we\'ll even pay you for your hard work!';
+                } else if (correct >= 4) {
+                    descNode.textContent = 'Not too bad.';
                 } else {
-                    descNode.textContent = 'you fuckin idiot. consider reading the runescape wiki for once in your life.';
+                    descNode.textContent = 'Maybe you should spend a little more time on the wiki.';
                 }
 
-                descNode.innerHTML += ' Would you like to try <span class="link reset-quiz" role="button">our other quiz</span>?';
+                descNode.innerHTML += '<br style="content: \'\'; display: block; margin-bottom: .75em;" /><span class="link reset-quiz" role="button">Click here to try the other quiz →</span>';
                 get('.reset-quiz').addEventListener('click', resetQuiz, false);
 
                 function resetQuiz() {
@@ -558,7 +555,6 @@
                     resultsNode.textContent = '';
                     resultsNode.removeAttribute('style');
 
-                    get('.pick').style.display = 'block';
                     get('#quiz').scrollIntoView({behavior: 'smooth'});
                     buildQuiz();
                 }
@@ -566,16 +562,21 @@
         }
     }
 
-    function initImage() {
-        let thumb = get('.thumb');
+    function initModal() {
+        let picture = get('.picture');
+        let src = 'srcFull';
 
-        thumb.addEventListener('mouseover', preloadFullImage, { once: true });
-        thumb.addEventListener('click', showModal, false);
+        // use different image depending on if user's display supports P3
+        // <https://webkit.org/blog/10042/wide-gamut-color-in-css-with-display-p3/>
+        if (window.matchMedia('(color-gamut: p3)').matches) src = 'srcFullP3';
+
+        picture.addEventListener('mouseover', preloadFullImage, { once: true });
+        picture.addEventListener('click', showModal, false);
 
         function preloadFullImage(event) {
             let preloader = document.createElement('link');
 
-            preloader.href = event.currentTarget.dataset.src;
+            preloader.href = event.currentTarget.dataset[src];
             preloader.rel = 'preload';
             preloader.as = 'image';
 
@@ -593,23 +594,24 @@
             modal.addEventListener('click', closeModal, false);
 
             image.classList.add('image');
-            image.src = event.currentTarget.dataset.src;
+            image.src = event.currentTarget.dataset[src];
 
             note.classList.add('note');
             note.textContent = 'Click anywhere or press Esc to close.';
 
-            document.addEventListener('keydown', escToClose, false);
             document.body.style.overflow = 'hidden';
             document.body.appendChild(modal);
-        }
-
-        function escToClose(event) {
-            if (event.key === 'Escape') closeModal();
+            document.addEventListener('keydown', escToClose, false);
         }
 
         function closeModal() {
             get('.modal').remove();
             document.body.removeAttribute('style'); // unset overflow: hidden
+            document.removeEventListener('keydown', escToClose, false);
+        }
+
+        function escToClose(event) {
+            if (event.key === 'Escape') closeModal();
         }
     }
 
@@ -618,5 +620,5 @@
     initTabs();
     initGraph();
     initQuiz();
-    initImage();
+    initModal();
 }());

@@ -156,6 +156,14 @@ p abbr {
     text-decoration: underline;
 }
 
+.thumb {
+    display: block;
+    max-width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-02);
+    margin: auto;
+}
+
 /* hide focus ring when using a mouse (but keep it for keyboard navigation)
    using polyfill from <https://github.com/WICG/focus-visible> */
 .js-focus-visible :focus:not(.focus-visible) {
@@ -572,12 +580,16 @@ section + section {
 
 .button:hover,
 .button:focus {
-    filter: brightness(.95) saturate(1.3);
+    filter: brightness(.96) saturate(2);
 }
 
 /* ------------
        TABS
    ------------ */
+
+.tab-container {
+    margin-top: 2em;
+}
 
 .tab-list {
     --tab-count: 4;
@@ -591,7 +603,7 @@ section + section {
     background-color: var(--bg-01);
     border-radius: calc(var(--border-radius) + var(--tab-gap));
     box-shadow: inset 0 2px 4px -1px rgba(0, 0, 0, .025);
-    margin: 2em auto 1em;
+    margin: 0 auto 1em;
     width: 85%;
     max-width: 32em;
 }
@@ -680,7 +692,7 @@ section + section {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1em;
-    margin: 0 var(--breakout-margin) 3.5em;
+    margin: 0 var(--breakout-margin);
 }
 
 .stat {
@@ -859,7 +871,7 @@ section + section {
     background-color: var(--bg-03);
     border-radius: var(--border-radius);
     padding: 1.5em 1.75em 1.35em;
-    margin: 2em 0;
+    margin: 2em 0 2.25em;
     box-shadow: var(--shadow-03);
     position: relative;
 }
@@ -1015,9 +1027,17 @@ section + section {
 }
 
 .quiz-start {
-    color: var(--text-02);
-    background-color: #e8eaea;
     padding: 2em .5em;
+}
+
+.quiz-start:first-child {
+    color: #2a5877;
+    background-color: #edf3f7;
+}
+
+.quiz-start:last-child {
+    color: #52452b;
+    background-color: #f5f1eb;
 }
 
 .quiz-group {
@@ -1062,13 +1082,13 @@ section + section {
 }
 
 .rs .unanswered .quiz-choice {
-    color: #22455d;
+    color: #2a5877;
     background-color: #edf3f7;
 }
 
 .osrs .unanswered .quiz-choice {
-    color: #5a4a2c;
-    background-color: #f5f3ef;
+    color: #52452b;
+    background-color: #f5f1eb;
 }
 
 .selected,
@@ -1111,6 +1131,11 @@ section + section {
     width: 90%;
 }
 
+.reset-quiz {
+    color: inherit;
+    font-weight: bold;
+}
+
 @media screen and (max-width: 450px) {
 
     .quiz-button-group {
@@ -1136,20 +1161,6 @@ section + section {
        ENDING
    -------------- */
 
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, .75);
-    cursor: pointer;
-}
-
 figure {
     max-width: 70%;
     margin: 2em auto;
@@ -1161,25 +1172,37 @@ figcaption {
     margin-top: .75em;
 }
 
-.thumb {
-    display: block;
-    max-width: 100%;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-02);
-    margin: auto;
+figure .thumb {
     cursor: pointer;
     transition: .4s var(--ease-out-quad);
 }
 
-.thumb:hover {
-    transform: scale(1.02);
+figure .thumb:hover {
+    transform: scale(1.015);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .75);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    cursor: pointer;
 }
 
 .image {
     display: block;
-    max-width: 94vw;
-    max-height: 94vh;
+    max-width: 93vw;
+    max-height: 93vh;
     box-shadow: var(--shadow-02);
+    animation: .65s modal-entry cubic-bezier(0.22, 1, 0.36, 1); /* <https://easings.net/#easeOutQuint> */
 }
 
 .note {
@@ -1198,6 +1221,20 @@ figcaption {
 
     figure {
         max-width: 90%;
+    }
+
+}
+
+@keyframes modal-entry {
+
+    from {
+        transform: scale(0.96);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
     }
 
 }
