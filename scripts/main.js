@@ -563,7 +563,7 @@
     }
 
     function initModal() {
-        let picture = get('.picture');
+        let picture = get('picture');
         let src = 'srcFull';
 
         // use different image depending on if user's display supports P3
@@ -584,23 +584,15 @@
         }
 
         function showModal(event) {
-            let modal = document.createElement('div');
-            let image = document.createElement('img');
-            let note = document.createElement('div');
+            let modalTemplate = get('.template-modal').content.cloneNode(true),
+                modal = get('.modal', modalTemplate),
+                image = get('.full-image', modalTemplate);
 
-            modal.classList.add('modal');
-            modal.appendChild(image);
-            modal.appendChild(note);
             modal.addEventListener('click', closeModal, false);
-
-            image.classList.add('image');
             image.src = event.currentTarget.dataset[src];
 
-            note.classList.add('note');
-            note.textContent = 'Click anywhere or press Esc to close.';
-
             document.body.style.overflow = 'hidden';
-            document.body.appendChild(modal);
+            document.body.appendChild(modalTemplate);
             document.addEventListener('keydown', escToClose, false);
         }
 

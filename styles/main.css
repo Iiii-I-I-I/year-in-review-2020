@@ -1178,11 +1178,36 @@ figcaption {
 
 figure .thumb {
     cursor: pointer;
-    transition: .4s var(--ease-out-quad);
 }
 
-figure .thumb:hover {
-    transform: scale(1.015);
+.picture-container {
+    position: relative;
+}
+
+.fullscreen-button {
+    position: absolute;
+    display: flex;
+    bottom: .6em;
+    right: .8em;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+
+    transition: opacity .2s var(--ease-out-quad);
+    background-color: rgba(255, 255, 255, 0.175);
+    border-radius: 100%;
+    opacity: 0;
+}
+
+.picture-container:hover .fullscreen-button {
+    opacity: 1;
+}
+
+.fullscreen-icon {
+    color: white;
+    width: 22px;
+    height: 22px;
+    margin: auto;
 }
 
 .modal {
@@ -1201,7 +1226,7 @@ figure .thumb:hover {
     cursor: pointer;
 }
 
-.image {
+.full-image {
     display: block;
     max-width: 93vw;
     max-height: 93vh;
