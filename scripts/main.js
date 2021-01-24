@@ -563,15 +563,17 @@
     }
 
     function initModal() {
-        let picture = get('picture');
+        let pictures = getAll('picture');
         let src = 'srcFull';
 
         // use different image depending on if user's display supports P3
         // <https://webkit.org/blog/10042/wide-gamut-color-in-css-with-display-p3/>
         if (window.matchMedia('(color-gamut: p3)').matches) src = 'srcFullP3';
 
-        picture.addEventListener('mouseover', preloadFullImage, { once: true });
-        picture.addEventListener('click', showModal, false);
+        for (let picture of pictures) {
+            picture.addEventListener('mouseover', preloadFullImage, { once: true });
+            picture.addEventListener('click', showModal, false);
+        }
 
         function preloadFullImage(event) {
             let preloader = document.createElement('link');
