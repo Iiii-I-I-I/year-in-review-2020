@@ -247,11 +247,11 @@
                         yAxisLabels.classList.add('traffic-y-labels');
                         get('.traffic-graph').appendChild(yAxisLabels);
 
-                        for (let i = 0; i <= 7; i++) {
+                        for (let i = 7; i >= 0; i--) {
                             let viewLabel = document.createElement('div');
 
                             viewLabel.classList.add('y-label');
-                            viewLabel.textContent = i + ((i !== 0) ? 'M' : '');
+                            viewLabel.textContent = i + ((i !== 0) ? 'm' : '');
                             yAxisLabels.appendChild(viewLabel);
                         }
                     }
@@ -347,7 +347,7 @@
                     text: "Sins of the Father is released"
                 }, {
                     x: "2020/10/14",
-                    text: "RuneScape is released on Steam"
+                    text: "RuneScape is released on the Steam store"
                 }, {
                     x: "2020/10/28",
                     text: "Trailblazer League begins",
@@ -389,8 +389,8 @@
 
     // design and ux stolen from NYT quizzes <https://www.nytimes.com/spotlight/news-quiz>
     function initQuiz() {
-        let request = new XMLHttpRequest(),
-            requestURL = `https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review${ /* CHEATERS BEGONE */'' }-2020/master/data/cryptic.json`;
+        let request = new XMLHttpRequest();
+        let requestURL = `https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review${ /* CHEATERS BEGONE */'' }-2020/master/data/cryptic.json`;
 
         request.open('GET', requestURL);
         request.responseType = 'json';
@@ -402,23 +402,23 @@
         function buildQuiz() {
             let quiz = get('.quiz'),
                 questions,
-                total = 10,
+                total,
                 correct = 0,
                 answered = 0;
 
             let buttonGroup = document.createElement('div');
 
-            buttonGroup.classList.add('quiz-button-group');
+            buttonGroup.classList.add('quiz-button-group', 'stat');
             createButton('RuneScape', 'rs');
             createButton('Old School RuneScape', 'osrs');
-            // createButton('The RuneScape<br />Classic quiz (fake)', 'rsc');
+            createButton('RuneScape Classic', 'rsc');
             quiz.appendChild(buttonGroup);
 
-            function createButton(text, game) {
+            function createButton(label, game) {
                 let button = document.createElement('button');
 
-                button.classList.add('quiz-start', 'button');
-                button.textContent = text;
+                button.classList.add('button', 'quiz-start', game);
+                button.textContent = label;
                 button.addEventListener('click', function () {
                     get('.quiz-button-group').remove();
                     setupQuestions(game);
@@ -435,16 +435,18 @@
                     case 'osrs':
                         questions = request.response[0].osrs;
                         break;
-                    // case 'rsc':
-                    //     questions = request.response[0].rsc;
-                    //     break;
+                    case 'rsc':
+                        questions = request.response[0].rsc;
+                        break;
                 }
+
+                total = questions.length;
 
                 // add class for css
                 quiz.classList.add(game);
 
                 questions.forEach((question, i) => {
-                    let groupNode = get('.template-group').content.cloneNode(true),
+                    let groupNode = get('.template-quiz-group').content.cloneNode(true),
                         numberNode = get('.quiz-number', groupNode),
                         questionNode = get('.quiz-question', groupNode),
                         explanationNode = get('.quiz-explanation', groupNode),
@@ -525,43 +527,36 @@
             }
 
             function showResults() {
-                let resultsNode = get('.quiz-results'),
-                    scoreNode = document.createElement('h3'),
-                    descNode = document.createElement('p');
+                let resultsNode = get('.template-quiz-results').content.cloneNode(true),
+                    headerNode = get('h3', resultsNode),
+                    descNode = get('p:first-of-type', resultsNode),
+                    score = correct / total;
 
-                resultsNode.style.display = 'block';
-                resultsNode.appendChild(scoreNode);
-                resultsNode.appendChild(descNode);
+                headerNode.textContent = `You answered ${correct} out of ${total} questions correctly.`;
+                headerNode.style.fontSize = '1.25em';
 
-                scoreNode.textContent = `You answered ${correct} out of ${total} questions correctly.`;
-                scoreNode.style.fontSize = '1.25em';
-                descNode.style.marginBottom = '0';
-
-                if (correct >= 7) {
-                    descNode.innerHTML = 'Very good. You should consider helping us with our <a class="link" target="_blank" rel="noopener" href="https://runescape.wiki/w/RuneScape:One_Small_Wiki_Favour">RS Wiki</a> and <a class="link" target="_blank" rel="noopener" href="https://oldschool.runescape.wiki/w/RuneScape:One_Small_Wiki_Favour">OSRS Wiki projects</a> – we\'ll even pay you for your hard work!';
-                } else if (correct >= 4) {
-                    descNode.textContent = 'Not too bad.';
+                if (score >= 0.7) {
+                    descNode.innerHTML = 'Very good. You should consider helping us with our <a class="link" target="_blank" rel="noopener" href="https://rs.wiki/RS:OSWF">RS Wiki</a> and <a class="link" target="_blank" rel="noopener" href="https://osrs.wiki/RS:OSWF">OSRS Wiki projects</a> – we\'ll reward you for your work!';
+                } else if (score >= 0.4) {
+                    descNode.textContent = 'Could\'ve been worse. Hopefully you\'ll do better on next year\'s quiz.';
                 } else {
                     descNode.textContent = 'Maybe you should spend a little more time on the wiki.';
                 }
 
-                descNode.innerHTML += '<br style="content: \'\'; display: block; margin-bottom: .75em;" /><span class="link reset-quiz" role="button">Click here to try the other quiz →</span>';
+                get('.quiz').appendChild(resultsNode);
                 get('.reset-quiz').addEventListener('click', resetQuiz, false);
 
                 function resetQuiz() {
                     quiz.textContent = '';
-                    quiz.classList.remove(quiz.classList.item(1));
-
-                    resultsNode.textContent = '';
-                    resultsNode.removeAttribute('style');
-
-                    get('#quiz').scrollIntoView({behavior: 'smooth'});
+                    quiz.classList.remove(quiz.classList.item(1)); // remove game version class
+                    get('#quiz').scrollIntoView({ behavior: 'smooth' });
                     buildQuiz();
                 }
             }
         }
     }
 
+    // @TODO: show "Loading...", hide when image is loaded <https://stackoverflow.com/q/7922404>
     function initModal() {
         let pictures = getAll('picture');
         let src = 'srcFull';
@@ -572,7 +567,7 @@
 
         for (let picture of pictures) {
             picture.addEventListener('mouseover', preloadFullImage, { once: true });
-            picture.addEventListener('click', showModal, false);
+            picture.addEventListener('click', openModal, false);
         }
 
         function preloadFullImage(event) {
@@ -585,7 +580,7 @@
             document.head.appendChild(preloader);
         }
 
-        function showModal(event) {
+        function openModal(event) {
             let modalTemplate = get('.template-modal').content.cloneNode(true),
                 modal = get('.modal', modalTemplate),
                 image = get('.full-image', modalTemplate);
