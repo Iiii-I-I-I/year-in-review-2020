@@ -561,7 +561,6 @@ section + section {
 .button {
     font-family: inherit;
     font-size: 1em;
-    font-weight: bold;
     border: none;
     border-radius: calc(var(--border-radius) * .8);
     transition: filter .2s ease;
@@ -1022,9 +1021,9 @@ section + section {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: .75em;
-    margin: 2em auto 0;
-    border-radius: calc(var(--border-radius) * 1.5);
     padding: .75em;
+    margin-top: 2em;
+    border-radius: calc(var(--border-radius) + .3em);
 }
 
 .quiz-start {
@@ -1033,9 +1032,9 @@ section + section {
 
 .quiz-group {
     width: 75%;
-    margin: 3.5em auto 0;
+    margin: 3em auto 0;
     border-top: 1px solid #ddd;
-    padding-top: 3em;
+    padding-top: 2.5em;
 }
 
 .quiz-number {
@@ -1149,11 +1148,15 @@ section + section {
 
     .quiz-button-group {
         grid-template-columns: none;
-        grid-gap: .5em;
     }
 
     .quiz-start {
         padding: 1em .5em;
+    }
+
+    .quiz-results {
+        padding: 2em;
+        width: 100%;
     }
 
 }
@@ -1171,7 +1174,6 @@ section + section {
    -------------- */
 
 figure {
-    /* max-width: 65%; */
     margin: 2em auto;
     display: flex;
     flex-flow: row wrap;
@@ -1209,26 +1211,29 @@ figure .thumb {
 .fullscreen-button {
     position: absolute;
     display: flex;
-    bottom: .5em;
+    top: .6em;
     right: .6em;
-    width: 36px;
-    height: 36px;
-    pointer-events: none;
+    width: 34px;
+    height: 34px;
 
-    transition: opacity .15s var(--ease-out-quad);
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: white;
     border-radius: 100%;
     opacity: 0;
+    transform: translateY(-3px);
+    transition: .25s var(--ease-out-quad);
+    transition-property: opacity, transform;
+    pointer-events: none;
 }
 
 .picture-container:hover .fullscreen-button {
     opacity: 1;
+    transform: translateY(0);
 }
 
 .fullscreen-icon {
-    color: white;
-    width: 20px;
-    height: 20px;
+    color: #333;
+    width: 18px;
+    height: 18px;
     margin: auto;
 }
 
@@ -1240,8 +1245,8 @@ figure .thumb {
     right: 0;
     display: flex;
     background-color: rgba(0, 0, 0, .75);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
     cursor: pointer;
     animation: .55s fade-in cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1254,8 +1259,8 @@ figure .thumb {
 
 .full-image {
     display: block;
-    max-width: 93vw;
-    max-height: 93vh;
+    max-width: 95vw;
+    max-height: 95vh;
     box-shadow: var(--shadow-02);
 }
 
@@ -1294,10 +1299,15 @@ figure .thumb {
     background-color: #d0eaf9;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 425px) {
 
     figure {
-        max-width: 90%;
+        flex-direction: column;
+    }
+
+    .picture-container + .picture-container {
+        margin-top: .9em;
+        margin-left: 0;
     }
 
 }
