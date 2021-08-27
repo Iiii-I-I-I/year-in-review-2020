@@ -32,7 +32,7 @@
                     "d": "Dramen tree"
                 },
                 "correctAnswer": "a",
-                "explanation": "Acadia (instead of <a class='link' href='https://en.wikipedia.org/wiki/Vachellia_tortilis' target='_blank' rel='noopener'>acacia</a>) was a mistake that the developers decided to keep because <a class='link' href='https://www.reddit.com/r/runescape/comments/6fgvda/acadia_trees/dii234m/' target='_blank' rel='noopener'>they liked it better</a>."
+                "explanation": "Acadia (instead of <a class='link' href='https://en.wikipedia.org/wiki/Vachellia_tortilis' target='_blank' rel='noopener'>acacia</a>) was a mistake that the developers decided to keep because they <a class='link' href='https://www.reddit.com/r/runescape/comments/6fgvda/acadia_trees/dii234m/' target='_blank' rel='noopener'>liked it better</a>."
             },
             {
                 "question": "Despite the fact that wyverns are extant, how does the natural history quiz in the Varrock Museum claim they died out?",
@@ -140,7 +140,7 @@
                     "d": "Varrock"
                 },
                 "correctAnswer": "c",
-                "explanation": "The Nightmare was driven away from Ashihama, an island in the <a class='link' href='https://oldschool.runescape.wiki/w/Wushanko_Isles' target='_blank' rel='noopener'>Wushanko Isles</a>, and she fled west until she reached Slepe. The Eastern Lands' influence is visible in the torii gates surrounding her arena."
+                "explanation": "The Nightmare was driven away from Ashihama, an island in the <a class='link' href='https://oldschool.runescape.wiki/w/Wushanko_Isles' target='_blank' rel='noopener'>Wushanko Isles</a>, and fled west until she reached Slepe. The Eastern Lands' influence is visible in the torii gates surrounding her arena."
             },
             {
                 "question": "Which of the following is not a variant of wyvern?",
@@ -193,7 +193,7 @@
                     "d": "Gods"
                 },
                 "correctAnswer": "a",
-                "explanation": "The Hallowed Sepulchre is found beneath the former Saradominist kingdom of <a class='link' href='https://oldschool.runescape.wiki/w/Hallowvale' target='_blank' rel='noopener'>Hallowvale</a>, which was renamed <a class='link' href='https://oldschool.runescape.wiki/w/Morytania' target='_blank' rel='noopener'>Morytania</a> by the vampyres after their victory in the Third Age."
+                "explanation": "The Hallowed Sepulchre is found beneath the former Saradominist kingdom of <a class='link' href='https://oldschool.runescape.wiki/w/Hallowvale' target='_blank' rel='noopener'>Hallowvale</a>, renamed <a class='link' href='https://oldschool.runescape.wiki/w/Morytania' target='_blank' rel='noopener'>Morytania</a> by the vampyres after their victory in the Third Age."
             },
             {
                 "question": "The Wise Old Man appears in all of the following quests except for which one?",
@@ -209,7 +209,7 @@
                 "question": "The Armadyl crossbow is dropped by Commander Zilyana in the God Wars Dungeon. Why is she, and not one of Armadyl's followers, in possession of the crossbow?",
                 "answers": {
                     "a": "Armadyl gifted it to her when they were still allies",
-                    "b": "It's a duplicate of the real crossbow, not the original",
+                    "b": "It is a duplicate of the real crossbow, not the original",
                     "c": "Saradomin crafted it specifically to defeat Armadyl",
                     "d": "She stole it from Kree'arra during the God Wars"
                 },
@@ -272,7 +272,7 @@
                 "explanation": "You may have been thrown off by its current spelling in RuneScape and Old School RuneScape, \"<a class='link' href='https://runescape.wiki/w/Legends%27_Quest' target='_blank' rel='noopener'>Legends' Quest</a>\"."
             },
             {
-                "question": "Which unreleased rune, originally meant for an expansion to Magic, was eventually added to RuneScape for use in Gower Quest over a decade later?",
+                "question": "Which unreleased rune, originally meant for the Magic skill, was eventually added to RuneScape as part of Gower Quest over a decade later?",
                 "answers": {
                     "a": "Time rune",
                     "b": "Soul rune",
@@ -280,7 +280,7 @@
                     "d": "Cosmic rune"
                 },
                 "correctAnswer": "c",
-                "explanation": "Life runes (written \"<a class='link' href='https://classic.runescape.wiki/w/Life-Rune' target='_blank' rel='noopener'>Life-Runes</a>\" in RuneScape Classic) were planned to be used in Magic spells that summoned followers. <a class='link' href='https://runescape.wiki/w/Summoning' target='_blank' rel='noopener'>Summoning</a> returned as a separate skill in RuneScape in 2008."
+                "explanation": "Life runes (written \"<a class='link' href='https://classic.runescape.wiki/w/Life-Rune' target='_blank' rel='noopener'>Life-Runes</a>\" in RuneScape Classic) were planned to be used in Magic spells that summoned followers. <a class='link' href='https://runescape.wiki/w/Summoning' target='_blank' rel='noopener'>Summoning</a> reappeared as a separate skill in 2008."
             },
             {
                 "question": "Which quest must be completed in order to unlock the ability to wield a dragon sword?",
