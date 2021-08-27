@@ -449,80 +449,76 @@
                     let groupNode = get('.template-quiz-group').content.cloneNode(true),
                         numberNode = get('.quiz-number', groupNode),
                         questionNode = get('.quiz-question', groupNode),
+                        choicesNode = get('.quiz-choice-group', groupNode),
                         explanationNode = get('.quiz-explanation', groupNode),
-                        answers = Object.keys(question.answers),
-                        choices = [];
+                        letters = ['a', 'b', 'c', 'd'];
 
                     // fill in <template> with data
                     numberNode.textContent = `Question ${i + 1}`;
                     questionNode.textContent = question.question;
-                    answers.forEach(answer => {
+                    letters.forEach((letter, i) => {
                         let choice = document.createElement('li');
 
+                        // add tabindex="0" for first element, "-1" for the rest
+                        choice.setAttribute('tabindex', (i === 0) ? 0 : -1);
                         choice.classList.add('quiz-choice');
-                        choice.textContent = question.answers[answer];
-                        choice.answerKey = answer;
-                        choices.push(choice);
-                        get('.quiz-choice-group', groupNode).appendChild(choice);
+                        choice.textContent = question.answers[letter];
+                        choice.dataset.letter = letter;
+
+                        choicesNode.appendChild(choice);
                     });
 
-                    // insert completed question in DOM
-                    quiz.appendChild(groupNode);
+                    // validate choice when clicked
+                    choicesNode.addEventListener('click', function clicked(e) {
+                        if (!e.target.classList.contains('quiz-choice')) return;
 
-                    // validate choice
-                    choices.forEach(choice => choice.addEventListener('click', checkAnswer, false));
+                        let selectedLetter = e.target.dataset.letter;
+                        let correctLetter = question.correctAnswer;
+                        let explanation = question.explanation;
 
-                    function checkAnswer(event) {
-                        let choice = event.currentTarget,
-                            selectedKey = choice.answerKey,
-                            correctKey = question.correctAnswer,
-                            explanation = question.explanation;
-
-                        if (selectedKey === correctKey) {
-                            choice.classList.add('selected', 'correct');
+                        // css to highlight chosen answer
+                        if (selectedLetter === correctLetter) {
+                            e.target.classList.add('selected', 'correct');
                             correct++;
                         } else {
                             // reveal correct answer in addition to user's choice
-                            let correct = choices.find(c => c.answerKey === correctKey);
-
-                            correct.classList.add('not-selected', 'correct');
-                            choice.classList.add('selected', 'incorrect');
+                            get(`[data-letter=${correctLetter}]`, choicesNode).classList.add('not-selected', 'correct');
+                            e.target.classList.add('selected', 'incorrect');
                         }
-
-                        // stop user from choosing again
-                        choices.forEach(choice => choice.removeEventListener('click', checkAnswer));
-                        choice.closest('.quiz-group').classList.remove('unanswered');
-
-                        // stop keyHandler() focusing when input is not via keyboard
-                        choice.blur();
-                        choice.setAttribute('tabindex', -1);
 
                         // add explanation for correct answer
                         if (explanation) explanationNode.innerHTML = explanation;
 
+                        // stop keyHandler() focusing when input is not via keyboard
+                        e.target.blur();
+
+                        // shouldn't be focusable once answered (clicked)
+                        e.target.setAttribute('tabindex', -1);
+
+                        // things to run after question has been answered
                         answered++;
+                        e.target.closest('.quiz-group').classList.remove('unanswered');
+                        choicesNode.removeEventListener('click', clicked, false);
                         if (answered === total) showResults();
-                    }
-                });
+                    }, false);
 
-                // make quiz keyboard accessible
-                getAll('.quiz-group').forEach(quizGroup => {
-                    quizGroup.focus = 0;
-                    quizGroup.elements = getAll('.quiz-choice', quizGroup);
-                    quizGroup.addEventListener('keydown', keyHandler, false);
+                    // make quiz arrow-key accessible
+                    choicesNode.focus = 0;
+                    choicesNode.elements = getAll('.quiz-choice', choicesNode);
+                    choicesNode.addEventListener('keydown', keyHandler, false);
 
-                    quizGroup.elements.forEach((choice, i) => {
-                        // add tabindex="0" for first element, "-1" for the rest
-                        choice.setAttribute('tabindex', (i === 0) ? 0 : -1);
+                    // simulate click with enter key
+                    choicesNode.addEventListener('keydown', function pressed(e) {
+                        let focused = document.activeElement;
 
-                        // simulate click with enter key
-                        choice.addEventListener('keydown', event => {
-                            if (event.keyCode === 13) {
-                                choice.click();
-                                quizGroup.removeEventListener('keydown', keyHandler);
-                            }
-                        }, false);
-                    });
+                        if ((e.keyCode === 13) && (choicesNode.contains(focused)) && (focused.classList.contains('quiz-choice'))) {
+                            focused.click();
+                            choicesNode.removeEventListener('keydown', pressed, false);
+                        }
+                    }, false);
+
+                    // add finished question and choice group into dom
+                    quiz.appendChild(groupNode);
                 });
             }
 
@@ -535,9 +531,9 @@
                 headerNode.textContent = `You answered ${correct} out of ${total} questions correctly.`;
                 headerNode.style.fontSize = '1.25em';
 
-                if (score >= 0.7) {
+                if (score >= 0.6) {
                     descNode.innerHTML = 'Very good. You should consider helping us with our <a class="link" target="_blank" rel="noopener" href="https://rs.wiki/RS:OSWF">RS Wiki</a> and <a class="link" target="_blank" rel="noopener" href="https://osrs.wiki/RS:OSWF">OSRS Wiki projects</a> – we\'ll reward you for your work!';
-                } else if (score >= 0.4) {
+                } else if (score >= 0.3) {
                     descNode.textContent = 'Could\'ve been worse. Hopefully you\'ll do better on next year\'s quiz.';
                 } else {
                     descNode.textContent = 'Maybe you should spend a little more time on the wiki.';
