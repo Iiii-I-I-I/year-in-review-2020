@@ -390,165 +390,174 @@
     // design and ux stolen from NYT quizzes <https://www.nytimes.com/spotlight/news-quiz>
     function initQuiz() {
         let request = new XMLHttpRequest();
-        let requestURL = `https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review${ /* CHEATERS BEGONE */'' }-2020/master/data/cryptic.json`;
+        let requestURL = 'https://raw.githubusercontent.com/Iiii-I-I-I/year-in-review-2020/master/data/cryptic.json';
+        let quiz = get('.quiz');
+        let questions;
+        let numberTotal;
+        let numberCorrect = 0;
+        let numberAnswered = 0;
 
         request.open('GET', requestURL);
         request.responseType = 'json';
         request.send();
         request.addEventListener('load', function () {
-            buildQuiz();
+            setupButtons();
         }, false);
 
-        function buildQuiz() {
-            let quiz = get('.quiz'),
-                questions,
-                total,
-                correct = 0,
-                answered = 0;
-
+        function setupButtons() {
             let buttonGroup = document.createElement('div');
 
             buttonGroup.classList.add('quiz-button-group', 'stat');
-            createButton('RuneScape', 'rs');
-            createButton('Old School RuneScape', 'osrs');
-            createButton('RuneScape Classic', 'rsc');
             quiz.appendChild(buttonGroup);
+            buildButton('RuneScape', 'rs');
+            buildButton('Old School RuneScape', 'osrs');
+            buildButton('RuneScape Classic', 'rsc');
+        }
 
-            function createButton(label, game) {
-                let button = document.createElement('button');
+        function buildButton(label, game) {
+            let button = document.createElement('button');
 
-                button.classList.add('button', 'quiz-start', game);
-                button.textContent = label;
-                button.addEventListener('click', function () {
-                    get('.quiz-button-group').remove();
-                    setupQuestions(game);
-                }, false);
+            button.classList.add('button', 'quiz-start', game);
+            button.textContent = label;
+            button.addEventListener('click', function () {
+                get('.quiz-button-group').remove();
+                setupQuestions(game);
+                buildQuestions(questions);
+            }, false);
 
-                buttonGroup.appendChild(button);
+            get('.quiz-button-group').appendChild(button);
+        }
+
+        function setupQuestions(game) {
+            switch (game) {
+                case 'rs':
+                questions = request.response[0].rs;
+                break;
+                case 'osrs':
+                questions = request.response[0].osrs;
+                break;
+                case 'rsc':
+                questions = request.response[0].rsc;
+                break;
             }
 
-            function setupQuestions(game) {
-                switch (game) {
-                    case 'rs':
-                        questions = request.response[0].rs;
-                        break;
-                    case 'osrs':
-                        questions = request.response[0].osrs;
-                        break;
-                    case 'rsc':
-                        questions = request.response[0].rsc;
-                        break;
-                }
+            // 10 for rs and osrs, but 9 for rsc
+            numberTotal = questions.length;
 
-                total = questions.length;
+            // need class for css
+            quiz.classList.add(game);
+        }
 
-                // add class for css
-                quiz.classList.add(game);
+        function buildQuestions(questions) {
+            questions.forEach((question, i) => {
+                let groupNode = get('.template-quiz-group').content.cloneNode(true);
+                let choicesNode = get('.quiz-choice-group', groupNode);
+                let explanationNode = get('.quiz-explanation', groupNode);
+                let letters = ['a', 'b', 'c', 'd'];
 
-                questions.forEach((question, i) => {
-                    let groupNode = get('.template-quiz-group').content.cloneNode(true),
-                        numberNode = get('.quiz-number', groupNode),
-                        questionNode = get('.quiz-question', groupNode),
-                        choicesNode = get('.quiz-choice-group', groupNode),
-                        explanationNode = get('.quiz-explanation', groupNode),
-                        letters = ['a', 'b', 'c', 'd'];
+                // fill in <template> with quiz data
+                get('.quiz-number', groupNode).textContent = `Question ${i + 1}`;
+                get('.quiz-question', groupNode).textContent = question.question;
+                letters.forEach((letter, i) => {
+                    let choice = document.createElement('li');
 
-                    // fill in <template> with data
-                    numberNode.textContent = `Question ${i + 1}`;
-                    questionNode.textContent = question.question;
-                    letters.forEach((letter, i) => {
-                        let choice = document.createElement('li');
+                    // tabindex="0" for first element so it can be focused, "-1" for the rest
+                    choice.setAttribute('tabindex', (i === 0) ? 0 : -1);
+                    choice.classList.add('quiz-choice');
+                    choice.dataset.letter = letter;
+                    choice.textContent = question.answers[letter];
 
-                        // add tabindex="0" for first element, "-1" for the rest
-                        choice.setAttribute('tabindex', (i === 0) ? 0 : -1);
-                        choice.classList.add('quiz-choice');
-                        choice.textContent = question.answers[letter];
-                        choice.dataset.letter = letter;
+                    choicesNode.appendChild(choice);
+                });
 
-                        choicesNode.appendChild(choice);
+                // validate choice when clicked
+                choicesNode.addEventListener('click', clicked, false);
+
+                // simulate click with enter key
+                choicesNode.addEventListener('keydown', pressed, false);
+
+                // make quiz arrow-key accessible
+                choicesNode.focus = 0;
+                choicesNode.elements = getAll('.quiz-choice', choicesNode);
+                choicesNode.addEventListener('keydown', keyHandler, false);
+
+                // add finished question and choice group into dom
+                quiz.appendChild(groupNode);
+
+                function clicked(e) {
+                    if (!e.target.classList.contains('quiz-choice')) return;
+
+                    let selectedLetter = e.target.dataset.letter;
+                    let correctLetter = question.correctAnswer;
+                    let explanation = question.explanation;
+
+                    // css to highlight chosen answer
+                    if (selectedLetter === correctLetter) {
+                        e.target.classList.add('selected', 'correct');
+                        numberCorrect++;
+                    } else {
+                        // reveal correct answer in addition to user's choice
+                        get(`[data-letter=${correctLetter}]`, choicesNode).classList.add('not-selected', 'correct');
+                        e.target.classList.add('selected', 'incorrect');
+                    }
+
+                    // add explanation for correct answer
+                    if (explanation) explanationNode.innerHTML = explanation;
+
+                    // stop keyHandler() focusing when input is not via keyboard
+                    e.target.blur();
+
+                    // choices shouldn't be focusable once answered
+                    choicesNode.elements.forEach(choice => {
+                        choice.setAttribute('tabindex', -1);
                     });
 
-                    // validate choice when clicked
-                    choicesNode.addEventListener('click', function clicked(e) {
-                        if (!e.target.classList.contains('quiz-choice')) return;
+                    // other things to run after question has been answered
+                    e.target.closest('.quiz-group').classList.remove('unanswered');
+                    choicesNode.removeEventListener('click', clicked, false);
+                    choicesNode.removeEventListener('keydown', pressed, false);
+                    choicesNode.removeEventListener('keydown', keyHandler, false);
 
-                        let selectedLetter = e.target.dataset.letter;
-                        let correctLetter = question.correctAnswer;
-                        let explanation = question.explanation;
-
-                        // css to highlight chosen answer
-                        if (selectedLetter === correctLetter) {
-                            e.target.classList.add('selected', 'correct');
-                            correct++;
-                        } else {
-                            // reveal correct answer in addition to user's choice
-                            get(`[data-letter=${correctLetter}]`, choicesNode).classList.add('not-selected', 'correct');
-                            e.target.classList.add('selected', 'incorrect');
-                        }
-
-                        // add explanation for correct answer
-                        if (explanation) explanationNode.innerHTML = explanation;
-
-                        // stop keyHandler() focusing when input is not via keyboard
-                        e.target.blur();
-
-                        // shouldn't be focusable once answered (clicked)
-                        e.target.setAttribute('tabindex', -1);
-
-                        // things to run after question has been answered
-                        answered++;
-                        e.target.closest('.quiz-group').classList.remove('unanswered');
-                        choicesNode.removeEventListener('click', clicked, false);
-                        if (answered === total) showResults();
-                    }, false);
-
-                    // make quiz arrow-key accessible
-                    choicesNode.focus = 0;
-                    choicesNode.elements = getAll('.quiz-choice', choicesNode);
-                    choicesNode.addEventListener('keydown', keyHandler, false);
-
-                    // simulate click with enter key
-                    choicesNode.addEventListener('keydown', function pressed(e) {
-                        let focused = document.activeElement;
-
-                        if ((e.keyCode === 13) && (choicesNode.contains(focused)) && (focused.classList.contains('quiz-choice'))) {
-                            focused.click();
-                            choicesNode.removeEventListener('keydown', pressed, false);
-                        }
-                    }, false);
-
-                    // add finished question and choice group into dom
-                    quiz.appendChild(groupNode);
-                });
-            }
-
-            function showResults() {
-                let resultsNode = get('.template-quiz-results').content.cloneNode(true),
-                    headerNode = get('h3', resultsNode),
-                    descNode = get('p:first-of-type', resultsNode),
-                    score = correct / total;
-
-                headerNode.textContent = `You answered ${correct} out of ${total} questions correctly.`;
-                headerNode.style.fontSize = '1.25em';
-
-                if (score >= 0.6) {
-                    descNode.innerHTML = 'Very good. You should consider helping us with our <a class="link" target="_blank" rel="noopener" href="https://rs.wiki/RS:OSWF">RS Wiki</a> and <a class="link" target="_blank" rel="noopener" href="https://osrs.wiki/RS:OSWF">OSRS Wiki projects</a> – we\'ll reward you for your work!';
-                } else if (score >= 0.3) {
-                    descNode.textContent = 'Could\'ve been worse. Hopefully you\'ll do better on next year\'s quiz.';
-                } else {
-                    descNode.textContent = 'Maybe you should spend a little more time on the wiki.';
+                    numberAnswered++;
+                    if (numberAnswered === numberTotal) showResults();
                 }
 
-                get('.quiz').appendChild(resultsNode);
-                get('.reset-quiz').addEventListener('click', resetQuiz, false);
+                function pressed(e) {
+                    let focused = document.activeElement;
 
-                function resetQuiz() {
-                    quiz.textContent = '';
-                    quiz.classList.remove(quiz.classList.item(1)); // remove game version class
-                    get('#quiz').scrollIntoView({ behavior: 'smooth' });
-                    buildQuiz();
+                    if ((e.keyCode === 13) && (choicesNode.contains(focused)) && (focused.classList.contains('quiz-choice'))) {
+                        focused.click();
+                    }
                 }
+            });
+        }
+
+        function showResults() {
+            let resultsNode = get('.template-quiz-results').content.cloneNode(true);
+            let headerNode = get('h3', resultsNode);
+            let descNode = get('p:first-of-type', resultsNode);
+            let score = numberCorrect / numberTotal;
+
+            headerNode.textContent = `You answered ${numberCorrect} out of ${numberTotal} questions correctly.`;
+            headerNode.style.fontSize = '1.25em';
+
+            if (score >= 0.6) {
+                descNode.innerHTML = 'Very good. You should consider helping us with our <a class="link" target="_blank" rel="noopener" href="https://rs.wiki/RS:OSWF">RS Wiki</a> and <a class="link" target="_blank" rel="noopener" href="https://osrs.wiki/RS:OSWF">OSRS Wiki projects</a> – we\'ll reward you for your work!';
+            } else if (score >= 0.3) {
+                descNode.textContent = 'Could\'ve been worse. Hopefully you\'ll do better on next year\'s quiz.';
+            } else {
+                descNode.textContent = 'Maybe you should spend a little more time on the wiki.';
             }
+
+            quiz.appendChild(resultsNode);
+            get('.reset-quiz').addEventListener('click', function resetQuiz() {
+                numberCorrect = 0;
+                numberAnswered = 0;
+                quiz.textContent = '';
+                quiz.classList.remove(quiz.classList.item(1)); // remove game version class
+                get('h2#quiz').scrollIntoView({ behavior: 'smooth' });
+                setupButtons();
+            }, false);
         }
     }
 
